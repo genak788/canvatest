@@ -472,6 +472,118 @@
             border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #e0e0e0;
+            font-weight: 400;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #00d4ff;
+            cursor: pointer;
+        }
+
+        .searchable-input {
+            position: relative;
+        }
+
+        .searchable-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(30, 30, 60, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0 0 10px 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .searchable-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 212, 255, 0.2);
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .clear-item-btn {
+            background: #ff6b6b;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .clear-item-btn:hover {
+            background: #ff5252;
+            transform: translateY(-1px);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+        }
+
         .loading {
             display: none;
             text-align: center;
@@ -481,6 +593,104 @@
 
         .loading.show {
             display: block;
+        }
+
+        /* Settings Styles */
+        .settings-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 4px;
+            gap: 4px;
+        }
+
+        .settings-tab {
+            flex: 1;
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            color: #b0b0b0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .settings-tab.active {
+            background: linear-gradient(45deg, #00d4ff, #9c27b0);
+            color: white;
+        }
+
+        .settings-tab-content {
+            display: none;
+        }
+
+        .settings-tab-content.active {
+            display: block;
+        }
+
+        .users-table {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .technicians-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .technician-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .technician-name {
+            color: white;
+            font-weight: 500;
+        }
+
+        .photo-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .photo-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .photo-input {
+            flex: 1;
+        }
+
+        .remove-photo-btn {
+            background: #ff4757;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .remove-photo-btn:hover {
+            background: #ff3742;
+        }
+
+        .add-photo-btn:hover {
+            background: #0099cc !important;
+            transform: translateY(-1px);
         }
 
         @media (max-width: 768px) {
@@ -517,14 +727,6 @@
      <div class="login-card">
       <h1 class="login-title" id="companyTitle">PT. JAYA KENCANA</h1>
       <p class="login-subtitle">Safety Management System</p>
-      <div class="login-tabs">
-       <div class="login-tab active" onclick="switchTab('admin')">
-        Admin
-       </div>
-       <div class="login-tab" onclick="switchTab('user')">
-        User
-       </div>
-      </div>
       <form id="loginForm" onsubmit="handleLogin(event)">
        <div class="form-group"><label for="username" class="form-label">Username</label> <input type="text" id="username" class="form-input" placeholder="Masukkan username" required>
        </div>
@@ -539,7 +741,7 @@
      <h1 class="company-title" id="dashboardCompanyTitle">PT. JAYA KENCANA</h1>
      <p class="user-subtitle" id="userWelcome">Selamat datang, User</p><button class="back-btn" onclick="logout()">Logout</button>
     </div>
-    <div class="nav-grid">
+    <div class="nav-grid" id="userNavigation">
      <div class="nav-card" onclick="showSection('escalator')"><span class="nav-icon">🔧</span>
       <div class="nav-title">
        Safety Eskalator
@@ -561,6 +763,33 @@
       </div>
      </div>
     </div>
+    <div class="nav-grid" id="adminNavigation" style="display: none;">
+     <div class="nav-card" onclick="showSection('escalator')"><span class="nav-icon">🔧</span>
+      <div class="nav-title">
+       Safety Eskalator
+      </div>
+     </div>
+     <div class="nav-card" onclick="showSection('elevator')"><span class="nav-icon">🏢</span>
+      <div class="nav-title">
+       Safety Elevator
+      </div>
+     </div>
+     <div class="nav-card" onclick="showSection('realization')"><span class="nav-icon">📊</span>
+      <div class="nav-title">
+       Realisasi
+      </div>
+     </div>
+     <div class="nav-card" onclick="showSection('history')"><span class="nav-icon">📋</span>
+      <div class="nav-title">
+       History
+      </div>
+     </div>
+     <div class="nav-card" onclick="showSection('settings')"><span class="nav-icon">⚙️</span>
+      <div class="nav-title">
+       Settings
+      </div>
+     </div>
+    </div>
    </div><!-- Escalator Form Section -->
    <div id="escalatorSection" class="main-content form-section"><button class="back-btn" onclick="showDashboard()">← Kembali ke Dashboard</button>
     <div class="section-header">
@@ -569,9 +798,33 @@
     <form id="escalatorForm" onsubmit="handleSubmit(event, 'escalator')">
      <div class="form-card">
       <div class="form-row">
-       <div class="form-group"><label for="buildingName" class="form-label">Nama Gedung/Proyek</label> <select id="buildingName" class="form-input" required> <option value="">Pilih Gedung</option> <option value="Gedung A">Gedung A</option> <option value="Gedung B">Gedung B</option> <option value="Mall Central">Mall Central</option> <option value="Office Tower">Office Tower</option> </select>
+       <div class="form-group"><label for="buildingName" class="form-label">Nama Gedung/Proyek</label>
+        <div class="searchable-input"><input type="text" id="buildingName" class="form-input" placeholder="Ketik untuk mencari gedung..." required autocomplete="off">
+         <div class="searchable-dropdown" id="buildingDropdown">
+          <div class="dropdown-item" onclick="selectBuilding('Gedung A')">
+           Gedung A
+          </div>
+          <div class="dropdown-item" onclick="selectBuilding('Gedung B')">
+           Gedung B
+          </div>
+          <div class="dropdown-item" onclick="selectBuilding('Mall Central')">
+           Mall Central
+          </div>
+          <div class="dropdown-item" onclick="selectBuilding('Office Tower')">
+           Office Tower
+          </div>
+          <div class="dropdown-item" onclick="selectBuilding('Plaza Indonesia')">
+           Plaza Indonesia
+          </div>
+          <div class="dropdown-item" onclick="selectBuilding('Grand Indonesia')">
+           Grand Indonesia
+          </div>
+         </div>
+        </div>
        </div>
-       <div class="form-group"><label for="technicianName" class="form-label">Nama Teknisi</label> <input type="text" id="technicianName" class="form-input" placeholder="Masukkan nama teknisi" required>
+       <div class="form-group"><label class="form-label">Nama Teknisi</label>
+        <div class="checkbox-group"><label class="checkbox-item"> <input type="checkbox" name="technician" value="Ahmad Rizki"> Ahmad Rizki </label> <label class="checkbox-item"> <input type="checkbox" name="technician" value="Budi Santoso"> Budi Santoso </label> <label class="checkbox-item"> <input type="checkbox" name="technician" value="Candra Wijaya"> Candra Wijaya </label> <label class="checkbox-item"> <input type="checkbox" name="technician" value="Dedi Kurniawan"> Dedi Kurniawan </label> <label class="checkbox-item"> <input type="checkbox" name="technician" value="Eko Prasetyo"> Eko Prasetyo </label>
+        </div>
        </div>
        <div class="form-group"><label for="inspectionDate" class="form-label">Tanggal</label> <input type="date" id="inspectionDate" class="form-input" required>
        </div>
@@ -580,8 +833,6 @@
      <div class="item-section">
       <div class="item-header">
        <h3 class="item-title">ITEM</h3>
-       <div><button type="button" class="add-btn" onclick="addUnit()">+ Tambah Unit</button>
-       </div>
       </div>
       <div id="unitsContainer">
        <div class="unit-group">
@@ -591,33 +842,154 @@
           </div>
           <div class="form-group"><label class="form-label">MFG</label> <input type="text" class="form-input mfg-input" placeholder="Masukkan MFG" required>
           </div>
-          <div class="form-group"><label class="form-label">Type</label> <input type="text" class="form-input type-input" placeholder="Masukkan type" required>
+          <div class="form-group"><label class="form-label">Type</label>
+           <div class="searchable-input"><input type="text" class="form-input type-input" placeholder="Ketik untuk mencari type..." required autocomplete="off">
+            <div class="searchable-dropdown">
+             <div class="dropdown-item" onclick="selectType(this, 'Type A')">
+              Type A
+             </div>
+             <div class="dropdown-item" onclick="selectType(this, 'Type B')">
+              Type B
+             </div>
+             <div class="dropdown-item" onclick="selectType(this, 'Type C')">
+              Type C
+             </div>
+             <div class="dropdown-item" onclick="selectType(this, 'Standard')">
+              Standard
+             </div>
+             <div class="dropdown-item" onclick="selectType(this, 'Premium')">
+              Premium
+             </div>
+            </div>
+           </div>
           </div>
          </div>
          <div class="item-header">
-          <h4 style="color: #00d4ff; margin: 0;">Items</h4><button type="button" class="add-btn" onclick="addItem(this)">+ Tambah Item</button>
+          <h4 style="color: #00d4ff; margin: 0;">Items</h4>
          </div>
          <div class="items-container">
           <div class="item-group">
            <div class="form-row">
-            <div class="form-group"><label class="form-label">Item Sparepart</label> <input type="text" class="form-input" placeholder="Masukkan item sparepart" required>
+            <div class="form-group"><label class="form-label">Item Sparepart</label>
+             <div class="searchable-input"><input type="text" class="form-input sparepart-input" placeholder="Ketik untuk mencari sparepart..." required autocomplete="off">
+              <div class="searchable-dropdown">
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Motor')">
+                Motor
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Belt')">
+                Belt
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Roller')">
+                Roller
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Chain')">
+                Chain
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Brake')">
+                Brake
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Control Panel')">
+                Control Panel
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Sensor')">
+                Sensor
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Cable')">
+                Cable
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Bearing')">
+                Bearing
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Switch')">
+                Switch
+               </div>
+              </div>
+             </div>
             </div>
-            <div class="form-group"><label class="form-label">Kondisi</label> <input type="text" class="form-input" placeholder="Masukkan kondisi" required>
+            <div class="form-group"><label class="form-label">Kondisi</label>
+             <div class="searchable-input"><input type="text" class="form-input condition-input" placeholder="Ketik untuk mencari kondisi..." required autocomplete="off">
+              <div class="searchable-dropdown">
+               <div class="dropdown-item" onclick="selectCondition(this, 'Baik')">
+                Baik
+               </div>
+               <div class="dropdown-item" onclick="selectCondition(this, 'Rusak Ringan')">
+                Rusak Ringan
+               </div>
+               <div class="dropdown-item" onclick="selectCondition(this, 'Rusak Berat')">
+                Rusak Berat
+               </div>
+               <div class="dropdown-item" onclick="selectCondition(this, 'Perlu Penggantian')">
+                Perlu Penggantian
+               </div>
+               <div class="dropdown-item" onclick="selectCondition(this, 'Maintenance')">
+                Maintenance
+               </div>
+              </div>
+             </div>
             </div>
             <div class="form-group"><label class="form-label">Jumlah</label> <input type="number" class="form-input" placeholder="Masukkan jumlah" required>
             </div>
+            <div class="form-group"><label class="form-label">Satuan</label>
+             <div class="searchable-input"><input type="text" class="form-input unit-input" placeholder="Ketik untuk mencari satuan..." required autocomplete="off">
+              <div class="searchable-dropdown">
+               <div class="dropdown-item" onclick="selectUnit(this, 'Pcs')">
+                Pcs
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Unit')">
+                Unit
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Set')">
+                Set
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Meter')">
+                Meter
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Kg')">
+                Kg
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Liter')">
+                Liter
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Roll')">
+                Roll
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Pack')">
+                Pack
+               </div>
+              </div>
+             </div>
+            </div>
             <div class="form-group"><label class="form-label">Remarks</label> <input type="text" class="form-input" placeholder="Masukkan remarks">
             </div>
-            <div class="form-group"><label class="form-label">Prioritas</label> <select class="form-input" required> <option value="">Pilih Prioritas</option> <option value="High">High</option> <option value="Medium">Medium</option> <option value="Low">Low</option> </select>
+            <div class="form-group"><label class="form-label">Prioritas</label>
+             <div class="searchable-input"><input type="text" class="form-input priority-input" placeholder="Ketik untuk mencari prioritas..." required autocomplete="off">
+              <div class="searchable-dropdown">
+               <div class="dropdown-item" onclick="selectPriority(this, 'High')">
+                High
+               </div>
+               <div class="dropdown-item" onclick="selectPriority(this, 'Medium')">
+                Medium
+               </div>
+               <div class="dropdown-item" onclick="selectPriority(this, 'Low')">
+                Low
+               </div>
+              </div>
+             </div>
             </div>
-            <div class="form-group"><label class="form-label">Foto Part (Max 2)</label> <input type="file" class="form-input" accept="image/*" multiple> <small style="color: #b0b0b0;">Maksimal 2 foto</small>
+            <div class="form-group"><label class="form-label">Foto Part</label>
+             <div class="photo-container">
+              <div class="photo-input-group"><input type="file" class="form-input photo-input" accept="image/*" onchange="handlePhotoUpload(this)"> <button type="button" class="remove-photo-btn" onclick="removePhoto(this)" style="display: none;">🗑️</button>
+              </div>
+             </div><button type="button" class="add-photo-btn" onclick="addPhotoInput(this)" style="display: none; background: #00d4ff; border: none; border-radius: 5px; padding: 8px 15px; color: white; cursor: pointer; margin-top: 10px;">+ Tambah Foto</button>
             </div>
-           </div>
+           </div><button type="button" class="clear-item-btn" onclick="clearItem(this)">🗑️ Clear Item</button>
           </div>
          </div>
         </div>
        </div>
       </div>
+     </div>
+     <div class="action-buttons"><button type="button" class="action-btn" onclick="addElevatorUnit()">+ Tambah Unit</button> <button type="button" class="action-btn" onclick="addItemToLastElevatorUnit()">+ Tambah Item</button>
      </div><button type="submit" class="submit-btn">Submit</button>
     </form>
    </div><!-- Elevator Form Section -->
@@ -628,9 +1000,33 @@
     <form id="elevatorForm" onsubmit="handleSubmit(event, 'elevator')">
      <div class="form-card">
       <div class="form-row">
-       <div class="form-group"><label for="elevatorBuildingName" class="form-label">Nama Gedung/Proyek</label> <select id="elevatorBuildingName" class="form-input" required> <option value="">Pilih Gedung</option> <option value="Gedung A">Gedung A</option> <option value="Gedung B">Gedung B</option> <option value="Mall Central">Mall Central</option> <option value="Office Tower">Office Tower</option> </select>
+       <div class="form-group"><label for="elevatorBuildingName" class="form-label">Nama Gedung/Proyek</label>
+        <div class="searchable-input"><input type="text" id="elevatorBuildingName" class="form-input" placeholder="Ketik untuk mencari gedung..." required autocomplete="off">
+         <div class="searchable-dropdown" id="elevatorBuildingDropdown">
+          <div class="dropdown-item" onclick="selectElevatorBuilding('Gedung A')">
+           Gedung A
+          </div>
+          <div class="dropdown-item" onclick="selectElevatorBuilding('Gedung B')">
+           Gedung B
+          </div>
+          <div class="dropdown-item" onclick="selectElevatorBuilding('Mall Central')">
+           Mall Central
+          </div>
+          <div class="dropdown-item" onclick="selectElevatorBuilding('Office Tower')">
+           Office Tower
+          </div>
+          <div class="dropdown-item" onclick="selectElevatorBuilding('Plaza Indonesia')">
+           Plaza Indonesia
+          </div>
+          <div class="dropdown-item" onclick="selectElevatorBuilding('Grand Indonesia')">
+           Grand Indonesia
+          </div>
+         </div>
+        </div>
        </div>
-       <div class="form-group"><label for="elevatorTechnicianName" class="form-label">Nama Teknisi</label> <input type="text" id="elevatorTechnicianName" class="form-input" placeholder="Masukkan nama teknisi" required>
+       <div class="form-group"><label class="form-label">Nama Teknisi</label>
+        <div class="checkbox-group"><label class="checkbox-item"> <input type="checkbox" name="elevatorTechnician" value="Ahmad Rizki"> Ahmad Rizki </label> <label class="checkbox-item"> <input type="checkbox" name="elevatorTechnician" value="Budi Santoso"> Budi Santoso </label> <label class="checkbox-item"> <input type="checkbox" name="elevatorTechnician" value="Candra Wijaya"> Candra Wijaya </label> <label class="checkbox-item"> <input type="checkbox" name="elevatorTechnician" value="Dedi Kurniawan"> Dedi Kurniawan </label> <label class="checkbox-item"> <input type="checkbox" name="elevatorTechnician" value="Eko Prasetyo"> Eko Prasetyo </label>
+        </div>
        </div>
        <div class="form-group"><label for="elevatorInspectionDate" class="form-label">Tanggal</label> <input type="date" id="elevatorInspectionDate" class="form-input" required>
        </div>
@@ -639,8 +1035,6 @@
      <div class="item-section">
       <div class="item-header">
        <h3 class="item-title">ITEM</h3>
-       <div><button type="button" class="add-btn" onclick="addElevatorUnit()">+ Tambah Unit</button>
-       </div>
       </div>
       <div id="elevatorUnitsContainer">
        <div class="unit-group">
@@ -650,33 +1044,154 @@
           </div>
           <div class="form-group"><label class="form-label">MFG</label> <input type="text" class="form-input mfg-input" placeholder="Masukkan MFG" required>
           </div>
-          <div class="form-group"><label class="form-label">Type</label> <input type="text" class="form-input type-input" placeholder="Masukkan type" required>
+          <div class="form-group"><label class="form-label">Type</label>
+           <div class="searchable-input"><input type="text" class="form-input type-input" placeholder="Ketik untuk mencari type..." required autocomplete="off">
+            <div class="searchable-dropdown">
+             <div class="dropdown-item" onclick="selectType(this, 'Type A')">
+              Type A
+             </div>
+             <div class="dropdown-item" onclick="selectType(this, 'Type B')">
+              Type B
+             </div>
+             <div class="dropdown-item" onclick="selectType(this, 'Type C')">
+              Type C
+             </div>
+             <div class="dropdown-item" onclick="selectType(this, 'Standard')">
+              Standard
+             </div>
+             <div class="dropdown-item" onclick="selectType(this, 'Premium')">
+              Premium
+             </div>
+            </div>
+           </div>
           </div>
          </div>
          <div class="item-header">
-          <h4 style="color: #00d4ff; margin: 0;">Items</h4><button type="button" class="add-btn" onclick="addItem(this)">+ Tambah Item</button>
+          <h4 style="color: #00d4ff; margin: 0;">Items</h4>
          </div>
          <div class="items-container">
           <div class="item-group">
            <div class="form-row">
-            <div class="form-group"><label class="form-label">Item Sparepart</label> <input type="text" class="form-input" placeholder="Masukkan item sparepart" required>
+            <div class="form-group"><label class="form-label">Item Sparepart</label>
+             <div class="searchable-input"><input type="text" class="form-input sparepart-input" placeholder="Ketik untuk mencari sparepart..." required autocomplete="off">
+              <div class="searchable-dropdown">
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Motor')">
+                Motor
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Belt')">
+                Belt
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Roller')">
+                Roller
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Chain')">
+                Chain
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Brake')">
+                Brake
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Control Panel')">
+                Control Panel
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Sensor')">
+                Sensor
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Cable')">
+                Cable
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Bearing')">
+                Bearing
+               </div>
+               <div class="dropdown-item" onclick="selectSparepart(this, 'Switch')">
+                Switch
+               </div>
+              </div>
+             </div>
             </div>
-            <div class="form-group"><label class="form-label">Kondisi</label> <input type="text" class="form-input" placeholder="Masukkan kondisi" required>
+            <div class="form-group"><label class="form-label">Kondisi</label>
+             <div class="searchable-input"><input type="text" class="form-input condition-input" placeholder="Ketik untuk mencari kondisi..." required autocomplete="off">
+              <div class="searchable-dropdown">
+               <div class="dropdown-item" onclick="selectCondition(this, 'Baik')">
+                Baik
+               </div>
+               <div class="dropdown-item" onclick="selectCondition(this, 'Rusak Ringan')">
+                Rusak Ringan
+               </div>
+               <div class="dropdown-item" onclick="selectCondition(this, 'Rusak Berat')">
+                Rusak Berat
+               </div>
+               <div class="dropdown-item" onclick="selectCondition(this, 'Perlu Penggantian')">
+                Perlu Penggantian
+               </div>
+               <div class="dropdown-item" onclick="selectCondition(this, 'Maintenance')">
+                Maintenance
+               </div>
+              </div>
+             </div>
             </div>
             <div class="form-group"><label class="form-label">Jumlah</label> <input type="number" class="form-input" placeholder="Masukkan jumlah" required>
             </div>
+            <div class="form-group"><label class="form-label">Satuan</label>
+             <div class="searchable-input"><input type="text" class="form-input unit-input" placeholder="Ketik untuk mencari satuan..." required autocomplete="off">
+              <div class="searchable-dropdown">
+               <div class="dropdown-item" onclick="selectUnit(this, 'Pcs')">
+                Pcs
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Unit')">
+                Unit
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Set')">
+                Set
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Meter')">
+                Meter
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Kg')">
+                Kg
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Liter')">
+                Liter
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Roll')">
+                Roll
+               </div>
+               <div class="dropdown-item" onclick="selectUnit(this, 'Pack')">
+                Pack
+               </div>
+              </div>
+             </div>
+            </div>
             <div class="form-group"><label class="form-label">Remarks</label> <input type="text" class="form-input" placeholder="Masukkan remarks">
             </div>
-            <div class="form-group"><label class="form-label">Prioritas</label> <select class="form-input" required> <option value="">Pilih Prioritas</option> <option value="High">High</option> <option value="Medium">Medium</option> <option value="Low">Low</option> </select>
+            <div class="form-group"><label class="form-label">Prioritas</label>
+             <div class="searchable-input"><input type="text" class="form-input priority-input" placeholder="Ketik untuk mencari prioritas..." required autocomplete="off">
+              <div class="searchable-dropdown">
+               <div class="dropdown-item" onclick="selectPriority(this, 'High')">
+                High
+               </div>
+               <div class="dropdown-item" onclick="selectPriority(this, 'Medium')">
+                Medium
+               </div>
+               <div class="dropdown-item" onclick="selectPriority(this, 'Low')">
+                Low
+               </div>
+              </div>
+             </div>
             </div>
-            <div class="form-group"><label class="form-label">Foto Part (Max 2)</label> <input type="file" class="form-input" accept="image/*" multiple> <small style="color: #b0b0b0;">Maksimal 2 foto</small>
+            <div class="form-group"><label class="form-label">Foto Part</label>
+             <div class="photo-container">
+              <div class="photo-input-group"><input type="file" class="form-input photo-input" accept="image/*" onchange="handlePhotoUpload(this)"> <button type="button" class="remove-photo-btn" onclick="removePhoto(this)" style="display: none;">🗑️</button>
+              </div>
+             </div><button type="button" class="add-photo-btn" onclick="addPhotoInput(this)" style="display: none; background: #00d4ff; border: none; border-radius: 5px; padding: 8px 15px; color: white; cursor: pointer; margin-top: 10px;">+ Tambah Foto</button>
             </div>
-           </div>
+           </div><button type="button" class="clear-item-btn" onclick="clearItem(this)">🗑️ Clear Item</button>
           </div>
          </div>
         </div>
        </div>
       </div>
+     </div>
+     <div class="action-buttons"><button type="button" class="action-btn" onclick="addElevatorUnit()">+ Tambah Unit</button> <button type="button" class="action-btn" onclick="addItemToLastElevatorUnit()">+ Tambah Item</button>
      </div><button type="submit" class="submit-btn">Submit</button>
     </form>
    </div><!-- Realization Section -->
@@ -689,6 +1204,21 @@
    <div id="historySection" class="main-content form-section"><button class="back-btn" onclick="showDashboard()">← Kembali ke Dashboard</button>
     <div class="section-header">
      <h2 class="section-title">History Data</h2>
+    </div><!-- Search Filters -->
+    <div class="form-card">
+     <h3 style="color: #00d4ff; margin-bottom: 20px;">🔍 Filter Data</h3>
+     <div class="form-row">
+      <div class="form-group"><label class="form-label">Cari Gedung</label> <input type="text" id="searchBuilding" class="form-input" placeholder="Ketik nama gedung..." onkeyup="filterHistory()">
+      </div>
+      <div class="form-group"><label class="form-label">Tanggal Dari</label> <input type="date" id="searchDateFrom" class="form-input" onchange="filterHistory()">
+      </div>
+      <div class="form-group"><label class="form-label">Tanggal Sampai</label> <input type="date" id="searchDateTo" class="form-input" onchange="filterHistory()">
+      </div>
+      <div class="form-group"><label class="form-label">Tipe</label> <select id="searchType" class="form-input" onchange="filterHistory()"> <option value="">Semua Tipe</option> <option value="escalator">Eskalator</option> <option value="elevator">Elevator</option> </select>
+      </div>
+     </div>
+     <div class="action-buttons"><button type="button" class="action-btn" onclick="clearFilters()">🗑️ Clear Filter</button> <button type="button" class="action-btn" onclick="downloadFilteredPDF()">📄 Download PDF</button>
+     </div>
     </div>
     <div class="loading" id="historyLoading">
      <p>Memuat data...</p>
@@ -714,6 +1244,80 @@
       </div>
       <div id="historyTableBody"><!-- Data will be populated here -->
       </div>
+     </div>
+     <div id="noDataMessage" style="display: none; text-align: center; padding: 40px; color: #b0b0b0;">
+      <p>📭 Tidak ada data yang sesuai dengan filter</p>
+     </div>
+    </div>
+   </div><!-- Settings Section (Admin Only) -->
+   <div id="settingsSection" class="main-content form-section"><button class="back-btn" onclick="showDashboard()">← Kembali ke Dashboard</button>
+    <div class="section-header">
+     <h2 class="section-title">Settings Admin</h2>
+    </div>
+    <div class="settings-tabs"><button class="settings-tab active" onclick="showSettingsTab('users')">Kelola User</button> <button class="settings-tab" onclick="showSettingsTab('technicians')">Kelola Teknisi</button> <button class="settings-tab" onclick="showSettingsTab('profile')">Profil Saya</button>
+    </div><!-- Users Management Tab -->
+    <div id="usersTab" class="settings-tab-content active">
+     <div class="form-card">
+      <h3 style="color: #00d4ff; margin-bottom: 20px;">Tambah User Baru</h3>
+      <form id="addUserForm" onsubmit="addUser(event)">
+       <div class="form-row">
+        <div class="form-group"><label class="form-label">Username</label> <input type="text" id="newUsername" class="form-input" placeholder="Masukkan username" required>
+        </div>
+        <div class="form-group"><label class="form-label">Password</label> <input type="password" id="newPassword" class="form-input" placeholder="Masukkan password" required>
+        </div>
+        <div class="form-group"><label class="form-label">Role</label> <select id="newUserRole" class="form-input" required> <option value="">Pilih Role</option> <option value="admin">Admin</option> <option value="user">User</option> </select>
+        </div>
+       </div><button type="submit" class="add-btn">Tambah User</button>
+      </form>
+     </div>
+     <div class="form-card">
+      <h3 style="color: #00d4ff; margin-bottom: 20px;">Daftar User</h3>
+      <div class="users-table">
+       <div class="table-header">
+        <div>
+         Username
+        </div>
+        <div>
+         Role
+        </div>
+        <div>
+         Aksi
+        </div>
+       </div>
+       <div id="usersTableBody"><!-- Users will be populated here -->
+       </div>
+      </div>
+     </div>
+    </div><!-- Technicians Management Tab -->
+    <div id="techniciansTab" class="settings-tab-content">
+     <div class="form-card">
+      <h3 style="color: #00d4ff; margin-bottom: 20px;">Tambah Teknisi Baru</h3>
+      <form id="addTechnicianForm" onsubmit="addTechnician(event)">
+       <div class="form-row">
+        <div class="form-group"><label class="form-label">Nama Teknisi</label> <input type="text" id="newTechnicianName" class="form-input" placeholder="Masukkan nama teknisi" required>
+        </div>
+       </div><button type="submit" class="add-btn">Tambah Teknisi</button>
+      </form>
+     </div>
+     <div class="form-card">
+      <h3 style="color: #00d4ff; margin-bottom: 20px;">Daftar Teknisi</h3>
+      <div class="technicians-list" id="techniciansList"><!-- Technicians will be populated here -->
+      </div>
+     </div>
+    </div><!-- Profile Management Tab -->
+    <div id="profileTab" class="settings-tab-content">
+     <div class="form-card">
+      <h3 style="color: #00d4ff; margin-bottom: 20px;">Ubah Password</h3>
+      <form id="changePasswordForm" onsubmit="changePassword(event)">
+       <div class="form-row">
+        <div class="form-group"><label class="form-label">Password Lama</label> <input type="password" id="oldPassword" class="form-input" placeholder="Masukkan password lama" required>
+        </div>
+        <div class="form-group"><label class="form-label">Password Baru</label> <input type="password" id="newPasswordChange" class="form-input" placeholder="Masukkan password baru" required>
+        </div>
+        <div class="form-group"><label class="form-label">Konfirmasi Password Baru</label> <input type="password" id="confirmPassword" class="form-input" placeholder="Konfirmasi password baru" required>
+        </div>
+       </div><button type="submit" class="submit-btn">Ubah Password</button>
+      </form>
      </div>
     </div>
    </div><!-- Footer -->
@@ -748,8 +1352,19 @@
   </div>
   <script>
         let currentUser = null;
-        let currentUserType = 'admin';
+        let currentUserType = 'user';
         let allData = [];
+        let users = [
+            { username: 'admin', password: 'admin123', role: 'admin' },
+            { username: 'user1', password: 'user123', role: 'user' }
+        ];
+        let technicians = [
+            'Ahmad Rizki',
+            'Budi Santoso', 
+            'Candra Wijaya',
+            'Dedi Kurniawan',
+            'Eko Prasetyo'
+        ];
 
         const defaultConfig = {
             company_name: "PT. JAYA KENCANA",
@@ -816,11 +1431,22 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            // Simple validation - in real app, this would be server-side
-            if (username && password) {
+            // Check credentials
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
                 currentUser = username;
-                document.getElementById('userWelcome').textContent = `Selamat datang, ${username}`;
+                currentUserType = user.role;
+                document.getElementById('userWelcome').textContent = `Selamat datang, ${username} (${user.role})`;
                 showDashboard();
+            } else {
+                // Show error message
+                const errorDiv = document.createElement('div');
+                errorDiv.style.cssText = 'background: #ff4757; color: white; padding: 10px; border-radius: 5px; margin: 10px 0; text-align: center;';
+                errorDiv.textContent = 'Username atau password salah!';
+                document.getElementById('loginForm').insertBefore(errorDiv, document.querySelector('.login-btn'));
+                
+                setTimeout(() => errorDiv.remove(), 3000);
             }
         }
 
@@ -835,11 +1461,21 @@
         function showDashboard() {
             document.getElementById('loginSection').style.display = 'none';
             document.getElementById('dashboardSection').classList.add('active');
+            
+            // Show appropriate navigation based on user type
+            if (currentUserType === 'admin') {
+                document.getElementById('userNavigation').style.display = 'none';
+                document.getElementById('adminNavigation').style.display = 'grid';
+            } else {
+                document.getElementById('userNavigation').style.display = 'grid';
+                document.getElementById('adminNavigation').style.display = 'none';
+            }
+            
             hideAllSections();
         }
 
         function hideAllSections() {
-            const sections = ['escalatorSection', 'elevatorSection', 'realizationSection', 'historySection'];
+            const sections = ['escalatorSection', 'elevatorSection', 'realizationSection', 'historySection', 'settingsSection'];
             sections.forEach(section => {
                 document.getElementById(section).classList.remove('active');
             });
@@ -868,9 +1504,32 @@
             inputs.forEach(input => {
                 if (input.type === 'file') {
                     input.value = '';
+                } else if (input.type === 'checkbox') {
+                    input.checked = false;
                 } else {
                     input.value = '';
                 }
+            });
+            
+            // Reset photo inputs properly
+            const photoContainers = unitGroup.querySelectorAll('.photo-container');
+            photoContainers.forEach(container => {
+                // Keep only the first photo input group
+                const groups = container.querySelectorAll('.photo-input-group');
+                groups.forEach((group, index) => {
+                    if (index === 0) {
+                        const input = group.querySelector('.photo-input');
+                        const removeBtn = group.querySelector('.remove-photo-btn');
+                        input.value = '';
+                        if (removeBtn) removeBtn.style.display = 'none';
+                    } else {
+                        group.remove();
+                    }
+                });
+                
+                // Hide add photo button
+                const addBtn = container.closest('.form-group').querySelector('.add-photo-btn');
+                if (addBtn) addBtn.style.display = 'none';
             });
             
             // Add remove button
@@ -893,9 +1552,32 @@
             inputs.forEach(input => {
                 if (input.type === 'file') {
                     input.value = '';
+                } else if (input.type === 'checkbox') {
+                    input.checked = false;
                 } else {
                     input.value = '';
                 }
+            });
+            
+            // Reset photo inputs properly
+            const photoContainers = unitGroup.querySelectorAll('.photo-container');
+            photoContainers.forEach(container => {
+                // Keep only the first photo input group
+                const groups = container.querySelectorAll('.photo-input-group');
+                groups.forEach((group, index) => {
+                    if (index === 0) {
+                        const input = group.querySelector('.photo-input');
+                        const removeBtn = group.querySelector('.remove-photo-btn');
+                        input.value = '';
+                        if (removeBtn) removeBtn.style.display = 'none';
+                    } else {
+                        group.remove();
+                    }
+                });
+                
+                // Hide add photo button
+                const addBtn = container.closest('.form-group').querySelector('.add-photo-btn');
+                if (addBtn) addBtn.style.display = 'none';
             });
             
             // Add remove button
@@ -918,16 +1600,45 @@
             inputs.forEach(input => {
                 if (input.type === 'file') {
                     input.value = '';
+                } else if (input.type === 'checkbox') {
+                    input.checked = false;
                 } else {
                     input.value = '';
                 }
             });
             
+            // Reset photo inputs properly
+            const photoContainers = itemGroup.querySelectorAll('.photo-container');
+            photoContainers.forEach(container => {
+                // Keep only the first photo input group
+                const groups = container.querySelectorAll('.photo-input-group');
+                groups.forEach((group, index) => {
+                    if (index === 0) {
+                        const input = group.querySelector('.photo-input');
+                        const removeBtn = group.querySelector('.remove-photo-btn');
+                        input.value = '';
+                        if (removeBtn) removeBtn.style.display = 'none';
+                    } else {
+                        group.remove();
+                    }
+                });
+                
+                // Hide add photo button
+                const addBtn = container.closest('.form-group').querySelector('.add-photo-btn');
+                if (addBtn) addBtn.style.display = 'none';
+            });
+            
+            // Remove existing remove button if any
+            const existingRemoveBtn = itemGroup.querySelector('.remove-item');
+            if (existingRemoveBtn) {
+                existingRemoveBtn.remove();
+            }
+            
             // Add remove button
             const removeBtn = document.createElement('button');
             removeBtn.type = 'button';
             removeBtn.className = 'remove-item';
-            removeBtn.textContent = 'Hapus';
+            removeBtn.textContent = 'Hapus Item';
             removeBtn.onclick = function() { this.closest('.item-group').remove(); };
             itemGroup.appendChild(removeBtn);
             
@@ -963,9 +1674,12 @@
                 const buildingName = type === 'escalator' ? 
                     document.getElementById('buildingName').value : 
                     document.getElementById('elevatorBuildingName').value;
-                const technicianName = type === 'escalator' ? 
-                    document.getElementById('technicianName').value : 
-                    document.getElementById('elevatorTechnicianName').value;
+                // Get selected technicians from checkboxes
+                const technicianCheckboxes = type === 'escalator' ? 
+                    document.querySelectorAll('input[name="technician"]:checked') : 
+                    document.querySelectorAll('input[name="elevatorTechnician"]:checked');
+                const technicianNames = Array.from(technicianCheckboxes).map(cb => cb.value);
+                const technicianName = technicianNames.join(', ');
                 const inspectionDate = type === 'escalator' ? 
                     document.getElementById('inspectionDate').value : 
                     document.getElementById('elevatorInspectionDate').value;
@@ -986,13 +1700,14 @@
                     const itemGroups = unitGroup.querySelectorAll('.item-group');
                     itemGroups.forEach(itemGroup => {
                         const inputs = itemGroup.querySelectorAll('input, select');
-                        if (inputs.length >= 5) {
+                        if (inputs.length >= 6) {
                             items.push({
                                 sparepart: inputs[0].value,
                                 condition: inputs[1].value,
                                 quantity: inputs[2].value,
-                                remarks: inputs[3].value,
-                                priority: inputs[4].value
+                                unit: inputs[3].value,
+                                remarks: inputs[4].value,
+                                priority: inputs[5].value
                             });
                         }
                     });
@@ -1072,16 +1787,23 @@
             }, 1000);
         }
 
-        function renderHistory() {
+        let filteredData = [];
+
+        function renderHistory(dataToRender = allData) {
             const tbody = document.getElementById('historyTableBody');
+            const noDataMsg = document.getElementById('noDataMessage');
             tbody.innerHTML = '';
             
-            if (allData.length === 0) {
-                tbody.innerHTML = '<div class="table-row"><div colspan="5" style="text-align: center; color: #b0b0b0;">Belum ada data</div></div>';
+            if (dataToRender.length === 0) {
+                tbody.style.display = 'none';
+                noDataMsg.style.display = 'block';
                 return;
             }
             
-            allData.forEach(record => {
+            tbody.style.display = 'block';
+            noDataMsg.style.display = 'none';
+            
+            dataToRender.forEach(record => {
                 const row = document.createElement('div');
                 row.className = 'table-row';
                 row.innerHTML = `
@@ -1090,6 +1812,7 @@
                     <div>${record.technician_name}</div>
                     <div>${new Date(record.date).toLocaleDateString('id-ID')}</div>
                     <div>
+                        <button class="edit-btn" onclick="viewRecord('${record.__backendId}')">Lihat</button>
                         ${currentUserType === 'admin' ? `
                             <button class="edit-btn" onclick="editRecord('${record.__backendId}')">Edit</button>
                             <button class="delete-btn" onclick="deleteRecord('${record.__backendId}')">Hapus</button>
@@ -1098,6 +1821,194 @@
                 `;
                 tbody.appendChild(row);
             });
+        }
+
+        function filterHistory() {
+            const buildingFilter = document.getElementById('searchBuilding').value.toLowerCase();
+            const dateFromFilter = document.getElementById('searchDateFrom').value;
+            const dateToFilter = document.getElementById('searchDateTo').value;
+            const typeFilter = document.getElementById('searchType').value;
+            
+            filteredData = allData.filter(record => {
+                // Building filter
+                const buildingMatch = !buildingFilter || 
+                    record.building_name.toLowerCase().includes(buildingFilter);
+                
+                // Date range filter
+                let dateMatch = true;
+                if (dateFromFilter || dateToFilter) {
+                    const recordDate = new Date(record.date);
+                    if (dateFromFilter) {
+                        const fromDate = new Date(dateFromFilter);
+                        dateMatch = dateMatch && recordDate >= fromDate;
+                    }
+                    if (dateToFilter) {
+                        const toDate = new Date(dateToFilter);
+                        dateMatch = dateMatch && recordDate <= toDate;
+                    }
+                }
+                
+                // Type filter
+                const typeMatch = !typeFilter || record.type === typeFilter;
+                
+                return buildingMatch && dateMatch && typeMatch;
+            });
+            
+            renderHistory(filteredData);
+        }
+
+        function clearFilters() {
+            document.getElementById('searchBuilding').value = '';
+            document.getElementById('searchDateFrom').value = '';
+            document.getElementById('searchDateTo').value = '';
+            document.getElementById('searchType').value = '';
+            filteredData = allData;
+            renderHistory(allData);
+        }
+
+        function downloadFilteredPDF() {
+            const dataToDownload = filteredData.length > 0 ? filteredData : allData;
+            
+            if (dataToDownload.length === 0) {
+                showMessage('Tidak ada data untuk didownload!', 'error');
+                return;
+            }
+            
+            generatePDF(dataToDownload);
+        }
+
+        function generatePDF(data) {
+            // Create PDF content
+            let pdfContent = `
+                <html>
+                <head>
+                    <title>Laporan Safety System - PT. Jaya Kencana</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #004A99; padding-bottom: 20px; }
+                        .company-name { font-size: 24px; font-weight: bold; color: #004A99; margin-bottom: 5px; }
+                        .report-title { font-size: 18px; color: #666; }
+                        .summary { background: #f5f5f5; padding: 15px; margin: 20px 0; border-radius: 5px; }
+                        .record { border: 1px solid #ddd; margin: 20px 0; padding: 15px; border-radius: 5px; }
+                        .record-header { background: #004A99; color: white; padding: 10px; margin: -15px -15px 15px -15px; border-radius: 5px 5px 0 0; }
+                        .detail-row { margin: 8px 0; }
+                        .label { font-weight: bold; color: #333; }
+                        .units-section { margin-top: 15px; }
+                        .unit { background: #f9f9f9; padding: 10px; margin: 10px 0; border-left: 4px solid #00d4ff; }
+                        .items { margin-left: 20px; }
+                        .item { padding: 5px 0; border-bottom: 1px solid #eee; }
+                        .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <div class="company-name">PT. JAYA KENCANA</div>
+                        <div class="report-title">Laporan Safety Management System</div>
+                        <div style="font-size: 12px; color: #666; margin-top: 10px;">
+                            Tanggal Cetak: ${new Date().toLocaleDateString('id-ID', { 
+                                weekday: 'long', 
+                                year: 'numeric', 
+                                month: 'long', 
+                                day: 'numeric' 
+                            })}
+                        </div>
+                    </div>
+                    
+                    <div class="summary">
+                        <strong>Ringkasan Laporan:</strong><br>
+                        Total Data: ${data.length} record<br>
+                        Eskalator: ${data.filter(r => r.type === 'escalator').length} record<br>
+                        Elevator: ${data.filter(r => r.type === 'elevator').length} record
+                    </div>
+            `;
+            
+            data.forEach((record, index) => {
+                const units = JSON.parse(record.units || '[]');
+                
+                pdfContent += `
+                    <div class="record">
+                        <div class="record-header">
+                            Record #${index + 1} - ${record.type === 'escalator' ? 'ESKALATOR' : 'ELEVATOR'}
+                        </div>
+                        
+                        <div class="detail-row">
+                            <span class="label">Gedung/Proyek:</span> ${record.building_name}
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Teknisi:</span> ${record.technician_name}
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Tanggal:</span> ${new Date(record.date).toLocaleDateString('id-ID')}
+                        </div>
+                        <div class="detail-row">
+                            <span class="label">Dibuat:</span> ${new Date(record.created_at).toLocaleDateString('id-ID')} oleh ${record.user_type}
+                        </div>
+                        
+                        <div class="units-section">
+                            <strong>Detail Unit & Items:</strong>
+                `;
+                
+                units.forEach((unit, unitIndex) => {
+                    pdfContent += `
+                        <div class="unit">
+                            <strong>Unit ${unitIndex + 1}:</strong> ${unit.unit}<br>
+                            <strong>MFG:</strong> ${unit.mfg}<br>
+                            <strong>Type:</strong> ${unit.type}
+                            
+                            <div class="items">
+                                <strong>Items:</strong>
+                    `;
+                    
+                    unit.items.forEach((item, itemIndex) => {
+                        pdfContent += `
+                            <div class="item">
+                                ${itemIndex + 1}. ${item.sparepart} - ${item.condition} 
+                                (${item.quantity} ${item.unit}) 
+                                ${item.priority ? `[${item.priority}]` : ''}
+                                ${item.remarks ? `- ${item.remarks}` : ''}
+                            </div>
+                        `;
+                    });
+                    
+                    pdfContent += `
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                pdfContent += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            pdfContent += `
+                    <div class="footer">
+                        <div>PT. JAYA KENCANA</div>
+                        <div>Jl. Salemba Raya No.61 Jakarta - Indonesia 10440</div>
+                        <div>Tel: (021) 390 8501 / (021) 390 8510</div>
+                        <div>Email: info@jayakencana.com</div>
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            // Open in new window for printing/saving as PDF
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(pdfContent);
+            printWindow.document.close();
+            
+            // Auto print dialog
+            setTimeout(() => {
+                printWindow.print();
+            }, 500);
+        }
+
+        function viewRecord(backendId) {
+            const record = allData.find(r => r.__backendId === backendId);
+            if (!record) return;
+            
+            showRecordDetail(record, false);
         }
 
         async function deleteRecord(backendId) {
@@ -1150,18 +2061,556 @@
         }
 
         function editRecord(backendId) {
-            // For demo purposes, show a message that edit functionality would be implemented
-            const infoDiv = document.createElement('div');
-            infoDiv.style.cssText = 'background: #ffa502; color: white; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center;';
-            infoDiv.textContent = 'Fitur edit akan segera tersedia dalam versi selanjutnya.';
-            document.getElementById('historyContent').insertBefore(infoDiv, document.querySelector('.history-table'));
+            const record = allData.find(r => r.__backendId === backendId);
+            if (!record) return;
             
-            setTimeout(() => infoDiv.remove(), 3000);
+            showRecordDetail(record, true);
+        }
+
+        function showRecordDetail(record, isEditable = false) {
+            const units = JSON.parse(record.units || '[]');
+            
+            // Create modal overlay
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                z-index: 9999;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                box-sizing: border-box;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+                border-radius: 15px;
+                padding: 30px;
+                max-width: 800px;
+                width: 100%;
+                max-height: 90%;
+                overflow-y: auto;
+                color: white;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            `;
+            
+            let modalHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid rgba(0, 212, 255, 0.5); padding-bottom: 20px;">
+                    <h2 style="color: #00d4ff; margin: 0;">${isEditable ? '✏️ Edit' : '👁️ Detail'} Record - ${record.type === 'escalator' ? 'Eskalator' : 'Elevator'}</h2>
+                    <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="background: #ff4757; border: none; border-radius: 50%; width: 40px; height: 40px; color: white; cursor: pointer; font-size: 18px;">✕</button>
+                </div>
+                
+                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+                    <h3 style="color: #00d4ff; margin-top: 0;">Informasi Umum</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: 500;">Gedung/Proyek:</label>
+                            ${isEditable ? 
+                                `<input type="text" id="editBuilding" value="${record.building_name}" style="width: 100%; padding: 10px; border: 1px solid rgba(255,255,255,0.3); border-radius: 5px; background: rgba(255,255,255,0.1); color: white;">` :
+                                `<div style="padding: 10px; background: rgba(255,255,255,0.05); border-radius: 5px;">${record.building_name}</div>`
+                            }
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: 500;">Teknisi:</label>
+                            ${isEditable ? 
+                                `<input type="text" id="editTechnician" value="${record.technician_name}" style="width: 100%; padding: 10px; border: 1px solid rgba(255,255,255,0.3); border-radius: 5px; background: rgba(255,255,255,0.1); color: white;">` :
+                                `<div style="padding: 10px; background: rgba(255,255,255,0.05); border-radius: 5px;">${record.technician_name}</div>`
+                            }
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: 500;">Tanggal:</label>
+                            ${isEditable ? 
+                                `<input type="date" id="editDate" value="${record.date}" style="width: 100%; padding: 10px; border: 1px solid rgba(255,255,255,0.3); border-radius: 5px; background: rgba(255,255,255,0.1); color: white;">` :
+                                `<div style="padding: 10px; background: rgba(255,255,255,0.05); border-radius: 5px;">${new Date(record.date).toLocaleDateString('id-ID')}</div>`
+                            }
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 5px; font-weight: 500;">Dibuat:</label>
+                            <div style="padding: 10px; background: rgba(255,255,255,0.05); border-radius: 5px;">${new Date(record.created_at).toLocaleDateString('id-ID')} (${record.user_type})</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px;">
+                    <h3 style="color: #00d4ff; margin-top: 0;">Detail Unit & Items</h3>
+                    <div id="unitsDetail">
+            `;
+            
+            units.forEach((unit, unitIndex) => {
+                modalHTML += `
+                    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #00d4ff;">
+                        <h4 style="color: #00d4ff; margin-top: 0;">Unit ${unitIndex + 1}</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 15px;">
+                            <div><strong>Unit:</strong> ${unit.unit}</div>
+                            <div><strong>MFG:</strong> ${unit.mfg}</div>
+                            <div><strong>Type:</strong> ${unit.type}</div>
+                        </div>
+                        
+                        <div style="margin-top: 15px;">
+                            <strong style="color: #00d4ff;">Items:</strong>
+                            <div style="margin-left: 20px; margin-top: 10px;">
+                `;
+                
+                unit.items.forEach((item, itemIndex) => {
+                    modalHTML += `
+                        <div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                            <div style="font-weight: 500;">${itemIndex + 1}. ${item.sparepart}</div>
+                            <div style="font-size: 14px; color: #b0b0b0; margin-left: 15px;">
+                                Kondisi: ${item.condition} | 
+                                Jumlah: ${item.quantity} ${item.unit} | 
+                                Prioritas: ${item.priority}
+                                ${item.remarks ? `<br>Remarks: ${item.remarks}` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                modalHTML += `
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            modalHTML += `
+                    </div>
+                </div>
+                
+                ${isEditable ? `
+                    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+                        <button onclick="saveEditedRecord('${record.__backendId}')" style="background: linear-gradient(45deg, #2ed573, #1dd1a1); border: none; border-radius: 10px; padding: 15px 30px; color: white; cursor: pointer; font-weight: 600;">💾 Simpan Perubahan</button>
+                        <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="background: #666; border: none; border-radius: 10px; padding: 15px 30px; color: white; cursor: pointer; font-weight: 600;">❌ Batal</button>
+                    </div>
+                ` : `
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="background: linear-gradient(45deg, #9c27b0, #673ab7); border: none; border-radius: 10px; padding: 15px 30px; color: white; cursor: pointer; font-weight: 600;">✅ Tutup</button>
+                    </div>
+                `}
+            `;
+            
+            modalContent.innerHTML = modalHTML;
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+
+        async function saveEditedRecord(backendId) {
+            if (!window.dataSdk) return;
+            
+            const record = allData.find(r => r.__backendId === backendId);
+            if (!record) return;
+            
+            // Get edited values
+            const editedBuilding = document.getElementById('editBuilding').value;
+            const editedTechnician = document.getElementById('editTechnician').value;
+            const editedDate = document.getElementById('editDate').value;
+            
+            // Update record
+            const updatedRecord = {
+                ...record,
+                building_name: editedBuilding,
+                technician_name: editedTechnician,
+                date: editedDate
+            };
+            
+            const result = await window.dataSdk.update(updatedRecord);
+            
+            if (result.isOk) {
+                // Close modal
+                document.querySelector('[style*="position: fixed"]').remove();
+                
+                // Show success message
+                showMessage('Data berhasil diperbarui!', 'success');
+            } else {
+                showMessage('Gagal memperbarui data. Silakan coba lagi.', 'error');
+            }
+        }
+
+        // Searchable dropdown functions
+        function setupSearchableInputs() {
+            document.addEventListener('click', function(e) {
+                // Close all dropdowns when clicking outside
+                if (!e.target.closest('.searchable-input')) {
+                    document.querySelectorAll('.searchable-dropdown').forEach(dropdown => {
+                        dropdown.classList.remove('show');
+                    });
+                }
+            });
+
+            // Setup input event listeners for search functionality
+            document.addEventListener('input', function(e) {
+                if (e.target.closest('.searchable-input')) {
+                    const input = e.target;
+                    const dropdown = input.nextElementSibling;
+                    const searchTerm = input.value.toLowerCase();
+                    
+                    if (searchTerm.length > 0) {
+                        dropdown.classList.add('show');
+                        
+                        // Filter dropdown items
+                        const items = dropdown.querySelectorAll('.dropdown-item');
+                        items.forEach(item => {
+                            const text = item.textContent.toLowerCase();
+                            if (text.includes(searchTerm)) {
+                                item.style.display = 'block';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        });
+                    } else {
+                        dropdown.classList.remove('show');
+                    }
+                }
+            });
+
+            // Setup focus event listeners
+            document.addEventListener('focus', function(e) {
+                if (e.target.closest('.searchable-input')) {
+                    const input = e.target;
+                    const dropdown = input.nextElementSibling;
+                    dropdown.classList.add('show');
+                    
+                    // Show all items when focused
+                    const items = dropdown.querySelectorAll('.dropdown-item');
+                    items.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                }
+            }, true);
+        }
+
+        function selectBuilding(value) {
+            document.getElementById('buildingName').value = value;
+            document.getElementById('buildingDropdown').classList.remove('show');
+        }
+
+        function selectElevatorBuilding(value) {
+            document.getElementById('elevatorBuildingName').value = value;
+            document.getElementById('elevatorBuildingDropdown').classList.remove('show');
+        }
+
+        function selectType(element, value) {
+            const input = element.closest('.searchable-input').querySelector('input');
+            input.value = value;
+            element.closest('.searchable-dropdown').classList.remove('show');
+        }
+
+        function selectSparepart(element, value) {
+            const input = element.closest('.searchable-input').querySelector('input');
+            input.value = value;
+            element.closest('.searchable-dropdown').classList.remove('show');
+        }
+
+        function selectCondition(element, value) {
+            const input = element.closest('.searchable-input').querySelector('input');
+            input.value = value;
+            element.closest('.searchable-dropdown').classList.remove('show');
+        }
+
+        function selectUnit(element, value) {
+            const input = element.closest('.searchable-input').querySelector('input');
+            input.value = value;
+            element.closest('.searchable-dropdown').classList.remove('show');
+        }
+
+        function selectPriority(element, value) {
+            const input = element.closest('.searchable-input').querySelector('input');
+            input.value = value;
+            element.closest('.searchable-dropdown').classList.remove('show');
+        }
+
+        function clearItem(button) {
+            const itemGroup = button.closest('.item-group');
+            const inputs = itemGroup.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                if (input.type === 'file') {
+                    input.value = '';
+                } else if (input.type === 'checkbox') {
+                    input.checked = false;
+                } else {
+                    input.value = '';
+                }
+            });
+        }
+
+        function addItemToLastUnit() {
+            const container = document.getElementById('unitsContainer');
+            const lastUnit = container.querySelector('.unit-group:last-child');
+            if (lastUnit) {
+                addItem(lastUnit.querySelector('.add-btn') || lastUnit);
+            }
+        }
+
+        function addItemToLastElevatorUnit() {
+            const container = document.getElementById('elevatorUnitsContainer');
+            const lastUnit = container.querySelector('.unit-group:last-child');
+            if (lastUnit) {
+                addItem(lastUnit.querySelector('.add-btn') || lastUnit);
+            }
+        }
+
+        // Photo upload functions
+        function handlePhotoUpload(input) {
+            if (input.files && input.files[0]) {
+                const removeBtn = input.nextElementSibling;
+                if (removeBtn) {
+                    removeBtn.style.display = 'inline-block';
+                }
+                
+                const container = input.closest('.form-group');
+                const addBtn = container.querySelector('.add-photo-btn');
+                if (addBtn) {
+                    addBtn.style.display = 'inline-block';
+                }
+            }
+        }
+
+        function addPhotoInput(button) {
+            const container = button.closest('.form-group').querySelector('.photo-container');
+            const newGroup = document.createElement('div');
+            newGroup.className = 'photo-input-group';
+            newGroup.innerHTML = `
+                <input type="file" class="form-input photo-input" accept="image/*" onchange="handlePhotoUpload(this)">
+                <button type="button" class="remove-photo-btn" onclick="removePhoto(this)" style="display: none;">🗑️</button>
+            `;
+            container.appendChild(newGroup);
+        }
+
+        function removePhoto(button) {
+            const group = button.closest('.photo-input-group');
+            const container = group.closest('.photo-container');
+            const isFirstInput = group === container.firstElementChild;
+            
+            if (isFirstInput && container.children.length === 1) {
+                // If it's the only input, just clear it and hide buttons
+                const input = group.querySelector('.photo-input');
+                input.value = '';
+                button.style.display = 'none';
+                
+                const addBtn = container.closest('.form-group').querySelector('.add-photo-btn');
+                if (addBtn) {
+                    addBtn.style.display = 'none';
+                }
+            } else {
+                // Remove the group if there are multiple inputs
+                group.remove();
+            }
+        }
+
+        function resetPhotoInputs() {
+            // Reset all photo inputs when adding new units/items
+            document.querySelectorAll('.photo-container').forEach(container => {
+                const inputs = container.querySelectorAll('.photo-input');
+                inputs.forEach((input, index) => {
+                    if (index === 0) {
+                        // Keep first input, just clear it
+                        input.value = '';
+                        const removeBtn = input.nextElementSibling;
+                        if (removeBtn) removeBtn.style.display = 'none';
+                    } else {
+                        // Remove additional inputs
+                        input.closest('.photo-input-group').remove();
+                    }
+                });
+                
+                // Hide add button
+                const addBtn = container.closest('.form-group').querySelector('.add-photo-btn');
+                if (addBtn) {
+                    addBtn.style.display = 'none';
+                }
+            });
+        }
+
+        // Settings functions
+        function showSettingsTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.settings-tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.settings-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + 'Tab').classList.add('active');
+            event.target.classList.add('active');
+            
+            // Load data for specific tabs
+            if (tabName === 'users') {
+                loadUsers();
+            } else if (tabName === 'technicians') {
+                loadTechnicians();
+            }
+        }
+
+        function addUser(event) {
+            event.preventDefault();
+            const username = document.getElementById('newUsername').value;
+            const password = document.getElementById('newPassword').value;
+            const role = document.getElementById('newUserRole').value;
+            
+            // Check if username already exists
+            if (users.find(u => u.username === username)) {
+                showMessage('Username sudah ada!', 'error');
+                return;
+            }
+            
+            users.push({ username, password, role });
+            document.getElementById('addUserForm').reset();
+            loadUsers();
+            showMessage('User berhasil ditambahkan!', 'success');
+        }
+
+        function deleteUser(username) {
+            if (username === currentUser) {
+                showMessage('Tidak dapat menghapus user yang sedang login!', 'error');
+                return;
+            }
+            
+            users = users.filter(u => u.username !== username);
+            loadUsers();
+            showMessage('User berhasil dihapus!', 'success');
+        }
+
+        function loadUsers() {
+            const tbody = document.getElementById('usersTableBody');
+            tbody.innerHTML = '';
+            
+            users.forEach(user => {
+                const row = document.createElement('div');
+                row.className = 'table-row';
+                row.innerHTML = `
+                    <div>${user.username}</div>
+                    <div>${user.role}</div>
+                    <div>
+                        ${user.username !== currentUser ? 
+                            `<button class="delete-btn" onclick="deleteUser('${user.username}')">Hapus</button>` : 
+                            '<span style="color: #b0b0b0;">Current User</span>'
+                        }
+                    </div>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function addTechnician(event) {
+            event.preventDefault();
+            const name = document.getElementById('newTechnicianName').value;
+            
+            if (technicians.includes(name)) {
+                showMessage('Teknisi sudah ada!', 'error');
+                return;
+            }
+            
+            technicians.push(name);
+            document.getElementById('addTechnicianForm').reset();
+            loadTechnicians();
+            updateTechnicianCheckboxes();
+            showMessage('Teknisi berhasil ditambahkan!', 'success');
+        }
+
+        function deleteTechnician(name) {
+            technicians = technicians.filter(t => t !== name);
+            loadTechnicians();
+            updateTechnicianCheckboxes();
+            showMessage('Teknisi berhasil dihapus!', 'success');
+        }
+
+        function loadTechnicians() {
+            const container = document.getElementById('techniciansList');
+            container.innerHTML = '';
+            
+            technicians.forEach(tech => {
+                const item = document.createElement('div');
+                item.className = 'technician-item';
+                item.innerHTML = `
+                    <span class="technician-name">${tech}</span>
+                    <button class="delete-btn" onclick="deleteTechnician('${tech}')">Hapus</button>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function updateTechnicianCheckboxes() {
+            // Update all technician checkboxes in forms
+            const checkboxContainers = document.querySelectorAll('.checkbox-group');
+            checkboxContainers.forEach(container => {
+                container.innerHTML = '';
+                technicians.forEach(tech => {
+                    const label = document.createElement('label');
+                    label.className = 'checkbox-item';
+                    label.innerHTML = `
+                        <input type="checkbox" name="technician" value="${tech}"> ${tech}
+                    `;
+                    container.appendChild(label);
+                });
+            });
+        }
+
+        function changePassword(event) {
+            event.preventDefault();
+            const oldPassword = document.getElementById('oldPassword').value;
+            const newPassword = document.getElementById('newPasswordChange').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            const user = users.find(u => u.username === currentUser);
+            
+            if (user.password !== oldPassword) {
+                showMessage('Password lama salah!', 'error');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                showMessage('Konfirmasi password tidak cocok!', 'error');
+                return;
+            }
+            
+            user.password = newPassword;
+            document.getElementById('changePasswordForm').reset();
+            showMessage('Password berhasil diubah!', 'success');
+        }
+
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
+                background: ${type === 'success' ? '#2ed573' : '#ff4757'}; 
+                color: white; 
+                padding: 15px; 
+                border-radius: 10px; 
+                margin: 20px 0; 
+                text-align: center;
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 9999;
+                min-width: 300px;
+            `;
+            messageDiv.textContent = message;
+            document.body.appendChild(messageDiv);
+            
+            setTimeout(() => messageDiv.remove(), 3000);
         }
 
         // Initialize the application
-        document.addEventListener('DOMContentLoaded', initializeApp);
-   <script src="script.js"></script> 
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupSearchableInputs();
+        });
+    <script src="script.js"></script> 
     
     <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'995ac3c203009ca5',t:'MTc2MTY1Nzk4NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
     
