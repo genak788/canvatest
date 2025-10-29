@@ -1481,8 +1481,17 @@ if (!window.dataSdk) {
             
             historyList.innerHTML = filteredRecords.map(record => {
                 const date = new Date(record.created_at).toLocaleDateString('id-ID');
-                const units = JSON.parse(record.units || '[]');
-                
+let units = record.units;
+if (typeof units === 'string') {
+    try { units = JSON.parse(units); } catch { units = []; }
+}
+for (let u of units) {
+    if (typeof u.items === 'string') {
+        try { u.items = JSON.parse(u.items); } catch { u.items = []; }
+    } else if (!Array.isArray(u.items)) {
+        u.items = [];
+    }
+}                
                 return `
                     <div class="history-item">
                         <div class="history-header">
@@ -1546,7 +1555,17 @@ if (!window.dataSdk) {
             const modal = document.getElementById('edit-modal');
             const container = document.getElementById('edit-form-container');
             
-            const units = JSON.parse(record.units || '[]');
+            let units = record.units;
+if (typeof units === 'string') {
+    try { units = JSON.parse(units); } catch { units = []; }
+}
+for (let u of units) {
+    if (typeof u.items === 'string') {
+        try { u.items = JSON.parse(u.items); } catch { u.items = []; }
+    } else if (!Array.isArray(u.items)) {
+        u.items = [];
+    }
+}
             
 container.innerHTML = `
     <div class="modal-body">
@@ -1660,8 +1679,17 @@ container.innerHTML = `
             const modal = document.getElementById('review-modal');
             const container = document.getElementById('review-content');
             
-            const units = JSON.parse(record.units || '[]');
-            
+let units = record.units;
+if (typeof units === 'string') {
+    try { units = JSON.parse(units); } catch { units = []; }
+}
+for (let u of units) {
+    if (typeof u.items === 'string') {
+        try { u.items = JSON.parse(u.items); } catch { u.items = []; }
+    } else if (!Array.isArray(u.items)) {
+        u.items = [];
+    }
+}            
             container.innerHTML = `
                 <div class="modal-body">
                     <div class="review-section">
@@ -1923,7 +1951,7 @@ container.innerHTML = `
                 building_name: formData.get('building_name'),
                 technician_names: selectedTechnicians.join(', '),
                 date: formData.get('date'),
-                units: JSON.stringify(units),
+                units: units,
                 created_at: new Date().toISOString(),
                 user_type: currentUser.role,
                 username: currentUser.username,
@@ -1992,7 +2020,7 @@ container.innerHTML = `
                 building_name: formData.get('building_name'),
                 technician_names: selectedTechnicians.join(', '),
                 date: formData.get('date'),
-                units: JSON.stringify(units),
+                units: units,
                 created_at: new Date().toISOString(),
                 user_type: currentUser.role,
                 username: currentUser.username,
