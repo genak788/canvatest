@@ -990,6 +990,47 @@
                 }
             }
         };
+// ✅ Fallback untuk GitHub Pages (tanpa Canva SDK)
+if (!window.dataSdk) {
+    console.warn('⚠️ dataSdk tidak ditemukan. Menggunakan localStorage sebagai penyimpanan sementara.');
+
+    window.dataSdk = {
+        // Simulasi inisialisasi SDK
+        async init(handler) {
+            const stored = JSON.parse(localStorage.getItem('records') || '[]');
+            handler.onDataChanged(stored);
+            return { isOk: true };
+        },
+
+        // Simulasi create
+        async create(data) {
+            const records = JSON.parse(localStorage.getItem('records') || '[]');
+            records.push({ ...data, __backendId: data.id });
+            localStorage.setItem('records', JSON.stringify(records));
+            dataHandler.onDataChanged(records);
+            return { isOk: true };
+        },
+
+        // Simulasi update
+        async update(updatedData) {
+            const records = JSON.parse(localStorage.getItem('records') || '[]');
+            const index = records.findIndex(r => r.__backendId === updatedData.__backendId);
+            if (index !== -1) records[index] = updatedData;
+            localStorage.setItem('records', JSON.stringify(records));
+            dataHandler.onDataChanged(records);
+            return { isOk: true };
+        },
+
+        // Simulasi delete
+        async delete(targetData) {
+            const records = JSON.parse(localStorage.getItem('records') || '[]');
+            const filtered = records.filter(r => r.__backendId !== targetData.__backendId);
+            localStorage.setItem('records', JSON.stringify(filtered));
+            dataHandler.onDataChanged(filtered);
+            return { isOk: true };
+        }
+    };
+}
 
         // Initialize Data SDK
         async function initializeDataSDK() {
