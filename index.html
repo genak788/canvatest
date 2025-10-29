@@ -3,268 +3,314 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PT. Jaya Kencana Safety System</title>
-  <script src="/_sdk/element_sdk.js"></script>
+  <title>PT. JAYA KENCANA - Form System</title>
   <script src="/_sdk/data_sdk.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <style>
         body {
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
             min-height: 100%;
-            color: white;
+            color: #ffffff;
+            overflow-x: hidden;
         }
 
-        html {
-            height: 100%;
+        * {
+            box-sizing: border-box;
         }
 
-        .container {
-            min-height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 20px;
-        }
-
-        /* Login Styles */
         .login-container {
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            min-height: 80%;
+            justify-content: center;
             padding: 20px;
         }
 
         .login-card {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 40px;
             width: 100%;
-            max-width: 400px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            max-width: 450px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         }
 
-        .login-title {
+        .login-header {
             text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #00d4ff, #9c27b0);
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            background: linear-gradient(135deg, #ffffff, #e0e7ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .login-subtitle {
-            text-align: center;
-            color: #b0b0b0;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        .login-tabs {
-            display: flex;
-            margin-bottom: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 4px;
-        }
-
-        .login-tab {
-            flex: 1;
-            padding: 12px;
-            text-align: center;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .login-tab.active {
-            background: linear-gradient(45deg, #00d4ff, #9c27b0);
-            color: white;
+        .login-header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin: 0;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
-        .form-label {
+        .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 500;
-            color: #e0e0e0;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #00d4ff;
-            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
-        }
-
-        .form-input::placeholder {
-            color: #888;
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(45deg, #9c27b0, #673ab7);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            font-size: 16px;
             font-weight: 600;
-            cursor: pointer;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
             transition: all 0.3s ease;
+            font-family: inherit;
         }
 
-        .login-btn:hover {
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(156, 39, 176, 0.4);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
         }
 
-        /* Dashboard Styles */
-        .dashboard {
+        .btn-success {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.3);
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(72, 187, 120, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f56565, #e53e3e);
+            color: white;
+            box-shadow: 0 8px 25px rgba(245, 101, 101, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(245, 101, 101, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .main-container {
             display: none;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        .dashboard.active {
-            display: block;
-        }
-
-        .dashboard-header {
+        .header {
             text-align: center;
             margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .company-title {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #00d4ff, #9c27b0);
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            background: linear-gradient(135deg, #ffffff, #e0e7ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .user-subtitle {
-            font-size: 18px;
-            color: #b0b0b0;
-            font-weight: 400;
+        .header .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
         }
 
-        .nav-grid {
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #f56565, #e53e3e);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             margin-bottom: 40px;
-            max-width: 1000px;
+            max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .nav-card {
+        .menu-card {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
             padding: 30px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .nav-card:hover {
+        .menu-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
             background: rgba(255, 255, 255, 0.15);
         }
 
-        .nav-icon {
-            font-size: 48px;
+        .menu-card.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .menu-icon {
+            font-size: 3rem;
             margin-bottom: 15px;
             display: block;
         }
 
-        .nav-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: white;
+        .menu-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
         }
 
-        /* Form Styles */
-        .form-section {
+        .form-container {
             display: none;
-            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .form-section.active {
+        .form-container.active {
             display: block;
+            animation: fadeIn 0.5s ease-out;
         }
 
-        .section-header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-header {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 20px;
             margin-bottom: 30px;
-            text-align: center;
+        }
+
+        .form-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .form-section {
+            margin-bottom: 40px;
         }
 
         .section-title {
-            font-size: 32px;
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 20px;
-            background: linear-gradient(45deg, #00d4ff, #9c27b0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .back-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            color: white;
-            cursor: pointer;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .form-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .form-row {
@@ -274,221 +320,263 @@
             margin-bottom: 20px;
         }
 
-        .item-section {
-            border-top: 2px solid rgba(0, 212, 255, 0.5);
-            padding-top: 20px;
-            margin-top: 30px;
+        .unit-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .unit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .unit-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .item-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
         }
 
         .item-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .item-title {
-            font-size: 24px;
+            font-size: 1.1rem;
             font-weight: 600;
-            color: #00d4ff;
+            color: #ffffff;
         }
 
-        .add-btn {
-            background: linear-gradient(45deg, #00d4ff, #0099cc);
-            border: none;
-            border-radius: 8px;
-            padding: 10px 20px;
-            color: white;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            margin-left: 10px;
-        }
-
-        .add-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(45deg, #9c27b0, #673ab7);
-            border: none;
-            border-radius: 15px;
-            color: white;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 30px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(156, 39, 176, 0.4);
-        }
-
-        .item-group {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-left: 4px solid #00d4ff;
-        }
-
-        .remove-item {
-            background: #ff4757;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            color: white;
-            cursor: pointer;
-            font-size: 12px;
-            float: right;
-        }
-
-        /* History Styles */
-        .history-table {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            overflow: hidden;
+        .photo-upload-container {
             margin-top: 20px;
         }
 
-        .table-header {
-            background: rgba(0, 212, 255, 0.2);
-            padding: 15px;
-            font-weight: 600;
+        .photo-preview {
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 100px;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             gap: 15px;
+            margin-top: 15px;
         }
 
-        .table-row {
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 100px;
-            gap: 15px;
-            align-items: center;
+        .photo-item {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .table-row:hover {
-            background: rgba(255, 255, 255, 0.05);
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .edit-btn {
-            background: #ffa502;
+        .photo-remove {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(245, 101, 101, 0.9);
+            color: white;
             border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            color: white;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .delete-btn {
-            background: #ff4757;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            color: white;
-            cursor: pointer;
-            font-size: 12px;
-            margin-left: 5px;
-        }
-
-        /* Footer Styles */
-        .footer {
-            background: #004A99;
-            padding: 40px 20px 20px;
-            margin-top: auto;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-title {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: white;
-        }
-
-        .footer-info {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .footer-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: white;
-        }
-
-        .footer-icon {
-            width: 20px;
-            height: 20px;
-            fill: white;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, #ffa502, #ff6348);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .dropdown-container {
+            position: relative;
+        }
+
+        .dropdown-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(30, 60, 114, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .dropdown-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            transition: background 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .history-container {
+            display: none;
+        }
+
+        .history-container.active {
+            display: block;
+        }
+
+        .history-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
             transition: all 0.3s ease;
         }
 
-        .social-icon:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 165, 2, 0.4);
+        .history-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .copyright {
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .history-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .history-date {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+
+        .history-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .footer {
             text-align: center;
-            color: #b0b0b0;
-            font-size: 14px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            margin-top: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .error-message {
+            background: linear-gradient(135deg, #f56565, #e53e3e);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #48bb78, #38a169);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .checkbox-group {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 10px;
+            margin-top: 10px;
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
-            gap: 10px;
             padding: 10px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            color: #e0e0e0;
-            font-weight: 400;
+            transition: background 0.2s ease;
         }
 
         .checkbox-item:hover {
@@ -496,2120 +584,1004 @@
         }
 
         .checkbox-item input[type="checkbox"] {
+            margin-right: 10px;
             width: 18px;
             height: 18px;
-            accent-color: #00d4ff;
+        }
+
+        .checkbox-item label {
+            color: #ffffff;
             cursor: pointer;
-        }
-
-        .searchable-input {
-            position: relative;
-        }
-
-        .searchable-dropdown {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: rgba(30, 30, 60, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 0 0 10px 10px;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-        }
-
-        .searchable-dropdown.show {
-            display: block;
-        }
-
-        .dropdown-item {
-            padding: 12px 15px;
-            cursor: pointer;
-            color: white;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-item:hover {
-            background: rgba(0, 212, 255, 0.2);
-        }
-
-        .dropdown-item:last-child {
-            border-bottom: none;
-        }
-
-        .clear-item-btn {
-            background: #ff6b6b;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 15px;
-            color: white;
-            cursor: pointer;
-            font-size: 12px;
-            margin-top: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .clear-item-btn:hover {
-            background: #ff5252;
-            transform: translateY(-1px);
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-
-        .action-btn {
-            background: linear-gradient(45deg, #00d4ff, #0099cc);
-            border: none;
-            border-radius: 10px;
-            padding: 15px 30px;
-            color: white;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            min-width: 150px;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-            color: #00d4ff;
-        }
-
-        .loading.show {
-            display: block;
-        }
-
-        /* Settings Styles */
-        .settings-tabs {
-            display: flex;
-            margin-bottom: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 4px;
-            gap: 4px;
-        }
-
-        .settings-tab {
-            flex: 1;
-            padding: 12px 20px;
-            background: transparent;
-            border: none;
-            border-radius: 8px;
-            color: #b0b0b0;
-            cursor: pointer;
-            transition: all 0.3s ease;
             font-weight: 500;
-        }
-
-        .settings-tab.active {
-            background: linear-gradient(45deg, #00d4ff, #9c27b0);
-            color: white;
-        }
-
-        .settings-tab-content {
-            display: none;
-        }
-
-        .settings-tab-content.active {
-            display: block;
-        }
-
-        .users-table {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .technicians-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .technician-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 4px solid #00d4ff;
-        }
-
-        .technician-name {
-            color: white;
-            font-weight: 500;
-        }
-
-        .photo-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .photo-input-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .photo-input {
-            flex: 1;
-        }
-
-        .remove-photo-btn {
-            background: #ff4757;
-            border: none;
-            border-radius: 5px;
-            padding: 8px 12px;
-            color: white;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .remove-photo-btn:hover {
-            background: #ff3742;
-        }
-
-        .add-photo-btn:hover {
-            background: #0099cc !important;
-            transform: translateY(-1px);
         }
 
         @media (max-width: 768px) {
-            .company-title {
-                font-size: 32px;
+            .header h1 {
+                font-size: 2.5rem;
             }
             
-            .nav-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
             
             .form-row {
                 grid-template-columns: 1fr;
             }
             
-            .table-header, .table-row {
-                grid-template-columns: 1fr;
+            .user-info {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            
+            .history-header {
+                flex-direction: column;
+                align-items: flex-start;
                 gap: 10px;
             }
             
-            .item-header {
-                flex-direction: column;
-                gap: 10px;
+            .history-actions {
+                flex-wrap: wrap;
             }
         }
     </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
- <body>
-  <div class="container"><!-- Login Section -->
-   <div id="loginSection" class="main-content">
-    <div class="login-container">
-     <div class="login-card">
-      <h1 class="login-title" id="companyTitle">PT. JAYA KENCANA</h1>
-      <p class="login-subtitle">Safety Management System</p>
-      <form id="loginForm" onsubmit="handleLogin(event)">
-       <div class="form-group"><label for="username" class="form-label">Username</label> <input type="text" id="username" class="form-input" placeholder="Masukkan username" required>
-       </div>
-       <div class="form-group"><label for="password" class="form-label">Password</label> <input type="password" id="password" class="form-input" placeholder="Masukkan password" required>
-       </div><button type="submit" class="login-btn">Login</button>
-      </form>
-     </div>
+ <body><!-- Loading Overlay -->
+  <div id="loading" class="loading">
+   <div class="loading-content">
+    <div class="spinner"></div>
+    <div id="loading-text">
+     Loading...
     </div>
-   </div><!-- Dashboard Section -->
-   <div id="dashboardSection" class="main-content dashboard">
-    <div class="dashboard-header">
-     <h1 class="company-title" id="dashboardCompanyTitle">PT. JAYA KENCANA</h1>
-     <p class="user-subtitle" id="userWelcome">Selamat datang, User</p><button class="back-btn" onclick="logout()">Logout</button>
+   </div>
+  </div><!-- Login Page -->
+  <div id="login-page" class="login-container">
+   <div class="login-card">
+    <div class="login-header">
+     <h1 id="company-name">PT. JAYA KENCANA</h1>
+     <p>Form System Login</p>
     </div>
-    <div class="nav-grid" id="userNavigation">
-     <div class="nav-card" onclick="showSection('escalator')"><span class="nav-icon">🔧</span>
-      <div class="nav-title">
-       Safety Eskalator
-      </div>
+    <div id="login-error" class="error-message" style="display: none;"></div>
+    <form id="login-form">
+     <div class="form-group"><label for="username">Username</label> <input type="text" id="username" name="username" required placeholder="Enter your username">
      </div>
-     <div class="nav-card" onclick="showSection('elevator')"><span class="nav-icon">🏢</span>
-      <div class="nav-title">
-       Safety Elevator
-      </div>
-     </div>
-     <div class="nav-card" onclick="showSection('realization')"><span class="nav-icon">📊</span>
-      <div class="nav-title">
-       Realisasi
-      </div>
-     </div>
-     <div class="nav-card" onclick="showSection('history')"><span class="nav-icon">📋</span>
-      <div class="nav-title">
-       History
-      </div>
-     </div>
-    </div>
-    <div class="nav-grid" id="adminNavigation" style="display: none;">
-     <div class="nav-card" onclick="showSection('escalator')"><span class="nav-icon">🔧</span>
-      <div class="nav-title">
-       Safety Eskalator
-      </div>
-     </div>
-     <div class="nav-card" onclick="showSection('elevator')"><span class="nav-icon">🏢</span>
-      <div class="nav-title">
-       Safety Elevator
-      </div>
-     </div>
-     <div class="nav-card" onclick="showSection('realization')"><span class="nav-icon">📊</span>
-      <div class="nav-title">
-       Realisasi
-      </div>
-     </div>
-     <div class="nav-card" onclick="showSection('history')"><span class="nav-icon">📋</span>
-      <div class="nav-title">
-       History
-      </div>
-     </div>
-     <div class="nav-card" onclick="showSection('settings')"><span class="nav-icon">⚙️</span>
-      <div class="nav-title">
-       Settings
-      </div>
-     </div>
-    </div>
-   </div><!-- Escalator Form Section -->
-   <div id="escalatorSection" class="main-content form-section"><button class="back-btn" onclick="showDashboard()">← Kembali ke Dashboard</button>
-    <div class="section-header">
-     <h2 class="section-title">Safety Eskalator</h2>
-    </div>
-    <form id="escalatorForm" onsubmit="handleSubmit(event, 'escalator')">
-     <div class="form-card">
-      <div class="form-row">
-       <div class="form-group"><label for="buildingName" class="form-label">Nama Gedung/Proyek</label>
-        <div class="searchable-input"><input type="text" id="buildingName" class="form-input" placeholder="Ketik untuk mencari gedung..." required autocomplete="off">
-         <div class="searchable-dropdown" id="buildingDropdown">
-          <div class="dropdown-item" onclick="selectBuilding('Gedung A')">
-           Gedung A
-          </div>
-          <div class="dropdown-item" onclick="selectBuilding('Gedung B')">
-           Gedung B
-          </div>
-          <div class="dropdown-item" onclick="selectBuilding('Mall Central')">
-           Mall Central
-          </div>
-          <div class="dropdown-item" onclick="selectBuilding('Office Tower')">
-           Office Tower
-          </div>
-          <div class="dropdown-item" onclick="selectBuilding('Plaza Indonesia')">
-           Plaza Indonesia
-          </div>
-          <div class="dropdown-item" onclick="selectBuilding('Grand Indonesia')">
-           Grand Indonesia
-          </div>
-         </div>
-        </div>
-       </div>
-       <div class="form-group"><label class="form-label">Nama Teknisi</label>
-        <div class="checkbox-group"><label class="checkbox-item"> <input type="checkbox" name="technician" value="Ahmad Rizki"> Ahmad Rizki </label> <label class="checkbox-item"> <input type="checkbox" name="technician" value="Budi Santoso"> Budi Santoso </label> <label class="checkbox-item"> <input type="checkbox" name="technician" value="Candra Wijaya"> Candra Wijaya </label> <label class="checkbox-item"> <input type="checkbox" name="technician" value="Dedi Kurniawan"> Dedi Kurniawan </label> <label class="checkbox-item"> <input type="checkbox" name="technician" value="Eko Prasetyo"> Eko Prasetyo </label>
-        </div>
-       </div>
-       <div class="form-group"><label for="inspectionDate" class="form-label">Tanggal</label> <input type="date" id="inspectionDate" class="form-input" required>
-       </div>
-      </div>
-     </div>
-     <div class="item-section">
-      <div class="item-header">
-       <h3 class="item-title">ITEM</h3>
-      </div>
-      <div id="unitsContainer">
-       <div class="unit-group">
-        <div class="form-card">
-         <div class="form-row">
-          <div class="form-group"><label class="form-label">Unit</label> <input type="text" class="form-input unit-input" placeholder="Masukkan unit" required>
-          </div>
-          <div class="form-group"><label class="form-label">MFG</label> <input type="text" class="form-input mfg-input" placeholder="Masukkan MFG" required>
-          </div>
-          <div class="form-group"><label class="form-label">Type</label>
-           <div class="searchable-input"><input type="text" class="form-input type-input" placeholder="Ketik untuk mencari type..." required autocomplete="off">
-            <div class="searchable-dropdown">
-             <div class="dropdown-item" onclick="selectType(this, 'Type A')">
-              Type A
-             </div>
-             <div class="dropdown-item" onclick="selectType(this, 'Type B')">
-              Type B
-             </div>
-             <div class="dropdown-item" onclick="selectType(this, 'Type C')">
-              Type C
-             </div>
-             <div class="dropdown-item" onclick="selectType(this, 'Standard')">
-              Standard
-             </div>
-             <div class="dropdown-item" onclick="selectType(this, 'Premium')">
-              Premium
-             </div>
-            </div>
-           </div>
-          </div>
-         </div>
-         <div class="item-header">
-          <h4 style="color: #00d4ff; margin: 0;">Items</h4>
-         </div>
-         <div class="items-container">
-          <div class="item-group">
-           <div class="form-row">
-            <div class="form-group"><label class="form-label">Item Sparepart</label>
-             <div class="searchable-input"><input type="text" class="form-input sparepart-input" placeholder="Ketik untuk mencari sparepart..." required autocomplete="off">
-              <div class="searchable-dropdown">
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Motor')">
-                Motor
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Belt')">
-                Belt
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Roller')">
-                Roller
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Chain')">
-                Chain
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Brake')">
-                Brake
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Control Panel')">
-                Control Panel
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Sensor')">
-                Sensor
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Cable')">
-                Cable
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Bearing')">
-                Bearing
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Switch')">
-                Switch
-               </div>
-              </div>
-             </div>
-            </div>
-            <div class="form-group"><label class="form-label">Kondisi</label>
-             <div class="searchable-input"><input type="text" class="form-input condition-input" placeholder="Ketik untuk mencari kondisi..." required autocomplete="off">
-              <div class="searchable-dropdown">
-               <div class="dropdown-item" onclick="selectCondition(this, 'Baik')">
-                Baik
-               </div>
-               <div class="dropdown-item" onclick="selectCondition(this, 'Rusak Ringan')">
-                Rusak Ringan
-               </div>
-               <div class="dropdown-item" onclick="selectCondition(this, 'Rusak Berat')">
-                Rusak Berat
-               </div>
-               <div class="dropdown-item" onclick="selectCondition(this, 'Perlu Penggantian')">
-                Perlu Penggantian
-               </div>
-               <div class="dropdown-item" onclick="selectCondition(this, 'Maintenance')">
-                Maintenance
-               </div>
-              </div>
-             </div>
-            </div>
-            <div class="form-group"><label class="form-label">Jumlah</label> <input type="number" class="form-input" placeholder="Masukkan jumlah" required>
-            </div>
-            <div class="form-group"><label class="form-label">Satuan</label>
-             <div class="searchable-input"><input type="text" class="form-input unit-input" placeholder="Ketik untuk mencari satuan..." required autocomplete="off">
-              <div class="searchable-dropdown">
-               <div class="dropdown-item" onclick="selectUnit(this, 'Pcs')">
-                Pcs
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Unit')">
-                Unit
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Set')">
-                Set
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Meter')">
-                Meter
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Kg')">
-                Kg
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Liter')">
-                Liter
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Roll')">
-                Roll
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Pack')">
-                Pack
-               </div>
-              </div>
-             </div>
-            </div>
-            <div class="form-group"><label class="form-label">Remarks</label> <input type="text" class="form-input" placeholder="Masukkan remarks">
-            </div>
-            <div class="form-group"><label class="form-label">Prioritas</label>
-             <div class="searchable-input"><input type="text" class="form-input priority-input" placeholder="Ketik untuk mencari prioritas..." required autocomplete="off">
-              <div class="searchable-dropdown">
-               <div class="dropdown-item" onclick="selectPriority(this, 'High')">
-                High
-               </div>
-               <div class="dropdown-item" onclick="selectPriority(this, 'Medium')">
-                Medium
-               </div>
-               <div class="dropdown-item" onclick="selectPriority(this, 'Low')">
-                Low
-               </div>
-              </div>
-             </div>
-            </div>
-            <div class="form-group"><label class="form-label">Foto Part</label>
-             <div class="photo-container">
-              <div class="photo-input-group"><input type="file" class="form-input photo-input" accept="image/*" onchange="handlePhotoUpload(this)"> <button type="button" class="remove-photo-btn" onclick="removePhoto(this)" style="display: none;">🗑️</button>
-              </div>
-             </div><button type="button" class="add-photo-btn" onclick="addPhotoInput(this)" style="display: none; background: #00d4ff; border: none; border-radius: 5px; padding: 8px 15px; color: white; cursor: pointer; margin-top: 10px;">+ Tambah Foto</button>
-            </div>
-           </div><button type="button" class="clear-item-btn" onclick="clearItem(this)">🗑️ Clear Item</button>
-          </div>
-         </div>
-        </div>
-       </div>
-      </div>
-     </div>
-     <div class="action-buttons"><button type="button" class="action-btn" onclick="addElevatorUnit()">+ Tambah Unit</button> <button type="button" class="action-btn" onclick="addItemToLastElevatorUnit()">+ Tambah Item</button>
-     </div><button type="submit" class="submit-btn">Submit</button>
+     <div class="form-group"><label for="password">Password</label> <input type="password" id="password" name="password" required placeholder="Enter your password">
+     </div><button type="submit" class="btn btn-primary">Login</button>
     </form>
-   </div><!-- Elevator Form Section -->
-   <div id="elevatorSection" class="main-content form-section"><button class="back-btn" onclick="showDashboard()">← Kembali ke Dashboard</button>
-    <div class="section-header">
-     <h2 class="section-title">Safety Elevator</h2>
+   </div>
+  </div><!-- Main Application -->
+  <div id="main-app" class="main-container">
+   <div class="user-info"><span id="user-display"></span> <button class="logout-btn" onclick="logout()">Logout</button>
+   </div>
+   <div class="header">
+    <h1 id="company-header">PT. JAYA KENCANA</h1>
+    <div class="subtitle" id="user-subtitle">
+     Welcome
     </div>
-    <form id="elevatorForm" onsubmit="handleSubmit(event, 'elevator')">
-     <div class="form-card">
+   </div><!-- Menu Navigation -->
+   <div class="menu-grid">
+    <div class="menu-card" onclick="showForm('escalator')">
+     <div class="menu-icon">
+      🔧
+     </div>
+     <h3 class="menu-title">Safety Escalator</h3>
+    </div>
+    <div class="menu-card" onclick="showForm('elevator')">
+     <div class="menu-icon">
+      🏢
+     </div>
+     <h3 class="menu-title">Safety Elevator</h3>
+    </div>
+    <div class="menu-card" onclick="showRealization()">
+     <div class="menu-icon">
+      📊
+     </div>
+     <h3 class="menu-title">Realisasi</h3>
+    </div>
+    <div class="menu-card" onclick="showHistory()">
+     <div class="menu-icon">
+      📋
+     </div>
+     <h3 class="menu-title">History</h3>
+    </div>
+   </div><!-- Form Containers -->
+   <div id="escalator-form" class="form-container">
+    <div class="form-header"><button class="btn btn-secondary" onclick="goBack()" style="float: left; margin-bottom: 10px;">← Back to Dashboard</button>
+     <h2 class="form-title">Safety Escalator Form</h2>
+    </div>
+    <form id="escalator-form-element">
+     <div class="form-section">
       <div class="form-row">
-       <div class="form-group"><label for="elevatorBuildingName" class="form-label">Nama Gedung/Proyek</label>
-        <div class="searchable-input"><input type="text" id="elevatorBuildingName" class="form-input" placeholder="Ketik untuk mencari gedung..." required autocomplete="off">
-         <div class="searchable-dropdown" id="elevatorBuildingDropdown">
-          <div class="dropdown-item" onclick="selectElevatorBuilding('Gedung A')">
-           Gedung A
-          </div>
-          <div class="dropdown-item" onclick="selectElevatorBuilding('Gedung B')">
-           Gedung B
-          </div>
-          <div class="dropdown-item" onclick="selectElevatorBuilding('Mall Central')">
-           Mall Central
-          </div>
-          <div class="dropdown-item" onclick="selectElevatorBuilding('Office Tower')">
-           Office Tower
-          </div>
-          <div class="dropdown-item" onclick="selectElevatorBuilding('Plaza Indonesia')">
-           Plaza Indonesia
-          </div>
-          <div class="dropdown-item" onclick="selectElevatorBuilding('Grand Indonesia')">
-           Grand Indonesia
-          </div>
-         </div>
+       <div class="form-group"><label for="escalator-building">Nama Gedung/Proyek</label>
+        <div class="dropdown-container"><input type="text" id="escalator-building" name="building_name" required placeholder="Type to search building...">
+         <div id="escalator-building-dropdown" class="dropdown-list"></div>
         </div>
        </div>
-       <div class="form-group"><label class="form-label">Nama Teknisi</label>
-        <div class="checkbox-group"><label class="checkbox-item"> <input type="checkbox" name="elevatorTechnician" value="Ahmad Rizki"> Ahmad Rizki </label> <label class="checkbox-item"> <input type="checkbox" name="elevatorTechnician" value="Budi Santoso"> Budi Santoso </label> <label class="checkbox-item"> <input type="checkbox" name="elevatorTechnician" value="Candra Wijaya"> Candra Wijaya </label> <label class="checkbox-item"> <input type="checkbox" name="elevatorTechnician" value="Dedi Kurniawan"> Dedi Kurniawan </label> <label class="checkbox-item"> <input type="checkbox" name="elevatorTechnician" value="Eko Prasetyo"> Eko Prasetyo </label>
-        </div>
+       <div class="form-group"><label>Nama Teknisi</label>
+        <div id="escalator-technicians" class="checkbox-group"></div>
        </div>
-       <div class="form-group"><label for="elevatorInspectionDate" class="form-label">Tanggal</label> <input type="date" id="elevatorInspectionDate" class="form-input" required>
+       <div class="form-group"><label for="escalator-date">Tanggal</label> <input type="date" id="escalator-date" name="date" required>
        </div>
       </div>
      </div>
-     <div class="item-section">
-      <div class="item-header">
-       <h3 class="item-title">ITEM</h3>
-      </div>
-      <div id="elevatorUnitsContainer">
-       <div class="unit-group">
-        <div class="form-card">
-         <div class="form-row">
-          <div class="form-group"><label class="form-label">Unit</label> <input type="text" class="form-input unit-input" placeholder="Masukkan unit" required>
-          </div>
-          <div class="form-group"><label class="form-label">MFG</label> <input type="text" class="form-input mfg-input" placeholder="Masukkan MFG" required>
-          </div>
-          <div class="form-group"><label class="form-label">Type</label>
-           <div class="searchable-input"><input type="text" class="form-input type-input" placeholder="Ketik untuk mencari type..." required autocomplete="off">
-            <div class="searchable-dropdown">
-             <div class="dropdown-item" onclick="selectType(this, 'Type A')">
-              Type A
-             </div>
-             <div class="dropdown-item" onclick="selectType(this, 'Type B')">
-              Type B
-             </div>
-             <div class="dropdown-item" onclick="selectType(this, 'Type C')">
-              Type C
-             </div>
-             <div class="dropdown-item" onclick="selectType(this, 'Standard')">
-              Standard
-             </div>
-             <div class="dropdown-item" onclick="selectType(this, 'Premium')">
-              Premium
-             </div>
-            </div>
-           </div>
-          </div>
-         </div>
-         <div class="item-header">
-          <h4 style="color: #00d4ff; margin: 0;">Items</h4>
-         </div>
-         <div class="items-container">
-          <div class="item-group">
-           <div class="form-row">
-            <div class="form-group"><label class="form-label">Item Sparepart</label>
-             <div class="searchable-input"><input type="text" class="form-input sparepart-input" placeholder="Ketik untuk mencari sparepart..." required autocomplete="off">
-              <div class="searchable-dropdown">
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Motor')">
-                Motor
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Belt')">
-                Belt
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Roller')">
-                Roller
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Chain')">
-                Chain
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Brake')">
-                Brake
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Control Panel')">
-                Control Panel
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Sensor')">
-                Sensor
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Cable')">
-                Cable
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Bearing')">
-                Bearing
-               </div>
-               <div class="dropdown-item" onclick="selectSparepart(this, 'Switch')">
-                Switch
-               </div>
-              </div>
-             </div>
-            </div>
-            <div class="form-group"><label class="form-label">Kondisi</label>
-             <div class="searchable-input"><input type="text" class="form-input condition-input" placeholder="Ketik untuk mencari kondisi..." required autocomplete="off">
-              <div class="searchable-dropdown">
-               <div class="dropdown-item" onclick="selectCondition(this, 'Baik')">
-                Baik
-               </div>
-               <div class="dropdown-item" onclick="selectCondition(this, 'Rusak Ringan')">
-                Rusak Ringan
-               </div>
-               <div class="dropdown-item" onclick="selectCondition(this, 'Rusak Berat')">
-                Rusak Berat
-               </div>
-               <div class="dropdown-item" onclick="selectCondition(this, 'Perlu Penggantian')">
-                Perlu Penggantian
-               </div>
-               <div class="dropdown-item" onclick="selectCondition(this, 'Maintenance')">
-                Maintenance
-               </div>
-              </div>
-             </div>
-            </div>
-            <div class="form-group"><label class="form-label">Jumlah</label> <input type="number" class="form-input" placeholder="Masukkan jumlah" required>
-            </div>
-            <div class="form-group"><label class="form-label">Satuan</label>
-             <div class="searchable-input"><input type="text" class="form-input unit-input" placeholder="Ketik untuk mencari satuan..." required autocomplete="off">
-              <div class="searchable-dropdown">
-               <div class="dropdown-item" onclick="selectUnit(this, 'Pcs')">
-                Pcs
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Unit')">
-                Unit
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Set')">
-                Set
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Meter')">
-                Meter
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Kg')">
-                Kg
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Liter')">
-                Liter
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Roll')">
-                Roll
-               </div>
-               <div class="dropdown-item" onclick="selectUnit(this, 'Pack')">
-                Pack
-               </div>
-              </div>
-             </div>
-            </div>
-            <div class="form-group"><label class="form-label">Remarks</label> <input type="text" class="form-input" placeholder="Masukkan remarks">
-            </div>
-            <div class="form-group"><label class="form-label">Prioritas</label>
-             <div class="searchable-input"><input type="text" class="form-input priority-input" placeholder="Ketik untuk mencari prioritas..." required autocomplete="off">
-              <div class="searchable-dropdown">
-               <div class="dropdown-item" onclick="selectPriority(this, 'High')">
-                High
-               </div>
-               <div class="dropdown-item" onclick="selectPriority(this, 'Medium')">
-                Medium
-               </div>
-               <div class="dropdown-item" onclick="selectPriority(this, 'Low')">
-                Low
-               </div>
-              </div>
-             </div>
-            </div>
-            <div class="form-group"><label class="form-label">Foto Part</label>
-             <div class="photo-container">
-              <div class="photo-input-group"><input type="file" class="form-input photo-input" accept="image/*" onchange="handlePhotoUpload(this)"> <button type="button" class="remove-photo-btn" onclick="removePhoto(this)" style="display: none;">🗑️</button>
-              </div>
-             </div><button type="button" class="add-photo-btn" onclick="addPhotoInput(this)" style="display: none; background: #00d4ff; border: none; border-radius: 5px; padding: 8px 15px; color: white; cursor: pointer; margin-top: 10px;">+ Tambah Foto</button>
-            </div>
-           </div><button type="button" class="clear-item-btn" onclick="clearItem(this)">🗑️ Clear Item</button>
-          </div>
-         </div>
-        </div>
-       </div>
+     <div id="escalator-units-container">
+      <div class="section-title">
+       Units
       </div>
      </div>
-     <div class="action-buttons"><button type="button" class="action-btn" onclick="addElevatorUnit()">+ Tambah Unit</button> <button type="button" class="action-btn" onclick="addItemToLastElevatorUnit()">+ Tambah Item</button>
-     </div><button type="submit" class="submit-btn">Submit</button>
+     <div style="margin-top: 30px; text-align: center;"><button type="button" class="btn btn-secondary" onclick="addUnit('escalator')" style="padding: 8px 16px; font-size: 14px; margin-right: 10px;">+ Tambah Unit</button> <button type="submit" class="btn btn-success">Submit</button>
+     </div>
     </form>
-   </div><!-- Realization Section -->
-   <div id="realizationSection" class="main-content form-section"><button class="back-btn" onclick="showDashboard()">← Kembali ke Dashboard</button>
-    <div class="section-header">
-     <h2 class="section-title">Realisasi</h2>
-     <p style="color: #b0b0b0; margin-top: 10px;">Fitur realisasi akan segera tersedia</p>
+   </div>
+   <div id="elevator-form" class="form-container">
+    <div class="form-header"><button class="btn btn-secondary" onclick="goBack()" style="float: left; margin-bottom: 10px;">← Back to Dashboard</button>
+     <h2 class="form-title">Safety Elevator Form</h2>
     </div>
-   </div><!-- History Section -->
-   <div id="historySection" class="main-content form-section"><button class="back-btn" onclick="showDashboard()">← Kembali ke Dashboard</button>
-    <div class="section-header">
-     <h2 class="section-title">History Data</h2>
-    </div><!-- Search Filters -->
-    <div class="form-card">
-     <h3 style="color: #00d4ff; margin-bottom: 20px;">🔍 Filter Data</h3>
-     <div class="form-row">
-      <div class="form-group"><label class="form-label">Cari Gedung</label> <input type="text" id="searchBuilding" class="form-input" placeholder="Ketik nama gedung..." onkeyup="filterHistory()">
-      </div>
-      <div class="form-group"><label class="form-label">Tanggal Dari</label> <input type="date" id="searchDateFrom" class="form-input" onchange="filterHistory()">
-      </div>
-      <div class="form-group"><label class="form-label">Tanggal Sampai</label> <input type="date" id="searchDateTo" class="form-input" onchange="filterHistory()">
-      </div>
-      <div class="form-group"><label class="form-label">Tipe</label> <select id="searchType" class="form-input" onchange="filterHistory()"> <option value="">Semua Tipe</option> <option value="escalator">Eskalator</option> <option value="elevator">Elevator</option> </select>
+    <form id="elevator-form-element">
+     <div class="form-section">
+      <div class="form-row">
+       <div class="form-group"><label for="elevator-building">Nama Gedung/Proyek</label>
+        <div class="dropdown-container"><input type="text" id="elevator-building" name="building_name" required placeholder="Type to search building...">
+         <div id="elevator-building-dropdown" class="dropdown-list"></div>
+        </div>
+       </div>
+       <div class="form-group"><label>Nama Teknisi</label>
+        <div id="elevator-technicians" class="checkbox-group"></div>
+       </div>
+       <div class="form-group"><label for="elevator-date">Tanggal</label> <input type="date" id="elevator-date" name="date" required>
+       </div>
       </div>
      </div>
-     <div class="action-buttons"><button type="button" class="action-btn" onclick="clearFilters()">🗑️ Clear Filter</button> <button type="button" class="action-btn" onclick="downloadFilteredPDF()">📄 Download PDF</button>
+     <div id="elevator-units-container">
+      <div class="section-title">
+       Units
+      </div>
      </div>
+     <div style="margin-top: 30px; text-align: center;"><button type="button" class="btn btn-secondary" onclick="addUnit('elevator')" style="padding: 8px 16px; font-size: 14px; margin-right: 10px;">+ Tambah Unit</button> <button type="submit" class="btn btn-success">Submit</button>
+     </div>
+    </form>
+   </div><!-- Realization Container -->
+   <div id="realization-container" class="form-container">
+    <div class="form-header"><button class="btn btn-secondary" onclick="goBack()" style="float: left; margin-bottom: 10px;">← Back to Dashboard</button>
+     <h2 class="form-title">Realisasi</h2>
     </div>
-    <div class="loading" id="historyLoading">
-     <p>Memuat data...</p>
+    <div id="realization-content">
+     <p style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.2rem;">Fitur realisasi akan segera tersedia</p>
     </div>
-    <div id="historyContent">
-     <div class="history-table">
-      <div class="table-header">
-       <div>
-        Tipe
-       </div>
-       <div>
-        Gedung
-       </div>
-       <div>
-        Teknisi
-       </div>
-       <div>
-        Tanggal
-       </div>
-       <div>
-        Aksi
-       </div>
-      </div>
-      <div id="historyTableBody"><!-- Data will be populated here -->
-      </div>
-     </div>
-     <div id="noDataMessage" style="display: none; text-align: center; padding: 40px; color: #b0b0b0;">
-      <p>📭 Tidak ada data yang sesuai dengan filter</p>
-     </div>
+   </div><!-- History Container -->
+   <div id="history-container" class="history-container">
+    <div class="form-header"><button class="btn btn-secondary" onclick="goBack()" style="float: left; margin-bottom: 10px;">← Back to Dashboard</button>
+     <h2 class="form-title">History Data</h2>
     </div>
-   </div><!-- Settings Section (Admin Only) -->
-   <div id="settingsSection" class="main-content form-section"><button class="back-btn" onclick="showDashboard()">← Kembali ke Dashboard</button>
-    <div class="section-header">
-     <h2 class="section-title">Settings Admin</h2>
+    <div class="form-group" style="margin-bottom: 30px;"><label for="history-search">Search History</label> <input type="text" id="history-search" placeholder="Search by building name, technician, or date..." onkeyup="filterHistory()">
     </div>
-    <div class="settings-tabs"><button class="settings-tab active" onclick="showSettingsTab('users')">Kelola User</button> <button class="settings-tab" onclick="showSettingsTab('technicians')">Kelola Teknisi</button> <button class="settings-tab" onclick="showSettingsTab('profile')">Profil Saya</button>
-    </div><!-- Users Management Tab -->
-    <div id="usersTab" class="settings-tab-content active">
-     <div class="form-card">
-      <h3 style="color: #00d4ff; margin-bottom: 20px;">Tambah User Baru</h3>
-      <form id="addUserForm" onsubmit="addUser(event)">
-       <div class="form-row">
-        <div class="form-group"><label class="form-label">Username</label> <input type="text" id="newUsername" class="form-input" placeholder="Masukkan username" required>
-        </div>
-        <div class="form-group"><label class="form-label">Password</label> <input type="password" id="newPassword" class="form-input" placeholder="Masukkan password" required>
-        </div>
-        <div class="form-group"><label class="form-label">Role</label> <select id="newUserRole" class="form-input" required> <option value="">Pilih Role</option> <option value="admin">Admin</option> <option value="user">User</option> </select>
-        </div>
-       </div><button type="submit" class="add-btn">Tambah User</button>
-      </form>
-     </div>
-     <div class="form-card">
-      <h3 style="color: #00d4ff; margin-bottom: 20px;">Daftar User</h3>
-      <div class="users-table">
-       <div class="table-header">
-        <div>
-         Username
-        </div>
-        <div>
-         Role
-        </div>
-        <div>
-         Aksi
-        </div>
-       </div>
-       <div id="usersTableBody"><!-- Users will be populated here -->
-       </div>
-      </div>
-     </div>
-    </div><!-- Technicians Management Tab -->
-    <div id="techniciansTab" class="settings-tab-content">
-     <div class="form-card">
-      <h3 style="color: #00d4ff; margin-bottom: 20px;">Tambah Teknisi Baru</h3>
-      <form id="addTechnicianForm" onsubmit="addTechnician(event)">
-       <div class="form-row">
-        <div class="form-group"><label class="form-label">Nama Teknisi</label> <input type="text" id="newTechnicianName" class="form-input" placeholder="Masukkan nama teknisi" required>
-        </div>
-       </div><button type="submit" class="add-btn">Tambah Teknisi</button>
-      </form>
-     </div>
-     <div class="form-card">
-      <h3 style="color: #00d4ff; margin-bottom: 20px;">Daftar Teknisi</h3>
-      <div class="technicians-list" id="techniciansList"><!-- Technicians will be populated here -->
-      </div>
-     </div>
-    </div><!-- Profile Management Tab -->
-    <div id="profileTab" class="settings-tab-content">
-     <div class="form-card">
-      <h3 style="color: #00d4ff; margin-bottom: 20px;">Ubah Password</h3>
-      <form id="changePasswordForm" onsubmit="changePassword(event)">
-       <div class="form-row">
-        <div class="form-group"><label class="form-label">Password Lama</label> <input type="password" id="oldPassword" class="form-input" placeholder="Masukkan password lama" required>
-        </div>
-        <div class="form-group"><label class="form-label">Password Baru</label> <input type="password" id="newPasswordChange" class="form-input" placeholder="Masukkan password baru" required>
-        </div>
-        <div class="form-group"><label class="form-label">Konfirmasi Password Baru</label> <input type="password" id="confirmPassword" class="form-input" placeholder="Konfirmasi password baru" required>
-        </div>
-       </div><button type="submit" class="submit-btn">Ubah Password</button>
-      </form>
-     </div>
-    </div>
+    <div id="history-list"></div>
    </div><!-- Footer -->
-   <footer class="footer">
-    <div class="footer-content">
-     <h3 class="footer-title">Jakarta</h3>
-     <div class="footer-info">
-      <div class="footer-item">
-       <svg class="footer-icon" viewbox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-       </svg><span id="footerAddress">Jl. Salemba Raya No.61 Jakarta - Indonesia 10440</span>
-      </div>
-      <div class="footer-item">
-       <svg class="footer-icon" viewbox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-       </svg><span id="footerPhone1">(021) 390 8501</span>
-      </div>
-      <div class="footer-item">
-       <svg class="footer-icon" viewbox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-       </svg><span id="footerPhone2">(021) 390 8510</span>
-      </div>
-      <div class="footer-item">
-       <svg class="footer-icon" viewbox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-       </svg><span id="footerEmail">info@jayakencana.com</span>
-      </div>
-     </div>
-     <div class="social-icons"><a href="https://www.instagram.com/pt.jayakencana/" target="_blank" rel="noopener noreferrer" class="social-icon">📷</a> <a href="https://www.youtube.com/@ptjayakencana6459" target="_blank" rel="noopener noreferrer" class="social-icon">📺</a> <a href="https://www.facebook.com/jaya.kencana.790693" target="_blank" rel="noopener noreferrer" class="social-icon">📘</a>
-     </div>
-     <div class="copyright">
-      Copyright 2025 PT. Jaya Kencana
-     </div>
-    </div>
-   </footer>
+   <div class="footer">
+    <p id="copyright-footer">Copyright 2025 PT. Jaya Kencana</p>
+   </div>
   </div>
   <script>
+        // Global variables
         let currentUser = null;
-        let currentUserType = 'user';
-        let allData = [];
-        let users = [
-            { username: 'admin', password: 'admin123', role: 'admin' },
-            { username: 'user1', password: 'user123', role: 'user' }
-        ];
-        let technicians = [
-            'Ahmad Rizki',
-            'Budi Santoso', 
-            'Candra Wijaya',
-            'Dedi Kurniawan',
-            'Eko Prasetyo'
-        ];
+        let currentRecords = [];
+        let unitCounters = { escalator: 0, elevator: 0 };
+        let itemCounters = { escalator: {}, elevator: {} };
 
-        const defaultConfig = {
-            company_name: "PT. JAYA KENCANA",
-            address: "Jl. Salemba Raya No.61 Jakarta - Indonesia 10440",
-            phone1: "(021) 390 8501",
-            phone2: "(021) 390 8510",
-            email: "info@jayakencana.com"
+        // User data with different technicians and buildings per user
+        const userData = {
+            admin: {
+                password: 'admin123',
+                role: 'admin',
+                technicians: ['Ahmad Rizki', 'Budi Santoso', 'Candra Wijaya', 'Dedi Kurniawan', 'Eko Prasetyo'],
+                buildings: ['Gedung A', 'Gedung B', 'Mall Central', 'Office Tower']
+            },
+            user1: {
+                password: '123',
+                role: 'user',
+                technicians: ['Teknisi A', 'Teknisi B', 'Teknisi C'],
+                buildings: ['Proyek Alpha', 'Proyek Beta', 'Gedung Utama']
+            },
+            user2: {
+                password: 'user2',
+                role: 'user',
+                technicians: ['Teknisi D', 'Teknisi E'],
+                buildings: ['Plaza Indonesia', 'Grand Indonesia', 'Senayan City']
+            },
+            user3: {
+                password: '456',
+                role: 'user',
+                technicians: ['Teknisi F', 'Teknisi G', 'Teknisi H'],
+                buildings: ['Mall Taman Anggrek', 'Central Park', 'Kelapa Gading Mall']
+            }
         };
 
+        // Dropdown data
+        const dropdownData = {
+            spareparts: ['Motor', 'Belt', 'Roller', 'Chain', 'Brake', 'Control Panel', 'Sensor', 'Cable', 'Bearing', 'Switch', 'Gear Box', 'Handrail', 'Step', 'Comb Plate'],
+            conditions: ['Baik', 'Rusak Ringan', 'Rusak Berat', 'Perlu Penggantian', 'Maintenance Rutin', 'Perlu Monitoring'],
+            quantities: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+            units: ['Pcs', 'Unit', 'Set', 'Meter', 'Kg', 'Liter', 'Roll', 'Pack', 'Buah'],
+            remarks: ['Normal Operation', 'Perlu Perhatian', 'Segera Diperbaiki', 'Dalam Perbaikan', 'Menunggu Sparepart', 'Selesai Diperbaiki'],
+            priorities: ['High', 'Medium', 'Low', 'Critical', 'Normal']
+        };
+
+        // Data SDK handler
         const dataHandler = {
             onDataChanged(data) {
-                allData = data;
-                if (document.getElementById('historySection').classList.contains('active')) {
+                currentRecords = data;
+                if (document.getElementById('history-container').classList.contains('active')) {
                     renderHistory();
                 }
             }
         };
 
-        async function initializeApp() {
-            if (window.dataSdk) {
-                const initResult = await window.dataSdk.init(dataHandler);
-                if (!initResult.isOk) {
-                    console.error("Failed to initialize data SDK");
+        // Initialize Data SDK
+        async function initializeDataSDK() {
+            try {
+                const result = await window.dataSdk.init(dataHandler);
+                if (!result.isOk) {
+                    console.error('Failed to initialize Data SDK:', result.error);
                 }
-            }
-
-            if (window.elementSdk) {
-                await window.elementSdk.init({
-                    defaultConfig,
-                    onConfigChange: async (config) => {
-                        document.getElementById('companyTitle').textContent = config.company_name || defaultConfig.company_name;
-                        document.getElementById('dashboardCompanyTitle').textContent = config.company_name || defaultConfig.company_name;
-                        document.getElementById('footerAddress').textContent = config.address || defaultConfig.address;
-                        document.getElementById('footerPhone1').textContent = config.phone1 || defaultConfig.phone1;
-                        document.getElementById('footerPhone2').textContent = config.phone2 || defaultConfig.phone2;
-                        document.getElementById('footerEmail').textContent = config.email || defaultConfig.email;
-                    },
-                    mapToCapabilities: (config) => ({
-                        recolorables: [],
-                        borderables: [],
-                        fontEditable: undefined,
-                        fontSizeable: undefined
-                    }),
-                    mapToEditPanelValues: (config) => new Map([
-                        ["company_name", config.company_name || defaultConfig.company_name],
-                        ["address", config.address || defaultConfig.address],
-                        ["phone1", config.phone1 || defaultConfig.phone1],
-                        ["phone2", config.phone2 || defaultConfig.phone2],
-                        ["email", config.email || defaultConfig.email]
-                    ])
-                });
+            } catch (error) {
+                console.error('Error initializing Data SDK:', error);
             }
         }
 
-        function switchTab(type) {
-            currentUserType = type;
-            const tabs = document.querySelectorAll('.login-tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-        }
-
-        function handleLogin(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            // Check credentials
-            const user = users.find(u => u.username === username && u.password === password);
-            
-            if (user) {
-                currentUser = username;
-                currentUserType = user.role;
-                document.getElementById('userWelcome').textContent = `Selamat datang, ${username} (${user.role})`;
-                showDashboard();
-            } else {
-                // Show error message
-                const errorDiv = document.createElement('div');
-                errorDiv.style.cssText = 'background: #ff4757; color: white; padding: 10px; border-radius: 5px; margin: 10px 0; text-align: center;';
-                errorDiv.textContent = 'Username atau password salah!';
-                document.getElementById('loginForm').insertBefore(errorDiv, document.querySelector('.login-btn'));
-                
-                setTimeout(() => errorDiv.remove(), 3000);
+        // Authentication functions
+        function login(username, password) {
+            const user = userData[username];
+            if (user && user.password === password) {
+                currentUser = { username, ...user };
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                return true;
             }
+            return false;
         }
 
         function logout() {
             currentUser = null;
-            document.getElementById('loginForm').reset();
-            document.getElementById('loginSection').style.display = 'block';
-            document.getElementById('dashboardSection').classList.remove('active');
-            hideAllSections();
+            localStorage.removeItem('currentUser');
+            document.getElementById('login-page').style.display = 'flex';
+            document.getElementById('main-app').style.display = 'none';
+            hideAllContainers();
+            showDashboard();
+        }
+
+        function checkAuth() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                return true;
+            }
+            return false;
+        }
+
+        // UI Functions
+        function hideAllContainers() {
+            document.querySelectorAll('.form-container, .history-container').forEach(container => {
+                container.classList.remove('active');
+            });
+            document.querySelectorAll('.menu-card').forEach(card => {
+                card.classList.remove('active');
+            });
         }
 
         function showDashboard() {
-            document.getElementById('loginSection').style.display = 'none';
-            document.getElementById('dashboardSection').classList.add('active');
-            
-            // Show appropriate navigation based on user type
-            if (currentUserType === 'admin') {
-                document.getElementById('userNavigation').style.display = 'none';
-                document.getElementById('adminNavigation').style.display = 'grid';
-            } else {
-                document.getElementById('userNavigation').style.display = 'grid';
-                document.getElementById('adminNavigation').style.display = 'none';
-            }
-            
-            hideAllSections();
+            hideAllContainers();
+            document.querySelector('.menu-grid').style.display = 'grid';
         }
 
-        function hideAllSections() {
-            const sections = ['escalatorSection', 'elevatorSection', 'realizationSection', 'historySection', 'settingsSection'];
-            sections.forEach(section => {
-                document.getElementById(section).classList.remove('active');
+        function hideDashboard() {
+            document.querySelector('.menu-grid').style.display = 'none';
+        }
+
+        function showForm(type) {
+            hideDashboard();
+            hideAllContainers();
+            document.getElementById(`${type}-form`).classList.add('active');
+            populateFormData(type);
+        }
+
+        function showRealization() {
+            hideDashboard();
+            hideAllContainers();
+            document.getElementById('realization-container').classList.add('active');
+        }
+
+        function showHistory() {
+            hideDashboard();
+            hideAllContainers();
+            document.getElementById('history-container').classList.add('active');
+            renderHistory();
+        }
+
+        function goBack() {
+            hideAllContainers();
+            showDashboard();
+        }
+
+        function populateFormData(type) {
+            // Populate technicians checkboxes
+            const techContainer = document.getElementById(`${type}-technicians`);
+            techContainer.innerHTML = '';
+            
+            currentUser.technicians.forEach(tech => {
+                const checkboxItem = document.createElement('div');
+                checkboxItem.className = 'checkbox-item';
+                checkboxItem.innerHTML = `
+                    <input type="checkbox" id="${type}-tech-${tech}" name="technicians" value="${tech}">
+                    <label for="${type}-tech-${tech}">${tech}</label>
+                `;
+                techContainer.appendChild(checkboxItem);
             });
+
+            // Setup building dropdown
+            setupDropdown(`${type}-building`, currentUser.buildings);
         }
 
-        function showSection(sectionName) {
-            hideAllSections();
-            document.getElementById('dashboardSection').classList.remove('active');
+        function setupDropdown(inputId, options) {
+            const input = document.getElementById(inputId);
+            const dropdown = document.getElementById(`${inputId}-dropdown`);
             
-            if (sectionName === 'history') {
-                document.getElementById('historySection').classList.add('active');
-                loadHistory();
-            } else if (sectionName === 'realization') {
-                document.getElementById('realizationSection').classList.add('active');
-            } else {
-                document.getElementById(sectionName + 'Section').classList.add('active');
-            }
-        }
-
-        function addUnit() {
-            const container = document.getElementById('unitsContainer');
-            const unitGroup = container.querySelector('.unit-group').cloneNode(true);
-            
-            // Clear all inputs
-            const inputs = unitGroup.querySelectorAll('input, select');
-            inputs.forEach(input => {
-                if (input.type === 'file') {
-                    input.value = '';
-                } else if (input.type === 'checkbox') {
-                    input.checked = false;
-                } else {
-                    input.value = '';
-                }
-            });
-            
-            // Reset photo inputs properly
-            const photoContainers = unitGroup.querySelectorAll('.photo-container');
-            photoContainers.forEach(container => {
-                // Keep only the first photo input group
-                const groups = container.querySelectorAll('.photo-input-group');
-                groups.forEach((group, index) => {
-                    if (index === 0) {
-                        const input = group.querySelector('.photo-input');
-                        const removeBtn = group.querySelector('.remove-photo-btn');
-                        input.value = '';
-                        if (removeBtn) removeBtn.style.display = 'none';
-                    } else {
-                        group.remove();
-                    }
-                });
+            input.addEventListener('input', function() {
+                const value = this.value.toLowerCase();
+                const filtered = options.filter(option => 
+                    option.toLowerCase().includes(value)
+                );
                 
-                // Hide add photo button
-                const addBtn = container.closest('.form-group').querySelector('.add-photo-btn');
-                if (addBtn) addBtn.style.display = 'none';
-            });
-            
-            // Add remove button
-            const removeBtn = document.createElement('button');
-            removeBtn.type = 'button';
-            removeBtn.className = 'remove-item';
-            removeBtn.textContent = 'Hapus Unit';
-            removeBtn.onclick = function() { this.closest('.unit-group').remove(); };
-            unitGroup.querySelector('.form-card').appendChild(removeBtn);
-            
-            container.appendChild(unitGroup);
-        }
-
-        function addElevatorUnit() {
-            const container = document.getElementById('elevatorUnitsContainer');
-            const unitGroup = container.querySelector('.unit-group').cloneNode(true);
-            
-            // Clear all inputs
-            const inputs = unitGroup.querySelectorAll('input, select');
-            inputs.forEach(input => {
-                if (input.type === 'file') {
-                    input.value = '';
-                } else if (input.type === 'checkbox') {
-                    input.checked = false;
-                } else {
-                    input.value = '';
-                }
-            });
-            
-            // Reset photo inputs properly
-            const photoContainers = unitGroup.querySelectorAll('.photo-container');
-            photoContainers.forEach(container => {
-                // Keep only the first photo input group
-                const groups = container.querySelectorAll('.photo-input-group');
-                groups.forEach((group, index) => {
-                    if (index === 0) {
-                        const input = group.querySelector('.photo-input');
-                        const removeBtn = group.querySelector('.remove-photo-btn');
-                        input.value = '';
-                        if (removeBtn) removeBtn.style.display = 'none';
-                    } else {
-                        group.remove();
-                    }
-                });
-                
-                // Hide add photo button
-                const addBtn = container.closest('.form-group').querySelector('.add-photo-btn');
-                if (addBtn) addBtn.style.display = 'none';
-            });
-            
-            // Add remove button
-            const removeBtn = document.createElement('button');
-            removeBtn.type = 'button';
-            removeBtn.className = 'remove-item';
-            removeBtn.textContent = 'Hapus Unit';
-            removeBtn.onclick = function() { this.closest('.unit-group').remove(); };
-            unitGroup.querySelector('.form-card').appendChild(removeBtn);
-            
-            container.appendChild(unitGroup);
-        }
-
-        function addItem(button) {
-            const itemsContainer = button.closest('.form-card').querySelector('.items-container');
-            const itemGroup = itemsContainer.querySelector('.item-group').cloneNode(true);
-            
-            // Clear all inputs
-            const inputs = itemGroup.querySelectorAll('input, select');
-            inputs.forEach(input => {
-                if (input.type === 'file') {
-                    input.value = '';
-                } else if (input.type === 'checkbox') {
-                    input.checked = false;
-                } else {
-                    input.value = '';
-                }
-            });
-            
-            // Reset photo inputs properly
-            const photoContainers = itemGroup.querySelectorAll('.photo-container');
-            photoContainers.forEach(container => {
-                // Keep only the first photo input group
-                const groups = container.querySelectorAll('.photo-input-group');
-                groups.forEach((group, index) => {
-                    if (index === 0) {
-                        const input = group.querySelector('.photo-input');
-                        const removeBtn = group.querySelector('.remove-photo-btn');
-                        input.value = '';
-                        if (removeBtn) removeBtn.style.display = 'none';
-                    } else {
-                        group.remove();
-                    }
-                });
-                
-                // Hide add photo button
-                const addBtn = container.closest('.form-group').querySelector('.add-photo-btn');
-                if (addBtn) addBtn.style.display = 'none';
-            });
-            
-            // Remove existing remove button if any
-            const existingRemoveBtn = itemGroup.querySelector('.remove-item');
-            if (existingRemoveBtn) {
-                existingRemoveBtn.remove();
-            }
-            
-            // Add remove button
-            const removeBtn = document.createElement('button');
-            removeBtn.type = 'button';
-            removeBtn.className = 'remove-item';
-            removeBtn.textContent = 'Hapus Item';
-            removeBtn.onclick = function() { this.closest('.item-group').remove(); };
-            itemGroup.appendChild(removeBtn);
-            
-            itemsContainer.appendChild(itemGroup);
-        }
-
-        async function handleSubmit(event, type) {
-            event.preventDefault();
-            
-            if (!window.dataSdk) {
-                return;
-            }
-
-            const form = event.target;
-            const submitBtn = form.querySelector('.submit-btn');
-            
-            // Show loading state
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Menyimpan...';
-            
-            try {
-                if (allData.length >= 999) {
-                    const errorDiv = document.createElement('div');
-                    errorDiv.style.cssText = 'background: #ff4757; color: white; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center;';
-                    errorDiv.textContent = 'Batas maksimum 999 data telah tercapai. Silakan hapus beberapa data terlebih dahulu.';
-                    form.insertBefore(errorDiv, submitBtn);
-                    
-                    setTimeout(() => errorDiv.remove(), 5000);
-                    return;
-                }
-
-                const formData = new FormData(form);
-                const buildingName = type === 'escalator' ? 
-                    document.getElementById('buildingName').value : 
-                    document.getElementById('elevatorBuildingName').value;
-                // Get selected technicians from checkboxes
-                const technicianCheckboxes = type === 'escalator' ? 
-                    document.querySelectorAll('input[name="technician"]:checked') : 
-                    document.querySelectorAll('input[name="elevatorTechnician"]:checked');
-                const technicianNames = Array.from(technicianCheckboxes).map(cb => cb.value);
-                const technicianName = technicianNames.join(', ');
-                const inspectionDate = type === 'escalator' ? 
-                    document.getElementById('inspectionDate').value : 
-                    document.getElementById('elevatorInspectionDate').value;
-
-                // Collect units data
-                const container = type === 'escalator' ? 
-                    document.getElementById('unitsContainer') : 
-                    document.getElementById('elevatorUnitsContainer');
-                const unitGroups = container.querySelectorAll('.unit-group');
-                
-                let unitsData = [];
-                unitGroups.forEach(unitGroup => {
-                    const unit = unitGroup.querySelector('.unit-input').value;
-                    const mfg = unitGroup.querySelector('.mfg-input').value;
-                    const typeValue = unitGroup.querySelector('.type-input').value;
-                    
-                    const items = [];
-                    const itemGroups = unitGroup.querySelectorAll('.item-group');
-                    itemGroups.forEach(itemGroup => {
-                        const inputs = itemGroup.querySelectorAll('input, select');
-                        if (inputs.length >= 6) {
-                            items.push({
-                                sparepart: inputs[0].value,
-                                condition: inputs[1].value,
-                                quantity: inputs[2].value,
-                                unit: inputs[3].value,
-                                remarks: inputs[4].value,
-                                priority: inputs[5].value
-                            });
-                        }
+                dropdown.innerHTML = '';
+                if (filtered.length > 0 && value) {
+                    filtered.forEach(option => {
+                        const item = document.createElement('div');
+                        item.className = 'dropdown-item';
+                        item.textContent = option;
+                        item.onclick = () => {
+                            input.value = option;
+                            dropdown.style.display = 'none';
+                        };
+                        dropdown.appendChild(item);
                     });
-                    
-                    unitsData.push({
-                        unit: unit,
-                        mfg: mfg,
-                        type: typeValue,
-                        items: items
-                    });
-                });
-
-                const record = {
-                    id: Date.now().toString(),
-                    type: type,
-                    building_name: buildingName,
-                    technician_name: technicianName,
-                    date: inspectionDate,
-                    units: JSON.stringify(unitsData),
-                    created_at: new Date().toISOString(),
-                    user_type: currentUserType
-                };
-
-                const result = await window.dataSdk.create(record);
-                
-                if (result.isOk) {
-                    // Show success message
-                    const successDiv = document.createElement('div');
-                    successDiv.style.cssText = 'background: #2ed573; color: white; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center;';
-                    successDiv.textContent = 'Data berhasil disimpan!';
-                    form.insertBefore(successDiv, submitBtn);
-                    
-                    // Reset form
-                    form.reset();
-                    
-                    // Remove success message after 3 seconds
-                    setTimeout(() => {
-                        successDiv.remove();
-                        showDashboard();
-                    }, 2000);
+                    dropdown.style.display = 'block';
                 } else {
-                    // Show error message
-                    const errorDiv = document.createElement('div');
-                    errorDiv.style.cssText = 'background: #ff4757; color: white; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center;';
-                    errorDiv.textContent = 'Gagal menyimpan data. Silakan coba lagi.';
-                    form.insertBefore(errorDiv, submitBtn);
-                    
-                    setTimeout(() => errorDiv.remove(), 5000);
+                    dropdown.style.display = 'none';
                 }
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                const errorDiv = document.createElement('div');
-                errorDiv.style.cssText = 'background: #ff4757; color: white; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center;';
-                errorDiv.textContent = 'Terjadi kesalahan. Silakan coba lagi.';
-                form.insertBefore(errorDiv, submitBtn);
+            });
+
+            input.addEventListener('focus', function() {
+                if (this.value) {
+                    const event = new Event('input');
+                    this.dispatchEvent(event);
+                }
+            });
+
+            document.addEventListener('click', function(e) {
+                if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+        }
+
+        function setupItemDropdown(inputId, options) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+
+            const dropdownId = `${inputId}-dropdown`;
+            let dropdown = document.getElementById(dropdownId);
+            
+            if (!dropdown) {
+                dropdown = document.createElement('div');
+                dropdown.id = dropdownId;
+                dropdown.className = 'dropdown-list';
+                input.parentNode.appendChild(dropdown);
+            }
+            
+            input.addEventListener('input', function() {
+                const value = this.value.toLowerCase();
+                const filtered = options.filter(option => 
+                    option.toLowerCase().includes(value)
+                );
                 
-                setTimeout(() => errorDiv.remove(), 5000);
-            } finally {
-                // Reset button state
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit';
+                dropdown.innerHTML = '';
+                if (filtered.length > 0 && value) {
+                    filtered.forEach(option => {
+                        const item = document.createElement('div');
+                        item.className = 'dropdown-item';
+                        item.textContent = option;
+                        item.onclick = () => {
+                            input.value = option;
+                            dropdown.style.display = 'none';
+                        };
+                        dropdown.appendChild(item);
+                    });
+                    dropdown.style.display = 'block';
+                } else {
+                    dropdown.style.display = 'none';
+                }
+            });
+
+            input.addEventListener('focus', function() {
+                if (this.value) {
+                    const event = new Event('input');
+                    this.dispatchEvent(event);
+                }
+            });
+        }
+
+        function addUnit(type) {
+            unitCounters[type]++;
+            const unitId = unitCounters[type];
+            itemCounters[type][unitId] = 0;
+            
+            const container = document.getElementById(`${type}-units-container`);
+            
+            const unitDiv = document.createElement('div');
+            unitDiv.className = 'unit-container';
+            unitDiv.id = `${type}-unit-${unitId}`;
+            
+            unitDiv.innerHTML = `
+                <div class="unit-header">
+                    <div class="unit-title">Unit ${unitId}</div>
+                    <button type="button" class="btn btn-danger" onclick="deleteUnit('${type}', ${unitId})" style="padding: 6px 12px; font-size: 12px;">Delete Unit</button>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <input type="text" name="${type}_unit_${unitId}" required placeholder="Enter unit name">
+                    </div>
+                    <div class="form-group">
+                        <label>MFG</label>
+                        <input type="text" name="${type}_mfg_${unitId}" required placeholder="Enter MFG">
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <input type="text" name="${type}_type_${unitId}" required placeholder="Enter type">
+                    </div>
+                </div>
+                
+                <div class="section-title">
+                    ITEM
+                    <button type="button" class="btn btn-secondary" onclick="addItem('${type}', ${unitId})" style="float: right; padding: 6px 12px; font-size: 12px;">+ Tambah Item</button>
+                </div>
+                
+                <div id="${type}-items-${unitId}"></div>
+            `;
+            
+            container.appendChild(unitDiv);
+            addItem(type, unitId); // Add first item automatically
+        }
+
+        function deleteUnit(type, unitId) {
+            const unitElement = document.getElementById(`${type}-unit-${unitId}`);
+            if (unitElement) {
+                unitElement.remove();
+                delete itemCounters[type][unitId];
             }
         }
 
-        async function loadHistory() {
-            const loading = document.getElementById('historyLoading');
-            const content = document.getElementById('historyContent');
+        function addItem(type, unitId) {
+            const container = document.getElementById(`${type}-items-${unitId}`);
+            const existingItems = container.querySelectorAll('.item-container');
+            const itemId = existingItems.length + 1;
             
-            loading.classList.add('show');
-            content.style.display = 'none';
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'item-container';
+            itemDiv.id = `${type}-item-${unitId}-${itemId}`;
             
-            // Simulate loading delay
-            setTimeout(() => {
-                renderHistory();
-                loading.classList.remove('show');
-                content.style.display = 'block';
-            }, 1000);
-        }
-
-        let filteredData = [];
-
-        function renderHistory(dataToRender = allData) {
-            const tbody = document.getElementById('historyTableBody');
-            const noDataMsg = document.getElementById('noDataMessage');
-            tbody.innerHTML = '';
-            
-            if (dataToRender.length === 0) {
-                tbody.style.display = 'none';
-                noDataMsg.style.display = 'block';
-                return;
-            }
-            
-            tbody.style.display = 'block';
-            noDataMsg.style.display = 'none';
-            
-            dataToRender.forEach(record => {
-                const row = document.createElement('div');
-                row.className = 'table-row';
-                row.innerHTML = `
-                    <div>${record.type === 'escalator' ? 'Eskalator' : 'Elevator'}</div>
-                    <div>${record.building_name}</div>
-                    <div>${record.technician_name}</div>
-                    <div>${new Date(record.date).toLocaleDateString('id-ID')}</div>
+            itemDiv.innerHTML = `
+                <div class="item-header">
+                    <div class="item-title">Item ${itemId}</div>
                     <div>
-                        <button class="edit-btn" onclick="viewRecord('${record.__backendId}')">Lihat</button>
-                        ${currentUserType === 'admin' ? `
-                            <button class="edit-btn" onclick="editRecord('${record.__backendId}')">Edit</button>
-                            <button class="delete-btn" onclick="deleteRecord('${record.__backendId}')">Hapus</button>
-                        ` : ''}
+                        <button type="button" class="btn btn-danger" onclick="deleteItem('${type}', ${unitId}, ${itemId})" style="padding: 4px 8px; font-size: 11px;">Delete Item</button>
                     </div>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        function filterHistory() {
-            const buildingFilter = document.getElementById('searchBuilding').value.toLowerCase();
-            const dateFromFilter = document.getElementById('searchDateFrom').value;
-            const dateToFilter = document.getElementById('searchDateTo').value;
-            const typeFilter = document.getElementById('searchType').value;
-            
-            filteredData = allData.filter(record => {
-                // Building filter
-                const buildingMatch = !buildingFilter || 
-                    record.building_name.toLowerCase().includes(buildingFilter);
+                </div>
                 
-                // Date range filter
-                let dateMatch = true;
-                if (dateFromFilter || dateToFilter) {
-                    const recordDate = new Date(record.date);
-                    if (dateFromFilter) {
-                        const fromDate = new Date(dateFromFilter);
-                        dateMatch = dateMatch && recordDate >= fromDate;
-                    }
-                    if (dateToFilter) {
-                        const toDate = new Date(dateToFilter);
-                        dateMatch = dateMatch && recordDate <= toDate;
-                    }
-                }
-                
-                // Type filter
-                const typeMatch = !typeFilter || record.type === typeFilter;
-                
-                return buildingMatch && dateMatch && typeMatch;
-            });
-            
-            renderHistory(filteredData);
-        }
-
-        function clearFilters() {
-            document.getElementById('searchBuilding').value = '';
-            document.getElementById('searchDateFrom').value = '';
-            document.getElementById('searchDateTo').value = '';
-            document.getElementById('searchType').value = '';
-            filteredData = allData;
-            renderHistory(allData);
-        }
-
-        function downloadFilteredPDF() {
-            const dataToDownload = filteredData.length > 0 ? filteredData : allData;
-            
-            if (dataToDownload.length === 0) {
-                showMessage('Tidak ada data untuk didownload!', 'error');
-                return;
-            }
-            
-            generatePDF(dataToDownload);
-        }
-
-        function generatePDF(data) {
-            // Create PDF content
-            let pdfContent = `
-                <html>
-                <head>
-                    <title>Laporan Safety System - PT. Jaya Kencana</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; margin: 20px; }
-                        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #004A99; padding-bottom: 20px; }
-                        .company-name { font-size: 24px; font-weight: bold; color: #004A99; margin-bottom: 5px; }
-                        .report-title { font-size: 18px; color: #666; }
-                        .summary { background: #f5f5f5; padding: 15px; margin: 20px 0; border-radius: 5px; }
-                        .record { border: 1px solid #ddd; margin: 20px 0; padding: 15px; border-radius: 5px; }
-                        .record-header { background: #004A99; color: white; padding: 10px; margin: -15px -15px 15px -15px; border-radius: 5px 5px 0 0; }
-                        .detail-row { margin: 8px 0; }
-                        .label { font-weight: bold; color: #333; }
-                        .units-section { margin-top: 15px; }
-                        .unit { background: #f9f9f9; padding: 10px; margin: 10px 0; border-left: 4px solid #00d4ff; }
-                        .items { margin-left: 20px; }
-                        .item { padding: 5px 0; border-bottom: 1px solid #eee; }
-                        .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px; }
-                    </style>
-                </head>
-                <body>
-                    <div class="header">
-                        <div class="company-name">PT. JAYA KENCANA</div>
-                        <div class="report-title">Laporan Safety Management System</div>
-                        <div style="font-size: 12px; color: #666; margin-top: 10px;">
-                            Tanggal Cetak: ${new Date().toLocaleDateString('id-ID', { 
-                                weekday: 'long', 
-                                year: 'numeric', 
-                                month: 'long', 
-                                day: 'numeric' 
-                            })}
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Item Sparepart</label>
+                        <div class="dropdown-container">
+                            <input type="text" id="${type}-sparepart-${unitId}-${itemId}" name="${type}_sparepart_${unitId}_${itemId}" required placeholder="Type to search sparepart...">
                         </div>
                     </div>
-                    
-                    <div class="summary">
-                        <strong>Ringkasan Laporan:</strong><br>
-                        Total Data: ${data.length} record<br>
-                        Eskalator: ${data.filter(r => r.type === 'escalator').length} record<br>
-                        Elevator: ${data.filter(r => r.type === 'elevator').length} record
+                    <div class="form-group">
+                        <label>Kondisi</label>
+                        <div class="dropdown-container">
+                            <input type="text" id="${type}-condition-${unitId}-${itemId}" name="${type}_condition_${unitId}_${itemId}" required placeholder="Type to search condition...">
+                        </div>
                     </div>
+                    <div class="form-group">
+                        <label>Jumlah</label>
+                        <div class="dropdown-container">
+                            <input type="text" id="${type}-quantity-${unitId}-${itemId}" name="${type}_quantity_${unitId}_${itemId}" required placeholder="Enter quantity...">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Satuan</label>
+                        <div class="dropdown-container">
+                            <input type="text" id="${type}-unit-${unitId}-${itemId}" name="${type}_unit_${unitId}_${itemId}" required placeholder="Type to search unit...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Remarks</label>
+                        <div class="dropdown-container">
+                            <input type="text" id="${type}-remarks-${unitId}-${itemId}" name="${type}_remarks_${unitId}_${itemId}" placeholder="Type to search remarks...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Prioritas</label>
+                        <div class="dropdown-container">
+                            <input type="text" id="${type}-priority-${unitId}-${itemId}" name="${type}_priority_${unitId}_${itemId}" required placeholder="Type to search priority...">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="photo-upload-container">
+                    <label>Foto Part</label>
+                    <input type="file" accept="image/*" onchange="handlePhotoUpload(event, '${type}', ${unitId}, ${itemId}, 1)">
+                    <div id="${type}-photos-${unitId}-${itemId}" class="photo-preview"></div>
+                </div>
             `;
             
-            data.forEach((record, index) => {
-                const units = JSON.parse(record.units || '[]');
-                
-                pdfContent += `
-                    <div class="record">
-                        <div class="record-header">
-                            Record #${index + 1} - ${record.type === 'escalator' ? 'ESKALATOR' : 'ELEVATOR'}
-                        </div>
-                        
-                        <div class="detail-row">
-                            <span class="label">Gedung/Proyek:</span> ${record.building_name}
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">Teknisi:</span> ${record.technician_name}
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">Tanggal:</span> ${new Date(record.date).toLocaleDateString('id-ID')}
-                        </div>
-                        <div class="detail-row">
-                            <span class="label">Dibuat:</span> ${new Date(record.created_at).toLocaleDateString('id-ID')} oleh ${record.user_type}
-                        </div>
-                        
-                        <div class="units-section">
-                            <strong>Detail Unit & Items:</strong>
-                `;
-                
-                units.forEach((unit, unitIndex) => {
-                    pdfContent += `
-                        <div class="unit">
-                            <strong>Unit ${unitIndex + 1}:</strong> ${unit.unit}<br>
-                            <strong>MFG:</strong> ${unit.mfg}<br>
-                            <strong>Type:</strong> ${unit.type}
-                            
-                            <div class="items">
-                                <strong>Items:</strong>
-                    `;
-                    
-                    unit.items.forEach((item, itemIndex) => {
-                        pdfContent += `
-                            <div class="item">
-                                ${itemIndex + 1}. ${item.sparepart} - ${item.condition} 
-                                (${item.quantity} ${item.unit}) 
-                                ${item.priority ? `[${item.priority}]` : ''}
-                                ${item.remarks ? `- ${item.remarks}` : ''}
-                            </div>
-                        `;
-                    });
-                    
-                    pdfContent += `
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                pdfContent += `
-                        </div>
-                    </div>
-                `;
-            });
+            container.appendChild(itemDiv);
             
-            pdfContent += `
-                    <div class="footer">
-                        <div>PT. JAYA KENCANA</div>
-                        <div>Jl. Salemba Raya No.61 Jakarta - Indonesia 10440</div>
-                        <div>Tel: (021) 390 8501 / (021) 390 8510</div>
-                        <div>Email: info@jayakencana.com</div>
-                    </div>
-                </body>
-                </html>
-            `;
-            
-            // Open in new window for printing/saving as PDF
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(pdfContent);
-            printWindow.document.close();
-            
-            // Auto print dialog
+            // Setup dropdowns for this item
             setTimeout(() => {
-                printWindow.print();
-            }, 500);
+                setupItemDropdown(`${type}-sparepart-${unitId}-${itemId}`, dropdownData.spareparts);
+                setupItemDropdown(`${type}-condition-${unitId}-${itemId}`, dropdownData.conditions);
+                setupItemDropdown(`${type}-quantity-${unitId}-${itemId}`, dropdownData.quantities);
+                setupItemDropdown(`${type}-unit-${unitId}-${itemId}`, dropdownData.units);
+                setupItemDropdown(`${type}-remarks-${unitId}-${itemId}`, dropdownData.remarks);
+                setupItemDropdown(`${type}-priority-${unitId}-${itemId}`, dropdownData.priorities);
+            }, 100);
         }
 
-        function viewRecord(backendId) {
-            const record = allData.find(r => r.__backendId === backendId);
-            if (!record) return;
-            
-            showRecordDetail(record, false);
-        }
-
-        async function deleteRecord(backendId) {
-            if (!window.dataSdk) return;
-            
-            const record = allData.find(r => r.__backendId === backendId);
-            if (!record) return;
-            
-            // Create inline confirmation
-            const confirmDiv = document.createElement('div');
-            confirmDiv.style.cssText = 'background: rgba(255, 71, 87, 0.1); border: 1px solid #ff4757; border-radius: 10px; padding: 20px; margin: 20px 0; text-align: center;';
-            confirmDiv.innerHTML = `
-                <p style="margin-bottom: 15px; color: white;">Yakin ingin menghapus data ini?</p>
-                <button onclick="confirmDelete('${backendId}')" style="background: #ff4757; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-right: 10px; cursor: pointer;">Ya, Hapus</button>
-                <button onclick="this.closest('div').remove()" style="background: #666; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Batal</button>
-            `;
-            
-            document.getElementById('historyContent').insertBefore(confirmDiv, document.querySelector('.history-table'));
-        }
-
-        async function confirmDelete(backendId) {
-            if (!window.dataSdk) return;
-            
-            const record = allData.find(r => r.__backendId === backendId);
-            if (!record) return;
-            
-            const result = await window.dataSdk.delete(record);
-            
-            // Remove confirmation dialog
-            const confirmDiv = document.querySelector('[style*="rgba(255, 71, 87, 0.1)"]');
-            if (confirmDiv) confirmDiv.remove();
-            
-            if (result.isOk) {
-                // Show success message
-                const successDiv = document.createElement('div');
-                successDiv.style.cssText = 'background: #2ed573; color: white; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center;';
-                successDiv.textContent = 'Data berhasil dihapus!';
-                document.getElementById('historyContent').insertBefore(successDiv, document.querySelector('.history-table'));
-                
-                setTimeout(() => successDiv.remove(), 3000);
-            } else {
-                // Show error message
-                const errorDiv = document.createElement('div');
-                errorDiv.style.cssText = 'background: #ff4757; color: white; padding: 15px; border-radius: 10px; margin: 20px 0; text-align: center;';
-                errorDiv.textContent = 'Gagal menghapus data. Silakan coba lagi.';
-                document.getElementById('historyContent').insertBefore(errorDiv, document.querySelector('.history-table'));
-                
-                setTimeout(() => errorDiv.remove(), 5000);
+        function deleteItem(type, unitId, itemId) {
+            const itemElement = document.getElementById(`${type}-item-${unitId}-${itemId}`);
+            if (itemElement) {
+                itemElement.remove();
+                renumberItems(type, unitId);
             }
         }
 
-        function editRecord(backendId) {
-            const record = allData.find(r => r.__backendId === backendId);
-            if (!record) return;
+        function renumberItems(type, unitId) {
+            const container = document.getElementById(`${type}-items-${unitId}`);
+            const items = container.querySelectorAll('.item-container');
             
-            showRecordDetail(record, true);
-        }
-
-        function showRecordDetail(record, isEditable = false) {
-            const units = JSON.parse(record.units || '[]');
-            
-            // Create modal overlay
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.8);
-                z-index: 9999;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 20px;
-                box-sizing: border-box;
-            `;
-            
-            const modalContent = document.createElement('div');
-            modalContent.style.cssText = `
-                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-                border-radius: 15px;
-                padding: 30px;
-                max-width: 800px;
-                width: 100%;
-                max-height: 90%;
-                overflow-y: auto;
-                color: white;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-            `;
-            
-            let modalHTML = `
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid rgba(0, 212, 255, 0.5); padding-bottom: 20px;">
-                    <h2 style="color: #00d4ff; margin: 0;">${isEditable ? '✏️ Edit' : '👁️ Detail'} Record - ${record.type === 'escalator' ? 'Eskalator' : 'Elevator'}</h2>
-                    <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="background: #ff4757; border: none; border-radius: 50%; width: 40px; height: 40px; color: white; cursor: pointer; font-size: 18px;">✕</button>
-                </div>
-                
-                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px; margin-bottom: 20px;">
-                    <h3 style="color: #00d4ff; margin-top: 0;">Informasi Umum</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                        <div>
-                            <label style="display: block; margin-bottom: 5px; font-weight: 500;">Gedung/Proyek:</label>
-                            ${isEditable ? 
-                                `<input type="text" id="editBuilding" value="${record.building_name}" style="width: 100%; padding: 10px; border: 1px solid rgba(255,255,255,0.3); border-radius: 5px; background: rgba(255,255,255,0.1); color: white;">` :
-                                `<div style="padding: 10px; background: rgba(255,255,255,0.05); border-radius: 5px;">${record.building_name}</div>`
-                            }
-                        </div>
-                        <div>
-                            <label style="display: block; margin-bottom: 5px; font-weight: 500;">Teknisi:</label>
-                            ${isEditable ? 
-                                `<input type="text" id="editTechnician" value="${record.technician_name}" style="width: 100%; padding: 10px; border: 1px solid rgba(255,255,255,0.3); border-radius: 5px; background: rgba(255,255,255,0.1); color: white;">` :
-                                `<div style="padding: 10px; background: rgba(255,255,255,0.05); border-radius: 5px;">${record.technician_name}</div>`
-                            }
-                        </div>
-                        <div>
-                            <label style="display: block; margin-bottom: 5px; font-weight: 500;">Tanggal:</label>
-                            ${isEditable ? 
-                                `<input type="date" id="editDate" value="${record.date}" style="width: 100%; padding: 10px; border: 1px solid rgba(255,255,255,0.3); border-radius: 5px; background: rgba(255,255,255,0.1); color: white;">` :
-                                `<div style="padding: 10px; background: rgba(255,255,255,0.05); border-radius: 5px;">${new Date(record.date).toLocaleDateString('id-ID')}</div>`
-                            }
-                        </div>
-                        <div>
-                            <label style="display: block; margin-bottom: 5px; font-weight: 500;">Dibuat:</label>
-                            <div style="padding: 10px; background: rgba(255,255,255,0.05); border-radius: 5px;">${new Date(record.created_at).toLocaleDateString('id-ID')} (${record.user_type})</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="background: rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 20px;">
-                    <h3 style="color: #00d4ff; margin-top: 0;">Detail Unit & Items</h3>
-                    <div id="unitsDetail">
-            `;
-            
-            units.forEach((unit, unitIndex) => {
-                modalHTML += `
-                    <div style="background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 15px; margin: 15px 0; border-left: 4px solid #00d4ff;">
-                        <h4 style="color: #00d4ff; margin-top: 0;">Unit ${unitIndex + 1}</h4>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 15px;">
-                            <div><strong>Unit:</strong> ${unit.unit}</div>
-                            <div><strong>MFG:</strong> ${unit.mfg}</div>
-                            <div><strong>Type:</strong> ${unit.type}</div>
-                        </div>
-                        
-                        <div style="margin-top: 15px;">
-                            <strong style="color: #00d4ff;">Items:</strong>
-                            <div style="margin-left: 20px; margin-top: 10px;">
-                `;
-                
-                unit.items.forEach((item, itemIndex) => {
-                    modalHTML += `
-                        <div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                            <div style="font-weight: 500;">${itemIndex + 1}. ${item.sparepart}</div>
-                            <div style="font-size: 14px; color: #b0b0b0; margin-left: 15px;">
-                                Kondisi: ${item.condition} | 
-                                Jumlah: ${item.quantity} ${item.unit} | 
-                                Prioritas: ${item.priority}
-                                ${item.remarks ? `<br>Remarks: ${item.remarks}` : ''}
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                modalHTML += `
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            modalHTML += `
-                    </div>
-                </div>
-                
-                ${isEditable ? `
-                    <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
-                        <button onclick="saveEditedRecord('${record.__backendId}')" style="background: linear-gradient(45deg, #2ed573, #1dd1a1); border: none; border-radius: 10px; padding: 15px 30px; color: white; cursor: pointer; font-weight: 600;">💾 Simpan Perubahan</button>
-                        <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="background: #666; border: none; border-radius: 10px; padding: 15px 30px; color: white; cursor: pointer; font-weight: 600;">❌ Batal</button>
-                    </div>
-                ` : `
-                    <div style="text-align: center; margin-top: 30px;">
-                        <button onclick="this.closest('[style*=\"position: fixed\"]').remove()" style="background: linear-gradient(45deg, #9c27b0, #673ab7); border: none; border-radius: 10px; padding: 15px 30px; color: white; cursor: pointer; font-weight: 600;">✅ Tutup</button>
-                    </div>
-                `}
-            `;
-            
-            modalContent.innerHTML = modalHTML;
-            modal.appendChild(modalContent);
-            document.body.appendChild(modal);
-            
-            // Close modal when clicking outside
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.remove();
+            items.forEach((item, index) => {
+                const newItemNumber = index + 1;
+                const titleElement = item.querySelector('.item-title');
+                if (titleElement) {
+                    titleElement.textContent = `Item ${newItemNumber}`;
                 }
             });
         }
 
-        async function saveEditedRecord(backendId) {
-            if (!window.dataSdk) return;
-            
-            const record = allData.find(r => r.__backendId === backendId);
-            if (!record) return;
-            
-            // Get edited values
-            const editedBuilding = document.getElementById('editBuilding').value;
-            const editedTechnician = document.getElementById('editTechnician').value;
-            const editedDate = document.getElementById('editDate').value;
-            
-            // Update record
-            const updatedRecord = {
-                ...record,
-                building_name: editedBuilding,
-                technician_name: editedTechnician,
-                date: editedDate
+        function handlePhotoUpload(event, type, unitId, itemId, photoIndex) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const photoContainer = document.getElementById(`${type}-photos-${unitId}-${itemId}`);
+                
+                const photoDiv = document.createElement('div');
+                photoDiv.className = 'photo-item';
+                photoDiv.innerHTML = `
+                    <img src="${e.target.result}" alt="Photo ${photoIndex}">
+                    <button type="button" class="photo-remove" onclick="removePhoto(this)">×</button>
+                    <input type="hidden" name="${type}_photo_${unitId}_${itemId}_${photoIndex}" value="${e.target.result}">
+                `;
+                
+                photoContainer.appendChild(photoDiv);
+                
+                // Add new photo input
+                const newPhotoIndex = photoIndex + 1;
+                const newInput = document.createElement('input');
+                newInput.type = 'file';
+                newInput.accept = 'image/*';
+                newInput.onchange = (e) => handlePhotoUpload(e, type, unitId, itemId, newPhotoIndex);
+                
+                photoContainer.parentNode.appendChild(newInput);
             };
             
-            const result = await window.dataSdk.update(updatedRecord);
-            
-            if (result.isOk) {
-                // Close modal
-                document.querySelector('[style*="position: fixed"]').remove();
-                
-                // Show success message
-                showMessage('Data berhasil diperbarui!', 'success');
-            } else {
-                showMessage('Gagal memperbarui data. Silakan coba lagi.', 'error');
-            }
-        }
-
-        // Searchable dropdown functions
-        function setupSearchableInputs() {
-            document.addEventListener('click', function(e) {
-                // Close all dropdowns when clicking outside
-                if (!e.target.closest('.searchable-input')) {
-                    document.querySelectorAll('.searchable-dropdown').forEach(dropdown => {
-                        dropdown.classList.remove('show');
-                    });
-                }
-            });
-
-            // Setup input event listeners for search functionality
-            document.addEventListener('input', function(e) {
-                if (e.target.closest('.searchable-input')) {
-                    const input = e.target;
-                    const dropdown = input.nextElementSibling;
-                    const searchTerm = input.value.toLowerCase();
-                    
-                    if (searchTerm.length > 0) {
-                        dropdown.classList.add('show');
-                        
-                        // Filter dropdown items
-                        const items = dropdown.querySelectorAll('.dropdown-item');
-                        items.forEach(item => {
-                            const text = item.textContent.toLowerCase();
-                            if (text.includes(searchTerm)) {
-                                item.style.display = 'block';
-                            } else {
-                                item.style.display = 'none';
-                            }
-                        });
-                    } else {
-                        dropdown.classList.remove('show');
-                    }
-                }
-            });
-
-            // Setup focus event listeners
-            document.addEventListener('focus', function(e) {
-                if (e.target.closest('.searchable-input')) {
-                    const input = e.target;
-                    const dropdown = input.nextElementSibling;
-                    dropdown.classList.add('show');
-                    
-                    // Show all items when focused
-                    const items = dropdown.querySelectorAll('.dropdown-item');
-                    items.forEach(item => {
-                        item.style.display = 'block';
-                    });
-                }
-            }, true);
-        }
-
-        function selectBuilding(value) {
-            document.getElementById('buildingName').value = value;
-            document.getElementById('buildingDropdown').classList.remove('show');
-        }
-
-        function selectElevatorBuilding(value) {
-            document.getElementById('elevatorBuildingName').value = value;
-            document.getElementById('elevatorBuildingDropdown').classList.remove('show');
-        }
-
-        function selectType(element, value) {
-            const input = element.closest('.searchable-input').querySelector('input');
-            input.value = value;
-            element.closest('.searchable-dropdown').classList.remove('show');
-        }
-
-        function selectSparepart(element, value) {
-            const input = element.closest('.searchable-input').querySelector('input');
-            input.value = value;
-            element.closest('.searchable-dropdown').classList.remove('show');
-        }
-
-        function selectCondition(element, value) {
-            const input = element.closest('.searchable-input').querySelector('input');
-            input.value = value;
-            element.closest('.searchable-dropdown').classList.remove('show');
-        }
-
-        function selectUnit(element, value) {
-            const input = element.closest('.searchable-input').querySelector('input');
-            input.value = value;
-            element.closest('.searchable-dropdown').classList.remove('show');
-        }
-
-        function selectPriority(element, value) {
-            const input = element.closest('.searchable-input').querySelector('input');
-            input.value = value;
-            element.closest('.searchable-dropdown').classList.remove('show');
-        }
-
-        function clearItem(button) {
-            const itemGroup = button.closest('.item-group');
-            const inputs = itemGroup.querySelectorAll('input, select');
-            inputs.forEach(input => {
-                if (input.type === 'file') {
-                    input.value = '';
-                } else if (input.type === 'checkbox') {
-                    input.checked = false;
-                } else {
-                    input.value = '';
-                }
-            });
-        }
-
-        function addItemToLastUnit() {
-            const container = document.getElementById('unitsContainer');
-            const lastUnit = container.querySelector('.unit-group:last-child');
-            if (lastUnit) {
-                addItem(lastUnit.querySelector('.add-btn') || lastUnit);
-            }
-        }
-
-        function addItemToLastElevatorUnit() {
-            const container = document.getElementById('elevatorUnitsContainer');
-            const lastUnit = container.querySelector('.unit-group:last-child');
-            if (lastUnit) {
-                addItem(lastUnit.querySelector('.add-btn') || lastUnit);
-            }
-        }
-
-        // Photo upload functions
-        function handlePhotoUpload(input) {
-            if (input.files && input.files[0]) {
-                const removeBtn = input.nextElementSibling;
-                if (removeBtn) {
-                    removeBtn.style.display = 'inline-block';
-                }
-                
-                const container = input.closest('.form-group');
-                const addBtn = container.querySelector('.add-photo-btn');
-                if (addBtn) {
-                    addBtn.style.display = 'inline-block';
-                }
-            }
-        }
-
-        function addPhotoInput(button) {
-            const container = button.closest('.form-group').querySelector('.photo-container');
-            const newGroup = document.createElement('div');
-            newGroup.className = 'photo-input-group';
-            newGroup.innerHTML = `
-                <input type="file" class="form-input photo-input" accept="image/*" onchange="handlePhotoUpload(this)">
-                <button type="button" class="remove-photo-btn" onclick="removePhoto(this)" style="display: none;">🗑️</button>
-            `;
-            container.appendChild(newGroup);
+            reader.readAsDataURL(file);
         }
 
         function removePhoto(button) {
-            const group = button.closest('.photo-input-group');
-            const container = group.closest('.photo-container');
-            const isFirstInput = group === container.firstElementChild;
-            
-            if (isFirstInput && container.children.length === 1) {
-                // If it's the only input, just clear it and hide buttons
-                const input = group.querySelector('.photo-input');
-                input.value = '';
-                button.style.display = 'none';
+            button.parentElement.remove();
+        }
+
+        function resetForm(type) {
+            document.getElementById(`${type}-form-element`).reset();
+            document.getElementById(`${type}-units-container`).innerHTML = `
+                <div class="section-title">Units</div>
+            `;
+            unitCounters[type] = 0;
+            itemCounters[type] = {};
+        }
+
+        async function submitForm(type, formData) {
+            try {
+                showLoading('Submitting form...');
                 
-                const addBtn = container.closest('.form-group').querySelector('.add-photo-btn');
-                if (addBtn) {
-                    addBtn.style.display = 'none';
+                if (currentRecords.length >= 999) {
+                    showMessage('Maximum limit of 999 records reached. Please delete some records first.', 'error');
+                    return;
                 }
-            } else {
-                // Remove the group if there are multiple inputs
-                group.remove();
+                
+                const createResult = await window.dataSdk.create(formData);
+                
+                if (!createResult.isOk) {
+                    throw new Error('Failed to save data: ' + createResult.error);
+                }
+                
+                showMessage('Form submitted successfully!', 'success');
+                resetForm(type);
+                
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                showMessage('Error submitting form: ' + error.message, 'error');
+            } finally {
+                hideLoading();
             }
         }
 
-        function resetPhotoInputs() {
-            // Reset all photo inputs when adding new units/items
-            document.querySelectorAll('.photo-container').forEach(container => {
-                const inputs = container.querySelectorAll('.photo-input');
-                inputs.forEach((input, index) => {
-                    if (index === 0) {
-                        // Keep first input, just clear it
-                        input.value = '';
-                        const removeBtn = input.nextElementSibling;
-                        if (removeBtn) removeBtn.style.display = 'none';
-                    } else {
-                        // Remove additional inputs
-                        input.closest('.photo-input-group').remove();
-                    }
+        function renderHistory(searchTerm = '') {
+            const historyList = document.getElementById('history-list');
+            
+            if (currentRecords.length === 0) {
+                historyList.innerHTML = '<p style="text-align: center; color: rgba(255, 255, 255, 0.7);">No data found.</p>';
+                return;
+            }
+            
+            // Filter records by current user if not admin
+            let filteredRecords = currentRecords;
+            if (currentUser.role !== 'admin') {
+                filteredRecords = currentRecords.filter(record => record.username === currentUser.username);
+            }
+            
+            // Apply search filter
+            if (searchTerm) {
+                filteredRecords = filteredRecords.filter(record => {
+                    const searchLower = searchTerm.toLowerCase();
+                    return record.building_name.toLowerCase().includes(searchLower) ||
+                           record.technician_names.toLowerCase().includes(searchLower) ||
+                           record.date.includes(searchTerm) ||
+                           record.type.toLowerCase().includes(searchLower);
                 });
+            }
+            
+            if (filteredRecords.length === 0) {
+                historyList.innerHTML = '<p style="text-align: center; color: rgba(255, 255, 255, 0.7);">No matching records found.</p>';
+                return;
+            }
+            
+            historyList.innerHTML = filteredRecords.map(record => {
+                const date = new Date(record.created_at).toLocaleDateString('id-ID');
+                const units = JSON.parse(record.units || '[]');
                 
-                // Hide add button
-                const addBtn = container.closest('.form-group').querySelector('.add-photo-btn');
-                if (addBtn) {
-                    addBtn.style.display = 'none';
-                }
-            });
-        }
-
-        // Settings functions
-        function showSettingsTab(tabName) {
-            // Hide all tab contents
-            document.querySelectorAll('.settings-tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Remove active class from all tabs
-            document.querySelectorAll('.settings-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected tab
-            document.getElementById(tabName + 'Tab').classList.add('active');
-            event.target.classList.add('active');
-            
-            // Load data for specific tabs
-            if (tabName === 'users') {
-                loadUsers();
-            } else if (tabName === 'technicians') {
-                loadTechnicians();
-            }
-        }
-
-        function addUser(event) {
-            event.preventDefault();
-            const username = document.getElementById('newUsername').value;
-            const password = document.getElementById('newPassword').value;
-            const role = document.getElementById('newUserRole').value;
-            
-            // Check if username already exists
-            if (users.find(u => u.username === username)) {
-                showMessage('Username sudah ada!', 'error');
-                return;
-            }
-            
-            users.push({ username, password, role });
-            document.getElementById('addUserForm').reset();
-            loadUsers();
-            showMessage('User berhasil ditambahkan!', 'success');
-        }
-
-        function deleteUser(username) {
-            if (username === currentUser) {
-                showMessage('Tidak dapat menghapus user yang sedang login!', 'error');
-                return;
-            }
-            
-            users = users.filter(u => u.username !== username);
-            loadUsers();
-            showMessage('User berhasil dihapus!', 'success');
-        }
-
-        function loadUsers() {
-            const tbody = document.getElementById('usersTableBody');
-            tbody.innerHTML = '';
-            
-            users.forEach(user => {
-                const row = document.createElement('div');
-                row.className = 'table-row';
-                row.innerHTML = `
-                    <div>${user.username}</div>
-                    <div>${user.role}</div>
-                    <div>
-                        ${user.username !== currentUser ? 
-                            `<button class="delete-btn" onclick="deleteUser('${user.username}')">Hapus</button>` : 
-                            '<span style="color: #b0b0b0;">Current User</span>'
-                        }
+                return `
+                    <div class="history-item">
+                        <div class="history-header">
+                            <div class="history-title">${record.type.toUpperCase()} - ${record.building_name}</div>
+                            <div class="history-date">${date}</div>
+                        </div>
+                        <p><strong>Teknisi:</strong> ${record.technician_names}</p>
+                        <p><strong>Tanggal:</strong> ${record.date}</p>
+                        <p><strong>Units:</strong> ${units.length} unit(s)</p>
+                        <p><strong>Submitted by:</strong> ${record.username} (${record.user_type})</p>
+                        
+                        <div class="history-actions">
+                            ${currentUser.role === 'admin' ? `
+                                <button class="btn btn-danger" onclick="deleteRecord('${record.__backendId}')">Delete</button>
+                            ` : `
+                                <button class="btn btn-secondary" onclick="downloadPDF('${record.__backendId}')">Download PDF</button>
+                            `}
+                        </div>
                     </div>
                 `;
-                tbody.appendChild(row);
-            });
+            }).join('');
         }
 
-        function addTechnician(event) {
-            event.preventDefault();
-            const name = document.getElementById('newTechnicianName').value;
-            
-            if (technicians.includes(name)) {
-                showMessage('Teknisi sudah ada!', 'error');
-                return;
+        function filterHistory() {
+            const searchTerm = document.getElementById('history-search').value;
+            renderHistory(searchTerm);
+        }
+
+        async function deleteRecord(recordId) {
+            try {
+                showLoading('Deleting record...');
+                
+                const recordToDelete = currentRecords.find(r => r.__backendId === recordId);
+                if (!recordToDelete) {
+                    throw new Error('Record not found');
+                }
+                
+                const deleteResult = await window.dataSdk.delete(recordToDelete);
+                
+                if (!deleteResult.isOk) {
+                    throw new Error('Failed to delete record: ' + deleteResult.error);
+                }
+                
+                showMessage('Record deleted successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Error deleting record:', error);
+                showMessage('Error deleting record: ' + error.message, 'error');
+            } finally {
+                hideLoading();
             }
-            
-            technicians.push(name);
-            document.getElementById('addTechnicianForm').reset();
-            loadTechnicians();
-            updateTechnicianCheckboxes();
-            showMessage('Teknisi berhasil ditambahkan!', 'success');
         }
 
-        function deleteTechnician(name) {
-            technicians = technicians.filter(t => t !== name);
-            loadTechnicians();
-            updateTechnicianCheckboxes();
-            showMessage('Teknisi berhasil dihapus!', 'success');
-        }
-
-        function loadTechnicians() {
-            const container = document.getElementById('techniciansList');
-            container.innerHTML = '';
+        function downloadPDF(recordId) {
+            // Simple PDF download simulation
+            const record = currentRecords.find(r => r.__backendId === recordId);
+            if (!record) return;
             
-            technicians.forEach(tech => {
-                const item = document.createElement('div');
-                item.className = 'technician-item';
-                item.innerHTML = `
-                    <span class="technician-name">${tech}</span>
-                    <button class="delete-btn" onclick="deleteTechnician('${tech}')">Hapus</button>
-                `;
-                container.appendChild(item);
-            });
-        }
-
-        function updateTechnicianCheckboxes() {
-            // Update all technician checkboxes in forms
-            const checkboxContainers = document.querySelectorAll('.checkbox-group');
-            checkboxContainers.forEach(container => {
-                container.innerHTML = '';
-                technicians.forEach(tech => {
-                    const label = document.createElement('label');
-                    label.className = 'checkbox-item';
-                    label.innerHTML = `
-                        <input type="checkbox" name="technician" value="${tech}"> ${tech}
-                    `;
-                    container.appendChild(label);
-                });
-            });
-        }
-
-        function changePassword(event) {
-            event.preventDefault();
-            const oldPassword = document.getElementById('oldPassword').value;
-            const newPassword = document.getElementById('newPasswordChange').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            
-            const user = users.find(u => u.username === currentUser);
-            
-            if (user.password !== oldPassword) {
-                showMessage('Password lama salah!', 'error');
-                return;
-            }
-            
-            if (newPassword !== confirmPassword) {
-                showMessage('Konfirmasi password tidak cocok!', 'error');
-                return;
-            }
-            
-            user.password = newPassword;
-            document.getElementById('changePasswordForm').reset();
-            showMessage('Password berhasil diubah!', 'success');
-        }
-
-        function showMessage(message, type) {
-            const messageDiv = document.createElement('div');
-            messageDiv.style.cssText = `
-                background: ${type === 'success' ? '#2ed573' : '#ff4757'}; 
-                color: white; 
-                padding: 15px; 
-                border-radius: 10px; 
-                margin: 20px 0; 
-                text-align: center;
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                z-index: 9999;
-                min-width: 300px;
+            const content = `
+                PT. JAYA KENCANA - ${record.type.toUpperCase()} REPORT
+                
+                Building: ${record.building_name}
+                Technicians: ${record.technician_names}
+                Date: ${record.date}
+                Submitted: ${new Date(record.created_at).toLocaleDateString('id-ID')}
+                
+                Units: ${JSON.parse(record.units || '[]').length} unit(s)
             `;
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${record.type}_${record.building_name}_${record.date}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showMessage('Report downloaded successfully!', 'success');
+        }
+
+        function showLoading(text = 'Loading...') {
+            document.getElementById('loading-text').textContent = text;
+            document.getElementById('loading').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        function showMessage(message, type = 'success') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
             messageDiv.textContent = message;
+            messageDiv.style.position = 'fixed';
+            messageDiv.style.top = '20px';
+            messageDiv.style.right = '20px';
+            messageDiv.style.zIndex = '10000';
+            messageDiv.style.maxWidth = '400px';
+            
             document.body.appendChild(messageDiv);
             
-            setTimeout(() => messageDiv.remove(), 3000);
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
         }
 
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
-            setupSearchableInputs();
+        // Event Listeners
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (login(username, password)) {
+                document.getElementById('login-page').style.display = 'none';
+                document.getElementById('main-app').style.display = 'block';
+                document.getElementById('user-display').textContent = `${currentUser.username} (${currentUser.role})`;
+                document.getElementById('user-subtitle').textContent = `Welcome, ${currentUser.username}`;
+            } else {
+                const errorDiv = document.getElementById('login-error');
+                errorDiv.textContent = 'Invalid username or password';
+                errorDiv.style.display = 'block';
+            }
         });
+
+        document.getElementById('escalator-form-element').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const selectedTechnicians = Array.from(document.querySelectorAll('#escalator-technicians input:checked'))
+                .map(cb => cb.value);
+            
+            if (selectedTechnicians.length === 0) {
+                showMessage('Please select at least one technician', 'error');
+                return;
+            }
+            
+            const units = [];
+            for (let unitId = 1; unitId <= unitCounters.escalator; unitId++) {
+                const unitElement = document.getElementById(`escalator-unit-${unitId}`);
+                if (unitElement) {
+                    const unit = {
+                        unit: formData.get(`escalator_unit_${unitId}`),
+                        mfg: formData.get(`escalator_mfg_${unitId}`),
+                        type: formData.get(`escalator_type_${unitId}`),
+                        items: []
+                    };
+                    
+                    // Collect items for this unit
+                    for (let itemId = 1; itemId <= (itemCounters.escalator[unitId] || 0); itemId++) {
+                        const itemElement = document.getElementById(`escalator-item-${unitId}-${itemId}`);
+                        if (itemElement) {
+                            const item = {
+                                sparepart: formData.get(`escalator_sparepart_${unitId}_${itemId}`),
+                                condition: formData.get(`escalator_condition_${unitId}_${itemId}`),
+                                quantity: formData.get(`escalator_quantity_${unitId}_${itemId}`),
+                                unit: formData.get(`escalator_unit_${unitId}_${itemId}`),
+                                remarks: formData.get(`escalator_remarks_${unitId}_${itemId}`),
+                                priority: formData.get(`escalator_priority_${unitId}_${itemId}`),
+                                photos: []
+                            };
+                            
+                            // Collect photos
+                            const photoInputs = itemElement.querySelectorAll('input[type="hidden"]');
+                            photoInputs.forEach(input => {
+                                if (input.value) {
+                                    item.photos.push(input.value);
+                                }
+                            });
+                            
+                            unit.items.push(item);
+                        }
+                    }
+                    
+                    units.push(unit);
+                }
+            }
+            
+            const data = {
+                id: Date.now().toString(),
+                type: 'escalator',
+                building_name: formData.get('building_name'),
+                technician_names: selectedTechnicians.join(', '),
+                date: formData.get('date'),
+                units: JSON.stringify(units),
+                created_at: new Date().toISOString(),
+                user_type: currentUser.role,
+                username: currentUser.username,
+                photos: JSON.stringify([])
+            };
+            
+            await submitForm('escalator', data);
+        });
+
+        document.getElementById('elevator-form-element').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const selectedTechnicians = Array.from(document.querySelectorAll('#elevator-technicians input:checked'))
+                .map(cb => cb.value);
+            
+            if (selectedTechnicians.length === 0) {
+                showMessage('Please select at least one technician', 'error');
+                return;
+            }
+            
+            const units = [];
+            for (let unitId = 1; unitId <= unitCounters.elevator; unitId++) {
+                const unitElement = document.getElementById(`elevator-unit-${unitId}`);
+                if (unitElement) {
+                    const unit = {
+                        unit: formData.get(`elevator_unit_${unitId}`),
+                        mfg: formData.get(`elevator_mfg_${unitId}`),
+                        type: formData.get(`elevator_type_${unitId}`),
+                        items: []
+                    };
+                    
+                    // Collect items for this unit
+                    for (let itemId = 1; itemId <= (itemCounters.elevator[unitId] || 0); itemId++) {
+                        const itemElement = document.getElementById(`elevator-item-${unitId}-${itemId}`);
+                        if (itemElement) {
+                            const item = {
+                                sparepart: formData.get(`elevator_sparepart_${unitId}_${itemId}`),
+                                condition: formData.get(`elevator_condition_${unitId}_${itemId}`),
+                                quantity: formData.get(`elevator_quantity_${unitId}_${itemId}`),
+                                unit: formData.get(`elevator_unit_${unitId}_${itemId}`),
+                                remarks: formData.get(`elevator_remarks_${unitId}_${itemId}`),
+                                priority: formData.get(`elevator_priority_${unitId}_${itemId}`),
+                                photos: []
+                            };
+                            
+                            // Collect photos
+                            const photoInputs = itemElement.querySelectorAll('input[type="hidden"]');
+                            photoInputs.forEach(input => {
+                                if (input.value) {
+                                    item.photos.push(input.value);
+                                }
+                            });
+                            
+                            unit.items.push(item);
+                        }
+                    }
+                    
+                    units.push(unit);
+                }
+            }
+            
+            const data = {
+                id: Date.now().toString(),
+                type: 'elevator',
+                building_name: formData.get('building_name'),
+                technician_names: selectedTechnicians.join(', '),
+                date: formData.get('date'),
+                units: JSON.stringify(units),
+                created_at: new Date().toISOString(),
+                user_type: currentUser.role,
+                username: currentUser.username,
+                photos: JSON.stringify([])
+            };
+            
+            await submitForm('elevator', data);
+        });
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Check authentication
+            if (checkAuth()) {
+                document.getElementById('login-page').style.display = 'none';
+                document.getElementById('main-app').style.display = 'block';
+                document.getElementById('user-display').textContent = `${currentUser.username} (${currentUser.role})`;
+                document.getElementById('user-subtitle').textContent = `Welcome, ${currentUser.username}`;
+            }
+            
+            // Set today's date
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('escalator-date').value = today;
+            document.getElementById('elevator-date').value = today;
+            
+            // Initialize Data SDK
+            await initializeDataSDK();
+        });
+
+        // Element SDK Configuration
+        const defaultConfig = {
+            company_name: 'PT. JAYA KENCANA',
+            copyright_text: 'Copyright 2025 PT. Jaya Kencana'
+        };
+
+        const element = {
+            defaultConfig,
+            onConfigChange: async (config) => {
+                document.getElementById('company-name').textContent = config.company_name || defaultConfig.company_name;
+                document.getElementById('company-header').textContent = config.company_name || defaultConfig.company_name;
+                document.getElementById('copyright-footer').textContent = config.copyright_text || defaultConfig.copyright_text;
+            },
+            mapToCapabilities: (config) => ({
+                recolorables: [],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            }),
+            mapToEditPanelValues: (config) => new Map([
+                ['company_name', config.company_name || defaultConfig.company_name],
+                ['copyright_text', config.copyright_text || defaultConfig.copyright_text]
+            ])
+        };
+
+        // Initialize Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init(element);
+        }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'995b45b9370f658d',t:'MTc2MTY2MzMwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'996274ded6abb584',t:'MTc2MTczODYzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
