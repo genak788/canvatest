@@ -1549,80 +1549,102 @@ if (!window.dataSdk) {
             const units = JSON.parse(record.units || '[]');
             
             container.innerHTML = `
-                <div class="modal-body">
-                    <form id="edit-record-form">
-                        <div class="form-section">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Nama Gedung/Proyek</label>
-                                    <input type="text" id="edit-building" value="${record.building_name}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Nama Teknisi</label>
-                                    <input type="text" id="edit-technicians" value="${record.technician_names}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Tanggal</label>
-                                    <input type="date" id="edit-date" value="${record.date}" required>
-                                </div>
+container.innerHTML = `
+    <div class="modal-body">
+        <form id="edit-record-form">
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nama Gedung/Proyek</label>
+                        <input type="text" id="edit-building" value="${record.building_name}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Teknisi</label>
+                        <input type="text" id="edit-technicians" value="${record.technician_names}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal</label>
+                        <input type="date" id="edit-date" value="${record.date}" required>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title">Units (${units.length})</div>
+            <div id="edit-units-display">
+                ${units.map((unit, index) => `
+                    <div class="unit-container">
+                        <div class="unit-header">
+                            <div class="unit-title">Unit ${index + 1}</div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Unit</label>
+                                <input type="text" value="${unit.unit || ''}" data-unit-index="${index}" class="edit-unit-name">
+                            </div>
+                            <div class="form-group">
+                                <label>MFG</label>
+                                <input type="text" value="${unit.mfg || ''}" data-unit-index="${index}" class="edit-unit-mfg">
+                            </div>
+                            <div class="form-group">
+                                <label>Type</label>
+                                <input type="text" value="${unit.type || ''}" data-unit-index="${index}" class="edit-unit-type">
                             </div>
                         </div>
-                        
-                        <div class="section-title">Units (${units.length})</div>
-                        <div id="edit-units-display">
-                            ${units.map((unit, index) => `
-                                <div class="unit-container">
-                                    <div class="unit-header">
-                                        <div class="unit-title">Unit ${index + 1}</div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="form-group">
-                                            <label>Unit</label>
-                                            <input type="text" value="${unit.unit || ''}" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>MFG</label>
-                                            <input type="text" value="${unit.mfg || ''}" readonly>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Type</label>
-                                            <input type="text" value="${unit.type || ''}" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="section-title">Items (${unit.items ? unit.items.length : 0})</div>
-                                    ${unit.items ? unit.items.map((item, itemIndex) => `
-                                        <div class="item-container">
-                                            <div class="item-header">
-                                                <div class="item-title">Item ${itemIndex + 1}</div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="form-group">
-                                                    <label>Sparepart</label>
-                                                    <input type="text" value="${item.sparepart || ''}" readonly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Kondisi</label>
-                                                    <input type="text" value="${item.condition || ''}" readonly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Jumlah</label>
-                                                    <input type="text" value="${item.quantity || ''}" readonly>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    `).join('') : ''}
+
+                        <div class="section-title">Items (${unit.items?.length || 0})</div>
+                        ${unit.items?.map((item, itemIndex) => `
+                            <div class="item-container">
+                                <div class="item-header">
+                                    <div class="item-title">Item ${itemIndex + 1}</div>
                                 </div>
-                            `).join('')}
-                        </div>
-                        
-                        <div style="margin-top: 30px; text-align: center;">
-                            <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
-                            <button type="submit" class="btn btn-success">Update Record</button>
-                        </div>
-                    </form>
-                </div>
-            `;
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Sparepart</label>
+                                        <input type="text" value="${item.sparepart || ''}" 
+                                            data-unit-index="${index}" data-item-index="${itemIndex}" class="edit-item-sparepart">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Kondisi</label>
+                                        <input type="text" value="${item.condition || ''}" 
+                                            data-unit-index="${index}" data-item-index="${itemIndex}" class="edit-item-condition">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Jumlah</label>
+                                        <input type="text" value="${item.quantity || ''}" 
+                                            data-unit-index="${index}" data-item-index="${itemIndex}" class="edit-item-quantity">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Satuan</label>
+                                        <input type="text" value="${item.unit || ''}" 
+                                            data-unit-index="${index}" data-item-index="${itemIndex}" class="edit-item-unit">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Remarks</label>
+                                        <input type="text" value="${item.remarks || ''}" 
+                                            data-unit-index="${index}" data-item-index="${itemIndex}" class="edit-item-remarks">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Prioritas</label>
+                                        <input type="text" value="${item.priority || ''}" 
+                                            data-unit-index="${index}" data-item-index="${itemIndex}" class="edit-item-priority">
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('') || '<p style="color:#ccc;">No items</p>'}
+                    </div>
+                `).join('')}
+            </div>
             
+            <div style="margin-top: 30px; text-align: center;">
+                <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                <button type="submit" class="btn btn-success">Update Record</button>
+            </div>
+        </form>
+    </div>
+`;            
             modal.style.display = 'flex';
             
             // Handle form submission
