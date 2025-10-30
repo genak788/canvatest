@@ -3,368 +3,247 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PT. JAYA KENCANA - Form System</title>
+  <title>PT. Jaya Kencana - Safety Management System</title>
   <script src="/_sdk/data_sdk.js"></script>
   <script src="/_sdk/element_sdk.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
         body {
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+            color: white;
             min-height: 100%;
-            color: #ffffff;
-            overflow-x: hidden;
         }
 
-        * {
-            box-sizing: border-box;
+        html {
+            height: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100%;
         }
 
         .login-container {
-            min-height: 100vh;
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding: 20px;
+            align-items: center;
+            min-height: 80%;
+            padding: 40px 20px;
         }
 
         .login-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(52, 152, 219, 0.15);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
             width: 100%;
-            max-width: 450px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        .login-header {
+        .logo {
             text-align: center;
             margin-bottom: 30px;
         }
 
-        .login-header h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin: 0 0 10px 0;
-            background: linear-gradient(135deg, #ffffff, #e0e7ff);
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            background: linear-gradient(45deg, #3498db, #e74c3c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .login-header p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-            margin: 0;
-        }
-
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
+            font-weight: 500;
+            color: #e0e0e0;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-control {
             width: 100%;
-            padding: 15px 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            font-size: 16px;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
             background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
+            color: white;
+            font-size: 16px;
             transition: all 0.3s ease;
-            font-family: inherit;
         }
 
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
+        .form-control:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+        }
+
+        .form-control::placeholder {
             color: rgba(255, 255, 255, 0.6);
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
-        }
-
         .btn {
-            padding: 15px 30px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 12px;
-            cursor: pointer;
+            border-radius: 10px;
             font-weight: 600;
-            font-size: 16px;
+            cursor: pointer;
             transition: all 0.3s ease;
-            font-family: inherit;
-            position: relative;
-            overflow: hidden;
+            font-size: 16px;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
             color: white;
             width: 100%;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
         }
 
-        .btn-success {
-            background: linear-gradient(135deg, #48bb78, #38a169);
-            color: white;
-            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.3);
-        }
-
-        .btn-success:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(72, 187, 120, 0.4);
-        }
-
-        .btn-danger {
-            background: linear-gradient(135deg, #f56565, #e53e3e);
-            color: white;
-            box-shadow: 0 8px 25px rgba(245, 101, 101, 0.3);
-        }
-
-        .btn-danger:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(245, 101, 101, 0.4);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-1px);
-        }
-
-        .main-container {
+        .main-content {
             display: none;
-            min-height: 100vh;
-            padding: 20px;
         }
 
         .header {
             text-align: center;
             margin-bottom: 40px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .header h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-size: 36px;
+            font-weight: 700;
             margin: 0 0 10px 0;
-            background: linear-gradient(135deg, #ffffff, #e0e7ff);
+            background: linear-gradient(45deg, #3498db, #e74c3c);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .header .subtitle {
-            font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
+            font-size: 18px;
+            color: #b0b0b0;
+            font-weight: 400;
         }
 
-.user-info {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 6px 10px;
-    border-radius: 8px;
-    z-index: 1000;
-}
-
-.user-display {
-    font-size: 12px;
-    font-weight: 500;
-    color: #fff;
-}
-
-.logout-btn {
-    background: #e53e3e;
-    color: #fff;
-    border: none;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 12px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.logout-btn:hover {
-    background: #c53030;
-}
-        .logout-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(245, 101, 101, 0.4);
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .menu-card {
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .nav-card {
+            background: rgba(52, 152, 219, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
             padding: 30px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(52, 152, 219, 0.3);
         }
 
-        .menu-card:hover {
+        .nav-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(52, 152, 219, 0.25);
         }
 
-        .menu-card.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        .nav-card.active {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            border-color: #e74c3c;
         }
 
-        .menu-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .menu-title {
-            font-size: 1.3rem;
-            font-weight: 700;
+        .nav-card h3 {
             margin: 0;
-        }
-
-        .form-container {
-            display: none;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .form-container.active {
-            display: block;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .form-header {
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        .form-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin: 0;
-            color: #ffffff;
+            font-size: 20px;
+            font-weight: 600;
         }
 
         .form-section {
-            margin-bottom: 40px;
+            display: none;
+            background: rgba(52, 152, 219, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .form-section.active {
+            display: block;
         }
 
         .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #ffffff;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #3498db;
         }
 
         .form-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             margin-bottom: 20px;
         }
 
-        .unit-container {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
+        .subsection {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .unit-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .subsection-title {
+            font-size: 20px;
+            font-weight: 600;
             margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .unit-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #ffffff;
+            color: #e74c3c;
         }
 
         .item-container {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            border-radius: 15px;
             padding: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .item-header {
@@ -374,65 +253,142 @@
             margin-bottom: 15px;
         }
 
-        .item-title {
-            font-size: 1.1rem;
+        .item-number {
             font-weight: 600;
-            color: #ffffff;
+            color: #3498db;
+            font-size: 18px;
         }
 
-        .photo-upload-container {
-            margin-top: 20px;
+        .delete-item-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: auto;
         }
 
-        .photo-preview {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 15px;
+        .delete-item-btn:hover {
+            background: #c0392b;
+        }
+
+        .photo-upload {
             margin-top: 15px;
         }
 
-        .photo-item {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        .photo-input {
+            margin-bottom: 10px;
         }
 
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .photo-remove {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: rgba(245, 101, 101, 0.9);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
+        .add-photo-btn {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px dashed #00d4ff;
+            color: #00d4ff;
+            padding: 8px 16px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 14px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-add {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+        }
+
+        .btn-clear {
+            background: linear-gradient(45deg, #ff9800, #f57c00);
+            color: white;
+        }
+
+        .btn-submit {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .history-section {
+            display: none;
+        }
+
+        .history-section.active {
+            display: block;
+        }
+
+        .history-item {
+            background: rgba(52, 152, 219, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .history-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
             font-size: 12px;
-            font-weight: bold;
+            border-radius: 6px;
         }
 
-        .dropdown-container {
-            position: relative;
+        .btn-edit {
+            background: #3498db;
+            color: white;
         }
 
-        .dropdown-list {
+        .btn-download {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 50px;
+            color: #b0b0b0;
+        }
+
+        .dropdown-suggestions {
             position: absolute;
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(30, 60, 114, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(30, 30, 60, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 8px;
             max-height: 200px;
             overflow-y: auto;
@@ -441,315 +397,49 @@
         }
 
         .dropdown-item {
-            padding: 12px 15px;
+            padding: 10px 15px;
             cursor: pointer;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            transition: background 0.2s ease;
         }
 
         .dropdown-item:hover {
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .dropdown-item:last-child {
-            border-bottom: none;
-        }
-
-        .history-container {
-            display: none;
-        }
-
-        .history-container.active {
-            display: block;
-        }
-
-        .history-item {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .history-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .history-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .history-date {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-
-        .history-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .footer p {
-            margin: 0;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 500;
-        }
-
-        .error-message {
-            background: linear-gradient(135deg, #f56565, #e53e3e);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .success-message {
-            background: linear-gradient(135deg, #48bb78, #38a169);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .loading {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .loading-content {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            color: white;
-        }
-
-        .spinner {
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .form-group {
+            position: relative;
         }
 
         .checkbox-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
             margin-top: 10px;
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .checkbox-item:hover {
-            background: rgba(255, 255, 255, 0.1);
+            gap: 8px;
         }
 
         .checkbox-item input[type="checkbox"] {
-            margin-right: 10px;
             width: 18px;
             height: 18px;
-        }
-
-        .checkbox-item label {
-            color: #ffffff;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #667eea 100%);
-            border-radius: 20px;
-            padding: 0;
-            max-width: 90%;
-            max-height: 90%;
-            overflow-y: auto;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(20px);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px 20px 0 0;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-            color: #ffffff;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            color: #ffffff;
-            font-size: 2rem;
-            cursor: pointer;
-            padding: 0;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: background 0.2s ease;
-        }
-
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .modal-body {
-            padding: 30px;
-        }
-
-        .review-section {
-            margin-bottom: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-        }
-
-        .review-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .review-item {
-            margin-bottom: 15px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-        }
-
-        .review-item-title {
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-
-        .review-photos {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .review-photo {
-            width: 100px;
-            height: 100px;
-            border-radius: 8px;
-            object-fit: cover;
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .review-photo:hover {
-            transform: scale(1.1);
+            accent-color: #9c27b0;
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .menu-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
             .form-row {
                 grid-template-columns: 1fr;
             }
             
-            .user-info {
-                position: relative;
-                top: auto;
-                right: auto;
-                margin-bottom: 20px;
-                text-align: center;
-                justify-content: center;
-                width: fit-content;
-                margin-left: auto;
-                margin-right: auto;
+            .nav-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
             }
             
             .history-header {
@@ -757,1327 +447,1722 @@
                 align-items: flex-start;
                 gap: 10px;
             }
-            
-            .history-actions {
-                flex-wrap: wrap;
-            }
-
-            .modal-content {
-                max-width: 95%;
-                max-height: 95%;
-            }
-
-            .modal-header {
-                padding: 15px 20px;
-            }
-
-            .modal-body {
-                padding: 20px;
-            }
-        }
-
-        @media (min-width: 769px) {
-            .user-info {
-                display: flex !important;
-            }
         }
     </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
- <body><!-- Loading Overlay -->
-  <div id="loading" class="loading">
-   <div class="loading-content">
-    <div class="spinner"></div>
-    <div id="loading-text">
-     Loading...
-    </div>
-   </div>
-  </div><!-- Login Page -->
-  <div id="login-page" class="login-container">
-   <div class="login-card">
-    <div class="login-header">
-     <h1 id="company-name">PT. JAYA KENCANA</h1>
-     <p>Form System Login</p>
-    </div>
-    <div id="login-error" class="error-message" style="display: none;"></div>
-    <form id="login-form">
-     <div class="form-group"><label for="username">Username</label> <input type="text" id="username" name="username" required placeholder="Enter your username">
+ <body>
+  <div class="container"><!-- Login Section -->
+   <div id="loginSection" class="login-container">
+    <div class="login-card">
+     <div class="logo">
+      <h1 id="companyName">PT. JAYA KENCANA</h1>
+      <p id="systemTitle">Safety Management System</p>
      </div>
-     <div class="form-group"><label for="password">Password</label> <input type="password" id="password" name="password" required placeholder="Enter your password">
-     </div><button type="submit" class="btn btn-primary">Login</button>
-    </form>
-   </div>
-  </div><!-- Main Application -->
-  <div id="main-app" class="main-container">
-   <div class="user-info"><span id="user-display" class="user-display"></span> <button class="logout-btn" onclick="logout()">Logout</button>
-   </div>
-   <div class="header">
-    <h1 id="company-header">PT. JAYA KENCANA</h1>
-    <div class="subtitle" id="user-subtitle">
-     Welcome
+     <form id="loginForm">
+      <div class="form-group"><label for="username">Username</label> <input type="text" id="username" class="form-control" placeholder="Masukkan username" required>
+      </div>
+      <div class="form-group"><label for="password">Password</label> <input type="password" id="password" class="form-control" placeholder="Masukkan password" required>
+      </div><button type="submit" class="btn btn-primary">Login</button>
+     </form>
     </div>
-   </div><!-- Menu Navigation -->
-   <div class="menu-grid">
-    <div class="menu-card" onclick="showForm('escalator')">
-     <div class="menu-icon">
-      🔧
+   </div><!-- Main Content -->
+   <div id="mainContent" class="main-content"><button id="logoutBtn" class="logout-btn">Logout</button> <button id="backBtn" class="logout-btn" style="right: 120px; display: none;">← Kembali</button>
+    <div class="header">
+     <h1 id="companyNameHeader">PT. JAYA KENCANA</h1>
+     <p class="subtitle" id="userSubtitle">Safety Management System</p>
+    </div><!-- Navigation -->
+    <div class="nav-grid">
+     <div class="nav-card" data-section="escalator">
+      <h3>🔧 Safety Eskalator</h3>
      </div>
-     <h3 class="menu-title">Safety Escalator</h3>
-    </div>
-    <div class="menu-card" onclick="showForm('elevator')">
-     <div class="menu-icon">
-      🏢
+     <div class="nav-card" data-section="elevator">
+      <h3>🏢 Safety Elevator</h3>
      </div>
-     <h3 class="menu-title">Safety Elevator</h3>
-    </div>
-    <div class="menu-card" onclick="showRealization()">
-     <div class="menu-icon">
-      📊
+     <div class="nav-card" data-section="realization">
+      <h3>📊 Realisasi</h3>
      </div>
-     <h3 class="menu-title">Realisasi</h3>
-    </div>
-    <div class="menu-card" onclick="showHistory()">
-     <div class="menu-icon">
-      📋
+     <div class="nav-card" data-section="history">
+      <h3>📋 History</h3>
      </div>
-     <h3 class="menu-title">History</h3>
-    </div>
-   </div><!-- Form Containers -->
-   <div id="escalator-form" class="form-container">
-    <div class="form-header"><button class="btn btn-secondary" onclick="goBack()" style="float: left; margin-bottom: 10px;">← Back to Dashboard</button>
-     <h2 class="form-title">Safety Escalator Form</h2>
-    </div>
-    <form id="escalator-form-element">
-     <div class="form-section">
+    </div><!-- Escalator Form -->
+    <div id="escalatorSection" class="form-section">
+     <h2 class="section-title">Safety Eskalator</h2>
+     <form id="escalatorForm">
       <div class="form-row">
-       <div class="form-group"><label for="escalator-building">Nama Gedung/Proyek</label>
-        <div class="dropdown-container"><input type="text" id="escalator-building" name="building_name" required placeholder="Type to search building...">
-         <div id="escalator-building-dropdown" class="dropdown-list"></div>
-        </div>
+       <div class="form-group"><label for="escalatorBuilding">Nama Gedung/Proyek</label> <input type="text" id="escalatorBuilding" class="form-control dropdown-input" placeholder="Pilih atau ketik nama gedung" required>
+        <div class="dropdown-suggestions" id="escalatorBuildingDropdown"></div>
        </div>
        <div class="form-group"><label>Nama Teknisi</label>
-        <div id="escalator-technicians" class="checkbox-group"></div>
+        <div class="checkbox-group" id="escalatorTechnicians"></div>
        </div>
-       <div class="form-group"><label for="escalator-date">Tanggal</label> <input type="date" id="escalator-date" name="date" required>
+       <div class="form-group"><label for="escalatorDate">Tanggal</label> <input type="date" id="escalatorDate" class="form-control" required>
        </div>
       </div>
-     </div>
-     <div id="escalator-units-container">
-      <div class="section-title">
-       Units
-      </div>
-     </div>
-     <div style="margin-top: 30px; text-align: center;"><button type="button" class="btn btn-secondary" onclick="addUnit('escalator')" style="padding: 8px 16px; font-size: 14px; margin-right: 10px;">+ Tambah Unit</button> <button type="submit" class="btn btn-success">Submit</button>
-     </div>
-    </form>
-   </div>
-   <div id="elevator-form" class="form-container">
-    <div class="form-header"><button class="btn btn-secondary" onclick="goBack()" style="float: left; margin-bottom: 10px;">← Back to Dashboard</button>
-     <h2 class="form-title">Safety Elevator Form</h2>
-    </div>
-    <form id="elevator-form-element">
-     <div class="form-section">
       <div class="form-row">
-       <div class="form-group"><label for="elevator-building">Nama Gedung/Proyek</label>
-        <div class="dropdown-container"><input type="text" id="elevator-building" name="building_name" required placeholder="Type to search building...">
-         <div id="elevator-building-dropdown" class="dropdown-list"></div>
-        </div>
+       <div class="form-group"><label for="escalatorUnit">Unit</label> <input type="text" id="escalatorUnit" class="form-control" placeholder="Masukkan unit" required>
+       </div>
+       <div class="form-group"><label for="escalatorMfg">MFG</label> <input type="text" id="escalatorMfg" class="form-control" placeholder="Masukkan MFG" required>
+       </div>
+       <div class="form-group"><label for="escalatorType">Type</label> <input type="text" id="escalatorType" class="form-control" placeholder="Masukkan type" required>
+       </div>
+      </div>
+      <div class="subsection">
+       <div class="subsection-title">
+        ITEM
+       </div>
+       <div id="escalatorItems"></div>
+       <div class="action-buttons"><button type="button" class="btn btn-add" id="addEscalatorItem">+ Tambah Item</button> <button type="button" class="btn btn-add" id="addEscalatorWork">+ Tambah Pekerjaan</button>
+       </div>
+      </div>
+      <div class="subsection">
+       <div class="subsection-title">
+        PEKERJAAN LAINNYA
+       </div>
+       <div id="escalatorAdditionalWork"></div>
+      </div>
+      <div class="action-buttons"><button type="submit" class="btn btn-submit">Submit</button>
+      </div>
+     </form>
+    </div><!-- Elevator Form -->
+    <div id="elevatorSection" class="form-section">
+     <h2 class="section-title">Safety Elevator</h2>
+     <form id="elevatorForm">
+      <div class="form-row">
+       <div class="form-group"><label for="elevatorBuilding">Nama Gedung/Proyek</label> <input type="text" id="elevatorBuilding" class="form-control dropdown-input" placeholder="Pilih atau ketik nama gedung" required>
+        <div class="dropdown-suggestions" id="elevatorBuildingDropdown"></div>
        </div>
        <div class="form-group"><label>Nama Teknisi</label>
-        <div id="elevator-technicians" class="checkbox-group"></div>
+        <div class="checkbox-group" id="elevatorTechnicians"></div>
        </div>
-       <div class="form-group"><label for="elevator-date">Tanggal</label> <input type="date" id="elevator-date" name="date" required>
+       <div class="form-group"><label for="elevatorDate">Tanggal</label> <input type="date" id="elevatorDate" class="form-control" required>
        </div>
       </div>
-     </div>
-     <div id="elevator-units-container">
-      <div class="section-title">
-       Units
+      <div class="form-row">
+       <div class="form-group"><label for="elevatorUnit">Unit</label> <input type="text" id="elevatorUnit" class="form-control" placeholder="Masukkan unit" required>
+       </div>
+       <div class="form-group"><label for="elevatorMfg">MFG</label> <input type="text" id="elevatorMfg" class="form-control" placeholder="Masukkan MFG" required>
+       </div>
+       <div class="form-group"><label for="elevatorType">Type</label> <input type="text" id="elevatorType" class="form-control" placeholder="Masukkan type" required>
+       </div>
       </div>
+      <div class="subsection">
+       <div class="subsection-title">
+        ITEM
+       </div>
+       <div id="elevatorItems"></div>
+       <div class="action-buttons"><button type="button" class="btn btn-add" id="addElevatorItem">+ Tambah Item</button> <button type="button" class="btn btn-add" id="addElevatorWork">+ Tambah Pekerjaan</button>
+       </div>
+      </div>
+      <div class="subsection">
+       <div class="subsection-title">
+        PEKERJAAN LAINNYA
+       </div>
+       <div id="elevatorAdditionalWork"></div>
+      </div>
+      <div class="action-buttons"><button type="submit" class="btn btn-submit">Submit</button>
+      </div>
+     </form>
+    </div><!-- Realization Section -->
+    <div id="realizationSection" class="form-section">
+     <h2 class="section-title">Realisasi</h2>
+     <form id="realizationForm">
+      <div class="form-row">
+       <div class="form-group"><label for="realizationBuilding">Nama Gedung/Proyek</label> <input type="text" id="realizationBuilding" class="form-control dropdown-input" placeholder="Pilih atau ketik nama gedung" required>
+        <div class="dropdown-suggestions" id="realizationBuildingDropdown"></div>
+       </div>
+       <div class="form-group"><label>Nama Teknisi</label>
+        <div class="checkbox-group" id="realizationTechnicians"></div>
+       </div>
+       <div class="form-group"><label for="realizationDate">Tanggal Kunjungan</label> <input type="date" id="realizationDate" class="form-control" required>
+       </div>
+      </div>
+      <div class="form-row">
+       <div class="form-group"><label>Jenis Pekerjaan</label>
+        <div class="checkbox-group">
+         <div class="checkbox-item"><input type="radio" id="workTypeSafety" name="workType" value="pemeriksaan_safety" required> <label for="workTypeSafety">Pemeriksaan Safety</label>
+         </div>
+         <div class="checkbox-item"><input type="radio" id="workTypeOther" name="workType" value="lainnya" required> <label for="workTypeOther">Lainnya</label>
+         </div>
+        </div>
+       </div>
+       <div class="form-group" id="otherWorkGroup" style="display: none;"><label for="otherWork">Jenis Pekerjaan Lainnya</label> <input type="text" id="otherWork" class="form-control" placeholder="Masukkan jenis pekerjaan">
+       </div>
+       <div class="form-group"><label for="unitType">Unit</label> <input type="text" id="unitType" class="form-control" placeholder="Masukkan unit (elevator/eskalator)" required>
+       </div>
+      </div>
+      <div class="action-buttons"><button type="submit" class="btn btn-submit">Submit</button>
+      </div>
+     </form>
+    </div><!-- History Section -->
+    <div id="historySection" class="history-section">
+     <h2 class="section-title">History Data</h2>
+     <div class="form-group" style="max-width: 400px; margin: 0 auto 30px auto;"><input type="text" id="searchHistory" class="form-control" placeholder="Cari berdasarkan gedung, teknisi, atau tanggal...">
      </div>
-     <div style="margin-top: 30px; text-align: center;"><button type="button" class="btn btn-secondary" onclick="addUnit('elevator')" style="padding: 8px 16px; font-size: 14px; margin-right: 10px;">+ Tambah Unit</button> <button type="submit" class="btn btn-success">Submit</button>
-     </div>
-    </form>
-   </div><!-- Realization Container -->
-   <div id="realization-container" class="form-container">
-    <div class="form-header"><button class="btn btn-secondary" onclick="goBack()" style="float: left; margin-bottom: 10px;">← Back to Dashboard</button>
-     <h2 class="form-title">Realisasi</h2>
+     <div id="historyList"></div>
     </div>
-    <div id="realization-content">
-     <p style="text-align: center; color: rgba(255, 255, 255, 0.7); font-size: 1.2rem;">Fitur realisasi akan segera tersedia</p>
+    <div class="footer">
+     <p id="copyrightText">Copyright 2025 PT. Jaya Kencana</p>
     </div>
-   </div><!-- History Container -->
-   <div id="history-container" class="history-container">
-    <div class="form-header"><button class="btn btn-secondary" onclick="goBack()" style="float: left; margin-bottom: 10px;">← Back to Dashboard</button>
-     <h2 class="form-title">History Data</h2>
-    </div>
-    <div class="form-group" style="margin-bottom: 30px;"><label for="history-search">Search History</label> <input type="text" id="history-search" placeholder="Search by building name, technician, or date..." onkeyup="filterHistory()">
-    </div>
-    <div id="history-list"></div>
-   </div><!-- Edit Record Modal -->
-   <div id="edit-modal" class="modal" style="display: none;">
-    <div class="modal-content">
-     <div class="modal-header">
-      <h2>Edit Record</h2><button class="modal-close" onclick="closeEditModal()">×</button>
-     </div>
-     <div id="edit-form-container"></div>
-    </div>
-   </div><!-- Review Record Modal -->
-   <div id="review-modal" class="modal" style="display: none;">
-    <div class="modal-content">
-     <div class="modal-header">
-      <h2>Review Record</h2><button class="modal-close" onclick="closeReviewModal()">×</button>
-     </div>
-     <div id="review-content"></div>
-    </div>
-   </div><!-- Footer -->
-   <div class="footer">
-    <p id="copyright-footer">Copyright 2025 PT. Jaya Kencana</p>
    </div>
   </div>
   <script>
-        // Global variables
-        let currentUser = null;
-        let currentRecords = [];
-        let unitCounters = { escalator: 0, elevator: 0 };
-        let itemCounters = { escalator: {}, elevator: {} };
+        // Configuration and Data
+        const defaultConfig = {
+            company_name: "PT. JAYA KENCANA",
+            system_title: "Safety Management System",
+            copyright_text: "Copyright 2025 PT. Jaya Kencana"
+        };
 
-        // User data with different technicians and buildings per user
+        // User data configuration
         const userData = {
             admin: {
-                password: 'admin123',
-                role: 'admin',
-                technicians: ['Ahmad Rizki', 'Budi Santoso', 'Candra Wijaya', 'Dedi Kurniawan', 'Eko Prasetyo'],
-                buildings: ['Gedung A', 'Gedung B', 'Mall Central', 'Office Tower']
+                username: "admin",
+                password: "admin123",
+                subtitle: "Administrator - Safety Management System",
+                buildings: ["Gedung A", "Gedung B", "Gedung C", "Mall Central", "Office Tower"],
+                technicians: ["Teknisi A", "Teknisi B", "Teknisi C", "Teknisi D", "Teknisi E"]
             },
             user1: {
-                password: '123',
-                role: 'user',
-                technicians: ['Teknisi A', 'Teknisi B', 'Teknisi C'],
-                buildings: ['Proyek Alpha', 'Proyek Beta', 'Gedung Utama']
+                username: "user1",
+                password: "123456",
+                subtitle: "User 1 - Safety Management System",
+                buildings: ["Gedung A", "Gedung B", "Mall Central"],
+                technicians: ["Teknisi A", "Teknisi B", "Teknisi C"]
             },
             user2: {
-                password: 'user2',
-                role: 'user',
-                technicians: ['Teknisi D', 'Teknisi E'],
-                buildings: ['Plaza Indonesia', 'Grand Indonesia', 'Senayan City']
-            },
-            user3: {
-                password: '456',
-                role: 'user',
-                technicians: ['Teknisi F', 'Teknisi G', 'Teknisi H'],
-                buildings: ['Mall Taman Anggrek', 'Central Park', 'Kelapa Gading Mall']
+                username: "user2",
+                password: "abcdef",
+                subtitle: "User 2 - Safety Management System",
+                buildings: ["Gedung C", "Office Tower", "Plaza Utama"],
+                technicians: ["Teknisi D", "Teknisi E", "Teknisi F"]
             }
         };
 
-        // Dropdown data
-        const dropdownData = {
-            spareparts: ['Motor', 'Belt', 'Roller', 'Chain', 'Brake', 'Control Panel', 'Sensor', 'Cable', 'Bearing', 'Switch', 'Gear Box', 'Handrail', 'Step', 'Comb Plate'],
-            conditions: ['Baik', 'Rusak Ringan', 'Rusak Berat', 'Perlu Penggantian', 'Maintenance Rutin', 'Perlu Monitoring'],
-            quantities: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-            units: ['Pcs', 'Unit', 'Set', 'Meter', 'Kg', 'Liter', 'Roll', 'Pack', 'Buah'],
-            remarks: ['Normal Operation', 'Perlu Perhatian', 'Segera Diperbaiki', 'Dalam Perbaikan', 'Menunggu Sparepart', 'Selesai Diperbaiki'],
-            priorities: ['High', 'Medium', 'Low', 'Critical', 'Normal']
+        // Dropdown options
+        const dropdownOptions = {
+            sparepart: ["Filter", "Belt", "Motor", "Sensor", "Cable", "Brake Pad", "Control Panel"],
+            condition: ["Baik", "Rusak Ringan", "Rusak Berat", "Perlu Penggantian"],
+            quantity: ["1", "2", "3", "4", "5", "10", "20"],
+            unit: ["Pcs", "Set", "Meter", "Roll", "Box"],
+            remarks: ["Normal", "Urgent", "Critical", "Scheduled"],
+            priority: ["Low", "Medium", "High", "Critical"],
+            additionalWork: ["Pembersihan", "Pelumasan", "Kalibrasi", "Inspeksi", "Perbaikan"],
+            workCondition: ["Selesai", "Dalam Proses", "Tertunda", "Perlu Review"],
+            workRemarks: ["Sesuai Jadwal", "Terlambat", "Dipercepat", "Perlu Tindak Lanjut"]
         };
 
-        // Data SDK handler
+        const sparepartUnits = {
+            "Filter": "Pcs",
+            "Belt": "Pcs", 
+            "Motor": "Unit",
+            "Sensor": "Pcs",
+            "Cable": "Meter",
+            "Brake Pad": "Set",
+            "Control Panel": "Unit",
+            "Kabel": "Meter",
+            "Baut": "Pcs"
+        };
+
+        let currentUser = null;
+        let currentUserType = null;
+        let currentSection = 'escalator';
+        let escalatorItemCount = 0;
+        let elevatorItemCount = 0;
+        let escalatorWorkCount = 0;
+        let elevatorWorkCount = 0;
+        let allData = [];
+
+        // Data SDK Handler
         const dataHandler = {
             onDataChanged(data) {
-                currentRecords = data;
-                if (document.getElementById('history-container').classList.contains('active')) {
+                allData = data;
+                if (currentSection === 'history') {
                     renderHistory();
                 }
             }
         };
-// ✅ Fallback untuk GitHub Pages (tanpa Canva SDK)
-if (!window.dataSdk) {
-    console.warn('⚠️ dataSdk tidak ditemukan. Menggunakan localStorage sebagai penyimpanan sementara.');
 
-    window.dataSdk = {
-        // Simulasi inisialisasi SDK
-        async init(handler) {
-            const stored = JSON.parse(localStorage.getItem('records') || '[]');
-            handler.onDataChanged(stored);
-            return { isOk: true };
-        },
-
-        // Simulasi create
-        async create(data) {
-            const records = JSON.parse(localStorage.getItem('records') || '[]');
-            records.push({ ...data, __backendId: data.id });
-            localStorage.setItem('records', JSON.stringify(records));
-            dataHandler.onDataChanged(records);
-            return { isOk: true };
-        },
-
-        // Simulasi update
-        async update(updatedData) {
-            const records = JSON.parse(localStorage.getItem('records') || '[]');
-            const index = records.findIndex(r => r.__backendId === updatedData.__backendId);
-            if (index !== -1) records[index] = updatedData;
-            localStorage.setItem('records', JSON.stringify(records));
-            dataHandler.onDataChanged(records);
-            return { isOk: true };
-        },
-
-        // Simulasi delete
-        async delete(targetData) {
-            const records = JSON.parse(localStorage.getItem('records') || '[]');
-            const filtered = records.filter(r => r.__backendId !== targetData.__backendId);
-            localStorage.setItem('records', JSON.stringify(filtered));
-            dataHandler.onDataChanged(filtered);
-            return { isOk: true };
-        }
-    };
-}
-
-        // Initialize Data SDK
-        async function initializeDataSDK() {
+        // Initialize SDK and app
+        async function initializeApp() {
             try {
-                const result = await window.dataSdk.init(dataHandler);
-                if (!result.isOk) {
-                    console.error('Failed to initialize Data SDK:', result.error);
+                const initResult = await window.dataSdk.init(dataHandler);
+                if (!initResult.isOk) {
+                    console.error("Failed to initialize data SDK");
                 }
             } catch (error) {
-                console.error('Error initializing Data SDK:', error);
+                console.error("Error initializing app:", error);
             }
-        }
 
-        // Authentication functions
-        function login(username, password) {
-            const user = userData[username];
-            if (user && user.password === password) {
-                currentUser = { username, ...user };
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                return true;
+            // Initialize Element SDK
+            if (window.elementSdk) {
+                await window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange: async (config) => {
+                        document.getElementById('companyName').textContent = config.company_name || defaultConfig.company_name;
+                        document.getElementById('companyNameHeader').textContent = config.company_name || defaultConfig.company_name;
+                        document.getElementById('systemTitle').textContent = config.system_title || defaultConfig.system_title;
+                        document.getElementById('copyrightText').textContent = config.copyright_text || defaultConfig.copyright_text;
+                    },
+                    mapToCapabilities: (config) => ({
+                        recolorables: [],
+                        borderables: [],
+                        fontEditable: undefined,
+                        fontSizeable: undefined
+                    }),
+                    mapToEditPanelValues: (config) => new Map([
+                        ["company_name", config.company_name || defaultConfig.company_name],
+                        ["system_title", config.system_title || defaultConfig.system_title],
+                        ["copyright_text", config.copyright_text || defaultConfig.copyright_text]
+                    ])
+                });
             }
-            return false;
+
+            setupEventListeners();
+            setTodayDate();
         }
 
-        function logout() {
-            currentUser = null;
-            localStorage.removeItem('currentUser');
-            document.getElementById('login-page').style.display = 'flex';
-            document.getElementById('main-app').style.display = 'none';
-            hideAllContainers();
-            showDashboard();
-            // Reset login form
-            document.getElementById('login-form').reset();
-            document.getElementById('login-error').style.display = 'none';
-        }
-
-        function checkAuth() {
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                return true;
-            }
-            return false;
-        }
-
-        // UI Functions
-        function hideAllContainers() {
-            document.querySelectorAll('.form-container, .history-container').forEach(container => {
-                container.classList.remove('active');
+        function setupEventListeners() {
+            // Login form
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            
+            // Logout button
+            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+            
+            // Back button
+            document.getElementById('backBtn').addEventListener('click', backToDashboard);
+            
+            // Navigation
+            document.querySelectorAll('.nav-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const section = card.dataset.section;
+                    switchSection(section);
+                });
             });
-            document.querySelectorAll('.menu-card').forEach(card => {
+
+            // Form submissions
+            document.getElementById('escalatorForm').addEventListener('submit', handleEscalatorSubmit);
+            document.getElementById('elevatorForm').addEventListener('submit', handleElevatorSubmit);
+            document.getElementById('realizationForm').addEventListener('submit', handleRealizationSubmit);
+
+            // Add item buttons
+            document.getElementById('addEscalatorItem').addEventListener('click', () => addItem('escalator'));
+            document.getElementById('addElevatorItem').addEventListener('click', () => addItem('elevator'));
+            document.getElementById('addEscalatorWork').addEventListener('click', () => addAdditionalWork('escalator'));
+            document.getElementById('addElevatorWork').addEventListener('click', () => addAdditionalWork('elevator'));
+
+
+
+            // Search functionality
+            document.getElementById('searchHistory').addEventListener('input', (e) => {
+                searchHistory(e.target.value);
+            });
+
+            // Work type change handler
+            document.addEventListener('change', (e) => {
+                if (e.target.name === 'workType') {
+                    const otherWorkGroup = document.getElementById('otherWorkGroup');
+                    
+                    if (e.target.value === 'lainnya') {
+                        otherWorkGroup.style.display = 'block';
+                        document.getElementById('otherWork').required = true;
+                    } else {
+                        otherWorkGroup.style.display = 'none';
+                        document.getElementById('otherWork').required = false;
+                    }
+                }
+            });
+        }
+
+        function setTodayDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('escalatorDate').value = today;
+            document.getElementById('elevatorDate').value = today;
+            document.getElementById('realizationDate').value = today;
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Validate credentials
+            let validUser = null;
+            let userType = null;
+            
+            // Check admin first
+            if (userData.admin.username === username && userData.admin.password === password) {
+                validUser = userData.admin;
+                userType = 'admin';
+            } else {
+                // Check regular users
+                for (const [key, user] of Object.entries(userData)) {
+                    if (key !== 'admin' && user.username === username && user.password === password) {
+                        validUser = user;
+                        userType = 'user';
+                        break;
+                    }
+                }
+            }
+
+            if (validUser) {
+                currentUser = validUser;
+                currentUserType = userType;
+                
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+                document.getElementById('userSubtitle').textContent = validUser.subtitle;
+                
+                setupUserData();
+            } else {
+                showMessage('Username atau password salah!', 'error');
+            }
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            currentUserType = null;
+            
+            document.getElementById('loginSection').style.display = 'flex';
+            document.getElementById('mainContent').style.display = 'none';
+            
+            // Reset form
+            document.getElementById('loginForm').reset();
+            
+            // Clear realization form only
+            document.getElementById('realizationForm').reset();
+            document.getElementById('otherWorkGroup').style.display = 'none';
+            document.getElementById('otherWork').required = false;
+            
+            // Clear sections
+            document.getElementById('escalatorItems').innerHTML = '';
+            document.getElementById('elevatorItems').innerHTML = '';
+            document.getElementById('escalatorAdditionalWork').innerHTML = '';
+            document.getElementById('elevatorAdditionalWork').innerHTML = '';
+            
+            // Reset navigation to dashboard
+            document.querySelector('.nav-grid').style.display = 'grid';
+            document.getElementById('backBtn').style.display = 'none';
+            
+            // Hide all sections
+            document.querySelectorAll('.form-section, .history-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            
+            // Remove active state from nav cards
+            document.querySelectorAll('.nav-card').forEach(card => {
                 card.classList.remove('active');
             });
-        }
-
-        function showDashboard() {
-            hideAllContainers();
-            document.querySelector('.menu-grid').style.display = 'grid';
-        }
-
-        function hideDashboard() {
-            document.querySelector('.menu-grid').style.display = 'none';
-        }
-
-        function showForm(type) {
-            hideDashboard();
-            hideAllContainers();
-            document.getElementById(`${type}-form`).classList.add('active');
-            populateFormData(type);
-        }
-
-        function showRealization() {
-            hideDashboard();
-            hideAllContainers();
-            document.getElementById('realization-container').classList.add('active');
-        }
-
-        function showHistory() {
-            hideDashboard();
-            hideAllContainers();
-            document.getElementById('history-container').classList.add('active');
-            renderHistory();
-        }
-
-        function goBack() {
-            hideAllContainers();
-            showDashboard();
-        }
-
-        function populateFormData(type) {
-            // Populate technicians checkboxes
-            const techContainer = document.getElementById(`${type}-technicians`);
-            techContainer.innerHTML = '';
             
-            currentUser.technicians.forEach(tech => {
+            currentSection = null;
+            escalatorItemCount = 0;
+            elevatorItemCount = 0;
+            escalatorWorkCount = 0;
+            elevatorWorkCount = 0;
+        }
+
+        function setupUserData() {
+            if (!currentUser) return;
+
+            // Setup building dropdowns
+            setupDropdown('escalatorBuilding', 'escalatorBuildingDropdown', currentUser.buildings);
+            setupDropdown('elevatorBuilding', 'elevatorBuildingDropdown', currentUser.buildings);
+            setupDropdown('realizationBuilding', 'realizationBuildingDropdown', currentUser.buildings);
+
+            // Setup technician checkboxes
+            setupTechnicians('escalatorTechnicians', currentUser.technicians);
+            setupTechnicians('elevatorTechnicians', currentUser.technicians);
+            setupTechnicians('realizationTechnicians', currentUser.technicians);
+        }
+
+        function setupDropdown(inputId, dropdownId, options) {
+            const input = document.getElementById(inputId);
+            const dropdown = document.getElementById(dropdownId);
+
+            input.addEventListener('input', () => {
+                const value = input.value.toLowerCase();
+                const filtered = options.filter(option => 
+                    option.toLowerCase().includes(value)
+                );
+                
+                if (filtered.length > 0 && value) {
+                    showDropdown(dropdown, filtered, input);
+                } else {
+                    hideDropdown(dropdown);
+                }
+            });
+
+            input.addEventListener('focus', () => {
+                if (options.length > 0) {
+                    showDropdown(dropdown, options, input);
+                }
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+                    hideDropdown(dropdown);
+                }
+            });
+        }
+
+        function setupTechnicians(containerId, technicians) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            technicians.forEach(tech => {
                 const checkboxItem = document.createElement('div');
                 checkboxItem.className = 'checkbox-item';
                 checkboxItem.innerHTML = `
-                    <input type="checkbox" id="${type}-tech-${tech}" name="technicians" value="${tech}">
-                    <label for="${type}-tech-${tech}">${tech}</label>
+                    <input type="checkbox" id="${containerId}_${tech}" name="${containerId}" value="${tech}">
+                    <label for="${containerId}_${tech}">${tech}</label>
                 `;
-                techContainer.appendChild(checkboxItem);
+                container.appendChild(checkboxItem);
             });
-
-            // Setup building dropdown
-            setupDropdown(`${type}-building`, currentUser.buildings);
         }
 
-        function setupDropdown(inputId, options) {
-            const input = document.getElementById(inputId);
-            const dropdown = document.getElementById(`${inputId}-dropdown`);
-            
-            input.addEventListener('input', function() {
-                const value = this.value.toLowerCase();
+        function showDropdown(dropdown, options, input) {
+            dropdown.innerHTML = '';
+            options.forEach(option => {
+                const item = document.createElement('div');
+                item.className = 'dropdown-item';
+                item.textContent = option;
+                item.addEventListener('click', () => {
+                    input.value = option;
+                    hideDropdown(dropdown);
+                    
+                    // Trigger change event for sparepart auto-fill
+                    if (input.name === 'sparepart') {
+                        const changeEvent = new Event('change', { bubbles: true });
+                        input.dispatchEvent(changeEvent);
+                    }
+                });
+                dropdown.appendChild(item);
+            });
+            dropdown.style.display = 'block';
+        }
+
+        function hideDropdown(dropdown) {
+            dropdown.style.display = 'none';
+        }
+
+        function setupItemDropdown(input, options) {
+            const dropdown = document.createElement('div');
+            dropdown.className = 'dropdown-suggestions';
+            input.parentNode.appendChild(dropdown);
+
+            input.addEventListener('input', () => {
+                const value = input.value.toLowerCase();
                 const filtered = options.filter(option => 
                     option.toLowerCase().includes(value)
                 );
                 
-                dropdown.innerHTML = '';
                 if (filtered.length > 0 && value) {
-                    filtered.forEach(option => {
-                        const item = document.createElement('div');
-                        item.className = 'dropdown-item';
-                        item.textContent = option;
-                        item.onclick = () => {
-                            input.value = option;
-                            dropdown.style.display = 'none';
-                        };
-                        dropdown.appendChild(item);
-                    });
-                    dropdown.style.display = 'block';
+                    showDropdown(dropdown, filtered, input);
                 } else {
-                    dropdown.style.display = 'none';
+                    hideDropdown(dropdown);
                 }
             });
 
-            input.addEventListener('focus', function() {
-                if (this.value) {
-                    const event = new Event('input');
-                    this.dispatchEvent(event);
+            input.addEventListener('focus', () => {
+                if (options.length > 0) {
+                    showDropdown(dropdown, options, input);
                 }
             });
 
-            document.addEventListener('click', function(e) {
+            document.addEventListener('click', (e) => {
                 if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-                    dropdown.style.display = 'none';
+                    hideDropdown(dropdown);
                 }
             });
         }
 
-        function setupItemDropdown(inputId, options) {
-            const input = document.getElementById(inputId);
-            if (!input) return;
+        function switchSection(section) {
+            // Update navigation
+            document.querySelectorAll('.nav-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            document.querySelector(`[data-section="${section}"]`).classList.add('active');
 
-            const dropdownId = `${inputId}-dropdown`;
-            let dropdown = document.getElementById(dropdownId);
-            
-            if (!dropdown) {
-                dropdown = document.createElement('div');
-                dropdown.id = dropdownId;
-                dropdown.className = 'dropdown-list';
-                input.parentNode.appendChild(dropdown);
-            }
-            
-            input.addEventListener('input', function() {
-                const value = this.value.toLowerCase();
-                const filtered = options.filter(option => 
-                    option.toLowerCase().includes(value)
-                );
-                
-                dropdown.innerHTML = '';
-                if (filtered.length > 0 && value) {
-                    filtered.forEach(option => {
-                        const item = document.createElement('div');
-                        item.className = 'dropdown-item';
-                        item.textContent = option;
-                        item.onclick = () => {
-                            input.value = option;
-                            dropdown.style.display = 'none';
-                        };
-                        dropdown.appendChild(item);
-                    });
-                    dropdown.style.display = 'block';
-                } else {
-                    dropdown.style.display = 'none';
-                }
+            // Hide navigation grid and show back button
+            document.querySelector('.nav-grid').style.display = 'none';
+            document.getElementById('backBtn').style.display = 'block';
+
+            // Hide all sections
+            document.querySelectorAll('.form-section, .history-section').forEach(sec => {
+                sec.classList.remove('active');
             });
 
-            input.addEventListener('focus', function() {
-                if (this.value) {
-                    const event = new Event('input');
-                    this.dispatchEvent(event);
-                }
-            });
-        }
-
-        function addUnit(type) {
-            unitCounters[type]++;
-            const unitId = unitCounters[type];
-            itemCounters[type][unitId] = 0;
-            
-            const container = document.getElementById(`${type}-units-container`);
-            
-            const unitDiv = document.createElement('div');
-            unitDiv.className = 'unit-container';
-            unitDiv.id = `${type}-unit-${unitId}`;
-            
-            unitDiv.innerHTML = `
-                <div class="unit-header">
-                    <div class="unit-title">Unit ${unitId}</div>
-                    <button type="button" class="btn btn-danger" onclick="deleteUnit('${type}', ${unitId})" style="padding: 6px 12px; font-size: 12px;">Delete Unit</button>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Unit</label>
-                        <input type="text" name="${type}_unit_${unitId}" required placeholder="Enter unit name">
-                    </div>
-                    <div class="form-group">
-                        <label>MFG</label>
-                        <input type="text" name="${type}_mfg_${unitId}" required placeholder="Enter MFG">
-                    </div>
-                    <div class="form-group">
-                        <label>Type</label>
-                        <input type="text" name="${type}_type_${unitId}" required placeholder="Enter type">
-                    </div>
-                </div>
-                
-                <div class="section-title">
-                    ITEM
-                    <button type="button" class="btn btn-secondary" onclick="addItem('${type}', ${unitId})" style="float: right; padding: 6px 12px; font-size: 12px;">+ Tambah Item</button>
-                </div>
-                
-                <div id="${type}-items-${unitId}"></div>
-            `;
-            
-            container.appendChild(unitDiv);
-            addItem(type, unitId); // Add first item automatically
-        }
-
-        function deleteUnit(type, unitId) {
-            const unitElement = document.getElementById(`${type}-unit-${unitId}`);
-            if (unitElement) {
-                unitElement.remove();
-                delete itemCounters[type][unitId];
+            // Show selected section
+            currentSection = section;
+            if (section === 'history') {
+                document.getElementById('historySection').classList.add('active');
+                renderHistory();
+            } else {
+                document.getElementById(`${section}Section`).classList.add('active');
             }
         }
 
-        function addItem(type, unitId) {
-            const container = document.getElementById(`${type}-items-${unitId}`);
-            const existingItems = container.querySelectorAll('.item-container');
-            const itemId = existingItems.length + 1;
+        function backToDashboard() {
+            // Show navigation grid and hide back button
+            document.querySelector('.nav-grid').style.display = 'grid';
+            document.getElementById('backBtn').style.display = 'none';
+
+            // Hide all sections
+            document.querySelectorAll('.form-section, .history-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+
+            // Remove active state from nav cards
+            document.querySelectorAll('.nav-card').forEach(card => {
+                card.classList.remove('active');
+            });
+
+            // Reset all forms and clear all items/work
+            document.getElementById('escalatorForm').reset();
+            document.getElementById('elevatorForm').reset();
+            
+            // Clear all items and work
+            document.getElementById('escalatorItems').innerHTML = '';
+            document.getElementById('elevatorItems').innerHTML = '';
+            document.getElementById('escalatorAdditionalWork').innerHTML = '';
+            document.getElementById('elevatorAdditionalWork').innerHTML = '';
+            
+            // Reset counters
+            escalatorItemCount = 0;
+            elevatorItemCount = 0;
+            escalatorWorkCount = 0;
+            elevatorWorkCount = 0;
+            
+            // Reset dates
+            setTodayDate();
+
+            currentSection = null;
+        }
+
+        function addItem(type) {
+            const container = document.getElementById(`${type}Items`);
+            const itemCount = type === 'escalator' ? ++escalatorItemCount : ++elevatorItemCount;
             
             const itemDiv = document.createElement('div');
             itemDiv.className = 'item-container';
-            itemDiv.id = `${type}-item-${unitId}-${itemId}`;
+            itemDiv.dataset.itemId = itemCount;
             
             itemDiv.innerHTML = `
                 <div class="item-header">
-                    <div class="item-title">Item ${itemId}</div>
+                    <span class="item-number">Item ${itemCount}</span>
                     <div>
-                        <button type="button" class="btn btn-danger" onclick="deleteItem('${type}', ${unitId}, ${itemId})" style="padding: 4px 8px; font-size: 11px;">Delete Item</button>
+                        <button type="button" class="btn btn-small" style="background: #ff9800; color: white; margin-right: 5px;" onclick="clearItem('${type}', ${itemCount})">Clear</button>
+                        <button type="button" class="delete-item-btn" onclick="deleteItem('${type}', ${itemCount})">Hapus</button>
                     </div>
                 </div>
-                
                 <div class="form-row">
                     <div class="form-group">
                         <label>Item Sparepart</label>
-                        <div class="dropdown-container">
-                            <input type="text" id="${type}-sparepart-${unitId}-${itemId}" name="${type}_sparepart_${unitId}_${itemId}" required placeholder="Type to search sparepart...">
-                        </div>
+                        <input type="text" class="form-control dropdown-input" name="sparepart" placeholder="Pilih atau ketik sparepart">
                     </div>
                     <div class="form-group">
                         <label>Kondisi</label>
-                        <div class="dropdown-container">
-                            <input type="text" id="${type}-condition-${unitId}-${itemId}" name="${type}_condition_${unitId}_${itemId}" required placeholder="Type to search condition...">
-                        </div>
+                        <input type="text" class="form-control dropdown-input" name="condition" placeholder="Pilih kondisi">
                     </div>
                     <div class="form-group">
                         <label>Jumlah</label>
-                        <div class="dropdown-container">
-                            <input type="text" id="${type}-quantity-${unitId}-${itemId}" name="${type}_quantity_${unitId}_${itemId}" required placeholder="Enter quantity...">
-                        </div>
+                        <input type="text" class="form-control dropdown-input" name="quantity" placeholder="Pilih jumlah">
                     </div>
                 </div>
-                
                 <div class="form-row">
                     <div class="form-group">
                         <label>Satuan</label>
-                        <div class="dropdown-container">
-                            <input type="text" id="${type}-unit-${unitId}-${itemId}" name="${type}_unit_${unitId}_${itemId}" required placeholder="Type to search unit...">
-                        </div>
+                        <input type="text" class="form-control" name="unit_type" placeholder="Satuan">
                     </div>
                     <div class="form-group">
                         <label>Remarks</label>
-                        <div class="dropdown-container">
-                            <input type="text" id="${type}-remarks-${unitId}-${itemId}" name="${type}_remarks_${unitId}_${itemId}" placeholder="Type to search remarks...">
-                        </div>
+                        <input type="text" class="form-control dropdown-input" name="remarks" placeholder="Pilih remarks">
                     </div>
                     <div class="form-group">
                         <label>Prioritas</label>
-                        <div class="dropdown-container">
-                            <input type="text" id="${type}-priority-${unitId}-${itemId}" name="${type}_priority_${unitId}_${itemId}" required placeholder="Type to search priority...">
-                        </div>
+                        <input type="text" class="form-control dropdown-input" name="priority" placeholder="Pilih prioritas">
                     </div>
                 </div>
-                
-                <div class="photo-upload-container">
+                <div class="photo-upload">
                     <label>Foto Part</label>
-                    <input type="file" accept="image/*" onchange="handlePhotoUpload(event, '${type}', ${unitId}, ${itemId}, 1)">
-                    <div id="${type}-photos-${unitId}-${itemId}" class="photo-preview"></div>
+                    <div class="photo-inputs">
+                        <input type="file" class="form-control photo-input" accept="image/*" name="photo">
+                    </div>
+                    <button type="button" class="add-photo-btn" onclick="addPhotoInput(this)">+ Tambah Foto</button>
                 </div>
             `;
             
             container.appendChild(itemDiv);
             
             // Setup dropdowns for this item
-            setTimeout(() => {
-                setupItemDropdown(`${type}-sparepart-${unitId}-${itemId}`, dropdownData.spareparts);
-                setupItemDropdown(`${type}-condition-${unitId}-${itemId}`, dropdownData.conditions);
-                setupItemDropdown(`${type}-quantity-${unitId}-${itemId}`, dropdownData.quantities);
-                setupItemDropdown(`${type}-unit-${unitId}-${itemId}`, dropdownData.units);
-                setupItemDropdown(`${type}-remarks-${unitId}-${itemId}`, dropdownData.remarks);
-                setupItemDropdown(`${type}-priority-${unitId}-${itemId}`, dropdownData.priorities);
-            }, 100);
-        }
-
-        function deleteItem(type, unitId, itemId) {
-            const itemElement = document.getElementById(`${type}-item-${unitId}-${itemId}`);
-            if (itemElement) {
-                itemElement.remove();
-                renumberItems(type, unitId);
+            const sparepartInput = itemDiv.querySelector('[name="sparepart"]');
+            const unitTypeInput = itemDiv.querySelector('[name="unit_type"]');
+            
+            setupItemDropdown(sparepartInput, dropdownOptions.sparepart);
+            setupItemDropdown(itemDiv.querySelector('[name="condition"]'), dropdownOptions.condition);
+            setupItemDropdown(itemDiv.querySelector('[name="quantity"]'), dropdownOptions.quantity);
+            setupItemDropdown(itemDiv.querySelector('[name="remarks"]'), dropdownOptions.remarks);
+            setupItemDropdown(itemDiv.querySelector('[name="priority"]'), dropdownOptions.priority);
+            
+            // Auto-fill unit when sparepart is selected
+            sparepartInput.addEventListener('input', function() {
+                const selectedSparepart = this.value;
+                if (sparepartUnits[selectedSparepart]) {
+                    unitTypeInput.value = sparepartUnits[selectedSparepart];
+                } else {
+                    // Clear unit if sparepart not in predefined list
+                    unitTypeInput.value = '';
+                }
+            });
+            
+            // Also handle when selecting from dropdown
+            sparepartInput.addEventListener('change', function() {
+                const selectedSparepart = this.value;
+                if (sparepartUnits[selectedSparepart]) {
+                    unitTypeInput.value = sparepartUnits[selectedSparepart];
+                } else {
+                    // Clear unit if sparepart not in predefined list
+                    unitTypeInput.value = '';
+                }
+            });
+            
+            // Handle dropdown selection
+            const sparepartDropdown = itemDiv.querySelector('.dropdown-suggestions');
+            if (sparepartDropdown) {
+                sparepartDropdown.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('dropdown-item')) {
+                        const selectedSparepart = e.target.textContent;
+                        if (sparepartUnits[selectedSparepart]) {
+                            unitTypeInput.value = sparepartUnits[selectedSparepart];
+                        } else {
+                            unitTypeInput.value = '';
+                        }
+                    }
+                });
             }
         }
 
-        function renumberItems(type, unitId) {
-            const container = document.getElementById(`${type}-items-${unitId}`);
+        function addAdditionalWork(type) {
+            const container = document.getElementById(`${type}AdditionalWork`);
+            const workCount = type === 'escalator' ? ++escalatorWorkCount : ++elevatorWorkCount;
+            
+            const workDiv = document.createElement('div');
+            workDiv.className = 'item-container';
+            workDiv.dataset.workId = workCount;
+            
+            workDiv.innerHTML = `
+                <div class="item-header">
+                    <span class="item-number">Pekerjaan ${workCount}</span>
+                    <div>
+                        <button type="button" class="btn btn-small" style="background: #ff9800; color: white; margin-right: 5px;" onclick="clearWork('${type}', ${workCount})">Clear</button>
+                        <button type="button" class="delete-item-btn" onclick="deleteWork('${type}', ${workCount})">Hapus</button>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Pekerjaan Lainnya</label>
+                        <input type="text" class="form-control dropdown-input" name="additional_work" placeholder="Pilih pekerjaan">
+                    </div>
+                    <div class="form-group">
+                        <label>Kondisi</label>
+                        <input type="text" class="form-control dropdown-input" name="work_condition" placeholder="Pilih kondisi">
+                    </div>
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <input type="text" class="form-control" name="description" placeholder="Masukkan keterangan">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Remarks</label>
+                        <input type="text" class="form-control dropdown-input" name="work_remarks" placeholder="Pilih remarks">
+                    </div>
+                    <div class="form-group">
+                        <label>Prioritas</label>
+                        <input type="text" class="form-control dropdown-input" name="work_priority" placeholder="Pilih prioritas">
+                    </div>
+                </div>
+                <div class="photo-upload">
+                    <label>Foto</label>
+                    <div class="photo-inputs">
+                        <input type="file" class="form-control photo-input" accept="image/*" name="work_photo">
+                    </div>
+                    <button type="button" class="add-photo-btn" onclick="addPhotoInput(this)">+ Tambah Foto</button>
+                </div>
+            `;
+            
+            container.appendChild(workDiv);
+            
+            // Setup dropdowns
+            setupItemDropdown(workDiv.querySelector('[name="additional_work"]'), dropdownOptions.additionalWork);
+            setupItemDropdown(workDiv.querySelector('[name="work_condition"]'), dropdownOptions.workCondition);
+            setupItemDropdown(workDiv.querySelector('[name="work_remarks"]'), dropdownOptions.workRemarks);
+            setupItemDropdown(workDiv.querySelector('[name="work_priority"]'), dropdownOptions.priority);
+        }
+
+        function deleteItem(type, itemId) {
+            const container = document.getElementById(`${type}Items`);
+            const itemToDelete = container.querySelector(`[data-item-id="${itemId}"]`);
+            if (itemToDelete) {
+                itemToDelete.remove();
+                renumberItems(type);
+            }
+        }
+
+        function deleteWork(type, workId) {
+            const container = document.getElementById(`${type}AdditionalWork`);
+            const workToDelete = container.querySelector(`[data-work-id="${workId}"]`);
+            if (workToDelete) {
+                workToDelete.remove();
+                renumberWork(type);
+            }
+        }
+
+        function renumberItems(type) {
+            const container = document.getElementById(`${type}Items`);
             const items = container.querySelectorAll('.item-container');
             
             items.forEach((item, index) => {
-                const newItemNumber = index + 1;
-                const titleElement = item.querySelector('.item-title');
-                if (titleElement) {
-                    titleElement.textContent = `Item ${newItemNumber}`;
-                }
+                const newNumber = index + 1;
+                item.dataset.itemId = newNumber;
+                item.querySelector('.item-number').textContent = `Item ${newNumber}`;
+                item.querySelector('.delete-item-btn').setAttribute('onclick', `deleteItem('${type}', ${newNumber})`);
             });
-        }
-
-        function handlePhotoUpload(event, type, unitId, itemId, photoIndex) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const photoContainer = document.getElementById(`${type}-photos-${unitId}-${itemId}`);
-                
-                const photoDiv = document.createElement('div');
-                photoDiv.className = 'photo-item';
-                photoDiv.innerHTML = `
-                    <img src="${e.target.result}" alt="Photo ${photoIndex}">
-                    <button type="button" class="photo-remove" onclick="removePhoto(this)">×</button>
-                    <input type="hidden" name="${type}_photo_${unitId}_${itemId}_${photoIndex}" value="${e.target.result}">
-                `;
-                
-                photoContainer.appendChild(photoDiv);
-                
-                // Add new photo input
-                const newPhotoIndex = photoIndex + 1;
-                const newInput = document.createElement('input');
-                newInput.type = 'file';
-                newInput.accept = 'image/*';
-                newInput.onchange = (e) => handlePhotoUpload(e, type, unitId, itemId, newPhotoIndex);
-                
-                photoContainer.parentNode.appendChild(newInput);
-            };
             
-            reader.readAsDataURL(file);
-        }
-
-        function removePhoto(button) {
-            button.parentElement.remove();
-        }
-
-        function resetForm(type) {
-            document.getElementById(`${type}-form-element`).reset();
-            document.getElementById(`${type}-units-container`).innerHTML = `
-                <div class="section-title">Units</div>
-            `;
-            unitCounters[type] = 0;
-            itemCounters[type] = {};
-        }
-
-        async function submitForm(type, formData) {
-            try {
-                showLoading('Submitting form...');
-                
-                if (currentRecords.length >= 999) {
-                    showMessage('Maximum limit of 999 records reached. Please delete some records first.', 'error');
-                    return;
-                }
-                
-                const createResult = await window.dataSdk.create(formData);
-                
-                if (!createResult.isOk) {
-                    throw new Error('Failed to save data: ' + createResult.error);
-                }
-                
-                showMessage('Form submitted successfully!', 'success');
-                resetForm(type);
-                
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                showMessage('Error submitting form: ' + error.message, 'error');
-            } finally {
-                hideLoading();
+            if (type === 'escalator') {
+                escalatorItemCount = items.length;
+            } else {
+                elevatorItemCount = items.length;
             }
         }
 
-        function renderHistory(searchTerm = '') {
-            const historyList = document.getElementById('history-list');
+        function renumberWork(type) {
+            const container = document.getElementById(`${type}AdditionalWork`);
+            const works = container.querySelectorAll('.item-container');
             
-            if (currentRecords.length === 0) {
-                historyList.innerHTML = '<p style="text-align: center; color: rgba(255, 255, 255, 0.7);">No data found.</p>';
-                return;
+            works.forEach((work, index) => {
+                const newNumber = index + 1;
+                work.dataset.workId = newNumber;
+                work.querySelector('.item-number').textContent = `Pekerjaan ${newNumber}`;
+                work.querySelector('.delete-item-btn').setAttribute('onclick', `deleteWork('${type}', ${newNumber})`);
+            });
+            
+            if (type === 'escalator') {
+                escalatorWorkCount = works.length;
+            } else {
+                elevatorWorkCount = works.length;
             }
-            
-            // Filter records by current user if not admin
-            let filteredRecords = currentRecords;
-            if (currentUser.role !== 'admin') {
-                filteredRecords = currentRecords.filter(record => record.username === currentUser.username);
-            }
-            
-            // Apply search filter
-            if (searchTerm) {
-                filteredRecords = filteredRecords.filter(record => {
-                    const searchLower = searchTerm.toLowerCase();
-                    return record.building_name.toLowerCase().includes(searchLower) ||
-                           record.technician_names.toLowerCase().includes(searchLower) ||
-                           record.date.includes(searchTerm) ||
-                           record.type.toLowerCase().includes(searchLower);
+        }
+
+        function clearItem(type, itemId) {
+            const container = document.getElementById(`${type}Items`);
+            const itemToClear = container.querySelector(`[data-item-id="${itemId}"]`);
+            if (itemToClear) {
+                itemToClear.querySelectorAll('input').forEach(input => {
+                    if (input.type !== 'file') {
+                        input.value = '';
+                    } else {
+                        input.value = '';
+                    }
                 });
             }
+        }
+
+        function clearWork(type, workId) {
+            const container = document.getElementById(`${type}AdditionalWork`);
+            const workToClear = container.querySelector(`[data-work-id="${workId}"]`);
+            if (workToClear) {
+                workToClear.querySelectorAll('input').forEach(input => {
+                    if (input.type !== 'file') {
+                        input.value = '';
+                    } else {
+                        input.value = '';
+                    }
+                });
+            }
+        }
+
+        function addPhotoInput(button) {
+            const photoInputs = button.previousElementSibling;
+            const newInput = document.createElement('input');
+            newInput.type = 'file';
+            newInput.className = 'form-control photo-input';
+            newInput.accept = 'image/*';
+            newInput.name = photoInputs.querySelector('input').name;
+            photoInputs.appendChild(newInput);
+        }
+
+        async function handleEscalatorSubmit(e) {
+            e.preventDefault();
+            await submitForm('escalator');
+        }
+
+        async function handleElevatorSubmit(e) {
+            e.preventDefault();
+            await submitForm('elevator');
+        }
+
+        async function handleRealizationSubmit(e) {
+            e.preventDefault();
             
-            if (filteredRecords.length === 0) {
-                historyList.innerHTML = '<p style="text-align: center; color: rgba(255, 255, 255, 0.7);">No matching records found.</p>';
+            if (allData.length >= 999) {
+                showMessage('Maksimum 999 data telah tercapai. Silakan hapus beberapa data terlebih dahulu.', 'error');
                 return;
             }
+
+            const building = document.getElementById('realizationBuilding').value;
+            const date = document.getElementById('realizationDate').value;
+            const otherWork = document.getElementById('otherWork').value;
+            const unitType = document.getElementById('unitType').value;
             
-            historyList.innerHTML = filteredRecords.map(record => {
-                const date = new Date(record.created_at).toLocaleDateString('id-ID');
-let units = record.units;
-if (typeof units === 'string') {
-    try { units = JSON.parse(units); } catch { units = []; }
-}
-for (let u of units) {
-    if (typeof u.items === 'string') {
-        try { u.items = JSON.parse(u.items); } catch { u.items = []; }
-    } else if (!Array.isArray(u.items)) {
-        u.items = [];
-    }
-}                
-                return `
-                    <div class="history-item">
-                        <div class="history-header">
-                            <div class="history-title">${record.type.toUpperCase()} - ${record.building_name}</div>
-                            <div class="history-date">${date}</div>
+            // Get selected technicians
+            const techCheckboxes = document.querySelectorAll('#realizationTechnicians input[type="checkbox"]:checked');
+            const technicians = Array.from(techCheckboxes).map(cb => cb.value);
+            
+            // Get selected work type
+            const workTypeRadio = document.querySelector('input[name="workType"]:checked');
+            
+            if (!building || !date || technicians.length === 0 || !workTypeRadio || !unitType) {
+                showMessage('Mohon lengkapi semua field yang wajib diisi!', 'error');
+                return;
+            }
+
+            if (workTypeRadio.value === 'lainnya' && !otherWork.trim()) {
+                showMessage('Mohon isi jenis pekerjaan lainnya!', 'error');
+                return;
+            }
+
+            let finalWorkType;
+            if (workTypeRadio.value === 'lainnya') {
+                finalWorkType = otherWork;
+            } else {
+                finalWorkType = 'Pemeriksaan Safety';
+            }
+
+            const formData = {
+                id: generateId(),
+                type: 'realization',
+                username: currentUser.username,
+                form_type: 'Realisasi',
+                building_name: building,
+                technician: technicians.join(', '),
+                date: date,
+                items: JSON.stringify([{
+                    work_type: finalWorkType,
+                    unit_type: unitType
+                }]),
+                additional_work: JSON.stringify([]),
+                created_at: new Date().toISOString(),
+                status: 'submitted'
+            };
+
+            // Show loading state
+            const submitBtn = document.querySelector('#realizationForm .btn-submit');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Menyimpan...';
+            submitBtn.disabled = true;
+
+            try {
+                const result = await window.dataSdk.create(formData);
+                
+                if (result.isOk) {
+                    showMessage('Realisasi berhasil disimpan!', 'success');
+                    document.getElementById('realizationForm').reset();
+                    document.getElementById('otherWorkGroup').style.display = 'none';
+                    document.getElementById('otherWork').required = false;
+                    
+                    // Uncheck all technician checkboxes
+                    document.querySelectorAll('#realizationTechnicians input[type="checkbox"]').forEach(cb => cb.checked = false);
+                    
+                    // Set today's date again
+                    document.getElementById('realizationDate').value = new Date().toISOString().split('T')[0];
+                    
+                    // Return to dashboard after 1.5 seconds
+                    setTimeout(() => {
+                        backToDashboard();
+                    }, 1500);
+                } else {
+                    showMessage('Gagal menyimpan realisasi. Silakan coba lagi.', 'error');
+                }
+            } catch (error) {
+                showMessage('Terjadi kesalahan. Silakan coba lagi.', 'error');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        async function submitForm(type) {
+            if (allData.length >= 999) {
+                showMessage('Maksimum 999 data telah tercapai. Silakan hapus beberapa data terlebih dahulu.', 'error');
+                return;
+            }
+
+            const building = document.getElementById(`${type}Building`).value;
+            const date = document.getElementById(`${type}Date`).value;
+            
+            // Get selected technicians
+            const techCheckboxes = document.querySelectorAll(`#${type}Technicians input[type="checkbox"]:checked`);
+            const technicians = Array.from(techCheckboxes).map(cb => cb.value);
+            
+            if (!building || !date || technicians.length === 0) {
+                showMessage('Mohon lengkapi semua field yang wajib diisi!', 'error');
+                return;
+            }
+
+            // Collect items data
+            const items = collectItemsData(`${type}Items`);
+            const additionalWork = collectItemsData(`${type}AdditionalWork`);
+
+            const formData = {
+                id: generateId(),
+                type: type,
+                username: currentUser.username,
+                form_type: type === 'escalator' ? 'Safety Eskalator' : 'Safety Elevator',
+                building_name: building,
+                technician: technicians.join(', '),
+                date: date,
+                items: JSON.stringify(items),
+                additional_work: JSON.stringify(additionalWork),
+                created_at: new Date().toISOString(),
+                status: 'submitted'
+            };
+
+            // Show loading state
+            const submitBtn = document.querySelector(`#${type}Form .btn-submit`);
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Menyimpan...';
+            submitBtn.disabled = true;
+
+            try {
+                const result = await window.dataSdk.create(formData);
+                
+                if (result.isOk) {
+                    showMessage('Data berhasil disimpan!', 'success');
+                    document.getElementById(`${type}Form`).reset();
+                    
+                    // Clear all items and work
+                    document.getElementById(`${type}Items`).innerHTML = '';
+                    document.getElementById(`${type}AdditionalWork`).innerHTML = '';
+                    
+                    // Reset counters
+                    if (type === 'escalator') {
+                        escalatorItemCount = 0;
+                        escalatorWorkCount = 0;
+                    } else {
+                        elevatorItemCount = 0;
+                        elevatorWorkCount = 0;
+                    }
+                    
+                    setTodayDate();
+                    
+                    // Return to dashboard after 1.5 seconds
+                    setTimeout(() => {
+                        backToDashboard();
+                    }, 1500);
+                } else {
+                    showMessage('Gagal menyimpan data. Silakan coba lagi.', 'error');
+                }
+            } catch (error) {
+                showMessage('Terjadi kesalahan. Silakan coba lagi.', 'error');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        function collectItemsData(containerId) {
+            const container = document.getElementById(containerId);
+            const items = [];
+            
+            container.querySelectorAll('.item-container').forEach(item => {
+                const itemData = {};
+                item.querySelectorAll('input, select').forEach(input => {
+                    if (input.type === 'file') {
+                        if (input.files.length > 0) {
+                            itemData[input.name] = input.files[0].name;
+                        }
+                    } else {
+                        itemData[input.name] = input.value;
+                    }
+                });
+                items.push(itemData);
+            });
+            
+            return items;
+        }
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        function renderHistory() {
+            const historyList = document.getElementById('historyList');
+            historyList.innerHTML = '';
+
+            let filteredData = allData;
+            
+            // Filter by user if not admin
+            if (currentUserType !== 'admin') {
+                filteredData = allData.filter(item => item.username === currentUser.username);
+            }
+            
+            // Filter out realization data from history
+            filteredData = filteredData.filter(item => item.type !== 'realization');
+
+            if (filteredData.length === 0) {
+                historyList.innerHTML = '<p style="text-align: center; color: #b0b0b0;">Belum ada data tersimpan</p>';
+                return;
+            }
+
+            filteredData.forEach(item => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                const itemsData = JSON.parse(item.items || '[]');
+                const workData = JSON.parse(item.additional_work || '[]');
+                
+                historyItem.innerHTML = `
+                    <div class="history-header">
+                        <div>
+                            <h4>${item.form_type}</h4>
+                            <p><strong>Gedung:</strong> ${item.building_name}</p>
+                            <p><strong>Teknisi:</strong> ${item.technician}</p>
+                            <p><strong>Tanggal:</strong> ${item.date}</p>
+                            <p><strong>Items:</strong> ${itemsData.length} item, ${workData.length} pekerjaan</p>
                         </div>
-                        <p><strong>Teknisi:</strong> ${record.technician_names}</p>
-                        <p><strong>Tanggal:</strong> ${record.date}</p>
-                        <p><strong>Units:</strong> ${units.length} unit(s)</p>
-                        <p><strong>Submitted by:</strong> ${record.username} (${record.user_type})</p>
-                        
                         <div class="history-actions">
-                            ${currentUser.role === 'admin' ? `
-                                <button class="btn btn-secondary" onclick="editRecord('${record.__backendId}')">Edit</button>
-                                <button class="btn btn-secondary" onclick="reviewRecord('${record.__backendId}')">Review</button>
-                                <button class="btn btn-secondary" onclick="downloadPDF('${record.__backendId}')">Download PDF</button>
-                                <button class="btn btn-danger" onclick="deleteRecord('${record.__backendId}')">Delete</button>
+                            ${currentUserType === 'admin' ? `
+                                <button class="btn btn-small btn-edit" onclick="reviewHistoryItem('${item.__backendId}')">Review</button>
+                                <button class="btn btn-small btn-edit" onclick="editHistoryItem('${item.__backendId}')">Edit</button>
+                                <button class="btn btn-small btn-delete" onclick="deleteHistoryItem('${item.__backendId}')">Hapus</button>
+                                <button class="btn btn-small btn-download" onclick="downloadPDF('${item.__backendId}')">PDF</button>
+                                <button class="btn btn-small" style="background: #2980b9;" onclick="downloadWord('${item.__backendId}')">Word</button>
                             ` : `
-                                <button class="btn btn-secondary" onclick="downloadPDF('${record.__backendId}')">Download PDF</button>
+                                <button class="btn btn-small btn-download" onclick="downloadPDF('${item.__backendId}')">PDF</button>
                             `}
                         </div>
                     </div>
                 `;
-            }).join('');
-        }
-
-        function filterHistory() {
-            const searchTerm = document.getElementById('history-search').value;
-            renderHistory(searchTerm);
-        }
-
-        async function deleteRecord(recordId) {
-            try {
-                showLoading('Deleting record...');
                 
-                const recordToDelete = currentRecords.find(r => r.__backendId === recordId);
-                if (!recordToDelete) {
-                    throw new Error('Record not found');
-                }
-                
-                const deleteResult = await window.dataSdk.delete(recordToDelete);
-                
-                if (!deleteResult.isOk) {
-                    throw new Error('Failed to delete record: ' + deleteResult.error);
-                }
-                
-                showMessage('Record deleted successfully!', 'success');
-                
-            } catch (error) {
-                console.error('Error deleting record:', error);
-                showMessage('Error deleting record: ' + error.message, 'error');
-            } finally {
-                hideLoading();
-            }
-        }
-
-        function editRecord(recordId) {
-            const record = currentRecords.find(r => r.__backendId === recordId);
-            if (!record) return;
-            
-            const modal = document.getElementById('edit-modal');
-            const container = document.getElementById('edit-form-container');
-            
-            let units = record.units;
-if (typeof units === 'string') {
-    try { units = JSON.parse(units); } catch { units = []; }
-}
-for (let u of units) {
-    if (typeof u.items === 'string') {
-        try { u.items = JSON.parse(u.items); } catch { u.items = []; }
-    } else if (!Array.isArray(u.items)) {
-        u.items = [];
-    }
-}
-            
-container.innerHTML = `
-    <div class="modal-body">
-        <form id="edit-record-form">
-            <div class="form-section">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Nama Gedung/Proyek</label>
-                        <input type="text" id="edit-building" value="${record.building_name}" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Nama Teknisi</label>
-                        <input type="text" id="edit-technicians" value="${record.technician_names}" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Tanggal</label>
-                        <input type="date" id="edit-date" value="${record.date}" required>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section-title">Units (${units.length})</div>
-            <div id="edit-units-display">
-                ${units.map((unit, index) => `
-                    <div class="unit-container">
-                        <div class="unit-header">
-                            <div class="unit-title">Unit ${index + 1}</div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Unit</label>
-                                <input type="text" value="${unit.unit || ''}" data-unit-index="${index}" class="edit-unit-name">
-                            </div>
-                            <div class="form-group">
-                                <label>MFG</label>
-                                <input type="text" value="${unit.mfg || ''}" data-unit-index="${index}" class="edit-unit-mfg">
-                            </div>
-                            <div class="form-group">
-                                <label>Type</label>
-                                <input type="text" value="${unit.type || ''}" data-unit-index="${index}" class="edit-unit-type">
-                            </div>
-                        </div>
-
-                        <div class="section-title">Items (${unit.items?.length || 0})</div>
-                        ${unit.items?.map((item, itemIndex) => `
-                            <div class="item-container">
-                                <div class="item-header">
-                                    <div class="item-title">Item ${itemIndex + 1}</div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label>Sparepart</label>
-                                        <input type="text" value="${item.sparepart || ''}" 
-                                            data-unit-index="${index}" data-item-index="${itemIndex}" class="edit-item-sparepart">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Kondisi</label>
-                                        <input type="text" value="${item.condition || ''}" 
-                                            data-unit-index="${index}" data-item-index="${itemIndex}" class="edit-item-condition">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Jumlah</label>
-                                        <input type="text" value="${item.quantity || ''}" 
-                                            data-unit-index="${index}" data-item-index="${itemIndex}" class="edit-item-quantity">
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label>Satuan</label>
-                                        <input type="text" value="${item.unit || ''}" 
-                                            data-unit-index="${index}" data-item-index="${itemIndex}" class="edit-item-unit">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Remarks</label>
-                                        <input type="text" value="${item.remarks || ''}" 
-                                            data-unit-index="${index}" data-item-index="${itemIndex}" class="edit-item-remarks">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Prioritas</label>
-                                        <input type="text" value="${item.priority || ''}" 
-                                            data-unit-index="${index}" data-item-index="${itemIndex}" class="edit-item-priority">
-                                    </div>
-                                </div>
-                            </div>
-                        `).join('') || '<p style="color:#ccc;">No items</p>'}
-                    </div>
-                `).join('')}
-            </div>
-            
-            <div style="margin-top: 30px; text-align: center;">
-                <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
-                <button type="submit" class="btn btn-success">Update Record</button>
-            </div>
-        </form>
-    </div>
-`;            
-            modal.style.display = 'flex';
-            
-            // Handle form submission
-            document.getElementById('edit-record-form').addEventListener('submit', async function(e) {
-                e.preventDefault();
-                await updateRecord(recordId);
+                historyList.appendChild(historyItem);
             });
         }
 
-        function reviewRecord(recordId) {
-            const record = currentRecords.find(r => r.__backendId === recordId);
-            if (!record) return;
+        async function deleteHistoryItem(itemId) {
+            const item = allData.find(d => d.__backendId === itemId);
+            if (!item) return;
+
+            // Create inline confirmation
+            const historyItem = document.querySelector(`button[onclick="deleteHistoryItem('${itemId}')"]`).closest('.history-item');
+            const actionsDiv = historyItem.querySelector('.history-actions');
             
-            const modal = document.getElementById('review-modal');
-            const container = document.getElementById('review-content');
-            
-let units = record.units;
-if (typeof units === 'string') {
-    try { units = JSON.parse(units); } catch { units = []; }
-}
-for (let u of units) {
-    if (typeof u.items === 'string') {
-        try { u.items = JSON.parse(u.items); } catch { u.items = []; }
-    } else if (!Array.isArray(u.items)) {
-        u.items = [];
-    }
-}            
-            container.innerHTML = `
-                <div class="modal-body">
-                    <div class="review-section">
-                        <div class="review-title">Record Information</div>
-                        <p><strong>Type:</strong> ${record.type.toUpperCase()}</p>
-                        <p><strong>Building:</strong> ${record.building_name}</p>
-                        <p><strong>Technicians:</strong> ${record.technician_names}</p>
-                        <p><strong>Date:</strong> ${record.date}</p>
-                        <p><strong>Submitted:</strong> ${new Date(record.created_at).toLocaleDateString('id-ID')} by ${record.username} (${record.user_type})</p>
-                    </div>
-                    
-                    <div class="review-section">
-                        <div class="review-title">Units Details (${units.length} units)</div>
-                        ${units.map((unit, index) => `
-                            <div class="review-item">
-                                <div class="review-item-title">Unit ${index + 1}: ${unit.unit || 'N/A'}</div>
-                                <p><strong>MFG:</strong> ${unit.mfg || 'N/A'}</p>
-                                <p><strong>Type:</strong> ${unit.type || 'N/A'}</p>
-                                
-                                ${unit.items && unit.items.length > 0 ? `
-                                    <div style="margin-top: 15px;">
-                                        <strong>Items (${unit.items.length}):</strong>
-                                        ${unit.items.map((item, itemIndex) => `
-                                            <div style="margin-left: 20px; margin-top: 10px; padding: 10px; background: rgba(255, 255, 255, 0.05); border-radius: 8px;">
-                                                <p><strong>Item ${itemIndex + 1}:</strong> ${item.sparepart || 'N/A'}</p>
-                                                <p><strong>Condition:</strong> ${item.condition || 'N/A'}</p>
-                                                <p><strong>Quantity:</strong> ${item.quantity || 'N/A'} ${item.unit || ''}</p>
-                                                <p><strong>Remarks:</strong> ${item.remarks || 'N/A'}</p>
-                                                <p><strong>Priority:</strong> ${item.priority || 'N/A'}</p>
-                                                ${item.photos && item.photos.length > 0 ? `
-                                                    <div class="review-photos">
-                                                        ${item.photos.map(photo => `
-                                                            <img src="${photo}" alt="Item Photo" class="review-photo" onclick="openPhotoModal('${photo}')">
-                                                        `).join('')}
-                                                    </div>
-                                                ` : ''}
-                                            </div>
-                                        `).join('')}
-                                    </div>
-                                ` : '<p>No items recorded</p>'}
-                            </div>
-                        `).join('')}
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 30px;">
-                        <button class="btn btn-secondary" onclick="closeReviewModal()">Close</button>
-                        <button class="btn btn-secondary" onclick="downloadPDF('${recordId}')">Download PDF</button>
-                    </div>
-                </div>
+            actionsDiv.innerHTML = `
+                <button class="btn btn-small btn-delete" onclick="confirmDelete('${itemId}')">Konfirmasi Hapus?</button>
+                <button class="btn btn-small" onclick="cancelDelete('${itemId}')">Batal</button>
             `;
-            
-            modal.style.display = 'flex';
         }
 
-        async function updateRecord(recordId) {
+        async function confirmDelete(itemId) {
+            const item = allData.find(d => d.__backendId === itemId);
+            if (!item) return;
+
             try {
-                showLoading('Updating record...');
-                
-                const record = currentRecords.find(r => r.__backendId === recordId);
-                if (!record) {
-                    throw new Error('Record not found');
-                }
-                
-                const updatedRecord = {
-                    ...record,
-                    building_name: document.getElementById('edit-building').value,
-                    technician_names: document.getElementById('edit-technicians').value,
-                    date: document.getElementById('edit-date').value
-                };
-                
-                const updateResult = await window.dataSdk.update(updatedRecord);
-                
-                if (!updateResult.isOk) {
-                    throw new Error('Failed to update record: ' + updateResult.error);
-                }
-                
-                showMessage('Record updated successfully!', 'success');
-                closeEditModal();
-                
-            } catch (error) {
-                console.error('Error updating record:', error);
-                showMessage('Error updating record: ' + error.message, 'error');
-            } finally {
-                hideLoading();
-            }
-        }
-
-        function closeEditModal() {
-            document.getElementById('edit-modal').style.display = 'none';
-        }
-
-        function closeReviewModal() {
-            document.getElementById('review-modal').style.display = 'none';
-        }
-
-        function openPhotoModal(photoSrc) {
-            const modal = document.createElement('div');
-            modal.className = 'modal';
-            modal.style.zIndex = '10001';
-            modal.innerHTML = `
-                <div style="position: relative; max-width: 90%; max-height: 90%;">
-                    <img src="${photoSrc}" style="width: 100%; height: auto; border-radius: 10px;">
-                    <button onclick="this.parentElement.parentElement.remove()" 
-                            style="position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; cursor: pointer; font-size: 20px;">×</button>
-                </div>
-            `;
-            document.body.appendChild(modal);
-        }
-
-        function downloadPDF(recordId) {
-            const record = currentRecords.find(r => r.__backendId === recordId);
-            if (!record) return;
-            
-            const units = JSON.parse(record.units || '[]');
-            
-            let content = `PT. JAYA KENCANA - ${record.type.toUpperCase()} REPORT\n\n`;
-            content += `Building: ${record.building_name}\n`;
-            content += `Technicians: ${record.technician_names}\n`;
-            content += `Date: ${record.date}\n`;
-            content += `Submitted: ${new Date(record.created_at).toLocaleDateString('id-ID')} by ${record.username} (${record.user_type})\n\n`;
-            content += `Total Units: ${units.length}\n\n`;
-            
-            units.forEach((unit, unitIndex) => {
-                content += `UNIT ${unitIndex + 1}\n`;
-                content += `Unit: ${unit.unit || 'N/A'}\n`;
-                content += `MFG: ${unit.mfg || 'N/A'}\n`;
-                content += `Type: ${unit.type || 'N/A'}\n\n`;
-                
-                if (unit.items && unit.items.length > 0) {
-                    content += `Items (${unit.items.length}):\n`;
-                    unit.items.forEach((item, itemIndex) => {
-                        content += `  Item ${itemIndex + 1}:\n`;
-                        content += `    Sparepart: ${item.sparepart || 'N/A'}\n`;
-                        content += `    Condition: ${item.condition || 'N/A'}\n`;
-                        content += `    Quantity: ${item.quantity || 'N/A'} ${item.unit || ''}\n`;
-                        content += `    Remarks: ${item.remarks || 'N/A'}\n`;
-                        content += `    Priority: ${item.priority || 'N/A'}\n`;
-                        content += `    Photos: ${item.photos ? item.photos.length : 0} photo(s)\n\n`;
-                    });
+                const result = await window.dataSdk.delete(item);
+                if (result.isOk) {
+                    showMessage('Data berhasil dihapus!', 'success');
                 } else {
-                    content += `No items recorded\n\n`;
+                    showMessage('Gagal menghapus data.', 'error');
+                }
+            } catch (error) {
+                showMessage('Terjadi kesalahan saat menghapus data.', 'error');
+            }
+        }
+
+        function cancelDelete(itemId) {
+            renderHistory(); // Re-render to restore original buttons
+        }
+
+        function reviewHistoryItem(itemId) {
+            const item = allData.find(d => d.__backendId === itemId);
+            if (!item) return;
+
+            const itemsData = JSON.parse(item.items || '[]');
+            const workData = JSON.parse(item.additional_work || '[]');
+            
+            let reviewContent = `<div style="max-height: 400px; overflow-y: auto; text-align: left;">`;
+            reviewContent += `<h3>${item.form_type}</h3>`;
+            reviewContent += `<p><strong>Gedung:</strong> ${item.building_name}</p>`;
+            reviewContent += `<p><strong>Teknisi:</strong> ${item.technician}</p>`;
+            reviewContent += `<p><strong>Tanggal:</strong> ${item.date}</p><br>`;
+            
+            if (itemsData.length > 0) {
+                reviewContent += `<h4>ITEMS:</h4>`;
+                itemsData.forEach((itm, index) => {
+                    reviewContent += `<div style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">`;
+                    reviewContent += `<strong>Item ${index + 1}:</strong><br>`;
+                    reviewContent += `Unit: ${itm.unit || '-'}<br>`;
+                    reviewContent += `MFG: ${itm.mfg || '-'}<br>`;
+                    reviewContent += `Type: ${itm.type || '-'}<br>`;
+                    reviewContent += `Sparepart: ${itm.sparepart || '-'}<br>`;
+                    reviewContent += `Kondisi: ${itm.condition || '-'}<br>`;
+                    reviewContent += `Jumlah: ${itm.quantity || '-'} ${itm.unit_type || ''}<br>`;
+                    reviewContent += `Remarks: ${itm.remarks || '-'}<br>`;
+                    reviewContent += `Prioritas: ${itm.priority || '-'}`;
+                    reviewContent += `</div>`;
+                });
+            }
+            
+            if (workData.length > 0) {
+                reviewContent += `<h4>PEKERJAAN LAINNYA:</h4>`;
+                workData.forEach((work, index) => {
+                    reviewContent += `<div style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">`;
+                    reviewContent += `<strong>Pekerjaan ${index + 1}:</strong><br>`;
+                    reviewContent += `Pekerjaan: ${work.additional_work || '-'}<br>`;
+                    reviewContent += `Kondisi: ${work.work_condition || '-'}<br>`;
+                    reviewContent += `Keterangan: ${work.description || '-'}<br>`;
+                    reviewContent += `Remarks: ${work.work_remarks || '-'}<br>`;
+                    reviewContent += `Prioritas: ${work.work_priority || '-'}`;
+                    reviewContent += `</div>`;
+                });
+            }
+            reviewContent += `</div>`;
+            
+            showModal('Review Data', reviewContent);
+        }
+
+        function editHistoryItem(itemId) {
+            const item = allData.find(d => d.__backendId === itemId);
+            if (!item) return;
+
+            const itemsData = JSON.parse(item.items || '[]');
+            const workData = JSON.parse(item.additional_work || '[]');
+            
+            let editForm = `<div style="max-height: 500px; overflow-y: auto;">`;
+            editForm += `<form id="editForm">`;
+            
+            // Basic info
+            editForm += `<div class="form-row">`;
+            editForm += `<div class="form-group">`;
+            editForm += `<label>Gedung/Proyek</label>`;
+            editForm += `<input type="text" id="editBuilding" class="form-control" value="${item.building_name}" required>`;
+            editForm += `</div>`;
+            editForm += `<div class="form-group">`;
+            editForm += `<label>Teknisi</label>`;
+            editForm += `<input type="text" id="editTechnician" class="form-control" value="${item.technician}" required>`;
+            editForm += `</div>`;
+            editForm += `<div class="form-group">`;
+            editForm += `<label>Tanggal</label>`;
+            editForm += `<input type="date" id="editDate" class="form-control" value="${item.date}" required>`;
+            editForm += `</div>`;
+            editForm += `</div>`;
+            
+            // Items
+            if (itemsData.length > 0) {
+                editForm += `<h4>ITEMS:</h4>`;
+                itemsData.forEach((itm, index) => {
+                    editForm += `<div style="margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">`;
+                    editForm += `<h5>Item ${index + 1}</h5>`;
+                    editForm += `<div class="form-row">`;
+                    editForm += `<div class="form-group"><label>Unit</label><input type="text" class="form-control item-field" data-field="unit" data-index="${index}" value="${itm.unit || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>MFG</label><input type="text" class="form-control item-field" data-field="mfg" data-index="${index}" value="${itm.mfg || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Type</label><input type="text" class="form-control item-field" data-field="type" data-index="${index}" value="${itm.type || ''}"></div>`;
+                    editForm += `</div>`;
+                    editForm += `<div class="form-row">`;
+                    editForm += `<div class="form-group"><label>Sparepart</label><input type="text" class="form-control item-field" data-field="sparepart" data-index="${index}" value="${itm.sparepart || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Kondisi</label><input type="text" class="form-control item-field" data-field="condition" data-index="${index}" value="${itm.condition || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Jumlah</label><input type="text" class="form-control item-field" data-field="quantity" data-index="${index}" value="${itm.quantity || ''}"></div>`;
+                    editForm += `</div>`;
+                    editForm += `<div class="form-row">`;
+                    editForm += `<div class="form-group"><label>Satuan</label><input type="text" class="form-control item-field" data-field="unit_type" data-index="${index}" value="${itm.unit_type || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Remarks</label><input type="text" class="form-control item-field" data-field="remarks" data-index="${index}" value="${itm.remarks || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Prioritas</label><input type="text" class="form-control item-field" data-field="priority" data-index="${index}" value="${itm.priority || ''}"></div>`;
+                    editForm += `</div>`;
+                    editForm += `</div>`;
+                });
+            }
+            
+            // Additional work
+            if (workData.length > 0) {
+                editForm += `<h4>PEKERJAAN LAINNYA:</h4>`;
+                workData.forEach((work, index) => {
+                    editForm += `<div style="margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">`;
+                    editForm += `<h5>Pekerjaan ${index + 1}</h5>`;
+                    editForm += `<div class="form-row">`;
+                    editForm += `<div class="form-group"><label>Pekerjaan</label><input type="text" class="form-control work-field" data-field="additional_work" data-index="${index}" value="${work.additional_work || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Kondisi</label><input type="text" class="form-control work-field" data-field="work_condition" data-index="${index}" value="${work.work_condition || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Keterangan</label><input type="text" class="form-control work-field" data-field="description" data-index="${index}" value="${work.description || ''}"></div>`;
+                    editForm += `</div>`;
+                    editForm += `<div class="form-row">`;
+                    editForm += `<div class="form-group"><label>Remarks</label><input type="text" class="form-control work-field" data-field="work_remarks" data-index="${index}" value="${work.work_remarks || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Prioritas</label><input type="text" class="form-control work-field" data-field="work_priority" data-index="${index}" value="${work.work_priority || ''}"></div>`;
+                    editForm += `</div>`;
+                    editForm += `</div>`;
+                });
+            }
+            
+            editForm += `</form>`;
+            editForm += `</div>`;
+            
+            showModal('Edit Data', editForm, [
+                {
+                    text: 'Simpan',
+                    class: 'btn-primary',
+                    onclick: 'saveEditedItem',
+                    params: [itemId, itemsData, workData]
+                },
+                {
+                    text: 'Batal',
+                    class: 'btn-secondary',
+                    onclick: 'closeModal',
+                    params: []
+                }
+            ]);
+        }
+
+        async function saveEditedItem(itemId, originalItems, originalWork) {
+            const item = allData.find(d => d.__backendId === itemId);
+            if (!item) return;
+
+            // Get updated basic info
+            const building = document.getElementById('editBuilding').value;
+            const technician = document.getElementById('editTechnician').value;
+            const date = document.getElementById('editDate').value;
+
+            // Get updated items
+            const updatedItems = [...originalItems];
+            document.querySelectorAll('.item-field').forEach(field => {
+                const index = parseInt(field.dataset.index);
+                const fieldName = field.dataset.field;
+                updatedItems[index][fieldName] = field.value;
+            });
+
+            // Get updated work
+            const updatedWork = [...originalWork];
+            document.querySelectorAll('.work-field').forEach(field => {
+                const index = parseInt(field.dataset.index);
+                const fieldName = field.dataset.field;
+                updatedWork[index][fieldName] = field.value;
+            });
+
+            // Update item
+            const updatedItem = {
+                ...item,
+                building_name: building,
+                technician: technician,
+                date: date,
+                items: JSON.stringify(updatedItems),
+                additional_work: JSON.stringify(updatedWork)
+            };
+
+            try {
+                const result = await window.dataSdk.update(updatedItem);
+                if (result.isOk) {
+                    showMessage('Data berhasil diupdate!', 'success');
+                    closeModal();
+                } else {
+                    showMessage('Gagal mengupdate data.', 'error');
+                }
+            } catch (error) {
+                showMessage('Terjadi kesalahan saat mengupdate data.', 'error');
+            }
+        }
+
+        function showModal(title, content, buttons = []) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+                border-radius: 20px;
+                padding: 30px;
+                max-width: 90%;
+                max-height: 90%;
+                overflow-y: auto;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+            `;
+            
+            let modalHTML = `<h3 style="margin-bottom: 20px; color: #00d4ff;">${title}</h3>`;
+            modalHTML += content;
+            
+            if (buttons.length > 0) {
+                modalHTML += `<div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">`;
+                buttons.forEach((btn, index) => {
+                    const buttonId = `modalBtn${index}`;
+                    modalHTML += `<button id="${buttonId}" class="btn ${btn.class}">${btn.text}</button>`;
+                });
+                modalHTML += `</div>`;
+            } else {
+                modalHTML += `<div style="margin-top: 20px; text-align: right;">`;
+                modalHTML += `<button class="btn btn-primary" onclick="closeModal()">Tutup</button>`;
+                modalHTML += `</div>`;
+            }
+            
+            modalContent.innerHTML = modalHTML;
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Add event listeners for buttons
+            if (buttons.length > 0) {
+                buttons.forEach((btn, index) => {
+                    const buttonElement = document.getElementById(`modalBtn${index}`);
+                    buttonElement.addEventListener('click', () => {
+                        if (btn.onclick === 'saveEditedItem') {
+                            saveEditedItem(btn.params[0], btn.params[1], btn.params[2]);
+                        } else if (btn.onclick === 'closeModal') {
+                            closeModal();
+                        }
+                    });
+                });
+            }
+            
+            // Store modal reference
+            window.currentModal = modal;
+            
+            // Close on backdrop click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
                 }
             });
+        }
+
+        function closeModal() {
+            if (window.currentModal) {
+                document.body.removeChild(window.currentModal);
+                window.currentModal = null;
+            }
+        }
+
+        function searchHistory(searchTerm) {
+            const historyList = document.getElementById('historyList');
             
-            const blob = new Blob([content], { type: 'text/plain' });
+            let filteredData = allData;
+            
+            // Filter by user if not admin
+            if (currentUserType !== 'admin') {
+                filteredData = allData.filter(item => item.username === currentUser.username);
+            }
+            
+            // Filter out realization data from history
+            filteredData = filteredData.filter(item => item.type !== 'realization');
+            
+            // Apply search filter
+            if (searchTerm.trim()) {
+                const term = searchTerm.toLowerCase();
+                filteredData = filteredData.filter(item => 
+                    item.building_name.toLowerCase().includes(term) ||
+                    item.technician.toLowerCase().includes(term) ||
+                    item.date.includes(term) ||
+                    item.form_type.toLowerCase().includes(term)
+                );
+            }
+            
+            historyList.innerHTML = '';
+
+            if (filteredData.length === 0) {
+                historyList.innerHTML = '<p style="text-align: center; color: #b0b0b0;">Tidak ada data yang ditemukan</p>';
+                return;
+            }
+
+            filteredData.forEach(item => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                const itemsData = JSON.parse(item.items || '[]');
+                const workData = JSON.parse(item.additional_work || '[]');
+                
+                historyItem.innerHTML = `
+                    <div class="history-header">
+                        <div>
+                            <h4>${item.form_type}</h4>
+                            <p><strong>Gedung:</strong> ${item.building_name}</p>
+                            <p><strong>Teknisi:</strong> ${item.technician}</p>
+                            <p><strong>Tanggal:</strong> ${item.date}</p>
+                            <p><strong>Items:</strong> ${itemsData.length} item, ${workData.length} pekerjaan</p>
+                        </div>
+                        <div class="history-actions">
+                            ${currentUserType === 'admin' ? `
+                                <button class="btn btn-small btn-edit" onclick="reviewHistoryItem('${item.__backendId}')">Review</button>
+                                <button class="btn btn-small btn-edit" onclick="editHistoryItem('${item.__backendId}')">Edit</button>
+                                <button class="btn btn-small btn-delete" onclick="deleteHistoryItem('${item.__backendId}')">Hapus</button>
+                                <button class="btn btn-small btn-download" onclick="downloadPDF('${item.__backendId}')">PDF</button>
+                                <button class="btn btn-small" style="background: #2980b9;" onclick="downloadWord('${item.__backendId}')">Word</button>
+                            ` : `
+                                <button class="btn btn-small btn-download" onclick="downloadPDF('${item.__backendId}')">PDF</button>
+                            `}
+                        </div>
+                    </div>
+                `;
+                
+                historyList.appendChild(historyItem);
+            });
+        }
+
+        function downloadPDF(itemId) {
+            const item = allData.find(d => d.__backendId === itemId);
+            if (!item) return;
+
+            const itemsData = JSON.parse(item.items || '[]');
+            const workData = JSON.parse(item.additional_work || '[]');
+            
+            // Create HTML content for PDF
+            let htmlContent = `
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 20px; }
+                        .info { margin-bottom: 20px; }
+                        .section { margin-bottom: 30px; }
+                        .section-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #333; }
+                        .item { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+                        .item-title { font-weight: bold; color: #666; }
+                        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                        th { background-color: #f2f2f2; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>LAPORAN ${item.form_type.toUpperCase()}</h1>
+                        <h2>PT. JAYA KENCANA</h2>
+                    </div>
+                    
+                    <div class="info">
+                        <table>
+                            <tr><th>Gedung/Proyek</th><td>${item.building_name}</td></tr>
+                            <tr><th>Teknisi</th><td>${item.technician}</td></tr>
+                            <tr><th>Tanggal</th><td>${item.date}</td></tr>
+                        </table>
+                    </div>
+            `;
+            
+            if (itemsData.length > 0) {
+                htmlContent += `<div class="section">
+                    <div class="section-title">ITEMS</div>`;
+                itemsData.forEach((itm, index) => {
+                    htmlContent += `<div class="item">
+                        <div class="item-title">Item ${index + 1}</div>
+                        <table>
+                            <tr><th>Unit</th><td>${itm.unit || '-'}</td><th>MFG</th><td>${itm.mfg || '-'}</td></tr>
+                            <tr><th>Type</th><td>${itm.type || '-'}</td><th>Sparepart</th><td>${itm.sparepart || '-'}</td></tr>
+                            <tr><th>Kondisi</th><td>${itm.condition || '-'}</td><th>Jumlah</th><td>${itm.quantity || '-'} ${itm.unit_type || ''}</td></tr>
+                            <tr><th>Remarks</th><td>${itm.remarks || '-'}</td><th>Prioritas</th><td>${itm.priority || '-'}</td></tr>
+                        </table>
+                    </div>`;
+                });
+                htmlContent += `</div>`;
+            }
+            
+            if (workData.length > 0) {
+                htmlContent += `<div class="section">
+                    <div class="section-title">PEKERJAAN LAINNYA</div>`;
+                workData.forEach((work, index) => {
+                    htmlContent += `<div class="item">
+                        <div class="item-title">Pekerjaan ${index + 1}</div>
+                        <table>
+                            <tr><th>Pekerjaan</th><td>${work.additional_work || '-'}</td><th>Kondisi</th><td>${work.work_condition || '-'}</td></tr>
+                            <tr><th>Keterangan</th><td colspan="3">${work.description || '-'}</td></tr>
+                            <tr><th>Remarks</th><td>${work.work_remarks || '-'}</td><th>Prioritas</th><td>${work.work_priority || '-'}</td></tr>
+                        </table>
+                    </div>`;
+                });
+                htmlContent += `</div>`;
+            }
+            
+            htmlContent += `</body></html>`;
+            
+            // Create and download PDF
+            const blob = new Blob([htmlContent], { type: 'text/html' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${record.type}_${record.building_name}_${record.date}_${new Date().toISOString().split('T')[0]}.txt`;
+            a.download = `${item.form_type}_${item.building_name}_${item.date}.html`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
             
-            showMessage('Report downloaded successfully!', 'success');
+            showMessage('Laporan PDF berhasil diunduh!', 'success');
         }
 
-        function showLoading(text = 'Loading...') {
-            document.getElementById('loading-text').textContent = text;
-            document.getElementById('loading').style.display = 'flex';
-        }
+        function downloadWord(itemId) {
+            const item = allData.find(d => d.__backendId === itemId);
+            if (!item) return;
 
-        function hideLoading() {
-            document.getElementById('loading').style.display = 'none';
-        }
-
-        function showMessage(message, type = 'success') {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = type === 'success' ? 'success-message' : 'error-message';
-            messageDiv.textContent = message;
-            messageDiv.style.position = 'fixed';
-            messageDiv.style.top = '20px';
-            messageDiv.style.right = '20px';
-            messageDiv.style.zIndex = '10000';
-            messageDiv.style.maxWidth = '400px';
+            const itemsData = JSON.parse(item.items || '[]');
+            const workData = JSON.parse(item.additional_work || '[]');
             
-            document.body.appendChild(messageDiv);
+            // Create Word document content
+            let wordContent = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+                <head>
+                    <meta charset='utf-8'>
+                    <title>Laporan ${item.form_type}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 20px; }
+                        .info { margin-bottom: 20px; }
+                        .section { margin-bottom: 30px; }
+                        .section-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #333; }
+                        .item { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; }
+                        .item-title { font-weight: bold; color: #666; margin-bottom: 10px; }
+                        table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+                        th, td { border: 1px solid #333; padding: 8px; text-align: left; }
+                        th { background-color: #f0f0f0; font-weight: bold; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>LAPORAN ${item.form_type.toUpperCase()}</h1>
+                        <h2>PT. JAYA KENCANA</h2>
+                        <p>Safety Management System</p>
+                    </div>
+                    
+                    <div class="info">
+                        <table>
+                            <tr><th width="30%">Gedung/Proyek</th><td>${item.building_name}</td></tr>
+                            <tr><th>Teknisi</th><td>${item.technician}</td></tr>
+                            <tr><th>Tanggal</th><td>${item.date}</td></tr>
+                            <tr><th>Status</th><td>Submitted</td></tr>
+                        </table>
+                    </div>
+            `;
+            
+            if (itemsData.length > 0) {
+                wordContent += `<div class="section">
+                    <div class="section-title">DAFTAR ITEMS</div>`;
+                itemsData.forEach((itm, index) => {
+                    wordContent += `<div class="item">
+                        <div class="item-title">Item ${index + 1}</div>
+                        <table>
+                            <tr><th width="20%">Unit</th><td width="30%">${itm.unit || '-'}</td><th width="20%">MFG</th><td>${itm.mfg || '-'}</td></tr>
+                            <tr><th>Type</th><td>${itm.type || '-'}</td><th>Sparepart</th><td>${itm.sparepart || '-'}</td></tr>
+                            <tr><th>Kondisi</th><td>${itm.condition || '-'}</td><th>Jumlah</th><td>${itm.quantity || '-'} ${itm.unit_type || ''}</td></tr>
+                            <tr><th>Remarks</th><td>${itm.remarks || '-'}</td><th>Prioritas</th><td>${itm.priority || '-'}</td></tr>
+                        </table>
+                    </div>`;
+                });
+                wordContent += `</div>`;
+            }
+            
+            if (workData.length > 0) {
+                wordContent += `<div class="section">
+                    <div class="section-title">PEKERJAAN LAINNYA</div>`;
+                workData.forEach((work, index) => {
+                    wordContent += `<div class="item">
+                        <div class="item-title">Pekerjaan ${index + 1}</div>
+                        <table>
+                            <tr><th width="20%">Pekerjaan</th><td width="30%">${work.additional_work || '-'}</td><th width="20%">Kondisi</th><td>${work.work_condition || '-'}</td></tr>
+                            <tr><th>Keterangan</th><td colspan="3">${work.description || '-'}</td></tr>
+                            <tr><th>Remarks</th><td>${work.work_remarks || '-'}</td><th>Prioritas</th><td>${work.work_priority || '-'}</td></tr>
+                        </table>
+                    </div>`;
+                });
+                wordContent += `</div>`;
+            }
+            
+            wordContent += `
+                    <div style="margin-top: 50px; text-align: center; border-top: 1px solid #333; padding-top: 20px;">
+                        <p><strong>PT. JAYA KENCANA</strong></p>
+                        <p>Safety Management System</p>
+                        <p>Generated on: ${new Date().toLocaleDateString('id-ID')}</p>
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            // Create and download Word document
+            const blob = new Blob([wordContent], { 
+                type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' 
+            });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${item.form_type}_${item.building_name}_${item.date}.doc`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showMessage('Laporan Word berhasil diunduh!', 'success');
+        }
+
+        function showMessage(message, type) {
+            // Create toast message
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 8px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                max-width: 300px;
+                word-wrap: break-word;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            switch(type) {
+                case 'success':
+                    toast.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
+                    break;
+                case 'error':
+                    toast.style.background = 'linear-gradient(45deg, #e74c3c, #c0392b)';
+                    break;
+                case 'info':
+                    toast.style.background = 'linear-gradient(45deg, #3498db, #2980b9)';
+                    break;
+            }
+            
+            toast.textContent = message;
+            document.body.appendChild(toast);
             
             setTimeout(() => {
-                messageDiv.remove();
-            }, 5000);
+                toast.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (document.body.contains(toast)) {
+                        document.body.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
         }
 
-        // Event Listeners
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (login(username, password)) {
-                document.getElementById('login-page').style.display = 'none';
-                document.getElementById('main-app').style.display = 'block';
-                document.getElementById('user-display').textContent = `${currentUser.username} (${currentUser.role})`;
-                document.getElementById('user-subtitle').textContent = `Welcome, ${currentUser.username}`;
-            } else {
-                const errorDiv = document.getElementById('login-error');
-                errorDiv.textContent = 'Invalid username or password';
-                errorDiv.style.display = 'block';
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
             }
-        });
-
-        document.getElementById('escalator-form-element').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const selectedTechnicians = Array.from(document.querySelectorAll('#escalator-technicians input:checked'))
-                .map(cb => cb.value);
-            
-            if (selectedTechnicians.length === 0) {
-                showMessage('Please select at least one technician', 'error');
-                return;
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
             }
-            
-            const units = [];
-            for (let unitId = 1; unitId <= unitCounters.escalator; unitId++) {
-                const unitElement = document.getElementById(`escalator-unit-${unitId}`);
-                if (unitElement) {
-                    const unit = {
-                        unit: formData.get(`escalator_unit_${unitId}`),
-                        mfg: formData.get(`escalator_mfg_${unitId}`),
-                        type: formData.get(`escalator_type_${unitId}`),
-                        items: []
-                    };
-                    
-                    // Collect items for this unit
-                    for (let itemId = 1; itemId <= (itemCounters.escalator[unitId] || 0); itemId++) {
-                        const itemElement = document.getElementById(`escalator-item-${unitId}-${itemId}`);
-                        if (itemElement) {
-                            const item = {
-                                sparepart: formData.get(`escalator_sparepart_${unitId}_${itemId}`),
-                                condition: formData.get(`escalator_condition_${unitId}_${itemId}`),
-                                quantity: formData.get(`escalator_quantity_${unitId}_${itemId}`),
-                                unit: formData.get(`escalator_unit_${unitId}_${itemId}`),
-                                remarks: formData.get(`escalator_remarks_${unitId}_${itemId}`),
-                                priority: formData.get(`escalator_priority_${unitId}_${itemId}`),
-                                photos: []
-                            };
-                            
-                            // Collect photos
-                            const photoInputs = itemElement.querySelectorAll('input[type="hidden"]');
-                            photoInputs.forEach(input => {
-                                if (input.value) {
-                                    item.photos.push(input.value);
-                                }
-                            });
-                            
-                            unit.items.push(item);
-                        }
-                    }
-                    
-                    units.push(unit);
-                }
-            }
-            
-            const data = {
-                id: Date.now().toString(),
-                type: 'escalator',
-                building_name: formData.get('building_name'),
-                technician_names: selectedTechnicians.join(', '),
-                date: formData.get('date'),
-                units: units,
-                created_at: new Date().toISOString(),
-                user_type: currentUser.role,
-                username: currentUser.username,
-                photos: JSON.stringify([])
-            };
-            
-            await submitForm('escalator', data);
-        });
+        `;
+        document.head.appendChild(style);
 
-        document.getElementById('elevator-form-element').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const selectedTechnicians = Array.from(document.querySelectorAll('#elevator-technicians input:checked'))
-                .map(cb => cb.value);
-            
-            if (selectedTechnicians.length === 0) {
-                showMessage('Please select at least one technician', 'error');
-                return;
-            }
-            
-            const units = [];
-            for (let unitId = 1; unitId <= unitCounters.elevator; unitId++) {
-                const unitElement = document.getElementById(`elevator-unit-${unitId}`);
-                if (unitElement) {
-                    const unit = {
-                        unit: formData.get(`elevator_unit_${unitId}`),
-                        mfg: formData.get(`elevator_mfg_${unitId}`),
-                        type: formData.get(`elevator_type_${unitId}`),
-                        items: []
-                    };
-                    
-                    // Collect items for this unit
-                    for (let itemId = 1; itemId <= (itemCounters.elevator[unitId] || 0); itemId++) {
-                        const itemElement = document.getElementById(`elevator-item-${unitId}-${itemId}`);
-                        if (itemElement) {
-                            const item = {
-                                sparepart: formData.get(`elevator_sparepart_${unitId}_${itemId}`),
-                                condition: formData.get(`elevator_condition_${unitId}_${itemId}`),
-                                quantity: formData.get(`elevator_quantity_${unitId}_${itemId}`),
-                                unit: formData.get(`elevator_unit_${unitId}_${itemId}`),
-                                remarks: formData.get(`elevator_remarks_${unitId}_${itemId}`),
-                                priority: formData.get(`elevator_priority_${unitId}_${itemId}`),
-                                photos: []
-                            };
-                            
-                            // Collect photos
-                            const photoInputs = itemElement.querySelectorAll('input[type="hidden"]');
-                            photoInputs.forEach(input => {
-                                if (input.value) {
-                                    item.photos.push(input.value);
-                                }
-                            });
-                            
-                            unit.items.push(item);
-                        }
-                    }
-                    
-                    units.push(unit);
-                }
-            }
-            
-            const data = {
-                id: Date.now().toString(),
-                type: 'elevator',
-                building_name: formData.get('building_name'),
-                technician_names: selectedTechnicians.join(', '),
-                date: formData.get('date'),
-                units: units,
-                created_at: new Date().toISOString(),
-                user_type: currentUser.role,
-                username: currentUser.username,
-                photos: JSON.stringify([])
-            };
-            
-            await submitForm('elevator', data);
-        });
-
-        // Initialize app
-        document.addEventListener('DOMContentLoaded', async function() {
-            // Check authentication
-            if (checkAuth()) {
-                document.getElementById('login-page').style.display = 'none';
-                document.getElementById('main-app').style.display = 'block';
-                document.getElementById('user-display').textContent = `${currentUser.username} (${currentUser.role})`;
-                document.getElementById('user-subtitle').textContent = `Welcome, ${currentUser.username}`;
-            }
-            
-            // Set today's date
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('escalator-date').value = today;
-            document.getElementById('elevator-date').value = today;
-            
-            // Initialize Data SDK
-            await initializeDataSDK();
-        });
-
-        // Element SDK Configuration
-        const defaultConfig = {
-            company_name: 'PT. JAYA KENCANA',
-            copyright_text: 'Copyright 2025 PT. Jaya Kencana'
-        };
-
-        const element = {
-            defaultConfig,
-            onConfigChange: async (config) => {
-                document.getElementById('company-name').textContent = config.company_name || defaultConfig.company_name;
-                document.getElementById('company-header').textContent = config.company_name || defaultConfig.company_name;
-                document.getElementById('copyright-footer').textContent = config.copyright_text || defaultConfig.copyright_text;
-            },
-            mapToCapabilities: (config) => ({
-                recolorables: [],
-                borderables: [],
-                fontEditable: undefined,
-                fontSizeable: undefined
-            }),
-            mapToEditPanelValues: (config) => new Map([
-                ['company_name', config.company_name || defaultConfig.company_name],
-                ['copyright_text', config.copyright_text || defaultConfig.copyright_text]
-            ])
-        };
-
-        // Initialize Element SDK
-        if (window.elementSdk) {
-            window.elementSdk.init(element);
-        }
+        // Initialize app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializeApp);
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9962893bc61db58d',t:'MTc2MTczOTQ3My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'996b80906224b573',t:'MTc2MTgzMzQ5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
