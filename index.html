@@ -533,8 +533,8 @@
                 technicians: ['Teknisi D', 'Teknisi E'],
                 buildings: ['Tower Office', 'Apartment Sky']
             },
-            'admin1': {
-                technicians: ['Admin Tech 1', 'Admin Tech 2'],
+            'ilham1': {
+                technicians: ['ilham Tech 1', 'ilham Tech 2'],
                 buildings: ['All Buildings']
             }
         };
@@ -641,10 +641,10 @@
             
             // Validate credentials
             if ((username === 'user1' && password === '123') || 
-                (username === 'admin' && password === 'admin123')) {
+                (username === 'ilham' && password === '123')) {
                 
                 currentUser = username;
-                currentUserType = username === 'admin' ? 'admin' : 'user';
+                currentUserType = username === 'ilham' ? 'ilham' : 'user';
                 
                 // Update user subtitle
                 const userSubtitle = document.getElementById('userSubtitle');
@@ -1618,7 +1618,7 @@
                         <div class="history-actions">
                             <button class="btn-download" onclick="downloadPDF('${item.id}')">📄 PDF</button>
                             <button class="btn-download" onclick="downloadWord('${item.id}')">📝 Word</button>
-                            ${currentUserType === 'admin' ? `
+                            ${currentUserType === 'ilham' ? `
                                 <button class="btn-edit" onclick="reviewData('${item.id}')" style="background: linear-gradient(45deg, #9c27b0, #673ab7);">👁️ Review</button>
                                 <button class="btn-edit" onclick="editData('${item.id}')">✏️ Edit</button>
                                 <button class="btn-small btn-delete" onclick="deleteData('${item.id}')">🗑️ Delete</button>
@@ -1688,7 +1688,7 @@
 
         // Edit data (admin only)
         function editData(itemId) {
-            if (currentUserType !== 'admin') return;
+            if (currentUserType !== 'ilham') return;
             
             const item = formData.find(d => d.id === itemId);
             if (!item) return;
@@ -1826,7 +1826,7 @@
 
         // Delete data (admin only)
         async function deleteData(itemId) {
-            if (currentUserType !== 'admin') return;
+            if (currentUserType !== 'ilham') return;
             
             const item = formData.find(d => d.id === itemId);
             if (!item) return;
@@ -1890,7 +1890,7 @@
 
         // Review data (admin only)
         function reviewData(itemId) {
-            if (currentUserType !== 'admin') return;
+            if (currentUserType !== 'ilham') return;
             
             const item = formData.find(d => d.id === itemId);
             if (!item) return;
@@ -2008,7 +2008,7 @@
 
         // Approve data (admin only)
         async function approveData(itemId) {
-            if (currentUserType !== 'admin') return;
+            if (currentUserType !== 'ilham') return;
             
             const item = formData.find(d => d.id === itemId);
             if (!item) return;
