@@ -3,9 +3,9 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PT. Jaya Kencana - Safety Management System</title>
-  <script src="/_sdk/data_sdk.js"></script>
+  <title>PT. Jaya Kencana Form System</title>
   <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
         body {
@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #2c3e50 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             color: white;
             min-height: 100%;
         }
@@ -33,31 +33,27 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 80%;
-            padding: 40px 20px;
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .login-card {
-            background: rgba(52, 152, 219, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
             width: 100%;
             max-width: 400px;
-            border: 1px solid rgba(52, 152, 219, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
-        .logo {
+        .login-title {
             text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .logo h1 {
             font-size: 28px;
             font-weight: 700;
-            margin: 0;
-            background: linear-gradient(45deg, #3498db, #e74c3c);
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #00d4ff, #9c27b0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -67,14 +63,14 @@
             margin-bottom: 20px;
         }
 
-        .form-group label {
+        .form-label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
             color: #e0e0e0;
         }
 
-        .form-control {
+        .form-input {
             width: 100%;
             padding: 12px 16px;
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -85,59 +81,75 @@
             transition: all 0.3s ease;
         }
 
-        .form-control:focus {
+        .form-input:focus {
             outline: none;
             border-color: #00d4ff;
-            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
         }
 
-        .form-control::placeholder {
+        .form-input::placeholder {
             color: rgba(255, 255, 255, 0.6);
         }
 
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
+        .login-type-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .login-type-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 16px;
+            text-align: center;
+        }
+
+        .login-type-btn.active {
+            background: linear-gradient(45deg, #00d4ff, #9c27b0);
+            border-color: transparent;
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            color: white;
             width: 100%;
+            padding: 14px;
+            background: linear-gradient(45deg, #9c27b0, #673ab7);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+            box-shadow: 0 8px 25px rgba(156, 39, 176, 0.4);
         }
 
-        .main-content {
-            display: none;
-        }
-
-        .header {
+        .main-header {
             text-align: center;
             margin-bottom: 40px;
             padding: 30px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .header h1 {
+        .company-title {
             font-size: 36px;
             font-weight: 700;
-            margin: 0 0 10px 0;
-            background: linear-gradient(45deg, #3498db, #e74c3c);
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #00d4ff, #9c27b0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .header .subtitle {
+        .user-subtitle {
             font-size: 18px;
             color: #b0b0b0;
             font-weight: 400;
@@ -147,13 +159,13 @@
             position: absolute;
             top: 20px;
             right: 20px;
+            padding: 8px 16px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
             color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 14px;
             cursor: pointer;
+            font-size: 12px;
             transition: all 0.3s ease;
         }
 
@@ -161,7 +173,7 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .nav-grid {
+        .navigation-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
@@ -169,53 +181,50 @@
         }
 
         .nav-card {
-            background: rgba(52, 152, 219, 0.15);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 30px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 1px solid rgba(52, 152, 219, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .nav-card:hover {
             transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            background: rgba(52, 152, 219, 0.25);
         }
 
         .nav-card.active {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            border-color: #e74c3c;
+            background: linear-gradient(45deg, #00d4ff, #9c27b0);
+            border-color: transparent;
         }
 
-        .nav-card h3 {
-            margin: 0;
-            font-size: 20px;
+        .nav-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .nav-title {
+            font-size: 18px;
             font-weight: 600;
         }
 
         .form-section {
-            display: none;
-            background: rgba(52, 152, 219, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
-            border: 1px solid rgba(52, 152, 219, 0.3);
-        }
-
-        .form-section.active {
-            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .section-title {
             font-size: 24px;
             font-weight: 600;
-            margin-bottom: 30px;
-            text-align: center;
-            color: #3498db;
+            margin-bottom: 25px;
+            color: #00d4ff;
         }
 
         .form-row {
@@ -225,164 +234,11 @@
             margin-bottom: 20px;
         }
 
-        .subsection {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        .dropdown-container {
+            position: relative;
         }
 
-        .subsection-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #e74c3c;
-        }
-
-        .item-container {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .item-number {
-            font-weight: 600;
-            color: #3498db;
-            font-size: 18px;
-        }
-
-        .delete-item-btn {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-            margin-left: auto;
-        }
-
-        .delete-item-btn:hover {
-            background: #c0392b;
-        }
-
-        .photo-upload {
-            margin-top: 15px;
-        }
-
-        .photo-input {
-            margin-bottom: 10px;
-        }
-
-        .add-photo-btn {
-            background: rgba(0, 212, 255, 0.2);
-            border: 1px dashed #00d4ff;
-            color: #00d4ff;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            flex-wrap: wrap;
-        }
-
-        .btn-add {
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            color: white;
-        }
-
-        .btn-clear {
-            background: linear-gradient(45deg, #ff9800, #f57c00);
-            color: white;
-        }
-
-        .btn-submit {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            color: white;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .history-section {
-            display: none;
-        }
-
-        .history-section.active {
-            display: block;
-        }
-
-        .history-item {
-            background: rgba(52, 152, 219, 0.15);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(52, 152, 219, 0.3);
-        }
-
-        .history-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .history-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-small {
-            padding: 6px 12px;
-            font-size: 12px;
-            border-radius: 6px;
-        }
-
-        .btn-edit {
-            background: #3498db;
-            color: white;
-        }
-
-        .btn-download {
-            background: #27ae60;
-            color: white;
-        }
-
-        .btn-delete {
-            background: #e74c3c;
-            color: white;
-        }
-
-        .btn-secondary {
-            background: #6c757d;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 30px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            margin-top: 50px;
-            color: #b0b0b0;
-        }
-
-        .dropdown-suggestions {
+        .dropdown-list {
             position: absolute;
             top: 100%;
             left: 0;
@@ -397,24 +253,19 @@
         }
 
         .dropdown-item {
-            padding: 10px 15px;
+            padding: 12px 16px;
             cursor: pointer;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.2s ease;
         }
 
         .dropdown-item:hover {
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .form-group {
-            position: relative;
-        }
-
         .checkbox-group {
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
-            margin-top: 10px;
         }
 
         .checkbox-item {
@@ -426,7 +277,173 @@
         .checkbox-item input[type="checkbox"] {
             width: 18px;
             height: 18px;
-            accent-color: #9c27b0;
+            accent-color: #00d4ff;
+        }
+
+        .item-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .item-number {
+            font-weight: 600;
+            color: #00d4ff;
+            font-size: 16px;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-clear {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border: 1px solid #ffc107;
+        }
+
+        .btn-delete {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            border: 1px solid #f44336;
+        }
+
+        .btn-add {
+            background: linear-gradient(45deg, #4caf50, #45a049);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+
+        .photo-upload {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .photo-upload:hover {
+            border-color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .photo-preview {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            margin: 10px;
+        }
+
+        .history-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .history-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .history-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-download {
+            background: linear-gradient(45deg, #2196f3, #1976d2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .btn-edit {
+            background: linear-gradient(45deg, #ff9800, #f57c00);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 50px;
+        }
+
+        .copyright {
+            color: #b0b0b0;
+            font-size: 14px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
         }
 
         @media (max-width: 768px) {
@@ -434,18 +451,12 @@
                 grid-template-columns: 1fr;
             }
             
-            .nav-grid {
-                grid-template-columns: 1fr;
+            .navigation-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .history-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
+            .company-title {
+                font-size: 28px;
             }
         }
     </style>
@@ -453,257 +464,128 @@
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body>
-  <div class="container"><!-- Login Section -->
-   <div id="loginSection" class="login-container">
-    <div class="login-card">
-     <div class="logo">
-      <h1 id="companyName">PT. JAYA KENCANA</h1>
-      <p id="systemTitle">Safety Management System</p>
+  <div id="loginScreen" class="login-container">
+   <div class="login-card">
+    <h1 class="login-title" id="companyTitle">PT. JAYA KENCANA</h1>
+    <form id="loginForm">
+     <div class="form-group"><label for="username" class="form-label">Username</label> <input type="text" id="username" class="form-input" placeholder="Masukkan username" required>
      </div>
-     <form id="loginForm">
-      <div class="form-group"><label for="username">Username</label> <input type="text" id="username" class="form-control" placeholder="Masukkan username" required>
-      </div>
-      <div class="form-group"><label for="password">Password</label> <input type="password" id="password" class="form-control" placeholder="Masukkan password" required>
-      </div><button type="submit" class="btn btn-primary">Login</button>
-     </form>
-    </div>
-   </div><!-- Main Content -->
-   <div id="mainContent" class="main-content"><button id="logoutBtn" class="logout-btn">Logout</button> <button id="backBtn" class="logout-btn" style="right: 120px; display: none;">← Kembali</button>
-    <div class="header">
-     <h1 id="companyNameHeader">PT. JAYA KENCANA</h1>
-     <p class="subtitle" id="userSubtitle">Safety Management System</p>
-    </div><!-- Navigation -->
-    <div class="nav-grid">
-     <div class="nav-card" data-section="escalator">
-      <h3>🔧 Safety Eskalator</h3>
-     </div>
-     <div class="nav-card" data-section="elevator">
-      <h3>🏢 Safety Elevator</h3>
-     </div>
-     <div class="nav-card" data-section="realization">
-      <h3>📊 Realisasi</h3>
-     </div>
-     <div class="nav-card" data-section="history">
-      <h3>📋 History</h3>
-     </div>
-    </div><!-- Escalator Form -->
-    <div id="escalatorSection" class="form-section">
-     <h2 class="section-title">Safety Eskalator</h2>
-     <form id="escalatorForm">
-      <div class="form-row">
-       <div class="form-group"><label for="escalatorBuilding">Nama Gedung/Proyek</label> <input type="text" id="escalatorBuilding" class="form-control dropdown-input" placeholder="Pilih atau ketik nama gedung" required>
-        <div class="dropdown-suggestions" id="escalatorBuildingDropdown"></div>
-       </div>
-       <div class="form-group"><label>Nama Teknisi</label>
-        <div class="checkbox-group" id="escalatorTechnicians"></div>
-       </div>
-       <div class="form-group"><label for="escalatorDate">Tanggal</label> <input type="date" id="escalatorDate" class="form-control" required>
-       </div>
-      </div>
-      <div class="form-row">
-       <div class="form-group"><label for="escalatorUnit">Unit</label> <input type="text" id="escalatorUnit" class="form-control" placeholder="Masukkan unit" required>
-       </div>
-       <div class="form-group"><label for="escalatorMfg">MFG</label> <input type="text" id="escalatorMfg" class="form-control" placeholder="Masukkan MFG" required>
-       </div>
-       <div class="form-group"><label for="escalatorType">Type</label> <input type="text" id="escalatorType" class="form-control" placeholder="Masukkan type" required>
-       </div>
-      </div>
-      <div class="subsection">
-       <div class="subsection-title">
-        ITEM
-       </div>
-       <div id="escalatorItems"></div>
-       <div class="action-buttons"><button type="button" class="btn btn-add" id="addEscalatorItem">+ Tambah Item</button> <button type="button" class="btn btn-add" id="addEscalatorWork">+ Tambah Pekerjaan</button>
-       </div>
-      </div>
-      <div class="subsection">
-       <div class="subsection-title">
-        PEKERJAAN LAINNYA
-       </div>
-       <div id="escalatorAdditionalWork"></div>
-      </div>
-      <div class="action-buttons"><button type="submit" class="btn btn-submit">Submit</button>
-      </div>
-     </form>
-    </div><!-- Elevator Form -->
-    <div id="elevatorSection" class="form-section">
-     <h2 class="section-title">Safety Elevator</h2>
-     <form id="elevatorForm">
-      <div class="form-row">
-       <div class="form-group"><label for="elevatorBuilding">Nama Gedung/Proyek</label> <input type="text" id="elevatorBuilding" class="form-control dropdown-input" placeholder="Pilih atau ketik nama gedung" required>
-        <div class="dropdown-suggestions" id="elevatorBuildingDropdown"></div>
-       </div>
-       <div class="form-group"><label>Nama Teknisi</label>
-        <div class="checkbox-group" id="elevatorTechnicians"></div>
-       </div>
-       <div class="form-group"><label for="elevatorDate">Tanggal</label> <input type="date" id="elevatorDate" class="form-control" required>
-       </div>
-      </div>
-      <div class="form-row">
-       <div class="form-group"><label for="elevatorUnit">Unit</label> <input type="text" id="elevatorUnit" class="form-control" placeholder="Masukkan unit" required>
-       </div>
-       <div class="form-group"><label for="elevatorMfg">MFG</label> <input type="text" id="elevatorMfg" class="form-control" placeholder="Masukkan MFG" required>
-       </div>
-       <div class="form-group"><label for="elevatorType">Type</label> <input type="text" id="elevatorType" class="form-control" placeholder="Masukkan type" required>
-       </div>
-      </div>
-      <div class="subsection">
-       <div class="subsection-title">
-        ITEM
-       </div>
-       <div id="elevatorItems"></div>
-       <div class="action-buttons"><button type="button" class="btn btn-add" id="addElevatorItem">+ Tambah Item</button> <button type="button" class="btn btn-add" id="addElevatorWork">+ Tambah Pekerjaan</button>
-       </div>
-      </div>
-      <div class="subsection">
-       <div class="subsection-title">
-        PEKERJAAN LAINNYA
-       </div>
-       <div id="elevatorAdditionalWork"></div>
-      </div>
-      <div class="action-buttons"><button type="submit" class="btn btn-submit">Submit</button>
-      </div>
-     </form>
-    </div><!-- Realization Section -->
-    <div id="realizationSection" class="form-section">
-     <h2 class="section-title">Realisasi</h2>
-     <form id="realizationForm">
-      <div class="form-row">
-       <div class="form-group"><label for="realizationBuilding">Nama Gedung/Proyek</label> <input type="text" id="realizationBuilding" class="form-control dropdown-input" placeholder="Pilih atau ketik nama gedung" required>
-        <div class="dropdown-suggestions" id="realizationBuildingDropdown"></div>
-       </div>
-       <div class="form-group"><label>Nama Teknisi</label>
-        <div class="checkbox-group" id="realizationTechnicians"></div>
-       </div>
-       <div class="form-group"><label for="realizationDate">Tanggal Kunjungan</label> <input type="date" id="realizationDate" class="form-control" required>
-       </div>
-      </div>
-      <div class="form-row">
-       <div class="form-group"><label>Jenis Pekerjaan</label>
-        <div class="checkbox-group">
-         <div class="checkbox-item"><input type="radio" id="workTypeSafety" name="workType" value="pemeriksaan_safety" required> <label for="workTypeSafety">Pemeriksaan Safety</label>
-         </div>
-         <div class="checkbox-item"><input type="radio" id="workTypeOther" name="workType" value="lainnya" required> <label for="workTypeOther">Lainnya</label>
-         </div>
-        </div>
-       </div>
-       <div class="form-group" id="otherWorkGroup" style="display: none;"><label for="otherWork">Jenis Pekerjaan Lainnya</label> <input type="text" id="otherWork" class="form-control" placeholder="Masukkan jenis pekerjaan">
-       </div>
-       <div class="form-group"><label for="unitType">Unit</label> <input type="text" id="unitType" class="form-control" placeholder="Masukkan unit (elevator/eskalator)" required>
-       </div>
-      </div>
-      <div class="action-buttons"><button type="submit" class="btn btn-submit">Submit</button>
-      </div>
-     </form>
-    </div><!-- History Section -->
-    <div id="historySection" class="history-section">
-     <h2 class="section-title">History Data</h2>
-     <div class="form-group" style="max-width: 400px; margin: 0 auto 30px auto;"><input type="text" id="searchHistory" class="form-control" placeholder="Cari berdasarkan gedung, teknisi, atau tanggal...">
-     </div>
-     <div id="historyList"></div>
-    </div>
-    <div class="footer">
-     <p id="copyrightText">Copyright 2025 PT. Jaya Kencana</p>
-    </div>
+     <div class="form-group"><label for="password" class="form-label">Password</label> <input type="password" id="password" class="form-input" placeholder="Masukkan password" required>
+     </div><button type="submit" class="btn-primary">Login</button>
+    </form>
    </div>
   </div>
+  <div id="mainScreen" class="container hidden"><button class="logout-btn" onclick="logout()">Logout</button>
+   <header class="main-header">
+    <h1 class="company-title" id="mainCompanyTitle">PT. JAYA KENCANA</h1>
+    <p class="user-subtitle" id="userSubtitle">Selamat datang</p>
+   </header>
+   <nav class="navigation-grid">
+    <div class="nav-card" data-section="escalator"><span class="nav-icon">🔧</span>
+     <div class="nav-title">
+      Safety Eskalator
+     </div>
+    </div>
+    <div class="nav-card" data-section="elevator"><span class="nav-icon">🏗️</span>
+     <div class="nav-title">
+      Safety Elevator
+     </div>
+    </div>
+    <div class="nav-card" data-section="realization"><span class="nav-icon">📊</span>
+     <div class="nav-title">
+      Realisasi
+     </div>
+    </div>
+    <div class="nav-card" data-section="history"><span class="nav-icon">📋</span>
+     <div class="nav-title">
+      History
+     </div>
+    </div>
+   </nav>
+   <main id="contentArea"><!-- Content will be dynamically loaded here -->
+   </main>
+   <footer class="footer">
+    <p class="copyright" id="copyrightText">Copyright 2025 PT. Jaya Kencana</p>
+   </footer>
+  </div>
   <script>
-        // Configuration and Data
+        // Configuration object for Element SDK
         const defaultConfig = {
             company_name: "PT. JAYA KENCANA",
-            system_title: "Safety Management System",
             copyright_text: "Copyright 2025 PT. Jaya Kencana"
         };
 
+        // Global variables
+        let currentUser = null;
+        let currentUserType = 'user';
+        let currentSection = null;
+        let formData = [];
+        let itemCounter = 0;
+        let workCounter = 0;
+
         // User data configuration
         const userData = {
-            admin: {
-                username: "admin",
-                password: "admin123",
-                subtitle: "Administrator - Safety Management System",
-                buildings: ["Gedung A", "Gedung B", "Gedung C", "Mall Central", "Office Tower"],
-                technicians: ["Teknisi A", "Teknisi B", "Teknisi C", "Teknisi D", "Teknisi E"]
+            'user1': {
+                technicians: ['Teknisi A', 'Teknisi B', 'Teknisi C'],
+                buildings: ['Gedung Plaza 1', 'Gedung Plaza 2', 'Mall Central']
             },
-            user1: {
-                username: "user1",
-                password: "123456",
-                subtitle: "User 1 - Safety Management System",
-                buildings: ["Gedung A", "Gedung B", "Mall Central"],
-                technicians: ["Teknisi A", "Teknisi B", "Teknisi C"]
+            'user2': {
+                technicians: ['Teknisi D', 'Teknisi E'],
+                buildings: ['Tower Office', 'Apartment Sky']
             },
-            user2: {
-                username: "user2",
-                password: "abcdef",
-                subtitle: "User 2 - Safety Management System",
-                buildings: ["Gedung C", "Office Tower", "Plaza Utama"],
-                technicians: ["Teknisi D", "Teknisi E", "Teknisi F"]
+            'admin1': {
+                technicians: ['Admin Tech 1', 'Admin Tech 2'],
+                buildings: ['All Buildings']
             }
         };
 
         // Dropdown options
         const dropdownOptions = {
-            sparepart: ["Filter", "Belt", "Motor", "Sensor", "Cable", "Brake Pad", "Control Panel"],
-            condition: ["Baik", "Rusak Ringan", "Rusak Berat", "Perlu Penggantian"],
-            quantity: ["1", "2", "3", "4", "5", "10", "20"],
-            unit: ["Pcs", "Set", "Meter", "Roll", "Box"],
-            remarks: ["Normal", "Urgent", "Critical", "Scheduled"],
-            priority: ["Low", "Medium", "High", "Critical"],
-            additionalWork: ["Pembersihan", "Pelumasan", "Kalibrasi", "Inspeksi", "Perbaikan"],
-            workCondition: ["Selesai", "Dalam Proses", "Tertunda", "Perlu Review"],
-            workRemarks: ["Sesuai Jadwal", "Terlambat", "Dipercepat", "Perlu Tindak Lanjut"]
+            buildings: ['Gedung Plaza 1', 'Gedung Plaza 2', 'Mall Central', 'Tower Office', 'Apartment Sky'],
+            spareparts: ['Motor', 'Brake', 'Cable', 'Control Panel', 'Sensor', 'Button'],
+            conditions: ['Baik', 'Rusak Ringan', 'Rusak Berat', 'Perlu Penggantian'],
+            quantities: ['1', '2', '3', '4', '5', '10', '20'],
+            units: ['Pcs', 'Set', 'Meter', 'Roll', 'Box'],
+            remarks: ['Urgent', 'Normal', 'Low Priority', 'Scheduled'],
+            priorities: ['High', 'Medium', 'Low'],
+            additionalWork: ['Pembersihan', 'Pelumasan', 'Kalibrasi', 'Inspeksi', 'Perbaikan'],
+            workConditions: ['Selesai', 'Dalam Proses', 'Tertunda', 'Perlu Review'],
+            workRemarks: ['Sesuai Jadwal', 'Terlambat', 'Dipercepat', 'Perlu Koordinasi']
         };
 
-        const sparepartUnits = {
-            "Filter": "Pcs",
-            "Belt": "Pcs", 
-            "Motor": "Unit",
-            "Sensor": "Pcs",
-            "Cable": "Meter",
-            "Brake Pad": "Set",
-            "Control Panel": "Unit",
-            "Kabel": "Meter",
-            "Baut": "Pcs"
+        // Sparepart to unit mapping
+        const sparepartUnitMapping = {
+            'Cable': 'Meter',
+            'Motor': 'Unit',
+            'Control Panel': 'Unit',
+            'Brake': 'Unit',
+            'Sensor': 'Pcs',
+            'Button': 'Pcs'
         };
 
-        let currentUser = null;
-        let currentUserType = null;
-        let currentSection = 'escalator';
-        let escalatorItemCount = 0;
-        let elevatorItemCount = 0;
-        let escalatorWorkCount = 0;
-        let elevatorWorkCount = 0;
-        let allData = [];
-
-        // Data SDK Handler
+        // Data handler for SDK
         const dataHandler = {
             onDataChanged(data) {
-                allData = data;
+                formData = data;
                 if (currentSection === 'history') {
                     renderHistory();
                 }
             }
         };
 
-        // Initialize SDK and app
-        async function initializeApp() {
-            try {
-                const initResult = await window.dataSdk.init(dataHandler);
-                if (!initResult.isOk) {
-                    console.error("Failed to initialize data SDK");
-                }
-            } catch (error) {
-                console.error("Error initializing app:", error);
-            }
-
-            // Initialize Element SDK
+        // Initialize Element SDK
+        async function initializeElementSDK() {
             if (window.elementSdk) {
                 await window.elementSdk.init({
-                    defaultConfig,
+                    defaultConfig: defaultConfig,
                     onConfigChange: async (config) => {
-                        document.getElementById('companyName').textContent = config.company_name || defaultConfig.company_name;
-                        document.getElementById('companyNameHeader').textContent = config.company_name || defaultConfig.company_name;
-                        document.getElementById('systemTitle').textContent = config.system_title || defaultConfig.system_title;
-                        document.getElementById('copyrightText').textContent = config.copyright_text || defaultConfig.copyright_text;
+                        const companyTitle = document.getElementById('companyTitle');
+                        const mainCompanyTitle = document.getElementById('mainCompanyTitle');
+                        const copyrightText = document.getElementById('copyrightText');
+                        
+                        if (companyTitle) companyTitle.textContent = config.company_name || defaultConfig.company_name;
+                        if (mainCompanyTitle) mainCompanyTitle.textContent = config.company_name || defaultConfig.company_name;
+                        if (copyrightText) copyrightText.textContent = config.copyright_text || defaultConfig.copyright_text;
                     },
                     mapToCapabilities: (config) => ({
                         recolorables: [],
@@ -713,1402 +595,937 @@
                     }),
                     mapToEditPanelValues: (config) => new Map([
                         ["company_name", config.company_name || defaultConfig.company_name],
-                        ["system_title", config.system_title || defaultConfig.system_title],
                         ["copyright_text", config.copyright_text || defaultConfig.copyright_text]
                     ])
                 });
             }
-
-            setupEventListeners();
-            setTodayDate();
         }
 
+        // Initialize Data SDK
+        async function initializeDataSDK() {
+            if (window.dataSdk) {
+                const result = await window.dataSdk.init(dataHandler);
+                if (!result.isOk) {
+                    console.error("Failed to initialize data SDK");
+                }
+            }
+        }
+
+        // Initialize application
+        async function initializeApp() {
+            await initializeElementSDK();
+            await initializeDataSDK();
+            setupEventListeners();
+        }
+
+        // Setup event listeners
         function setupEventListeners() {
             // Login form
             document.getElementById('loginForm').addEventListener('submit', handleLogin);
-            
-            // Logout button
-            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
-            
-            // Back button
-            document.getElementById('backBtn').addEventListener('click', backToDashboard);
-            
+
             // Navigation
             document.querySelectorAll('.nav-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const section = card.dataset.section;
-                    switchSection(section);
+                card.addEventListener('click', function() {
+                    const section = this.dataset.section;
+                    navigateToSection(section);
                 });
             });
-
-            // Form submissions
-            document.getElementById('escalatorForm').addEventListener('submit', handleEscalatorSubmit);
-            document.getElementById('elevatorForm').addEventListener('submit', handleElevatorSubmit);
-            document.getElementById('realizationForm').addEventListener('submit', handleRealizationSubmit);
-
-            // Add item buttons
-            document.getElementById('addEscalatorItem').addEventListener('click', () => addItem('escalator'));
-            document.getElementById('addElevatorItem').addEventListener('click', () => addItem('elevator'));
-            document.getElementById('addEscalatorWork').addEventListener('click', () => addAdditionalWork('escalator'));
-            document.getElementById('addElevatorWork').addEventListener('click', () => addAdditionalWork('elevator'));
-
-
-
-            // Search functionality
-            document.getElementById('searchHistory').addEventListener('input', (e) => {
-                searchHistory(e.target.value);
-            });
-
-            // Work type change handler
-            document.addEventListener('change', (e) => {
-                if (e.target.name === 'workType') {
-                    const otherWorkGroup = document.getElementById('otherWorkGroup');
-                    
-                    if (e.target.value === 'lainnya') {
-                        otherWorkGroup.style.display = 'block';
-                        document.getElementById('otherWork').required = true;
-                    } else {
-                        otherWorkGroup.style.display = 'none';
-                        document.getElementById('otherWork').required = false;
-                    }
-                }
-            });
         }
 
-        function setTodayDate() {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById('escalatorDate').value = today;
-            document.getElementById('elevatorDate').value = today;
-            document.getElementById('realizationDate').value = today;
-        }
-
+        // Handle login
         function handleLogin(e) {
             e.preventDefault();
             
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-
-            // Validate credentials
-            let validUser = null;
-            let userType = null;
             
-            // Check admin first
-            if (userData.admin.username === username && userData.admin.password === password) {
-                validUser = userData.admin;
-                userType = 'admin';
-            } else {
-                // Check regular users
-                for (const [key, user] of Object.entries(userData)) {
-                    if (key !== 'admin' && user.username === username && user.password === password) {
-                        validUser = user;
-                        userType = 'user';
-                        break;
-                    }
-                }
-            }
-
-            if (validUser) {
-                currentUser = validUser;
-                currentUserType = userType;
+            // Validate credentials
+            if ((username === 'user1' && password === '123') || 
+                (username === 'admin' && password === 'admin123')) {
                 
-                document.getElementById('loginSection').style.display = 'none';
-                document.getElementById('mainContent').style.display = 'block';
-                document.getElementById('userSubtitle').textContent = validUser.subtitle;
+                currentUser = username;
+                currentUserType = username === 'admin' ? 'admin' : 'user';
                 
-                setupUserData();
+                // Update user subtitle
+                const userSubtitle = document.getElementById('userSubtitle');
+                userSubtitle.textContent = `Selamat datang, ${username.toUpperCase()}`;
+                
+                // Show main screen
+                document.getElementById('loginScreen').classList.add('hidden');
+                document.getElementById('mainScreen').classList.remove('hidden');
+                
+                // Show navigation initially
+                document.querySelector('.navigation-grid').style.display = 'grid';
             } else {
-                showMessage('Username atau password salah!', 'error');
+                showMessage("Username atau password salah!", "error");
             }
         }
 
-        function handleLogout() {
+        // Logout function
+        function logout() {
             currentUser = null;
-            currentUserType = null;
-            
-            document.getElementById('loginSection').style.display = 'flex';
-            document.getElementById('mainContent').style.display = 'none';
+            currentUserType = 'user';
+            currentSection = null;
             
             // Reset form
             document.getElementById('loginForm').reset();
             
-            // Clear realization form only
-            document.getElementById('realizationForm').reset();
-            document.getElementById('otherWorkGroup').style.display = 'none';
-            document.getElementById('otherWork').required = false;
-            
-            // Clear sections
-            document.getElementById('escalatorItems').innerHTML = '';
-            document.getElementById('elevatorItems').innerHTML = '';
-            document.getElementById('escalatorAdditionalWork').innerHTML = '';
-            document.getElementById('elevatorAdditionalWork').innerHTML = '';
-            
-            // Reset navigation to dashboard
-            document.querySelector('.nav-grid').style.display = 'grid';
-            document.getElementById('backBtn').style.display = 'none';
-            
-            // Hide all sections
-            document.querySelectorAll('.form-section, .history-section').forEach(sec => {
-                sec.classList.remove('active');
-            });
-            
-            // Remove active state from nav cards
+            // Reset navigation
+            document.querySelector('.navigation-grid').style.display = 'grid';
+            document.getElementById('contentArea').innerHTML = '';
             document.querySelectorAll('.nav-card').forEach(card => {
                 card.classList.remove('active');
             });
             
-            currentSection = null;
-            escalatorItemCount = 0;
-            elevatorItemCount = 0;
-            escalatorWorkCount = 0;
-            elevatorWorkCount = 0;
+            // Show login screen
+            document.getElementById('mainScreen').classList.add('hidden');
+            document.getElementById('loginScreen').classList.remove('hidden');
         }
 
-        function setupUserData() {
-            if (!currentUser) return;
-
-            // Setup building dropdowns
-            setupDropdown('escalatorBuilding', 'escalatorBuildingDropdown', currentUser.buildings);
-            setupDropdown('elevatorBuilding', 'elevatorBuildingDropdown', currentUser.buildings);
-            setupDropdown('realizationBuilding', 'realizationBuildingDropdown', currentUser.buildings);
-
-            // Setup technician checkboxes
-            setupTechnicians('escalatorTechnicians', currentUser.technicians);
-            setupTechnicians('elevatorTechnicians', currentUser.technicians);
-            setupTechnicians('realizationTechnicians', currentUser.technicians);
-        }
-
-        function setupDropdown(inputId, dropdownId, options) {
-            const input = document.getElementById(inputId);
-            const dropdown = document.getElementById(dropdownId);
-
-            input.addEventListener('input', () => {
-                const value = input.value.toLowerCase();
-                const filtered = options.filter(option => 
-                    option.toLowerCase().includes(value)
-                );
-                
-                if (filtered.length > 0 && value) {
-                    showDropdown(dropdown, filtered, input);
-                } else {
-                    hideDropdown(dropdown);
-                }
-            });
-
-            input.addEventListener('focus', () => {
-                if (options.length > 0) {
-                    showDropdown(dropdown, options, input);
-                }
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-                    hideDropdown(dropdown);
-                }
-            });
-        }
-
-        function setupTechnicians(containerId, technicians) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-
-            technicians.forEach(tech => {
-                const checkboxItem = document.createElement('div');
-                checkboxItem.className = 'checkbox-item';
-                checkboxItem.innerHTML = `
-                    <input type="checkbox" id="${containerId}_${tech}" name="${containerId}" value="${tech}">
-                    <label for="${containerId}_${tech}">${tech}</label>
-                `;
-                container.appendChild(checkboxItem);
-            });
-        }
-
-        function showDropdown(dropdown, options, input) {
-            dropdown.innerHTML = '';
-            options.forEach(option => {
-                const item = document.createElement('div');
-                item.className = 'dropdown-item';
-                item.textContent = option;
-                item.addEventListener('click', () => {
-                    input.value = option;
-                    hideDropdown(dropdown);
-                    
-                    // Trigger change event for sparepart auto-fill
-                    if (input.name === 'sparepart') {
-                        const changeEvent = new Event('change', { bubbles: true });
-                        input.dispatchEvent(changeEvent);
-                    }
-                });
-                dropdown.appendChild(item);
-            });
-            dropdown.style.display = 'block';
-        }
-
-        function hideDropdown(dropdown) {
-            dropdown.style.display = 'none';
-        }
-
-        function setupItemDropdown(input, options) {
-            const dropdown = document.createElement('div');
-            dropdown.className = 'dropdown-suggestions';
-            input.parentNode.appendChild(dropdown);
-
-            input.addEventListener('input', () => {
-                const value = input.value.toLowerCase();
-                const filtered = options.filter(option => 
-                    option.toLowerCase().includes(value)
-                );
-                
-                if (filtered.length > 0 && value) {
-                    showDropdown(dropdown, filtered, input);
-                } else {
-                    hideDropdown(dropdown);
-                }
-            });
-
-            input.addEventListener('focus', () => {
-                if (options.length > 0) {
-                    showDropdown(dropdown, options, input);
-                }
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-                    hideDropdown(dropdown);
-                }
-            });
-        }
-
-        function switchSection(section) {
-            // Update navigation
+        // Navigate to section
+        function navigateToSection(section) {
+            currentSection = section;
+            
+            // Hide navigation and show content
+            document.querySelector('.navigation-grid').style.display = 'none';
+            
+            // Update navigation active state
             document.querySelectorAll('.nav-card').forEach(card => {
                 card.classList.remove('active');
             });
             document.querySelector(`[data-section="${section}"]`).classList.add('active');
-
-            // Hide navigation grid and show back button
-            document.querySelector('.nav-grid').style.display = 'none';
-            document.getElementById('backBtn').style.display = 'block';
-
-            // Hide all sections
-            document.querySelectorAll('.form-section, .history-section').forEach(sec => {
-                sec.classList.remove('active');
-            });
-
-            // Show selected section
-            currentSection = section;
-            if (section === 'history') {
-                document.getElementById('historySection').classList.add('active');
-                renderHistory();
-            } else {
-                document.getElementById(`${section}Section`).classList.add('active');
+            
+            // Reset counters when navigating
+            itemCounter = 0;
+            workCounter = 0;
+            
+            // Render content
+            const contentArea = document.getElementById('contentArea');
+            
+            switch(section) {
+                case 'escalator':
+                case 'elevator':
+                    renderFormSection(section);
+                    break;
+                case 'realization':
+                    renderRealizationSection();
+                    break;
+                case 'history':
+                    renderHistorySection();
+                    break;
             }
         }
 
-        function backToDashboard() {
-            // Show navigation grid and hide back button
-            document.querySelector('.nav-grid').style.display = 'grid';
-            document.getElementById('backBtn').style.display = 'none';
-
-            // Hide all sections
-            document.querySelectorAll('.form-section, .history-section').forEach(sec => {
-                sec.classList.remove('active');
-            });
-
-            // Remove active state from nav cards
-            document.querySelectorAll('.nav-card').forEach(card => {
-                card.classList.remove('active');
-            });
-
-            // Reset all forms and clear all items/work
-            document.getElementById('escalatorForm').reset();
-            document.getElementById('elevatorForm').reset();
+        // Render form section
+        function renderFormSection(type) {
+            const title = type === 'escalator' ? 'Safety Eskalator' : 'Safety Elevator';
+            const contentArea = document.getElementById('contentArea');
             
-            // Clear all items and work
-            document.getElementById('escalatorItems').innerHTML = '';
-            document.getElementById('elevatorItems').innerHTML = '';
-            document.getElementById('escalatorAdditionalWork').innerHTML = '';
-            document.getElementById('elevatorAdditionalWork').innerHTML = '';
-            
-            // Reset counters
-            escalatorItemCount = 0;
-            elevatorItemCount = 0;
-            escalatorWorkCount = 0;
-            elevatorWorkCount = 0;
-            
-            // Reset dates
-            setTodayDate();
-
-            currentSection = null;
-        }
-
-        function addItem(type) {
-            const container = document.getElementById(`${type}Items`);
-            const itemCount = type === 'escalator' ? ++escalatorItemCount : ++elevatorItemCount;
-            
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'item-container';
-            itemDiv.dataset.itemId = itemCount;
-            
-            itemDiv.innerHTML = `
-                <div class="item-header">
-                    <span class="item-number">Item ${itemCount}</span>
-                    <div>
-                        <button type="button" class="btn btn-small" style="background: #ff9800; color: white; margin-right: 5px;" onclick="clearItem('${type}', ${itemCount})">Clear</button>
-                        <button type="button" class="delete-item-btn" onclick="deleteItem('${type}', ${itemCount})">Hapus</button>
+            contentArea.innerHTML = `
+                <div class="form-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 class="section-title" style="margin: 0;">${title}</h2>
+                        <button type="button" class="btn-small" onclick="backToNavigation()" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3);">← Kembali</button>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Item Sparepart</label>
-                        <input type="text" class="form-control dropdown-input" name="sparepart" placeholder="Pilih atau ketik sparepart">
-                    </div>
-                    <div class="form-group">
-                        <label>Kondisi</label>
-                        <input type="text" class="form-control dropdown-input" name="condition" placeholder="Pilih kondisi">
-                    </div>
-                    <div class="form-group">
-                        <label>Jumlah</label>
-                        <input type="text" class="form-control dropdown-input" name="quantity" placeholder="Pilih jumlah">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Satuan</label>
-                        <input type="text" class="form-control" name="unit_type" placeholder="Satuan">
-                    </div>
-                    <div class="form-group">
-                        <label>Remarks</label>
-                        <input type="text" class="form-control dropdown-input" name="remarks" placeholder="Pilih remarks">
-                    </div>
-                    <div class="form-group">
-                        <label>Prioritas</label>
-                        <input type="text" class="form-control dropdown-input" name="priority" placeholder="Pilih prioritas">
-                    </div>
-                </div>
-                <div class="photo-upload">
-                    <label>Foto Part</label>
-                    <div class="photo-inputs">
-                        <input type="file" class="form-control photo-input" accept="image/*" name="photo">
-                    </div>
-                    <button type="button" class="add-photo-btn" onclick="addPhotoInput(this)">+ Tambah Foto</button>
+                    
+                    <form id="mainForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="buildingName" class="form-label">Nama Gedung/Proyek</label>
+                                <div class="dropdown-container">
+                                    <input type="text" id="buildingName" class="form-input" placeholder="Pilih atau ketik nama gedung" autocomplete="off" required>
+                                    <div id="buildingDropdown" class="dropdown-list"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Nama Teknisi</label>
+                                <div class="checkbox-group" id="technicianCheckboxes">
+                                    <!-- Technician checkboxes will be populated here -->
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="workDate" class="form-label">Tanggal</label>
+                                <input type="date" id="workDate" class="form-input" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="headerUnit" class="form-label">Unit</label>
+                                <input type="text" id="headerUnit" class="form-input" placeholder="Masukkan unit" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="headerMFG" class="form-label">MFG</label>
+                                <input type="text" id="headerMFG" class="form-input" placeholder="Masukkan MFG" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="headerType" class="form-label">Type</label>
+                                <input type="text" id="headerType" class="form-input" placeholder="Masukkan type" required>
+                            </div>
+                        </div>
+                        
+                        <div class="section-title" style="margin-top: 30px;">ITEM</div>
+                        <div id="itemsContainer">
+                            <!-- Items will be added here -->
+                        </div>
+                        
+                        <div id="additionalWorkContainer">
+                            <!-- Additional work will be added here -->
+                        </div>
+                        
+                        <div style="margin: 30px 0 20px 0;">
+                            <button type="button" class="btn-add" onclick="addItem()">+ Tambah Item</button>
+                            <button type="button" class="btn-add" onclick="addWork()">+ Tambah Pekerjaan</button>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Submit</button>
+                    </form>
                 </div>
             `;
             
-            container.appendChild(itemDiv);
+            // Populate technician checkboxes
+            populateTechnicianCheckboxes();
+            
+            // Setup dropdown for building name
+            setupDropdown('buildingName', 'buildingDropdown', getUserBuildings());
+            
+            // Setup form submission
+            document.getElementById('mainForm').addEventListener('submit', handleFormSubmit);
+            
+            // Set current date
+            document.getElementById('workDate').valueAsDate = new Date();
+            
+            // Add initial item
+            addItem();
+        }
+
+        // Populate technician checkboxes
+        function populateTechnicianCheckboxes() {
+            const container = document.getElementById('technicianCheckboxes');
+            const technicians = getUserTechnicians();
+            
+            container.innerHTML = technicians.map(tech => `
+                <div class="checkbox-item">
+                    <input type="checkbox" id="tech_${tech}" name="technicians" value="${tech}">
+                    <label for="tech_${tech}">${tech}</label>
+                </div>
+            `).join('');
+        }
+
+        // Get user technicians
+        function getUserTechnicians() {
+            return userData[currentUser] ? userData[currentUser].technicians : ['Teknisi Default'];
+        }
+
+        // Get user buildings
+        function getUserBuildings() {
+            return userData[currentUser] ? userData[currentUser].buildings : dropdownOptions.buildings;
+        }
+
+        // Setup dropdown functionality
+        function setupDropdown(inputId, dropdownId, options) {
+            const input = document.getElementById(inputId);
+            const dropdown = document.getElementById(dropdownId);
+            
+            input.addEventListener('input', function() {
+                const value = this.value.toLowerCase();
+                const filtered = options.filter(option => 
+                    option.toLowerCase().includes(value)
+                );
+                
+                if (filtered.length > 0 && value) {
+                    dropdown.innerHTML = filtered.map(option => 
+                        `<div class="dropdown-item" onclick="selectDropdownItem('${inputId}', '${option}')">${option}</div>`
+                    ).join('');
+                    dropdown.style.display = 'block';
+                } else {
+                    dropdown.style.display = 'none';
+                }
+            });
+            
+            input.addEventListener('focus', function() {
+                if (options.length > 0) {
+                    dropdown.innerHTML = options.map(option => 
+                        `<div class="dropdown-item" onclick="selectDropdownItem('${inputId}', '${option}')">${option}</div>`
+                    ).join('');
+                    dropdown.style.display = 'block';
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+        }
+
+        // Select dropdown item
+        function selectDropdownItem(inputId, value) {
+            document.getElementById(inputId).value = value;
+            document.getElementById(inputId.replace(/([A-Z])/g, '$1') + 'Dropdown').style.display = 'none';
+        }
+
+        // Add item
+        function addItem() {
+            itemCounter++;
+            const container = document.getElementById('itemsContainer');
+            
+            const itemHtml = `
+                <div class="item-container" id="item_${itemCounter}">
+                    <div class="item-header">
+                        <span class="item-number">Item ${itemCounter}</span>
+                        <div class="item-actions">
+                            <button type="button" class="btn-small btn-clear" onclick="clearItem(${itemCounter})">Clear</button>
+                            <button type="button" class="btn-small btn-delete" onclick="deleteItem(${itemCounter})">Delete</button>
+                        </div>
+                    </div>
+                    
+
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Item Sparepart</label>
+                            <div class="dropdown-container">
+                                <input type="text" class="form-input" name="sparepart_${itemCounter}" placeholder="Pilih sparepart" autocomplete="off">
+                                <div class="dropdown-list" id="sparepart_dropdown_${itemCounter}"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Kondisi</label>
+                            <div class="dropdown-container">
+                                <input type="text" class="form-input" name="condition_${itemCounter}" placeholder="Pilih kondisi" autocomplete="off">
+                                <div class="dropdown-list" id="condition_dropdown_${itemCounter}"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Jumlah</label>
+                            <div class="dropdown-container">
+                                <input type="text" class="form-input" name="quantity_${itemCounter}" placeholder="Pilih jumlah" autocomplete="off">
+                                <div class="dropdown-list" id="quantity_dropdown_${itemCounter}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Satuan</label>
+                            <div class="dropdown-container">
+                                <input type="text" class="form-input" name="unit_type_${itemCounter}" placeholder="Pilih satuan" autocomplete="off">
+                                <div class="dropdown-list" id="unit_dropdown_${itemCounter}"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Remarks</label>
+                            <div class="dropdown-container">
+                                <input type="text" class="form-input" name="remarks_${itemCounter}" placeholder="Pilih remarks" autocomplete="off">
+                                <div class="dropdown-list" id="remarks_dropdown_${itemCounter}"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Prioritas</label>
+                            <div class="dropdown-container">
+                                <input type="text" class="form-input" name="priority_${itemCounter}" placeholder="Pilih prioritas" autocomplete="off">
+                                <div class="dropdown-list" id="priority_dropdown_${itemCounter}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Foto Part</label>
+                        <div id="photoContainer_${itemCounter}">
+                            <div class="photo-upload" onclick="addPhotoUpload(${itemCounter}, 1)">
+                                <span>📷 Klik untuk upload foto</span>
+                                <input type="file" accept="image/*" style="display: none;" onchange="handlePhotoUpload(this, ${itemCounter}, 1)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', itemHtml);
             
             // Setup dropdowns for this item
-            const sparepartInput = itemDiv.querySelector('[name="sparepart"]');
-            const unitTypeInput = itemDiv.querySelector('[name="unit_type"]');
-            
-            setupItemDropdown(sparepartInput, dropdownOptions.sparepart);
-            setupItemDropdown(itemDiv.querySelector('[name="condition"]'), dropdownOptions.condition);
-            setupItemDropdown(itemDiv.querySelector('[name="quantity"]'), dropdownOptions.quantity);
-            setupItemDropdown(itemDiv.querySelector('[name="remarks"]'), dropdownOptions.remarks);
-            setupItemDropdown(itemDiv.querySelector('[name="priority"]'), dropdownOptions.priority);
-            
-            // Auto-fill unit when sparepart is selected
-            sparepartInput.addEventListener('input', function() {
-                const selectedSparepart = this.value;
-                if (sparepartUnits[selectedSparepart]) {
-                    unitTypeInput.value = sparepartUnits[selectedSparepart];
-                } else {
-                    // Clear unit if sparepart not in predefined list
-                    unitTypeInput.value = '';
-                }
-            });
-            
-            // Also handle when selecting from dropdown
-            sparepartInput.addEventListener('change', function() {
-                const selectedSparepart = this.value;
-                if (sparepartUnits[selectedSparepart]) {
-                    unitTypeInput.value = sparepartUnits[selectedSparepart];
-                } else {
-                    // Clear unit if sparepart not in predefined list
-                    unitTypeInput.value = '';
-                }
-            });
-            
-            // Handle dropdown selection
-            const sparepartDropdown = itemDiv.querySelector('.dropdown-suggestions');
-            if (sparepartDropdown) {
-                sparepartDropdown.addEventListener('click', function(e) {
-                    if (e.target.classList.contains('dropdown-item')) {
-                        const selectedSparepart = e.target.textContent;
-                        if (sparepartUnits[selectedSparepart]) {
-                            unitTypeInput.value = sparepartUnits[selectedSparepart];
-                        } else {
-                            unitTypeInput.value = '';
-                        }
-                    }
-                });
-            }
+            setupItemDropdowns(itemCounter);
         }
 
-        function addAdditionalWork(type) {
-            const container = document.getElementById(`${type}AdditionalWork`);
-            const workCount = type === 'escalator' ? ++escalatorWorkCount : ++elevatorWorkCount;
+        // Setup dropdowns for item
+        function setupItemDropdowns(itemId) {
+            const dropdowns = [
+                { input: `sparepart_${itemId}`, dropdown: `sparepart_dropdown_${itemId}`, options: dropdownOptions.spareparts },
+                { input: `condition_${itemId}`, dropdown: `condition_dropdown_${itemId}`, options: dropdownOptions.conditions },
+                { input: `quantity_${itemId}`, dropdown: `quantity_dropdown_${itemId}`, options: dropdownOptions.quantities },
+                { input: `unit_dropdown_${itemId}`, dropdown: `unit_dropdown_${itemId}`, options: dropdownOptions.units },
+                { input: `remarks_${itemId}`, dropdown: `remarks_dropdown_${itemId}`, options: dropdownOptions.remarks },
+                { input: `priority_${itemId}`, dropdown: `priority_dropdown_${itemId}`, options: dropdownOptions.priorities }
+            ];
             
-            const workDiv = document.createElement('div');
-            workDiv.className = 'item-container';
-            workDiv.dataset.workId = workCount;
-            
-            workDiv.innerHTML = `
-                <div class="item-header">
-                    <span class="item-number">Pekerjaan ${workCount}</span>
-                    <div>
-                        <button type="button" class="btn btn-small" style="background: #ff9800; color: white; margin-right: 5px;" onclick="clearWork('${type}', ${workCount})">Clear</button>
-                        <button type="button" class="delete-item-btn" onclick="deleteWork('${type}', ${workCount})">Hapus</button>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Pekerjaan Lainnya</label>
-                        <input type="text" class="form-control dropdown-input" name="additional_work" placeholder="Pilih pekerjaan">
-                    </div>
-                    <div class="form-group">
-                        <label>Kondisi</label>
-                        <input type="text" class="form-control dropdown-input" name="work_condition" placeholder="Pilih kondisi">
-                    </div>
-                    <div class="form-group">
-                        <label>Keterangan</label>
-                        <input type="text" class="form-control" name="description" placeholder="Masukkan keterangan">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Remarks</label>
-                        <input type="text" class="form-control dropdown-input" name="work_remarks" placeholder="Pilih remarks">
-                    </div>
-                    <div class="form-group">
-                        <label>Prioritas</label>
-                        <input type="text" class="form-control dropdown-input" name="work_priority" placeholder="Pilih prioritas">
-                    </div>
-                </div>
-                <div class="photo-upload">
-                    <label>Foto</label>
-                    <div class="photo-inputs">
-                        <input type="file" class="form-control photo-input" accept="image/*" name="work_photo">
-                    </div>
-                    <button type="button" class="add-photo-btn" onclick="addPhotoInput(this)">+ Tambah Foto</button>
-                </div>
-            `;
-            
-            container.appendChild(workDiv);
-            
-            // Setup dropdowns
-            setupItemDropdown(workDiv.querySelector('[name="additional_work"]'), dropdownOptions.additionalWork);
-            setupItemDropdown(workDiv.querySelector('[name="work_condition"]'), dropdownOptions.workCondition);
-            setupItemDropdown(workDiv.querySelector('[name="work_remarks"]'), dropdownOptions.workRemarks);
-            setupItemDropdown(workDiv.querySelector('[name="work_priority"]'), dropdownOptions.priority);
-        }
-
-        function deleteItem(type, itemId) {
-            const container = document.getElementById(`${type}Items`);
-            const itemToDelete = container.querySelector(`[data-item-id="${itemId}"]`);
-            if (itemToDelete) {
-                itemToDelete.remove();
-                renumberItems(type);
-            }
-        }
-
-        function deleteWork(type, workId) {
-            const container = document.getElementById(`${type}AdditionalWork`);
-            const workToDelete = container.querySelector(`[data-work-id="${workId}"]`);
-            if (workToDelete) {
-                workToDelete.remove();
-                renumberWork(type);
-            }
-        }
-
-        function renumberItems(type) {
-            const container = document.getElementById(`${type}Items`);
-            const items = container.querySelectorAll('.item-container');
-            
-            items.forEach((item, index) => {
-                const newNumber = index + 1;
-                item.dataset.itemId = newNumber;
-                item.querySelector('.item-number').textContent = `Item ${newNumber}`;
-                item.querySelector('.delete-item-btn').setAttribute('onclick', `deleteItem('${type}', ${newNumber})`);
-            });
-            
-            if (type === 'escalator') {
-                escalatorItemCount = items.length;
-            } else {
-                elevatorItemCount = items.length;
-            }
-        }
-
-        function renumberWork(type) {
-            const container = document.getElementById(`${type}AdditionalWork`);
-            const works = container.querySelectorAll('.item-container');
-            
-            works.forEach((work, index) => {
-                const newNumber = index + 1;
-                work.dataset.workId = newNumber;
-                work.querySelector('.item-number').textContent = `Pekerjaan ${newNumber}`;
-                work.querySelector('.delete-item-btn').setAttribute('onclick', `deleteWork('${type}', ${newNumber})`);
-            });
-            
-            if (type === 'escalator') {
-                escalatorWorkCount = works.length;
-            } else {
-                elevatorWorkCount = works.length;
-            }
-        }
-
-        function clearItem(type, itemId) {
-            const container = document.getElementById(`${type}Items`);
-            const itemToClear = container.querySelector(`[data-item-id="${itemId}"]`);
-            if (itemToClear) {
-                itemToClear.querySelectorAll('input').forEach(input => {
-                    if (input.type !== 'file') {
-                        input.value = '';
-                    } else {
-                        input.value = '';
-                    }
-                });
-            }
-        }
-
-        function clearWork(type, workId) {
-            const container = document.getElementById(`${type}AdditionalWork`);
-            const workToClear = container.querySelector(`[data-work-id="${workId}"]`);
-            if (workToClear) {
-                workToClear.querySelectorAll('input').forEach(input => {
-                    if (input.type !== 'file') {
-                        input.value = '';
-                    } else {
-                        input.value = '';
-                    }
-                });
-            }
-        }
-
-        function addPhotoInput(button) {
-            const photoInputs = button.previousElementSibling;
-            const newInput = document.createElement('input');
-            newInput.type = 'file';
-            newInput.className = 'form-control photo-input';
-            newInput.accept = 'image/*';
-            newInput.name = photoInputs.querySelector('input').name;
-            photoInputs.appendChild(newInput);
-        }
-
-        async function handleEscalatorSubmit(e) {
-            e.preventDefault();
-            await submitForm('escalator');
-        }
-
-        async function handleElevatorSubmit(e) {
-            e.preventDefault();
-            await submitForm('elevator');
-        }
-
-        async function handleRealizationSubmit(e) {
-            e.preventDefault();
-            
-            if (allData.length >= 999) {
-                showMessage('Maksimum 999 data telah tercapai. Silakan hapus beberapa data terlebih dahulu.', 'error');
-                return;
-            }
-
-            const building = document.getElementById('realizationBuilding').value;
-            const date = document.getElementById('realizationDate').value;
-            const otherWork = document.getElementById('otherWork').value;
-            const unitType = document.getElementById('unitType').value;
-            
-            // Get selected technicians
-            const techCheckboxes = document.querySelectorAll('#realizationTechnicians input[type="checkbox"]:checked');
-            const technicians = Array.from(techCheckboxes).map(cb => cb.value);
-            
-            // Get selected work type
-            const workTypeRadio = document.querySelector('input[name="workType"]:checked');
-            
-            if (!building || !date || technicians.length === 0 || !workTypeRadio || !unitType) {
-                showMessage('Mohon lengkapi semua field yang wajib diisi!', 'error');
-                return;
-            }
-
-            if (workTypeRadio.value === 'lainnya' && !otherWork.trim()) {
-                showMessage('Mohon isi jenis pekerjaan lainnya!', 'error');
-                return;
-            }
-
-            let finalWorkType;
-            if (workTypeRadio.value === 'lainnya') {
-                finalWorkType = otherWork;
-            } else {
-                finalWorkType = 'Pemeriksaan Safety';
-            }
-
-            const formData = {
-                id: generateId(),
-                type: 'realization',
-                username: currentUser.username,
-                form_type: 'Realisasi',
-                building_name: building,
-                technician: technicians.join(', '),
-                date: date,
-                items: JSON.stringify([{
-                    work_type: finalWorkType,
-                    unit_type: unitType
-                }]),
-                additional_work: JSON.stringify([]),
-                created_at: new Date().toISOString(),
-                status: 'submitted'
-            };
-
-            // Show loading state
-            const submitBtn = document.querySelector('#realizationForm .btn-submit');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Menyimpan...';
-            submitBtn.disabled = true;
-
-            try {
-                const result = await window.dataSdk.create(formData);
+            dropdowns.forEach(({ input, dropdown, options }) => {
+                const inputElement = document.querySelector(`[name="${input}"]`);
+                const dropdownElement = document.getElementById(dropdown);
                 
-                if (result.isOk) {
-                    showMessage('Realisasi berhasil disimpan!', 'success');
-                    document.getElementById('realizationForm').reset();
-                    document.getElementById('otherWorkGroup').style.display = 'none';
-                    document.getElementById('otherWork').required = false;
-                    
-                    // Uncheck all technician checkboxes
-                    document.querySelectorAll('#realizationTechnicians input[type="checkbox"]').forEach(cb => cb.checked = false);
-                    
-                    // Set today's date again
-                    document.getElementById('realizationDate').value = new Date().toISOString().split('T')[0];
-                    
-                    // Return to dashboard after 1.5 seconds
-                    setTimeout(() => {
-                        backToDashboard();
-                    }, 1500);
-                } else {
-                    showMessage('Gagal menyimpan realisasi. Silakan coba lagi.', 'error');
-                }
-            } catch (error) {
-                showMessage('Terjadi kesalahan. Silakan coba lagi.', 'error');
-            } finally {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
-        }
-
-        async function submitForm(type) {
-            if (allData.length >= 999) {
-                showMessage('Maksimum 999 data telah tercapai. Silakan hapus beberapa data terlebih dahulu.', 'error');
-                return;
-            }
-
-            const building = document.getElementById(`${type}Building`).value;
-            const date = document.getElementById(`${type}Date`).value;
-            
-            // Get selected technicians
-            const techCheckboxes = document.querySelectorAll(`#${type}Technicians input[type="checkbox"]:checked`);
-            const technicians = Array.from(techCheckboxes).map(cb => cb.value);
-            
-            if (!building || !date || technicians.length === 0) {
-                showMessage('Mohon lengkapi semua field yang wajib diisi!', 'error');
-                return;
-            }
-
-            // Collect items data
-            const items = collectItemsData(`${type}Items`);
-            const additionalWork = collectItemsData(`${type}AdditionalWork`);
-
-            const formData = {
-                id: generateId(),
-                type: type,
-                username: currentUser.username,
-                form_type: type === 'escalator' ? 'Safety Eskalator' : 'Safety Elevator',
-                building_name: building,
-                technician: technicians.join(', '),
-                date: date,
-                items: JSON.stringify(items),
-                additional_work: JSON.stringify(additionalWork),
-                created_at: new Date().toISOString(),
-                status: 'submitted'
-            };
-
-            // Show loading state
-            const submitBtn = document.querySelector(`#${type}Form .btn-submit`);
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Menyimpan...';
-            submitBtn.disabled = true;
-
-            try {
-                const result = await window.dataSdk.create(formData);
-                
-                if (result.isOk) {
-                    showMessage('Data berhasil disimpan!', 'success');
-                    document.getElementById(`${type}Form`).reset();
-                    
-                    // Clear all items and work
-                    document.getElementById(`${type}Items`).innerHTML = '';
-                    document.getElementById(`${type}AdditionalWork`).innerHTML = '';
-                    
-                    // Reset counters
-                    if (type === 'escalator') {
-                        escalatorItemCount = 0;
-                        escalatorWorkCount = 0;
-                    } else {
-                        elevatorItemCount = 0;
-                        elevatorWorkCount = 0;
-                    }
-                    
-                    setTodayDate();
-                    
-                    // Return to dashboard after 1.5 seconds
-                    setTimeout(() => {
-                        backToDashboard();
-                    }, 1500);
-                } else {
-                    showMessage('Gagal menyimpan data. Silakan coba lagi.', 'error');
-                }
-            } catch (error) {
-                showMessage('Terjadi kesalahan. Silakan coba lagi.', 'error');
-            } finally {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
-        }
-
-        function collectItemsData(containerId) {
-            const container = document.getElementById(containerId);
-            const items = [];
-            
-            container.querySelectorAll('.item-container').forEach(item => {
-                const itemData = {};
-                item.querySelectorAll('input, select').forEach(input => {
-                    if (input.type === 'file') {
-                        if (input.files.length > 0) {
-                            itemData[input.name] = input.files[0].name;
-                        }
-                    } else {
-                        itemData[input.name] = input.value;
-                    }
-                });
-                items.push(itemData);
-            });
-            
-            return items;
-        }
-
-        function generateId() {
-            return Date.now().toString(36) + Math.random().toString(36).substr(2);
-        }
-
-        function renderHistory() {
-            const historyList = document.getElementById('historyList');
-            historyList.innerHTML = '';
-
-            let filteredData = allData;
-            
-            // Filter by user if not admin
-            if (currentUserType !== 'admin') {
-                filteredData = allData.filter(item => item.username === currentUser.username);
-            }
-            
-            // Filter out realization data from history
-            filteredData = filteredData.filter(item => item.type !== 'realization');
-
-            if (filteredData.length === 0) {
-                historyList.innerHTML = '<p style="text-align: center; color: #b0b0b0;">Belum ada data tersimpan</p>';
-                return;
-            }
-
-            filteredData.forEach(item => {
-                const historyItem = document.createElement('div');
-                historyItem.className = 'history-item';
-                
-                const itemsData = JSON.parse(item.items || '[]');
-                const workData = JSON.parse(item.additional_work || '[]');
-                
-                historyItem.innerHTML = `
-                    <div class="history-header">
-                        <div>
-                            <h4>${item.form_type}</h4>
-                            <p><strong>Gedung:</strong> ${item.building_name}</p>
-                            <p><strong>Teknisi:</strong> ${item.technician}</p>
-                            <p><strong>Tanggal:</strong> ${item.date}</p>
-                            <p><strong>Items:</strong> ${itemsData.length} item, ${workData.length} pekerjaan</p>
-                        </div>
-                        <div class="history-actions">
-                            ${currentUserType === 'admin' ? `
-                                <button class="btn btn-small btn-edit" onclick="reviewHistoryItem('${item.__backendId}')">Review</button>
-                                <button class="btn btn-small btn-edit" onclick="editHistoryItem('${item.__backendId}')">Edit</button>
-                                <button class="btn btn-small btn-delete" onclick="deleteHistoryItem('${item.__backendId}')">Hapus</button>
-                                <button class="btn btn-small btn-download" onclick="downloadPDF('${item.__backendId}')">PDF</button>
-                                <button class="btn btn-small" style="background: #2980b9;" onclick="downloadWord('${item.__backendId}')">Word</button>
-                            ` : `
-                                <button class="btn btn-small btn-download" onclick="downloadPDF('${item.__backendId}')">PDF</button>
-                            `}
-                        </div>
-                    </div>
-                `;
-                
-                historyList.appendChild(historyItem);
-            });
-        }
-
-        async function deleteHistoryItem(itemId) {
-            const item = allData.find(d => d.__backendId === itemId);
-            if (!item) return;
-
-            // Create inline confirmation
-            const historyItem = document.querySelector(`button[onclick="deleteHistoryItem('${itemId}')"]`).closest('.history-item');
-            const actionsDiv = historyItem.querySelector('.history-actions');
-            
-            actionsDiv.innerHTML = `
-                <button class="btn btn-small btn-delete" onclick="confirmDelete('${itemId}')">Konfirmasi Hapus?</button>
-                <button class="btn btn-small" onclick="cancelDelete('${itemId}')">Batal</button>
-            `;
-        }
-
-        async function confirmDelete(itemId) {
-            const item = allData.find(d => d.__backendId === itemId);
-            if (!item) return;
-
-            try {
-                const result = await window.dataSdk.delete(item);
-                if (result.isOk) {
-                    showMessage('Data berhasil dihapus!', 'success');
-                } else {
-                    showMessage('Gagal menghapus data.', 'error');
-                }
-            } catch (error) {
-                showMessage('Terjadi kesalahan saat menghapus data.', 'error');
-            }
-        }
-
-        function cancelDelete(itemId) {
-            renderHistory(); // Re-render to restore original buttons
-        }
-
-        function reviewHistoryItem(itemId) {
-            const item = allData.find(d => d.__backendId === itemId);
-            if (!item) return;
-
-            const itemsData = JSON.parse(item.items || '[]');
-            const workData = JSON.parse(item.additional_work || '[]');
-            
-            let reviewContent = `<div style="max-height: 400px; overflow-y: auto; text-align: left;">`;
-            reviewContent += `<h3>${item.form_type}</h3>`;
-            reviewContent += `<p><strong>Gedung:</strong> ${item.building_name}</p>`;
-            reviewContent += `<p><strong>Teknisi:</strong> ${item.technician}</p>`;
-            reviewContent += `<p><strong>Tanggal:</strong> ${item.date}</p><br>`;
-            
-            if (itemsData.length > 0) {
-                reviewContent += `<h4>ITEMS:</h4>`;
-                itemsData.forEach((itm, index) => {
-                    reviewContent += `<div style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">`;
-                    reviewContent += `<strong>Item ${index + 1}:</strong><br>`;
-                    reviewContent += `Unit: ${itm.unit || '-'}<br>`;
-                    reviewContent += `MFG: ${itm.mfg || '-'}<br>`;
-                    reviewContent += `Type: ${itm.type || '-'}<br>`;
-                    reviewContent += `Sparepart: ${itm.sparepart || '-'}<br>`;
-                    reviewContent += `Kondisi: ${itm.condition || '-'}<br>`;
-                    reviewContent += `Jumlah: ${itm.quantity || '-'} ${itm.unit_type || ''}<br>`;
-                    reviewContent += `Remarks: ${itm.remarks || '-'}<br>`;
-                    reviewContent += `Prioritas: ${itm.priority || '-'}`;
-                    reviewContent += `</div>`;
-                });
-            }
-            
-            if (workData.length > 0) {
-                reviewContent += `<h4>PEKERJAAN LAINNYA:</h4>`;
-                workData.forEach((work, index) => {
-                    reviewContent += `<div style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">`;
-                    reviewContent += `<strong>Pekerjaan ${index + 1}:</strong><br>`;
-                    reviewContent += `Pekerjaan: ${work.additional_work || '-'}<br>`;
-                    reviewContent += `Kondisi: ${work.work_condition || '-'}<br>`;
-                    reviewContent += `Keterangan: ${work.description || '-'}<br>`;
-                    reviewContent += `Remarks: ${work.work_remarks || '-'}<br>`;
-                    reviewContent += `Prioritas: ${work.work_priority || '-'}`;
-                    reviewContent += `</div>`;
-                });
-            }
-            reviewContent += `</div>`;
-            
-            showModal('Review Data', reviewContent);
-        }
-
-        function editHistoryItem(itemId) {
-            const item = allData.find(d => d.__backendId === itemId);
-            if (!item) return;
-
-            const itemsData = JSON.parse(item.items || '[]');
-            const workData = JSON.parse(item.additional_work || '[]');
-            
-            let editForm = `<div style="max-height: 500px; overflow-y: auto;">`;
-            editForm += `<form id="editForm">`;
-            
-            // Basic info
-            editForm += `<div class="form-row">`;
-            editForm += `<div class="form-group">`;
-            editForm += `<label>Gedung/Proyek</label>`;
-            editForm += `<input type="text" id="editBuilding" class="form-control" value="${item.building_name}" required>`;
-            editForm += `</div>`;
-            editForm += `<div class="form-group">`;
-            editForm += `<label>Teknisi</label>`;
-            editForm += `<input type="text" id="editTechnician" class="form-control" value="${item.technician}" required>`;
-            editForm += `</div>`;
-            editForm += `<div class="form-group">`;
-            editForm += `<label>Tanggal</label>`;
-            editForm += `<input type="date" id="editDate" class="form-control" value="${item.date}" required>`;
-            editForm += `</div>`;
-            editForm += `</div>`;
-            
-            // Items
-            if (itemsData.length > 0) {
-                editForm += `<h4>ITEMS:</h4>`;
-                itemsData.forEach((itm, index) => {
-                    editForm += `<div style="margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">`;
-                    editForm += `<h5>Item ${index + 1}</h5>`;
-                    editForm += `<div class="form-row">`;
-                    editForm += `<div class="form-group"><label>Unit</label><input type="text" class="form-control item-field" data-field="unit" data-index="${index}" value="${itm.unit || ''}"></div>`;
-                    editForm += `<div class="form-group"><label>MFG</label><input type="text" class="form-control item-field" data-field="mfg" data-index="${index}" value="${itm.mfg || ''}"></div>`;
-                    editForm += `<div class="form-group"><label>Type</label><input type="text" class="form-control item-field" data-field="type" data-index="${index}" value="${itm.type || ''}"></div>`;
-                    editForm += `</div>`;
-                    editForm += `<div class="form-row">`;
-                    editForm += `<div class="form-group"><label>Sparepart</label><input type="text" class="form-control item-field" data-field="sparepart" data-index="${index}" value="${itm.sparepart || ''}"></div>`;
-                    editForm += `<div class="form-group"><label>Kondisi</label><input type="text" class="form-control item-field" data-field="condition" data-index="${index}" value="${itm.condition || ''}"></div>`;
-                    editForm += `<div class="form-group"><label>Jumlah</label><input type="text" class="form-control item-field" data-field="quantity" data-index="${index}" value="${itm.quantity || ''}"></div>`;
-                    editForm += `</div>`;
-                    editForm += `<div class="form-row">`;
-                    editForm += `<div class="form-group"><label>Satuan</label><input type="text" class="form-control item-field" data-field="unit_type" data-index="${index}" value="${itm.unit_type || ''}"></div>`;
-                    editForm += `<div class="form-group"><label>Remarks</label><input type="text" class="form-control item-field" data-field="remarks" data-index="${index}" value="${itm.remarks || ''}"></div>`;
-                    editForm += `<div class="form-group"><label>Prioritas</label><input type="text" class="form-control item-field" data-field="priority" data-index="${index}" value="${itm.priority || ''}"></div>`;
-                    editForm += `</div>`;
-                    editForm += `</div>`;
-                });
-            }
-            
-            // Additional work
-            if (workData.length > 0) {
-                editForm += `<h4>PEKERJAAN LAINNYA:</h4>`;
-                workData.forEach((work, index) => {
-                    editForm += `<div style="margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">`;
-                    editForm += `<h5>Pekerjaan ${index + 1}</h5>`;
-                    editForm += `<div class="form-row">`;
-                    editForm += `<div class="form-group"><label>Pekerjaan</label><input type="text" class="form-control work-field" data-field="additional_work" data-index="${index}" value="${work.additional_work || ''}"></div>`;
-                    editForm += `<div class="form-group"><label>Kondisi</label><input type="text" class="form-control work-field" data-field="work_condition" data-index="${index}" value="${work.work_condition || ''}"></div>`;
-                    editForm += `<div class="form-group"><label>Keterangan</label><input type="text" class="form-control work-field" data-field="description" data-index="${index}" value="${work.description || ''}"></div>`;
-                    editForm += `</div>`;
-                    editForm += `<div class="form-row">`;
-                    editForm += `<div class="form-group"><label>Remarks</label><input type="text" class="form-control work-field" data-field="work_remarks" data-index="${index}" value="${work.work_remarks || ''}"></div>`;
-                    editForm += `<div class="form-group"><label>Prioritas</label><input type="text" class="form-control work-field" data-field="work_priority" data-index="${index}" value="${work.work_priority || ''}"></div>`;
-                    editForm += `</div>`;
-                    editForm += `</div>`;
-                });
-            }
-            
-            editForm += `</form>`;
-            editForm += `</div>`;
-            
-            showModal('Edit Data', editForm, [
-                {
-                    text: 'Simpan',
-                    class: 'btn-primary',
-                    onclick: 'saveEditedItem',
-                    params: [itemId, itemsData, workData]
-                },
-                {
-                    text: 'Batal',
-                    class: 'btn-secondary',
-                    onclick: 'closeModal',
-                    params: []
-                }
-            ]);
-        }
-
-        async function saveEditedItem(itemId, originalItems, originalWork) {
-            const item = allData.find(d => d.__backendId === itemId);
-            if (!item) return;
-
-            // Get updated basic info
-            const building = document.getElementById('editBuilding').value;
-            const technician = document.getElementById('editTechnician').value;
-            const date = document.getElementById('editDate').value;
-
-            // Get updated items
-            const updatedItems = [...originalItems];
-            document.querySelectorAll('.item-field').forEach(field => {
-                const index = parseInt(field.dataset.index);
-                const fieldName = field.dataset.field;
-                updatedItems[index][fieldName] = field.value;
-            });
-
-            // Get updated work
-            const updatedWork = [...originalWork];
-            document.querySelectorAll('.work-field').forEach(field => {
-                const index = parseInt(field.dataset.index);
-                const fieldName = field.dataset.field;
-                updatedWork[index][fieldName] = field.value;
-            });
-
-            // Update item
-            const updatedItem = {
-                ...item,
-                building_name: building,
-                technician: technician,
-                date: date,
-                items: JSON.stringify(updatedItems),
-                additional_work: JSON.stringify(updatedWork)
-            };
-
-            try {
-                const result = await window.dataSdk.update(updatedItem);
-                if (result.isOk) {
-                    showMessage('Data berhasil diupdate!', 'success');
-                    closeModal();
-                } else {
-                    showMessage('Gagal mengupdate data.', 'error');
-                }
-            } catch (error) {
-                showMessage('Terjadi kesalahan saat mengupdate data.', 'error');
-            }
-        }
-
-        function showModal(title, content, buttons = []) {
-            const modal = document.createElement('div');
-            modal.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.8);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 10000;
-            `;
-            
-            const modalContent = document.createElement('div');
-            modalContent.style.cssText = `
-                background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-                border-radius: 20px;
-                padding: 30px;
-                max-width: 90%;
-                max-height: 90%;
-                overflow-y: auto;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                color: white;
-            `;
-            
-            let modalHTML = `<h3 style="margin-bottom: 20px; color: #00d4ff;">${title}</h3>`;
-            modalHTML += content;
-            
-            if (buttons.length > 0) {
-                modalHTML += `<div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">`;
-                buttons.forEach((btn, index) => {
-                    const buttonId = `modalBtn${index}`;
-                    modalHTML += `<button id="${buttonId}" class="btn ${btn.class}">${btn.text}</button>`;
-                });
-                modalHTML += `</div>`;
-            } else {
-                modalHTML += `<div style="margin-top: 20px; text-align: right;">`;
-                modalHTML += `<button class="btn btn-primary" onclick="closeModal()">Tutup</button>`;
-                modalHTML += `</div>`;
-            }
-            
-            modalContent.innerHTML = modalHTML;
-            modal.appendChild(modalContent);
-            document.body.appendChild(modal);
-            
-            // Add event listeners for buttons
-            if (buttons.length > 0) {
-                buttons.forEach((btn, index) => {
-                    const buttonElement = document.getElementById(`modalBtn${index}`);
-                    buttonElement.addEventListener('click', () => {
-                        if (btn.onclick === 'saveEditedItem') {
-                            saveEditedItem(btn.params[0], btn.params[1], btn.params[2]);
-                        } else if (btn.onclick === 'closeModal') {
-                            closeModal();
-                        }
-                    });
-                });
-            }
-            
-            // Store modal reference
-            window.currentModal = modal;
-            
-            // Close on backdrop click
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
+                if (inputElement && dropdownElement) {
+                    setupDropdownForElement(inputElement, dropdownElement, options);
                 }
             });
         }
 
-        function closeModal() {
-            if (window.currentModal) {
-                document.body.removeChild(window.currentModal);
-                window.currentModal = null;
-            }
-        }
-
-        function searchHistory(searchTerm) {
-            const historyList = document.getElementById('historyList');
-            
-            let filteredData = allData;
-            
-            // Filter by user if not admin
-            if (currentUserType !== 'admin') {
-                filteredData = allData.filter(item => item.username === currentUser.username);
-            }
-            
-            // Filter out realization data from history
-            filteredData = filteredData.filter(item => item.type !== 'realization');
-            
-            // Apply search filter
-            if (searchTerm.trim()) {
-                const term = searchTerm.toLowerCase();
-                filteredData = filteredData.filter(item => 
-                    item.building_name.toLowerCase().includes(term) ||
-                    item.technician.toLowerCase().includes(term) ||
-                    item.date.includes(term) ||
-                    item.form_type.toLowerCase().includes(term)
+        // Setup dropdown for specific element
+        function setupDropdownForElement(input, dropdown, options) {
+            input.addEventListener('input', function() {
+                const value = this.value.toLowerCase();
+                const filtered = options.filter(option => 
+                    option.toLowerCase().includes(value)
                 );
-            }
+                
+                if (filtered.length > 0 && value) {
+                    dropdown.innerHTML = filtered.map(option => 
+                        `<div class="dropdown-item" onclick="selectDropdownValue(this, '${option}')">${option}</div>`
+                    ).join('');
+                    dropdown.style.display = 'block';
+                } else {
+                    dropdown.style.display = 'none';
+                }
+            });
             
-            historyList.innerHTML = '';
+            input.addEventListener('focus', function() {
+                dropdown.innerHTML = options.map(option => 
+                    `<div class="dropdown-item" onclick="selectDropdownValue(this, '${option}')">${option}</div>`
+                ).join('');
+                dropdown.style.display = 'block';
+            });
+        }
 
-            if (filteredData.length === 0) {
-                historyList.innerHTML = '<p style="text-align: center; color: #b0b0b0;">Tidak ada data yang ditemukan</p>';
+        // Select dropdown value
+        function selectDropdownValue(element, value) {
+            const dropdown = element.parentElement;
+            const input = dropdown.previousElementSibling;
+            input.value = value;
+            dropdown.style.display = 'none';
+            
+            // Auto-update unit if sparepart is selected
+            if (input.name && input.name.includes('sparepart_')) {
+                const itemId = input.name.split('_')[1];
+                const unitInput = document.querySelector(`[name="unit_type_${itemId}"]`);
+                if (unitInput && sparepartUnitMapping[value]) {
+                    unitInput.value = sparepartUnitMapping[value];
+                }
+            }
+        }
+
+        // Clear item
+        function clearItem(itemId) {
+            const item = document.getElementById(`item_${itemId}`);
+            const inputs = item.querySelectorAll('input[type="text"], input[type="file"]');
+            inputs.forEach(input => {
+                input.value = '';
+            });
+            
+            // Clear photo previews (including containers)
+            const photoContainer = document.getElementById(`photoContainer_${itemId}`);
+            const previewContainers = photoContainer.querySelectorAll('div[style*="position: relative"]');
+            previewContainers.forEach(container => container.remove());
+        }
+
+        // Delete item
+        function deleteItem(itemId) {
+            const item = document.getElementById(`item_${itemId}`);
+            if (item) {
+                item.remove();
+                renumberItems();
+            }
+        }
+
+        // Renumber items after deletion
+        function renumberItems() {
+            const itemContainers = document.querySelectorAll('#itemsContainer .item-container[id^="item_"]');
+            itemContainers.forEach((container, index) => {
+                const newItemId = index + 1;
+                const itemNumber = container.querySelector('.item-number');
+                if (itemNumber) {
+                    itemNumber.textContent = `Item ${newItemId}`;
+                }
+                
+                // Update the container ID
+                container.id = `item_${newItemId}`;
+                
+                // Update all input names and related IDs within this container
+                const inputs = container.querySelectorAll('input[name*="_"]');
+                inputs.forEach(input => {
+                    if (input.name) {
+                        const nameParts = input.name.split('_');
+                        if (nameParts.length > 1) {
+                            nameParts[nameParts.length - 1] = newItemId.toString();
+                            input.name = nameParts.join('_');
+                        }
+                    }
+                });
+                
+                // Update dropdown IDs
+                const dropdowns = container.querySelectorAll('[id*="_dropdown_"], [id*="photoContainer_"]');
+                dropdowns.forEach(dropdown => {
+                    if (dropdown.id) {
+                        const idParts = dropdown.id.split('_');
+                        if (idParts.length > 1) {
+                            idParts[idParts.length - 1] = newItemId.toString();
+                            dropdown.id = idParts.join('_');
+                        }
+                    }
+                });
+                
+                // Update button onclick attributes
+                const clearBtn = container.querySelector('.btn-clear');
+                const deleteBtn = container.querySelector('.btn-delete');
+                
+                if (clearBtn) {
+                    clearBtn.setAttribute('onclick', `clearItem(${newItemId})`);
+                }
+                if (deleteBtn) {
+                    deleteBtn.setAttribute('onclick', `deleteItem(${newItemId})`);
+                }
+                
+                // Update photo upload buttons
+                const photoUploadBtn = container.querySelector('.photo-upload');
+                const photoInput = container.querySelector('input[type="file"]');
+                
+                if (photoUploadBtn) {
+                    photoUploadBtn.setAttribute('onclick', `addPhotoUpload(${newItemId}, 1)`);
+                }
+                if (photoInput) {
+                    photoInput.setAttribute('onchange', `handlePhotoUpload(this, ${newItemId}, 1)`);
+                }
+            });
+            
+            // Update the global counter
+            itemCounter = itemContainers.length;
+        }
+
+        // Add work
+        function addWork() {
+            workCounter++;
+            const container = document.getElementById('additionalWorkContainer');
+            
+            const workHtml = `
+                <div class="item-container" id="work_${workCounter}">
+                    <div class="item-header">
+                        <span class="item-number">Pekerjaan ${workCounter}</span>
+                        <div class="item-actions">
+                            <button type="button" class="btn-small btn-clear" onclick="clearWork(${workCounter})">Clear</button>
+                            <button type="button" class="btn-small btn-delete" onclick="deleteWork(${workCounter})">Delete</button>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Pekerjaan Lainnya</label>
+                            <div class="dropdown-container">
+                                <input type="text" class="form-input" name="additional_work_${workCounter}" placeholder="Pilih pekerjaan" autocomplete="off">
+                                <div class="dropdown-list" id="work_dropdown_${workCounter}"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Kondisi</label>
+                            <div class="dropdown-container">
+                                <input type="text" class="form-input" name="work_condition_${workCounter}" placeholder="Pilih kondisi" autocomplete="off">
+                                <div class="dropdown-list" id="work_condition_dropdown_${workCounter}"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Keterangan</label>
+                            <input type="text" class="form-input" name="work_description_${workCounter}" placeholder="Masukkan keterangan">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Remarks</label>
+                            <div class="dropdown-container">
+                                <input type="text" class="form-input" name="work_remarks_${workCounter}" placeholder="Pilih remarks" autocomplete="off">
+                                <div class="dropdown-list" id="work_remarks_dropdown_${workCounter}"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Prioritas</label>
+                            <div class="dropdown-container">
+                                <input type="text" class="form-input" name="work_priority_${workCounter}" placeholder="Pilih prioritas" autocomplete="off">
+                                <div class="dropdown-list" id="work_priority_dropdown_${workCounter}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Foto</label>
+                        <div id="workPhotoContainer_${workCounter}">
+                            <div class="photo-upload" onclick="addWorkPhotoUpload(${workCounter}, 1)">
+                                <span>📷 Klik untuk upload foto</span>
+                                <input type="file" accept="image/*" style="display: none;" onchange="handleWorkPhotoUpload(this, ${workCounter}, 1)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', workHtml);
+            
+            // Setup dropdowns for this work
+            setupWorkDropdowns(workCounter);
+        }
+
+        // Setup dropdowns for work
+        function setupWorkDropdowns(workId) {
+            const dropdowns = [
+                { input: `additional_work_${workId}`, dropdown: `work_dropdown_${workId}`, options: dropdownOptions.additionalWork },
+                { input: `work_condition_${workId}`, dropdown: `work_condition_dropdown_${workId}`, options: dropdownOptions.workConditions },
+                { input: `work_remarks_${workId}`, dropdown: `work_remarks_dropdown_${workId}`, options: dropdownOptions.workRemarks },
+                { input: `work_priority_${workId}`, dropdown: `work_priority_dropdown_${workId}`, options: dropdownOptions.priorities }
+            ];
+            
+            dropdowns.forEach(({ input, dropdown, options }) => {
+                const inputElement = document.querySelector(`[name="${input}"]`);
+                const dropdownElement = document.getElementById(dropdown);
+                
+                if (inputElement && dropdownElement) {
+                    setupDropdownForElement(inputElement, dropdownElement, options);
+                }
+            });
+        }
+
+        // Clear work
+        function clearWork(workId) {
+            const work = document.getElementById(`work_${workId}`);
+            const inputs = work.querySelectorAll('input[type="text"], input[type="file"]');
+            inputs.forEach(input => {
+                input.value = '';
+            });
+            
+            // Clear photo previews (including containers)
+            const photoContainer = document.getElementById(`workPhotoContainer_${workId}`);
+            const previewContainers = photoContainer.querySelectorAll('div[style*="position: relative"]');
+            previewContainers.forEach(container => container.remove());
+        }
+
+        // Delete work
+        function deleteWork(workId) {
+            const work = document.getElementById(`work_${workId}`);
+            if (work) {
+                work.remove();
+                renumberWorks();
+            }
+        }
+
+        // Renumber works after deletion
+        function renumberWorks() {
+            const workContainers = document.querySelectorAll('#additionalWorkContainer .item-container[id^="work_"]');
+            workContainers.forEach((container, index) => {
+                const newWorkId = index + 1;
+                const workNumber = container.querySelector('.item-number');
+                if (workNumber) {
+                    workNumber.textContent = `Pekerjaan ${newWorkId}`;
+                }
+                
+                // Update the container ID
+                container.id = `work_${newWorkId}`;
+                
+                // Update all input names and related IDs within this container
+                const inputs = container.querySelectorAll('input[name*="_"]');
+                inputs.forEach(input => {
+                    if (input.name) {
+                        const nameParts = input.name.split('_');
+                        if (nameParts.length > 1) {
+                            nameParts[nameParts.length - 1] = newWorkId.toString();
+                            input.name = nameParts.join('_');
+                        }
+                    }
+                });
+                
+                // Update dropdown IDs
+                const dropdowns = container.querySelectorAll('[id*="_dropdown_"], [id*="workPhotoContainer_"]');
+                dropdowns.forEach(dropdown => {
+                    if (dropdown.id) {
+                        const idParts = dropdown.id.split('_');
+                        if (idParts.length > 1) {
+                            idParts[idParts.length - 1] = newWorkId.toString();
+                            dropdown.id = idParts.join('_');
+                        }
+                    }
+                });
+                
+                // Update button onclick attributes
+                const clearBtn = container.querySelector('.btn-clear');
+                const deleteBtn = container.querySelector('.btn-delete');
+                
+                if (clearBtn) {
+                    clearBtn.setAttribute('onclick', `clearWork(${newWorkId})`);
+                }
+                if (deleteBtn) {
+                    deleteBtn.setAttribute('onclick', `deleteWork(${newWorkId})`);
+                }
+                
+                // Update photo upload buttons
+                const photoUploadBtn = container.querySelector('.photo-upload');
+                const photoInput = container.querySelector('input[type="file"]');
+                
+                if (photoUploadBtn) {
+                    photoUploadBtn.setAttribute('onclick', `addWorkPhotoUpload(${newWorkId}, 1)`);
+                }
+                if (photoInput) {
+                    photoInput.setAttribute('onchange', `handleWorkPhotoUpload(this, ${newWorkId}, 1)`);
+                }
+            });
+            
+            // Update the global counter
+            workCounter = workContainers.length;
+        }
+
+        // Add photo upload
+        function addPhotoUpload(itemId, photoId) {
+            const input = document.querySelector(`#photoContainer_${itemId} input[type="file"]:last-of-type`);
+            input.click();
+        }
+
+        // Handle photo upload
+        function handlePhotoUpload(input, itemId, photoId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const container = document.getElementById(`photoContainer_${itemId}`);
+                    
+                    // Create preview container
+                    const previewContainer = document.createElement('div');
+                    previewContainer.style.cssText = 'position: relative; display: inline-block; margin: 10px;';
+                    
+                    // Create preview
+                    const preview = document.createElement('img');
+                    preview.src = e.target.result;
+                    preview.className = 'photo-preview';
+                    preview.alt = `Photo ${photoId}`;
+                    
+                    // Create delete button
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.innerHTML = '×';
+                    deleteBtn.type = 'button';
+                    deleteBtn.style.cssText = `
+                        position: absolute;
+                        top: -5px;
+                        right: -5px;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        background: #f44336;
+                        color: white;
+                        border: none;
+                        cursor: pointer;
+                        font-size: 14px;
+                        font-weight: bold;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    `;
+                    deleteBtn.onclick = function() {
+                        previewContainer.remove();
+                    };
+                    
+                    previewContainer.appendChild(preview);
+                    previewContainer.appendChild(deleteBtn);
+                    
+                    // Insert before the upload button
+                    const uploadButton = container.querySelector('.photo-upload');
+                    container.insertBefore(previewContainer, uploadButton);
+                    
+                    // Reset the file input so it can be used again
+                    input.value = '';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Add work photo upload
+        function addWorkPhotoUpload(workId, photoId) {
+            const input = document.querySelector(`#workPhotoContainer_${workId} input[type="file"]:last-of-type`);
+            input.click();
+        }
+
+        // Handle work photo upload
+        function handleWorkPhotoUpload(input, workId, photoId) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const container = document.getElementById(`workPhotoContainer_${workId}`);
+                    
+                    // Create preview container
+                    const previewContainer = document.createElement('div');
+                    previewContainer.style.cssText = 'position: relative; display: inline-block; margin: 10px;';
+                    
+                    // Create preview
+                    const preview = document.createElement('img');
+                    preview.src = e.target.result;
+                    preview.className = 'photo-preview';
+                    preview.alt = `Work Photo ${photoId}`;
+                    
+                    // Create delete button
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.innerHTML = '×';
+                    deleteBtn.type = 'button';
+                    deleteBtn.style.cssText = `
+                        position: absolute;
+                        top: -5px;
+                        right: -5px;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        background: #f44336;
+                        color: white;
+                        border: none;
+                        cursor: pointer;
+                        font-size: 14px;
+                        font-weight: bold;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    `;
+                    deleteBtn.onclick = function() {
+                        previewContainer.remove();
+                    };
+                    
+                    previewContainer.appendChild(preview);
+                    previewContainer.appendChild(deleteBtn);
+                    
+                    // Insert before the upload button
+                    const uploadButton = container.querySelector('.photo-upload');
+                    container.insertBefore(previewContainer, uploadButton);
+                    
+                    // Reset the file input so it can be used again
+                    input.value = '';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Handle form submit
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            if (formData.length >= 999) {
+                showMessage("Batas maksimum 999 data telah tercapai. Silakan hapus beberapa data terlebih dahulu.", "error");
                 return;
             }
-
-            filteredData.forEach(item => {
-                const historyItem = document.createElement('div');
-                historyItem.className = 'history-item';
-                
-                const itemsData = JSON.parse(item.items || '[]');
-                const workData = JSON.parse(item.additional_work || '[]');
-                
-                historyItem.innerHTML = `
-                    <div class="history-header">
-                        <div>
-                            <h4>${item.form_type}</h4>
-                            <p><strong>Gedung:</strong> ${item.building_name}</p>
-                            <p><strong>Teknisi:</strong> ${item.technician}</p>
-                            <p><strong>Tanggal:</strong> ${item.date}</p>
-                            <p><strong>Items:</strong> ${itemsData.length} item, ${workData.length} pekerjaan</p>
-                        </div>
-                        <div class="history-actions">
-                            ${currentUserType === 'admin' ? `
-                                <button class="btn btn-small btn-edit" onclick="reviewHistoryItem('${item.__backendId}')">Review</button>
-                                <button class="btn btn-small btn-edit" onclick="editHistoryItem('${item.__backendId}')">Edit</button>
-                                <button class="btn btn-small btn-delete" onclick="deleteHistoryItem('${item.__backendId}')">Hapus</button>
-                                <button class="btn btn-small btn-download" onclick="downloadPDF('${item.__backendId}')">PDF</button>
-                                <button class="btn btn-small" style="background: #2980b9;" onclick="downloadWord('${item.__backendId}')">Word</button>
-                            ` : `
-                                <button class="btn btn-small btn-download" onclick="downloadPDF('${item.__backendId}')">PDF</button>
-                            `}
-                        </div>
-                    </div>
-                `;
-                
-                historyList.appendChild(historyItem);
-            });
-        }
-
-        function downloadPDF(itemId) {
-            const item = allData.find(d => d.__backendId === itemId);
-            if (!item) return;
-
-            const itemsData = JSON.parse(item.items || '[]');
-            const workData = JSON.parse(item.additional_work || '[]');
             
-            // Create HTML content for PDF
-            let htmlContent = `
-                <html>
-                <head>
-                    <meta charset="UTF-8">
-                    <style>
-                        body { font-family: Arial, sans-serif; margin: 20px; }
-                        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 20px; }
-                        .info { margin-bottom: 20px; }
-                        .section { margin-bottom: 30px; }
-                        .section-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #333; }
-                        .item { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
-                        .item-title { font-weight: bold; color: #666; }
-                        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
-                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-                        th { background-color: #f2f2f2; }
-                    </style>
-                </head>
-                <body>
-                    <div class="header">
-                        <h1>LAPORAN ${item.form_type.toUpperCase()}</h1>
-                        <h2>PT. JAYA KENCANA</h2>
-                    </div>
+            const form = e.target;
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // Show loading state
+            submitButton.classList.add('loading');
+            submitButton.textContent = 'Menyimpan...';
+            
+            try {
+                // Collect form data
+                const formDataObj = {
+                    id: Date.now().toString(),
+                    type: currentSection,
+                    username: currentUser,
+                    form_type: currentSection,
+                    building_name: document.getElementById('buildingName').value,
+                    technician: getSelectedTechnicians(),
+                    date: document.getElementById('workDate').value,
+                    items: collectItemsData(),
+                    additional_work: collectAdditionalWorkData(),
+                    created_at: new Date().toISOString(),
+                    status: 'submitted'
+                };
+                
+                // Save to Data SDK
+                const result = await window.dataSdk.create(formDataObj);
+                
+                if (result.isOk) {
+                    showMessage("Data berhasil disimpan!", "success");
                     
-                    <div class="info">
-                        <table>
-                            <tr><th>Gedung/Proyek</th><td>${item.building_name}</td></tr>
-                            <tr><th>Teknisi</th><td>${item.technician}</td></tr>
-                            <tr><th>Tanggal</th><td>${item.date}</td></tr>
-                        </table>
-                    </div>
-            `;
-            
-            if (itemsData.length > 0) {
-                htmlContent += `<div class="section">
-                    <div class="section-title">ITEMS</div>`;
-                itemsData.forEach((itm, index) => {
-                    htmlContent += `<div class="item">
-                        <div class="item-title">Item ${index + 1}</div>
-                        <table>
-                            <tr><th>Unit</th><td>${itm.unit || '-'}</td><th>MFG</th><td>${itm.mfg || '-'}</td></tr>
-                            <tr><th>Type</th><td>${itm.type || '-'}</td><th>Sparepart</th><td>${itm.sparepart || '-'}</td></tr>
-                            <tr><th>Kondisi</th><td>${itm.condition || '-'}</td><th>Jumlah</th><td>${itm.quantity || '-'} ${itm.unit_type || ''}</td></tr>
-                            <tr><th>Remarks</th><td>${itm.remarks || '-'}</td><th>Prioritas</th><td>${itm.priority || '-'}</td></tr>
-                        </table>
-                    </div>`;
-                });
-                htmlContent += `</div>`;
-            }
-            
-            if (workData.length > 0) {
-                htmlContent += `<div class="section">
-                    <div class="section-title">PEKERJAAN LAINNYA</div>`;
-                workData.forEach((work, index) => {
-                    htmlContent += `<div class="item">
-                        <div class="item-title">Pekerjaan ${index + 1}</div>
-                        <table>
-                            <tr><th>Pekerjaan</th><td>${work.additional_work || '-'}</td><th>Kondisi</th><td>${work.work_condition || '-'}</td></tr>
-                            <tr><th>Keterangan</th><td colspan="3">${work.description || '-'}</td></tr>
-                            <tr><th>Remarks</th><td>${work.work_remarks || '-'}</td><th>Prioritas</th><td>${work.work_priority || '-'}</td></tr>
-                        </table>
-                    </div>`;
-                });
-                htmlContent += `</div>`;
-            }
-            
-            htmlContent += `</body></html>`;
-            
-            // Create and download PDF
-            const blob = new Blob([htmlContent], { type: 'text/html' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${item.form_type}_${item.building_name}_${item.date}.html`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-            
-            showMessage('Laporan PDF berhasil diunduh!', 'success');
-        }
-
-        function downloadWord(itemId) {
-            const item = allData.find(d => d.__backendId === itemId);
-            if (!item) return;
-
-            const itemsData = JSON.parse(item.items || '[]');
-            const workData = JSON.parse(item.additional_work || '[]');
-            
-            // Create Word document content
-            let wordContent = `
-                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-                <head>
-                    <meta charset='utf-8'>
-                    <title>Laporan ${item.form_type}</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; margin: 20px; }
-                        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 20px; }
-                        .info { margin-bottom: 20px; }
-                        .section { margin-bottom: 30px; }
-                        .section-title { font-size: 18px; font-weight: bold; margin-bottom: 15px; color: #333; }
-                        .item { margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; }
-                        .item-title { font-weight: bold; color: #666; margin-bottom: 10px; }
-                        table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
-                        th, td { border: 1px solid #333; padding: 8px; text-align: left; }
-                        th { background-color: #f0f0f0; font-weight: bold; }
-                    </style>
-                </head>
-                <body>
-                    <div class="header">
-                        <h1>LAPORAN ${item.form_type.toUpperCase()}</h1>
-                        <h2>PT. JAYA KENCANA</h2>
-                        <p>Safety Management System</p>
-                    </div>
+                    // Reset form
+                    form.reset();
+                    document.getElementById('itemsContainer').innerHTML = '';
+                    document.getElementById('additionalWorkContainer').innerHTML = '';
+                    itemCounter = 0;
+                    workCounter = 0;
                     
-                    <div class="info">
-                        <table>
-                            <tr><th width="30%">Gedung/Proyek</th><td>${item.building_name}</td></tr>
-                            <tr><th>Teknisi</th><td>${item.technician}</td></tr>
-                            <tr><th>Tanggal</th><td>${item.date}</td></tr>
-                            <tr><th>Status</th><td>Submitted</td></tr>
-                        </table>
-                    </div>
-            `;
-            
-            if (itemsData.length > 0) {
-                wordContent += `<div class="section">
-                    <div class="section-title">DAFTAR ITEMS</div>`;
-                itemsData.forEach((itm, index) => {
-                    wordContent += `<div class="item">
-                        <div class="item-title">Item ${index + 1}</div>
-                        <table>
-                            <tr><th width="20%">Unit</th><td width="30%">${itm.unit || '-'}</td><th width="20%">MFG</th><td>${itm.mfg || '-'}</td></tr>
-                            <tr><th>Type</th><td>${itm.type || '-'}</td><th>Sparepart</th><td>${itm.sparepart || '-'}</td></tr>
-                            <tr><th>Kondisi</th><td>${itm.condition || '-'}</td><th>Jumlah</th><td>${itm.quantity || '-'} ${itm.unit_type || ''}</td></tr>
-                            <tr><th>Remarks</th><td>${itm.remarks || '-'}</td><th>Prioritas</th><td>${itm.priority || '-'}</td></tr>
-                        </table>
-                    </div>`;
-                });
-                wordContent += `</div>`;
+                    // Add initial item
+                    addItem();
+                } else {
+                    showMessage("Gagal menyimpan data. Silakan coba lagi.", "error");
+                }
+            } catch (error) {
+                showMessage("Terjadi kesalahan. Silakan coba lagi.", "error");
+            } finally {
+                // Reset loading state
+                submitButton.classList.remove('loading');
+                submitButton.textContent = 'Submit';
             }
-            
-            if (workData.length > 0) {
-                wordContent += `<div class="section">
-                    <div class="section-title">PEKERJAAN LAINNYA</div>`;
-                workData.forEach((work, index) => {
-                    wordContent += `<div class="item">
-                        <div class="item-title">Pekerjaan ${index + 1}</div>
-                        <table>
-                            <tr><th width="20%">Pekerjaan</th><td width="30%">${work.additional_work || '-'}</td><th width="20%">Kondisi</th><td>${work.work_condition || '-'}</td></tr>
-                            <tr><th>Keterangan</th><td colspan="3">${work.description || '-'}</td></tr>
-                            <tr><th>Remarks</th><td>${work.work_remarks || '-'}</td><th>Prioritas</th><td>${work.work_priority || '-'}</td></tr>
-                        </table>
-                    </div>`;
-                });
-                wordContent += `</div>`;
-            }
-            
-            wordContent += `
-                    <div style="margin-top: 50px; text-align: center; border-top: 1px solid #333; padding-top: 20px;">
-                        <p><strong>PT. JAYA KENCANA</strong></p>
-                        <p>Safety Management System</p>
-                        <p>Generated on: ${new Date().toLocaleDateString('id-ID')}</p>
-                    </div>
-                </body>
-                </html>
-            `;
-            
-            // Create and download Word document
-            const blob = new Blob([wordContent], { 
-                type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' 
-            });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${item.form_type}_${item.building_name}_${item.date}.doc`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-            
-            showMessage('Laporan Word berhasil diunduh!', 'success');
         }
 
+        // Get selected technicians
+        function getSelectedTechnicians() {
+            const checkboxes = document.querySelectorAll('input[name="technicians"]:checked');
+            return Array.from(checkboxes).map(cb => cb.value).join(', ');
+        }
+
+        // Collect items data
+        function collectItemsData() {
+            const items = [];
+            const itemContainers = document.querySelectorAll('[id^="item_"]');
+            
+            itemContainers.forEach(container => {
+                const itemData = {};
+                const inputs = container.querySelectorAll('input[type="text"]');
+                
+                inputs.forEach(input => {
+                    if (input.value.trim()) {
+                        itemData[input.name] = input.value.trim();
+                    }
+                });
+                
+                if (Object.keys(itemData).length > 0) {
+                    items.push(itemData);
+                }
+            });
+            
+            return JSON.stringify(items);
+        }
+
+        // Collect additional work data
+        function collectAdditionalWorkData() {
+            const works = [];
+            const workContainers = document.querySelectorAll('[id^="work_"]');
+            
+            workContainers.forEach(container => {
+                const workData = {};
+                const inputs = container.querySelectorAll('input[type="text"]');
+                
+                inputs.forEach(input => {
+                    if (input.value.trim()) {
+                        workData[input.name] = input.value.trim();
+                    }
+                });
+                
+                if (Object.keys(workData).length > 0) {
+                    works.push(workData);
+                }
+            });
+            
+            return JSON.stringify(works);
+        }
+
+        // Show message
         function showMessage(message, type) {
-            // Create toast message
-            const toast = document.createElement('div');
-            toast.style.cssText = `
+            const messageDiv = document.createElement('div');
+            messageDiv.style.cssText = `
                 position: fixed;
                 top: 20px;
                 right: 20px;
@@ -2117,52 +1534,516 @@
                 color: white;
                 font-weight: 500;
                 z-index: 10000;
-                max-width: 300px;
-                word-wrap: break-word;
                 animation: slideIn 0.3s ease;
+                ${type === 'success' ? 'background: linear-gradient(45deg, #4caf50, #45a049);' : 'background: linear-gradient(45deg, #f44336, #d32f2f);'}
             `;
+            messageDiv.textContent = message;
             
-            switch(type) {
-                case 'success':
-                    toast.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
-                    break;
-                case 'error':
-                    toast.style.background = 'linear-gradient(45deg, #e74c3c, #c0392b)';
-                    break;
-                case 'info':
-                    toast.style.background = 'linear-gradient(45deg, #3498db, #2980b9)';
-                    break;
-            }
-            
-            toast.textContent = message;
-            document.body.appendChild(toast);
+            document.body.appendChild(messageDiv);
             
             setTimeout(() => {
-                toast.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => {
-                    if (document.body.contains(toast)) {
-                        document.body.removeChild(toast);
-                    }
-                }, 300);
+                messageDiv.remove();
             }, 3000);
         }
 
-        // Add CSS animations
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
+        // Render realization section
+        function renderRealizationSection() {
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="form-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 class="section-title" style="margin: 0;">Realisasi</h2>
+                        <button type="button" class="btn-small" onclick="backToNavigation()" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3);">← Kembali</button>
+                    </div>
+                    <p style="text-align: center; color: #b0b0b0; font-size: 18px; margin: 50px 0;">
+                        📊 Fitur realisasi akan segera tersedia
+                    </p>
+                </div>
+            `;
+        }
+
+        // Render history section
+        function renderHistorySection() {
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="history-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 class="section-title" style="margin: 0;">History Data</h2>
+                        <button type="button" class="btn-small" onclick="backToNavigation()" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3);">← Kembali</button>
+                    </div>
+                    
+                    <div class="search-container">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Cari data..." onkeyup="filterHistory()">
+                    </div>
+                    
+                    <div id="historyList">
+                        <!-- History items will be populated here -->
+                    </div>
+                </div>
+            `;
+            
+            renderHistory();
+        }
+
+        // Render history
+        function renderHistory() {
+            const historyList = document.getElementById('historyList');
+            if (!historyList) return;
+            
+            const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
+            
+            let filteredData = formData.filter(item => {
+                return item.building_name?.toLowerCase().includes(searchTerm) ||
+                       item.technician?.toLowerCase().includes(searchTerm) ||
+                       item.form_type?.toLowerCase().includes(searchTerm) ||
+                       item.date?.includes(searchTerm);
+            });
+            
+            if (filteredData.length === 0) {
+                historyList.innerHTML = `
+                    <div style="text-align: center; color: #b0b0b0; padding: 50px;">
+                        📋 Belum ada data yang tersimpan
+                    </div>
+                `;
+                return;
             }
-            @keyframes slideOut {
-                from { transform: translateX(0); opacity: 1; }
-                to { transform: translateX(100%); opacity: 0; }
+            
+            historyList.innerHTML = filteredData.map(item => `
+                <div class="history-item">
+                    <div class="history-header">
+                        <div>
+                            <h3 style="margin: 0; color: #00d4ff;">${item.form_type?.toUpperCase()} - ${item.building_name}</h3>
+                            <p style="margin: 5px 0; color: #b0b0b0;">Teknisi: ${item.technician} | Tanggal: ${item.date}</p>
+                        </div>
+                        <div class="history-actions">
+                            <button class="btn-download" onclick="downloadPDF('${item.id}')">📄 PDF</button>
+                            <button class="btn-download" onclick="downloadWord('${item.id}')">📝 Word</button>
+                            ${currentUserType === 'admin' ? `
+                                <button class="btn-edit" onclick="reviewData('${item.id}')" style="background: linear-gradient(45deg, #9c27b0, #673ab7);">👁️ Review</button>
+                                <button class="btn-edit" onclick="editData('${item.id}')">✏️ Edit</button>
+                                <button class="btn-small btn-delete" onclick="deleteData('${item.id}')">🗑️ Delete</button>
+                            ` : ''}
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; font-size: 14px; color: #e0e0e0;">
+                        Status: ${item.status} | Dibuat: ${new Date(item.created_at).toLocaleString('id-ID')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Filter history
+        function filterHistory() {
+            renderHistory();
+        }
+
+        // Download PDF
+        function downloadPDF(itemId) {
+            const item = formData.find(d => d.id === itemId);
+            if (!item) return;
+            
+            // Create PDF content
+            const pdfContent = `
+                PT. JAYA KENCANA
+                LAPORAN ${item.form_type?.toUpperCase()}
+                
+                Gedung/Proyek: ${item.building_name}
+                Teknisi: ${item.technician}
+                Tanggal: ${item.date}
+                
+                ITEMS:
+                ${item.items ? JSON.parse(item.items).map((itm, idx) => `
+                Item ${idx + 1}:
+                ${Object.entries(itm).map(([key, value]) => `${key}: ${value}`).join('\n')}
+                `).join('\n') : 'Tidak ada item'}
+                
+                PEKERJAAN TAMBAHAN:
+                ${item.additional_work ? JSON.parse(item.additional_work).map((work, idx) => `
+                Pekerjaan ${idx + 1}:
+                ${Object.entries(work).map(([key, value]) => `${key}: ${value}`).join('\n')}
+                `).join('\n') : 'Tidak ada pekerjaan tambahan'}
+                
+                Dibuat: ${new Date(item.created_at).toLocaleString('id-ID')}
+            `;
+            
+            // Create and download file
+            const blob = new Blob([pdfContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${item.form_type}_${item.building_name}_${item.date}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showMessage("File berhasil diunduh!", "success");
+        }
+
+        // Download Word
+        function downloadWord(itemId) {
+            // For demo purposes, this creates a text file
+            downloadPDF(itemId);
+        }
+
+        // Edit data (admin only)
+        function editData(itemId) {
+            if (currentUserType !== 'admin') return;
+            
+            const item = formData.find(d => d.id === itemId);
+            if (!item) return;
+            
+            // Navigate to form section with pre-filled data
+            navigateToSection(item.form_type);
+            
+            // Wait for form to render then populate data
+            setTimeout(() => {
+                populateFormForEdit(item);
+            }, 100);
+        }
+
+        // Populate form for editing
+        function populateFormForEdit(item) {
+            // Fill basic form fields
+            document.getElementById('buildingName').value = item.building_name || '';
+            document.getElementById('workDate').value = item.date || '';
+            document.getElementById('headerUnit').value = item.unit || '';
+            document.getElementById('headerMFG').value = item.mfg || '';
+            document.getElementById('headerType').value = item.type || '';
+            
+            // Check technician checkboxes
+            if (item.technician) {
+                const techNames = item.technician.split(', ');
+                techNames.forEach(techName => {
+                    const checkbox = document.querySelector(`input[value="${techName}"]`);
+                    if (checkbox) checkbox.checked = true;
+                });
             }
-        `;
-        document.head.appendChild(style);
+            
+            // Clear existing items and works
+            document.getElementById('itemsContainer').innerHTML = '';
+            document.getElementById('additionalWorkContainer').innerHTML = '';
+            itemCounter = 0;
+            workCounter = 0;
+            
+            // Populate items
+            if (item.items) {
+                try {
+                    const items = JSON.parse(item.items);
+                    items.forEach(itemData => {
+                        addItem();
+                        const currentItemId = itemCounter;
+                        
+                        // Fill item data
+                        Object.entries(itemData).forEach(([key, value]) => {
+                            const input = document.querySelector(`[name="${key}"]`);
+                            if (input) input.value = value;
+                        });
+                    });
+                } catch (e) {
+                    console.error('Error parsing items:', e);
+                }
+            }
+            
+            // Populate additional work
+            if (item.additional_work) {
+                try {
+                    const works = JSON.parse(item.additional_work);
+                    works.forEach(workData => {
+                        addWork();
+                        const currentWorkId = workCounter;
+                        
+                        // Fill work data
+                        Object.entries(workData).forEach(([key, value]) => {
+                            const input = document.querySelector(`[name="${key}"]`);
+                            if (input) input.value = value;
+                        });
+                    });
+                } catch (e) {
+                    console.error('Error parsing additional work:', e);
+                }
+            }
+            
+            // Change submit button to update
+            const submitBtn = document.querySelector('#mainForm button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.textContent = 'Update Data';
+                submitBtn.onclick = (e) => handleUpdateSubmit(e, item.id);
+            }
+            
+            showMessage("Data berhasil dimuat untuk diedit", "success");
+        }
+
+        // Handle update submit
+        async function handleUpdateSubmit(e, originalId) {
+            e.preventDefault();
+            
+            const form = e.target.closest('form');
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            // Show loading state
+            submitButton.classList.add('loading');
+            submitButton.textContent = 'Mengupdate...';
+            
+            try {
+                // Find original item
+                const originalItem = formData.find(d => d.id === originalId);
+                if (!originalItem) {
+                    showMessage("Data asli tidak ditemukan", "error");
+                    return;
+                }
+                
+                // Collect updated form data
+                const updatedData = {
+                    ...originalItem,
+                    building_name: document.getElementById('buildingName').value,
+                    technician: getSelectedTechnicians(),
+                    date: document.getElementById('workDate').value,
+                    items: collectItemsData(),
+                    additional_work: collectAdditionalWorkData(),
+                    status: 'updated'
+                };
+                
+                // Update via Data SDK
+                const result = await window.dataSdk.update(updatedData);
+                
+                if (result.isOk) {
+                    showMessage("Data berhasil diupdate!", "success");
+                    
+                    // Navigate back to history
+                    navigateToSection('history');
+                } else {
+                    showMessage("Gagal mengupdate data. Silakan coba lagi.", "error");
+                }
+            } catch (error) {
+                showMessage("Terjadi kesalahan. Silakan coba lagi.", "error");
+            } finally {
+                // Reset loading state
+                submitButton.classList.remove('loading');
+                submitButton.textContent = 'Update Data';
+            }
+        }
+
+        // Delete data (admin only)
+        async function deleteData(itemId) {
+            if (currentUserType !== 'admin') return;
+            
+            const item = formData.find(d => d.id === itemId);
+            if (!item) return;
+            
+            // Create inline confirmation
+            const historyItem = document.querySelector(`[onclick*="${itemId}"]`).closest('.history-item');
+            const deleteBtn = historyItem.querySelector(`[onclick*="deleteData('${itemId}')"]`);
+            
+            if (deleteBtn.textContent === '🗑️ Delete') {
+                // First click - show confirmation
+                deleteBtn.textContent = 'Konfirmasi Hapus?';
+                deleteBtn.style.background = 'linear-gradient(45deg, #f44336, #d32f2f)';
+                
+                // Add cancel button
+                const cancelBtn = document.createElement('button');
+                cancelBtn.className = 'btn-small';
+                cancelBtn.textContent = 'Batal';
+                cancelBtn.style.background = 'rgba(255,255,255,0.1)';
+                cancelBtn.style.color = 'white';
+                cancelBtn.style.border = '1px solid rgba(255,255,255,0.3)';
+                cancelBtn.onclick = () => {
+                    deleteBtn.textContent = '🗑️ Delete';
+                    deleteBtn.style.background = '';
+                    cancelBtn.remove();
+                };
+                
+                deleteBtn.parentNode.insertBefore(cancelBtn, deleteBtn.nextSibling);
+                
+                // Reset after 5 seconds
+                setTimeout(() => {
+                    if (deleteBtn.textContent === 'Konfirmasi Hapus?') {
+                        deleteBtn.textContent = '🗑️ Delete';
+                        deleteBtn.style.background = '';
+                        if (cancelBtn.parentNode) cancelBtn.remove();
+                    }
+                }, 5000);
+                
+            } else if (deleteBtn.textContent === 'Konfirmasi Hapus?') {
+                // Second click - actually delete
+                deleteBtn.textContent = 'Menghapus...';
+                deleteBtn.disabled = true;
+                
+                try {
+                    const result = await window.dataSdk.delete(item);
+                    if (result.isOk) {
+                        showMessage("Data berhasil dihapus!", "success");
+                        // Remove the history item from DOM
+                        historyItem.remove();
+                    } else {
+                        showMessage("Gagal menghapus data.", "error");
+                        deleteBtn.textContent = '🗑️ Delete';
+                        deleteBtn.disabled = false;
+                    }
+                } catch (error) {
+                    showMessage("Terjadi kesalahan saat menghapus data.", "error");
+                    deleteBtn.textContent = '🗑️ Delete';
+                    deleteBtn.disabled = false;
+                }
+            }
+        }
+
+        // Review data (admin only)
+        function reviewData(itemId) {
+            if (currentUserType !== 'admin') return;
+            
+            const item = formData.find(d => d.id === itemId);
+            if (!item) return;
+            
+            const contentArea = document.getElementById('contentArea');
+            
+            let itemsHtml = '';
+            if (item.items) {
+                try {
+                    const items = JSON.parse(item.items);
+                    itemsHtml = items.map((itm, idx) => `
+                        <div class="item-container">
+                            <h4 style="color: #00d4ff; margin-bottom: 10px;">Item ${idx + 1}</h4>
+                            ${Object.entries(itm).map(([key, value]) => `
+                                <div style="margin-bottom: 8px;">
+                                    <strong>${key.replace(/_/g, ' ').toUpperCase()}:</strong> ${value}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `).join('');
+                } catch (e) {
+                    itemsHtml = '<p>Error parsing items data</p>';
+                }
+            }
+            
+            let worksHtml = '';
+            if (item.additional_work) {
+                try {
+                    const works = JSON.parse(item.additional_work);
+                    worksHtml = works.map((work, idx) => `
+                        <div class="item-container">
+                            <h4 style="color: #00d4ff; margin-bottom: 10px;">Pekerjaan ${idx + 1}</h4>
+                            ${Object.entries(work).map(([key, value]) => `
+                                <div style="margin-bottom: 8px;">
+                                    <strong>${key.replace(/_/g, ' ').toUpperCase()}:</strong> ${value}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `).join('');
+                } catch (e) {
+                    worksHtml = '<p>Error parsing work data</p>';
+                }
+            }
+            
+            contentArea.innerHTML = `
+                <div class="form-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h2 class="section-title" style="margin: 0;">Review Data - ${item.form_type?.toUpperCase()}</h2>
+                        <button type="button" class="btn-small" onclick="navigateToSection('history')" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.3);">← Kembali ke History</button>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Nama Gedung/Proyek</label>
+                            <div style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; color: #e0e0e0;">
+                                ${item.building_name || 'N/A'}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Teknisi</label>
+                            <div style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; color: #e0e0e0;">
+                                ${item.technician || 'N/A'}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Tanggal</label>
+                            <div style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; color: #e0e0e0;">
+                                ${item.date || 'N/A'}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Status</label>
+                            <div style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; color: #e0e0e0;">
+                                ${item.status || 'N/A'}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Dibuat</label>
+                            <div style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; color: #e0e0e0;">
+                                ${new Date(item.created_at).toLocaleString('id-ID')}
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">User</label>
+                            <div style="padding: 12px; background: rgba(255,255,255,0.1); border-radius: 8px; color: #e0e0e0;">
+                                ${item.username || 'N/A'}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${itemsHtml ? `
+                        <div class="section-title" style="margin-top: 30px;">ITEMS</div>
+                        ${itemsHtml}
+                    ` : ''}
+                    
+                    ${worksHtml ? `
+                        <div class="section-title" style="margin-top: 30px;">PEKERJAAN TAMBAHAN</div>
+                        ${worksHtml}
+                    ` : ''}
+                    
+                    <div style="margin-top: 30px; text-align: center;">
+                        <button class="btn-primary" onclick="editData('${item.id}')" style="margin-right: 10px;">✏️ Edit Data Ini</button>
+                        <button class="btn-primary" onclick="approveData('${item.id}')" style="background: linear-gradient(45deg, #4caf50, #45a049);">✅ Approve</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Approve data (admin only)
+        async function approveData(itemId) {
+            if (currentUserType !== 'admin') return;
+            
+            const item = formData.find(d => d.id === itemId);
+            if (!item) return;
+            
+            try {
+                const updatedData = {
+                    ...item,
+                    status: 'approved'
+                };
+                
+                const result = await window.dataSdk.update(updatedData);
+                
+                if (result.isOk) {
+                    showMessage("Data berhasil di-approve!", "success");
+                    navigateToSection('history');
+                } else {
+                    showMessage("Gagal approve data.", "error");
+                }
+            } catch (error) {
+                showMessage("Terjadi kesalahan saat approve data.", "error");
+            }
+        }
+
+        // Back to navigation
+        function backToNavigation() {
+            document.querySelector('.navigation-grid').style.display = 'grid';
+            document.getElementById('contentArea').innerHTML = '';
+            document.querySelectorAll('.nav-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            currentSection = null;
+        }
 
         // Initialize app when DOM is loaded
         document.addEventListener('DOMContentLoaded', initializeApp);
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'996b80906224b573',t:'MTc2MTgzMzQ5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-	</html>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'997b618873944083',t:'MTc2MTk5OTk5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
