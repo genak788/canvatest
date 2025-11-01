@@ -615,60 +615,30 @@
             copyright_text: "Copyright 2025 PT. Jaya Kencana"
         };
 
-       // 🧠 User data (akan diisi otomatis dari Google Spreadsheet)
-const userData = {}; // tetap ada, tapi kosong dulu
-
-// URL Google Apps Script Web App
-const GAS_BASE = "https://script.google.com/macros/s/AKfycbxEEZ4s8mkTLq5AgVHJey1ttKc0gVBXP7OWxWE9kr3CzQ2ya6jcLfstzlRbfP-rA5NQog/exec"; // Ganti dengan URL kamu
-
-// 🔄 Fungsi ambil data user & opsi dropdown dari Google Sheet
-async function fetchUsersAndOptions() {
-    try {
-        // Ambil data user dan options bersamaan
-        const [uResp, oResp] = await Promise.all([
-            fetch(`${GAS_BASE}?action=users`),
-            fetch(`${GAS_BASE}?action=options`)
-        ]);
-
-        const usersJson = await uResp.json();
-        const optionsJson = await oResp.json();
-
-        // ✅ Jika data user berhasil diambil
-        if (usersJson.success && Array.isArray(usersJson.users)) {
-            usersJson.users.forEach(u => {
-                userData[u.username] = {
-                    username: u.username,
-                    password: u.password,
-                    subtitle: u.subtitle,
-                    role: u.role,
-                    buildings: u.buildings,
-                    technicians: u.technicians
-                };
-            });
-        }
-
-        // ✅ Jika data dropdown berhasil diambil
-        if (optionsJson.success && optionsJson.options) {
-            Object.assign(dropdownOptions, optionsJson.options);
-        }
-
-        console.log("✅ Data user & opsi berhasil dimuat dari Google Sheet");
-    } catch (err) {
-        console.warn("⚠️ Gagal ambil data dari Google Sheet, pakai data lokal", err);
-
-        // Fallback (jaga-jaga jika Google Script gagal)
-        Object.assign(userData, {
+        // User data configuration
+        const userData = {
             admin: {
                 username: "admin",
                 password: "admin123",
                 subtitle: "Administrator - Safety Management System",
                 buildings: ["Gedung A", "Gedung B", "Gedung C", "Mall Central", "Office Tower"],
                 technicians: ["Teknisi A", "Teknisi B", "Teknisi C", "Teknisi D", "Teknisi E"]
+            },
+            user1: {
+                username: "user1",
+                password: "123456",
+                subtitle: "User 1 - Safety Management System",
+                buildings: ["Gedung A", "Gedung B", "Mall Central"],
+                technicians: ["Teknisi A", "Teknisi B", "Teknisi C"]
+            },
+            user2: {
+                username: "user2",
+                password: "abcdef",
+                subtitle: "User 2 - Safety Management System",
+                buildings: ["Gedung C", "Office Tower", "Plaza Utama"],
+                technicians: ["Teknisi D", "Teknisi E", "Teknisi F"]
             }
-        });
-    }
-}
-
+        };
 
         // Dropdown options
         const dropdownOptions = {
@@ -1388,192 +1358,141 @@ async function fetchUsersAndOptions() {
                 status: 'submitted'
             };
 
-           // Show loading state
-const submitBtn = document.querySelector('#realizationForm .btn-submit');
-const originalText = submitBtn.textContent;
-submitBtn.textContent = 'Menyimpan...';
-submitBtn.disabled = true;
+            // Show loading state
+            const submitBtn = document.querySelector('#realizationForm .btn-submit');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Menyimpan...';
+            submitBtn.disabled = true;
 
-try {
-  const resp = await fetch("https://script.google.com/macros/s/AKfycbxEEZ4s8mkTLq5AgVHJey1ttKc0gVBXP7OWxWE9kr3CzQ2ya6jcLfstzlRbfP-rA5NQog/exec", {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(formData) // ⬅️ kirim formData ke Google Script
-  });
-
-  const r = await resp.json();
-  if (!r.success) throw new Error('GAS error');
-
-  // ✅ Kalau sukses, tampilkan pesan berhasil
-  showMessage('Realisasi berhasil disimpan ke Google Sheets & Drive!', 'success');
-  document.getElementById('realizationForm').reset();
-  document.getElementById('otherWorkGroup').style.display = 'none';
-  document.getElementById('otherWork').required = false;
-
-  document.querySelectorAll('#realizationTechnicians input[type="checkbox"]').forEach(cb => cb.checked = false);
-  document.getElementById('realizationDate').value = new Date().toISOString().split('T')[0];
-
-  setTimeout(() => backToDashboard(), 1500);
-
-} catch (err) {
-  console.warn('⚠️ Koneksi ke GAS gagal, fallback ke local:', err);
-
-  // ⬇️ Simpan ke local kalau gagal koneksi
-  await window.dataSdk.create({
-    id: formData.id,
-    type: formData.type,
-    username: formData.username,
-    form_type: formData.form_type,
-    building_name: formData.building_name,
-    technician: formData.technician,
-    date: formData.date,
-    items: formData.items,
-    additional_work: formData.additional_work,
-    created_at: formData.created_at,
-    status: formData.status
-  });
-
-  showMessage('📦 Data disimpan lokal (offline mode)', 'success');
-}
-
-
-    showMessage('📦 Data disimpan lokal (offline mode)', 'success');
-} finally {
-    submitBtn.textContent = originalText;
-    submitBtn.disabled = false;
-}
-
+            try {
+                const result = await window.dataSdk.create(formData);
+                
+                if (result.isOk) {
+                    showMessage('Realisasi berhasil disimpan!', 'success');
+                    document.getElementById('realizationForm').reset();
+                    document.getElementById('otherWorkGroup').style.display = 'none';
+                    document.getElementById('otherWork').required = false;
+                    
+                    // Uncheck all technician checkboxes
+                    document.querySelectorAll('#realizationTechnicians input[type="checkbox"]').forEach(cb => cb.checked = false);
+                    
+                    // Set today's date again
+                    document.getElementById('realizationDate').value = new Date().toISOString().split('T')[0];
+                    
+                    // Return to dashboard after 1.5 seconds
+                    setTimeout(() => {
+                        backToDashboard();
+                    }, 1500);
+                } else {
+                    showMessage('Gagal menyimpan realisasi. Silakan coba lagi.', 'error');
+                }
+            } catch (error) {
+                showMessage('Terjadi kesalahan. Silakan coba lagi.', 'error');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
 
         async function submitForm(type) {
-    if (allData.length >= 999) {
-        showMessage('Maksimum 999 data telah tercapai. Silakan hapus beberapa data terlebih dahulu.', 'error');
-        return;
-    }
-
-    const building = document.getElementById(`${type}Building`).value;
-    const date = document.getElementById(`${type}Date`).value;
-
-    // Ambil nama teknisi yang dicentang
-    const techCheckboxes = document.querySelectorAll(`#${type}Technicians input[type="checkbox"]:checked`);
-    const technicians = Array.from(techCheckboxes).map(cb => cb.value);
-
-    if (!building || !date || technicians.length === 0) {
-        showMessage('Mohon lengkapi semua field yang wajib diisi!', 'error');
-        return;
-    }
-
-    // 🧩 Ambil data item & foto
-    const items = await collectItemsData(`${type}Items`);
-    const additionalWork = await collectItemsData(`${type}AdditionalWork`);
-
-    // 🔧 Susun payload untuk dikirim ke Google Apps Script
-    const payload = {
-        id: generateId(),
-        type: type,
-        username: currentUser.username,
-        form_type: type === 'escalator' ? 'Safety Eskalator' : 'Safety Elevator',
-        building_name: building,
-        technician: technicians.join(', '),
-        date: date,
-        items: items,                  // tidak pakai JSON.stringify
-        additional_work: additionalWork,
-        created_at: new Date().toISOString(),
-        status: 'submitted'
-    };
-
-    // 🌀 Tampilkan status loading
-    const submitBtn = document.querySelector(`#${type}Form .btn-submit`);
-    const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Menyimpan...';
-    submitBtn.disabled = true;
-
-    try {
-        const resp = await fetch('WEB_APP_URL', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        const result = await resp.json();
-
-        if (result.success) {
-            showMessage('✅ Data berhasil disimpan ke Google Sheets & Drive!', 'success');
-            document.getElementById(`${type}Form`).reset();
-
-            // Hapus semua item dan pekerjaan tambahan
-            document.getElementById(`${type}Items`).innerHTML = '';
-            document.getElementById(`${type}AdditionalWork`).innerHTML = '';
-
-            // Reset penghitung item
-            if (type === 'escalator') {
-                escalatorItemCount = 0;
-                escalatorWorkCount = 0;
-            } else {
-                elevatorItemCount = 0;
-                elevatorWorkCount = 0;
+            if (allData.length >= 999) {
+                showMessage('Maksimum 999 data telah tercapai. Silakan hapus beberapa data terlebih dahulu.', 'error');
+                return;
             }
 
-            setTodayDate();
+            const building = document.getElementById(`${type}Building`).value;
+            const date = document.getElementById(`${type}Date`).value;
+            
+            // Get selected technicians
+            const techCheckboxes = document.querySelectorAll(`#${type}Technicians input[type="checkbox"]:checked`);
+            const technicians = Array.from(techCheckboxes).map(cb => cb.value);
+            
+            if (!building || !date || technicians.length === 0) {
+                showMessage('Mohon lengkapi semua field yang wajib diisi!', 'error');
+                return;
+            }
 
-            // Balik ke dashboard setelah 1.2 detik
-            setTimeout(() => backToDashboard(), 1200);
-        } else {
-            console.error(result);
-            showMessage('❌ Gagal menyimpan: ' + (result.error || 'unknown'), 'error');
-        }
-    } catch (err) {
-        console.error(err);
-        showMessage('⚠️ Koneksi gagal ke server penyimpanan.', 'error');
-    } finally {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    }
-}
+            // Collect items data
+            const items = collectItemsData(`${type}Items`);
+            const additionalWork = collectItemsData(`${type}AdditionalWork`);
 
+            const formData = {
+                id: generateId(),
+                type: type,
+                username: currentUser.username,
+                form_type: type === 'escalator' ? 'Safety Eskalator' : 'Safety Elevator',
+                building_name: building,
+                technician: technicians.join(', '),
+                date: date,
+                items: JSON.stringify(items),
+                additional_work: JSON.stringify(additionalWork),
+                created_at: new Date().toISOString(),
+                status: 'submitted'
+            };
 
-        // 🔄 Fungsi baru menggantikan collectItemsData lama
-async function collectItemsData(containerId) {
-    const container = document.getElementById(containerId);
-    const items = [];
+            // Show loading state
+            const submitBtn = document.querySelector(`#${type}Form .btn-submit`);
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Menyimpan...';
+            submitBtn.disabled = true;
 
-    // Ambil semua item-container di dalam form
-    const itemContainers = Array.from(container.querySelectorAll('.item-container'));
-
-    for (const itemEl of itemContainers) {
-        const itemData = {};
-
-        // Ambil semua input, select, textarea
-        const inputs = itemEl.querySelectorAll('input, select, textarea');
-        for (const input of inputs) {
-            if (input.type === 'file') {
-                // Siapkan array untuk foto
-                const photos = [];
-                for (const file of input.files) {
-                    const dataUrl = await fileToDataURL(file);
-                    photos.push({ name: file.name, data: dataUrl });
+            try {
+                const result = await window.dataSdk.create(formData);
+                
+                if (result.isOk) {
+                    showMessage('Data berhasil disimpan!', 'success');
+                    document.getElementById(`${type}Form`).reset();
+                    
+                    // Clear all items and work
+                    document.getElementById(`${type}Items`).innerHTML = '';
+                    document.getElementById(`${type}AdditionalWork`).innerHTML = '';
+                    
+                    // Reset counters
+                    if (type === 'escalator') {
+                        escalatorItemCount = 0;
+                        escalatorWorkCount = 0;
+                    } else {
+                        elevatorItemCount = 0;
+                        elevatorWorkCount = 0;
+                    }
+                    
+                    setTodayDate();
+                    
+                    // Return to dashboard after 1.5 seconds
+                    setTimeout(() => {
+                        backToDashboard();
+                    }, 1500);
+                } else {
+                    showMessage('Gagal menyimpan data. Silakan coba lagi.', 'error');
                 }
-                itemData.photos = photos; // simpan foto sebagai array objek
-            } else {
-                itemData[input.name] = input.value;
+            } catch (error) {
+                showMessage('Terjadi kesalahan. Silakan coba lagi.', 'error');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
             }
         }
 
-        items.push(itemData);
-    }
-
-    return items;
-}
-
-// Helper: ubah file menjadi dataURL (base64)
-function fileToDataURL(file) {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-    });
-}
-
+        function collectItemsData(containerId) {
+            const container = document.getElementById(containerId);
+            const items = [];
+            
+            container.querySelectorAll('.item-container').forEach(item => {
+                const itemData = {};
+                item.querySelectorAll('input, select').forEach(input => {
+                    if (input.type === 'file') {
+                        if (input.files.length > 0) {
+                            itemData[input.name] = input.files[0].name;
+                        }
+                    } else {
+                        itemData[input.name] = input.value;
+                    }
+                });
+                items.push(itemData);
+            });
+            
+            return items;
+        }
 
         function generateId() {
             return Date.now().toString(36) + Math.random().toString(36).substr(2);
@@ -1666,79 +1585,142 @@ function fileToDataURL(file) {
             renderHistory(); // Re-render to restore original buttons
         }
 
-       function editHistoryItem(itemId) {
-  const item = allData.find(d => d.__backendId === itemId);
-  if (!item) return;
+        function reviewHistoryItem(itemId) {
+            const item = allData.find(d => d.__backendId === itemId);
+            if (!item) return;
 
-  let itemsData = [];
-  let workData = [];
+            const itemsData = JSON.parse(item.items || '[]');
+            const workData = JSON.parse(item.additional_work || '[]');
+            
+            let reviewContent = `<div style="max-height: 400px; overflow-y: auto; text-align: left;">`;
+            reviewContent += `<h3>${item.form_type}</h3>`;
+            reviewContent += `<p><strong>Gedung:</strong> ${item.building_name}</p>`;
+            reviewContent += `<p><strong>Teknisi:</strong> ${item.technician}</p>`;
+            reviewContent += `<p><strong>Tanggal:</strong> ${item.date}</p><br>`;
+            
+            if (itemsData.length > 0) {
+                reviewContent += `<h4>ITEMS:</h4>`;
+                itemsData.forEach((itm, index) => {
+                    reviewContent += `<div style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">`;
+                    reviewContent += `<strong>Item ${index + 1}:</strong><br>`;
+                    reviewContent += `Unit: ${itm.unit || '-'}<br>`;
+                    reviewContent += `MFG: ${itm.mfg || '-'}<br>`;
+                    reviewContent += `Type: ${itm.type || '-'}<br>`;
+                    reviewContent += `Sparepart: ${itm.sparepart || '-'}<br>`;
+                    reviewContent += `Kondisi: ${itm.condition || '-'}<br>`;
+                    reviewContent += `Jumlah: ${itm.quantity || '-'} ${itm.unit_type || ''}<br>`;
+                    reviewContent += `Remarks: ${itm.remarks || '-'}<br>`;
+                    reviewContent += `Prioritas: ${itm.priority || '-'}`;
+                    reviewContent += `</div>`;
+                });
+            }
+            
+            if (workData.length > 0) {
+                reviewContent += `<h4>PEKERJAAN LAINNYA:</h4>`;
+                workData.forEach((work, index) => {
+                    reviewContent += `<div style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">`;
+                    reviewContent += `<strong>Pekerjaan ${index + 1}:</strong><br>`;
+                    reviewContent += `Pekerjaan: ${work.additional_work || '-'}<br>`;
+                    reviewContent += `Kondisi: ${work.work_condition || '-'}<br>`;
+                    reviewContent += `Keterangan: ${work.description || '-'}<br>`;
+                    reviewContent += `Remarks: ${work.work_remarks || '-'}<br>`;
+                    reviewContent += `Prioritas: ${work.work_priority || '-'}`;
+                    reviewContent += `</div>`;
+                });
+            }
+            reviewContent += `</div>`;
+            
+            showModal('Review Data', reviewContent);
+        }
 
-  try {
-    itemsData = typeof item.items === 'string' ? JSON.parse(item.items) : item.items || [];
-  } catch {
-    itemsData = [];
-  }
-  try {
-    workData = typeof item.additional_work === 'string' ? JSON.parse(item.additional_work) : item.additional_work || [];
-  } catch {
-    workData = [];
-  }
+        function editHistoryItem(itemId) {
+            const item = allData.find(d => d.__backendId === itemId);
+            if (!item) return;
 
-  // ... lanjut isi editForm (seperti sudah kamu punya)
-}
-
-      function reviewHistoryItem(itemId) {
-  const item = allData.find(d => d.__backendId === itemId);
-  if (!item) return;
-
-  let itemsData = [];
-  let workData = [];
-
-  try {
-    itemsData = typeof item.items === 'string' ? JSON.parse(item.items) : item.items || [];
-  } catch {
-    itemsData = [];
-  }
-  try {
-    workData = typeof item.additional_work === 'string' ? JSON.parse(item.additional_work) : item.additional_work || [];
-  } catch {
-    workData = [];
-  }
-
-  let reviewContent = `<div style="max-height: 400px; overflow-y: auto; text-align: left;">`;
-  reviewContent += `<h3>${item.form_type}</h3>`;
-  reviewContent += `<p><strong>Gedung:</strong> ${item.building_name}</p>`;
-  reviewContent += `<p><strong>Teknisi:</strong> ${item.technician}</p>`;
-  reviewContent += `<p><strong>Tanggal:</strong> ${item.date}</p><br>`;
-
-  if (itemsData.length > 0) {
-    reviewContent += `<h4>ITEMS:</h4>`;
-    itemsData.forEach((itm, index) => {
-      reviewContent += `<div style="margin-bottom: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">`;
-      reviewContent += `<strong>Item ${index + 1}:</strong><br>`;
-      reviewContent += `Unit: ${itm.unit || '-'}<br>`;
-      reviewContent += `MFG: ${itm.mfg || '-'}<br>`;
-      reviewContent += `Type: ${itm.type || '-'}<br>`;
-      reviewContent += `Sparepart: ${itm.sparepart || '-'}<br>`;
-      reviewContent += `Kondisi: ${itm.condition || '-'}<br>`;
-      reviewContent += `Jumlah: ${itm.quantity || '-'} ${itm.unit_type || ''}<br>`;
-      reviewContent += `Remarks: ${itm.remarks || '-'}<br>`;
-      reviewContent += `Prioritas: ${itm.priority || '-'}<br>`;
-      if (Array.isArray(itm.photos) && itm.photos.length > 0) {
-        reviewContent += `<br><strong>Foto:</strong><br>`;
-        itm.photos.forEach((ph) => {
-          if (ph.data && ph.data.startsWith("data:image")) {
-            reviewContent += `<img src="${ph.data}" width="120" style="margin:3px;border-radius:6px;"/>`;
-          }
-        });
-      }
-      reviewContent += `</div>`;
-    });
-  }
-
-  // ... lanjut tampilan untuk workData & modal
-}
-
+            const itemsData = JSON.parse(item.items || '[]');
+            const workData = JSON.parse(item.additional_work || '[]');
+            
+            let editForm = `<div style="max-height: 500px; overflow-y: auto;">`;
+            editForm += `<form id="editForm">`;
+            
+            // Basic info
+            editForm += `<div class="form-row">`;
+            editForm += `<div class="form-group">`;
+            editForm += `<label>Gedung/Proyek</label>`;
+            editForm += `<input type="text" id="editBuilding" class="form-control" value="${item.building_name}" required>`;
+            editForm += `</div>`;
+            editForm += `<div class="form-group">`;
+            editForm += `<label>Teknisi</label>`;
+            editForm += `<input type="text" id="editTechnician" class="form-control" value="${item.technician}" required>`;
+            editForm += `</div>`;
+            editForm += `<div class="form-group">`;
+            editForm += `<label>Tanggal</label>`;
+            editForm += `<input type="date" id="editDate" class="form-control" value="${item.date}" required>`;
+            editForm += `</div>`;
+            editForm += `</div>`;
+            
+            // Items
+            if (itemsData.length > 0) {
+                editForm += `<h4>ITEMS:</h4>`;
+                itemsData.forEach((itm, index) => {
+                    editForm += `<div style="margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">`;
+                    editForm += `<h5>Item ${index + 1}</h5>`;
+                    editForm += `<div class="form-row">`;
+                    editForm += `<div class="form-group"><label>Unit</label><input type="text" class="form-control item-field" data-field="unit" data-index="${index}" value="${itm.unit || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>MFG</label><input type="text" class="form-control item-field" data-field="mfg" data-index="${index}" value="${itm.mfg || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Type</label><input type="text" class="form-control item-field" data-field="type" data-index="${index}" value="${itm.type || ''}"></div>`;
+                    editForm += `</div>`;
+                    editForm += `<div class="form-row">`;
+                    editForm += `<div class="form-group"><label>Sparepart</label><input type="text" class="form-control item-field" data-field="sparepart" data-index="${index}" value="${itm.sparepart || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Kondisi</label><input type="text" class="form-control item-field" data-field="condition" data-index="${index}" value="${itm.condition || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Jumlah</label><input type="text" class="form-control item-field" data-field="quantity" data-index="${index}" value="${itm.quantity || ''}"></div>`;
+                    editForm += `</div>`;
+                    editForm += `<div class="form-row">`;
+                    editForm += `<div class="form-group"><label>Satuan</label><input type="text" class="form-control item-field" data-field="unit_type" data-index="${index}" value="${itm.unit_type || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Remarks</label><input type="text" class="form-control item-field" data-field="remarks" data-index="${index}" value="${itm.remarks || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Prioritas</label><input type="text" class="form-control item-field" data-field="priority" data-index="${index}" value="${itm.priority || ''}"></div>`;
+                    editForm += `</div>`;
+                    editForm += `</div>`;
+                });
+            }
+            
+            // Additional work
+            if (workData.length > 0) {
+                editForm += `<h4>PEKERJAAN LAINNYA:</h4>`;
+                workData.forEach((work, index) => {
+                    editForm += `<div style="margin-bottom: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">`;
+                    editForm += `<h5>Pekerjaan ${index + 1}</h5>`;
+                    editForm += `<div class="form-row">`;
+                    editForm += `<div class="form-group"><label>Pekerjaan</label><input type="text" class="form-control work-field" data-field="additional_work" data-index="${index}" value="${work.additional_work || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Kondisi</label><input type="text" class="form-control work-field" data-field="work_condition" data-index="${index}" value="${work.work_condition || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Keterangan</label><input type="text" class="form-control work-field" data-field="description" data-index="${index}" value="${work.description || ''}"></div>`;
+                    editForm += `</div>`;
+                    editForm += `<div class="form-row">`;
+                    editForm += `<div class="form-group"><label>Remarks</label><input type="text" class="form-control work-field" data-field="work_remarks" data-index="${index}" value="${work.work_remarks || ''}"></div>`;
+                    editForm += `<div class="form-group"><label>Prioritas</label><input type="text" class="form-control work-field" data-field="work_priority" data-index="${index}" value="${work.work_priority || ''}"></div>`;
+                    editForm += `</div>`;
+                    editForm += `</div>`;
+                });
+            }
+            
+            editForm += `</form>`;
+            editForm += `</div>`;
+            
+            showModal('Edit Data', editForm, [
+                {
+                    text: 'Simpan',
+                    class: 'btn-primary',
+                    onclick: 'saveEditedItem',
+                    params: [itemId, itemsData, workData]
+                },
+                {
+                    text: 'Batal',
+                    class: 'btn-secondary',
+                    onclick: 'closeModal',
+                    params: []
+                }
+            ]);
+        }
 
         async function saveEditedItem(itemId, originalItems, originalWork) {
             const item = allData.find(d => d.__backendId === itemId);
@@ -1867,96 +1849,77 @@ function fileToDataURL(file) {
             }
         }
 
-     function searchHistory(searchTerm) {
-  const historyList = document.getElementById('historyList');
-  let filteredData = allData;
+        function searchHistory(searchTerm) {
+            const historyList = document.getElementById('historyList');
+            
+            let filteredData = allData;
+            
+            // Filter by user if not admin
+            if (currentUserType !== 'admin') {
+                filteredData = allData.filter(item => item.username === currentUser.username);
+            }
+            
+            // Filter out realization data from history
+            filteredData = filteredData.filter(item => item.type !== 'realization');
+            
+            // Apply search filter
+            if (searchTerm.trim()) {
+                const term = searchTerm.toLowerCase();
+                filteredData = filteredData.filter(item => 
+                    item.building_name.toLowerCase().includes(term) ||
+                    item.technician.toLowerCase().includes(term) ||
+                    item.date.includes(term) ||
+                    item.form_type.toLowerCase().includes(term)
+                );
+            }
+            
+            historyList.innerHTML = '';
 
-  if (currentUserType !== 'admin') {
-    filteredData = allData.filter(item => item.username === currentUser.username);
-  }
-  filteredData = filteredData.filter(item => item.type !== 'realization');
+            if (filteredData.length === 0) {
+                historyList.innerHTML = '<p style="text-align: center; color: #b0b0b0;">Tidak ada data yang ditemukan</p>';
+                return;
+            }
 
-  if (searchTerm.trim()) {
-    const term = searchTerm.toLowerCase();
-    filteredData = filteredData.filter(item =>
-      item.building_name.toLowerCase().includes(term) ||
-      item.technician.toLowerCase().includes(term) ||
-      item.date.includes(term) ||
-      item.form_type.toLowerCase().includes(term)
-    );
-  }
-
-  historyList.innerHTML = '';
-
-  if (filteredData.length === 0) {
-    historyList.innerHTML = '<p style="text-align: center; color: #b0b0b0;">Tidak ada data yang ditemukan</p>';
-    return;
-  }
-
-  filteredData.forEach(item => {
-    const historyItem = document.createElement('div');
-    historyItem.className = 'history-item';
-
-    let itemsData = [];
-    let workData = [];
-
-    try {
-      itemsData = typeof item.items === 'string' ? JSON.parse(item.items) : item.items || [];
-    } catch {
-      itemsData = [];
-    }
-    try {
-      workData = typeof item.additional_work === 'string' ? JSON.parse(item.additional_work) : item.additional_work || [];
-    } catch {
-      workData = [];
-    }
-
-    historyItem.innerHTML = `
-      <div class="history-header">
-        <div>
-          <h4>${item.form_type}</h4>
-          <p><strong>Gedung:</strong> ${item.building_name}</p>
-          <p><strong>Teknisi:</strong> ${item.technician}</p>
-          <p><strong>Tanggal:</strong> ${item.date}</p>
-          <p><strong>Items:</strong> ${itemsData.length} item, ${workData.length} pekerjaan</p>
-        </div>
-        <div class="history-actions">
-          ${currentUserType === 'admin' ? `
-            <button class="btn btn-small btn-edit" onclick="reviewHistoryItem('${item.__backendId}')">Review</button>
-            <button class="btn btn-small btn-edit" onclick="editHistoryItem('${item.__backendId}')">Edit</button>
-            <button class="btn btn-small btn-delete" onclick="deleteHistoryItem('${item.__backendId}')">Hapus</button>
-            <button class="btn btn-small btn-download" onclick="downloadPDF('${item.__backendId}')">PDF</button>
-            <button class="btn btn-small" style="background: #2980b9;" onclick="downloadWord('${item.__backendId}')">Word</button>
-          ` : `
-            <button class="btn btn-small btn-download" onclick="downloadPDF('${item.__backendId}')">PDF</button>
-          `}
-        </div>
-      </div>
-    `;
-
-    historyList.appendChild(historyItem);
-  });
-}
+            filteredData.forEach(item => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                const itemsData = JSON.parse(item.items || '[]');
+                const workData = JSON.parse(item.additional_work || '[]');
+                
+                historyItem.innerHTML = `
+                    <div class="history-header">
+                        <div>
+                            <h4>${item.form_type}</h4>
+                            <p><strong>Gedung:</strong> ${item.building_name}</p>
+                            <p><strong>Teknisi:</strong> ${item.technician}</p>
+                            <p><strong>Tanggal:</strong> ${item.date}</p>
+                            <p><strong>Items:</strong> ${itemsData.length} item, ${workData.length} pekerjaan</p>
+                        </div>
+                        <div class="history-actions">
+                            ${currentUserType === 'admin' ? `
+                                <button class="btn btn-small btn-edit" onclick="reviewHistoryItem('${item.__backendId}')">Review</button>
+                                <button class="btn btn-small btn-edit" onclick="editHistoryItem('${item.__backendId}')">Edit</button>
+                                <button class="btn btn-small btn-delete" onclick="deleteHistoryItem('${item.__backendId}')">Hapus</button>
+                                <button class="btn btn-small btn-download" onclick="downloadPDF('${item.__backendId}')">PDF</button>
+                                <button class="btn btn-small" style="background: #2980b9;" onclick="downloadWord('${item.__backendId}')">Word</button>
+                            ` : `
+                                <button class="btn btn-small btn-download" onclick="downloadPDF('${item.__backendId}')">PDF</button>
+                            `}
+                        </div>
+                    </div>
+                `;
+                
+                historyList.appendChild(historyItem);
+            });
+        }
 
         function downloadPDF(itemId) {
             const item = allData.find(d => d.__backendId === itemId);
             if (!item) return;
-	
-           let itemsData = [];
-let workData = [];
 
-try {
-    itemsData = typeof item.items === 'string' ? JSON.parse(item.items) : item.items || [];
-} catch (e) {
-    itemsData = [];
-}
-
-try {
-    workData = typeof item.additional_work === 'string' ? JSON.parse(item.additional_work) : item.additional_work || [];
-} catch (e) {
-    workData = [];
-}
-
+            const itemsData = JSON.parse(item.items || '[]');
+            const workData = JSON.parse(item.additional_work || '[]');
             
             // Create HTML content for PDF
             let htmlContent = `
@@ -2201,47 +2164,5 @@ try {
         // Initialize app when DOM is loaded
         document.addEventListener('DOMContentLoaded', initializeApp);
     </script>
- <script>
-(function(){
-    function c(){
-        var b = a.contentDocument || a.contentWindow.document;
-        if (b) {
-            var d = b.createElement('script');
-            d.innerHTML = "window.__CF$cv$params={r:'996b80906224b573',t:'MTc2MTgzMzQ5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
-            b.getElementsByTagName('head')[0].appendChild(d);
-        }
-    }
-    if (document.body) {
-        var a = document.createElement('iframe');
-        a.height = 1;
-        a.width = 1;
-        a.style.position = 'absolute';
-        a.style.top = 0;
-        a.style.left = 0;
-        a.style.border = 'none';
-        a.style.visibility = 'hidden';
-        document.body.appendChild(a);
-
-        if ('loading' !== document.readyState) c();
-        else if (window.addEventListener)
-            document.addEventListener('DOMContentLoaded', c);
-        else {
-            var e = document.onreadystatechange || function() {};
-            document.onreadystatechange = function(b) {
-                e(b);
-                'loading' !== document.readyState && (document.onreadystatechange = e, c());
-            };
-        }
-    }
-})();
-</script>
-
-<!-- ✅ Tambahkan library di sini -->
-<!-- Library html2pdf (ambil langsung dari CDN agar otomatis jalan di GitHub Pages) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-<!-- File JavaScript custom kamu -->
-<script src="script.js"></script>
-
-</body>
-</html>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'996b80906224b573',t:'MTc2MTgzMzQ5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+	</html>
